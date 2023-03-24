@@ -1,11 +1,11 @@
-package proyecto1.consola;
+package consola;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import proyecto1.autenticador.AutenticadorDeUsuarios;
-import proyecto1.cargador.CargadorDeDatos;
+import autenticador.AutenticadorDeUsuarios;
+import cargador.CargadorDeDatos;
 
 public class InterfazInicial
 {
@@ -21,14 +21,14 @@ public class InterfazInicial
 	{
 		super();
 		this.autenticador = new AutenticadorDeUsuarios();
-		
+		this.cargador = new CargadorDeDatos();
 	}
 	
 	public void ejecutarAplicacion()
 	{
 		System.out.println("\nProperty management system (PMS) - Hotel Villa Uniandes\n");
 		System.out.println("Cargando información del hotel...\n");
-		cargarInformacionHotel();
+		ejecutarCargarDatosHotel();
 		
 		boolean continuar = true;
 		while (continuar)
@@ -67,9 +67,9 @@ public class InterfazInicial
 		System.out.println("3. Salir de la aplicación");
 	}
 	
-	private void cargarInformacionHotel()
+	private void ejecutarCargarDatosHotel()
 	{
-		
+		cargador.cargarDatosHotel();
 	}
 	
 	private void ejecutarIniciarSesion()

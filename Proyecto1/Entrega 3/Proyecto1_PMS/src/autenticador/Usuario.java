@@ -1,4 +1,4 @@
-package proyecto1.autenticador;
+package autenticador;
 
 public class Usuario
 {
@@ -15,34 +15,14 @@ public class Usuario
 		this.tipoUsuario = tipo;
 	}
 
-	public String getLogin()
-	{
-		return login;
-	}
-
-	public void setLogin(String login)
-	{
-		this.login = login;
-	}
-
 	public String getPassword()
 	{
 		return password;
 	}
 
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
-
 	public String getTipoUsuario()
 	{
 		return tipoUsuario;
-	}
-
-	public void setTipoUsuario(String tipoUsuario)
-	{
-		this.tipoUsuario = tipoUsuario;
 	}
 
 	@Override

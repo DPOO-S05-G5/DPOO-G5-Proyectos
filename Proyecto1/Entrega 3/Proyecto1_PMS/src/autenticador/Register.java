@@ -1,4 +1,4 @@
-package proyecto1.autenticador;
+package autenticador;
 
 import java.io.BufferedReader;
 import java.io.IOException;

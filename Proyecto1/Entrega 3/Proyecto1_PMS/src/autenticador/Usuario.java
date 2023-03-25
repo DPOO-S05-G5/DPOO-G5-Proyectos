@@ -7,6 +7,10 @@ public class Usuario
 	private String password;
 	private String tipoUsuario;
 	
+	public Usuario()
+	{
+		
+	}
 	
 	public Usuario(String login, String password, String tipo)
 	{
@@ -29,7 +33,21 @@ public class Usuario
 	{
 		return tipoUsuario;
 	}
-	
+
+	public void setLogin(String login)
+	{
+		this.login = login;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	public void setTipoUsuario(String tipoUsuario)
+	{
+		this.tipoUsuario = tipoUsuario;
+	}
 
 	@Override
 	public String toString()

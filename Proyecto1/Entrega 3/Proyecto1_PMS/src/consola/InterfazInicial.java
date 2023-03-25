@@ -6,12 +6,14 @@ import java.io.InputStreamReader;
 
 import autenticador.AutenticadorDeUsuarios;
 import cargador.CargadorDeDatos;
+import salvador.SalvadorDeDatos;
 
 public class InterfazInicial
 {
 	
 	private AutenticadorDeUsuarios autenticador;
 	private CargadorDeDatos cargador;
+	private SalvadorDeDatos salvador;
 	//private CoordinadorPMS coordinador;
 	//private InterfazAdmin interfazAdmin;
 	//private InterfazRecepcion interfazRecepcion;
@@ -19,9 +21,9 @@ public class InterfazInicial
 	
 	public InterfazInicial()
 	{
-		super();
 		this.autenticador = new AutenticadorDeUsuarios();
 		this.cargador = new CargadorDeDatos();
+		this.salvador = new SalvadorDeDatos();
 	}
 	
 	public void ejecutarAplicacion()
@@ -45,6 +47,7 @@ public class InterfazInicial
 				else if (seleccion == 3)
 				{
 					System.out.println("\nSaliendo de la aplicación...\n");
+					ejecutarSalvarDatosHotel();
 					continuar = false;
 				}
 				else
@@ -69,7 +72,12 @@ public class InterfazInicial
 	
 	private void ejecutarCargarDatosHotel()
 	{
-		cargador.cargarDatosHotel();
+		cargador.cargarDatosHotel(autenticador);
+	}
+	
+	private void ejecutarSalvarDatosHotel()
+	{
+		salvador.salvarDatosHotel(autenticador);
 	}
 	
 	private void ejecutarIniciarSesion()

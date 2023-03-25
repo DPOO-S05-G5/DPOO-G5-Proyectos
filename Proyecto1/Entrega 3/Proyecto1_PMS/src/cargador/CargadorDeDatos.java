@@ -21,20 +21,18 @@ public class CargadorDeDatos
 		this.mapaUsuarios = new HashMap<String, Usuario>();
 	}
 	
-	public void cargarDatosHotel()
+	public void cargarDatosHotel(AutenticadorDeUsuarios autenticador)
 	{
-		cargarUsuarios();
+		cargarUsuarios(autenticador);
 	}
 
-	private void cargarUsuarios()
+	private void cargarUsuarios(AutenticadorDeUsuarios autenticador)
 	{	
 		try
 		{
 			FileInputStream fis = new FileInputStream(nombreArchivoUsuarios);
 			XMLDecoder decoder = new XMLDecoder(fis);
 			Object obj;
-			Usuario usuario;
-			String login;
 			
 			while (true)
 			{
@@ -44,8 +42,8 @@ public class CargadorDeDatos
 					
 					if (obj instanceof Usuario)
 					{
-						usuario = (Usuario) obj;
-						login = usuario.getLogin();
+						Usuario usuario = (Usuario) obj;
+						String login = usuario.getLogin();
 						mapaUsuarios.put(login, usuario);
 					}
 					else
@@ -69,5 +67,8 @@ public class CargadorDeDatos
 		{
 			e1.printStackTrace();
 		}
+		
+		autenticador.setMapaUsuarios(mapaUsuarios);
+
 	}
 }

@@ -7,30 +7,39 @@ public class AutenticadorDeUsuarios
 	
 	private Login login;
 	private Register registrador;
-	private HashMap<String, Usuario> usersMap;
+	private HashMap<String, Usuario> mapaUsuarios;
 	
 	public AutenticadorDeUsuarios()
 	{
-		this.usersMap = new HashMap<String, Usuario>();
+		this.mapaUsuarios = new HashMap<String, Usuario>();
 		this.login = new Login();
 		this.registrador = new Register();
 	}
 	
-	public AutenticadorDeUsuarios(HashMap<String, Usuario> usersMap)
+	public AutenticadorDeUsuarios(HashMap<String, Usuario> mapaUsuarios)
 	{
-		this.usersMap = usersMap;
+		this.mapaUsuarios = mapaUsuarios;
 		this.login = new Login();
 		this.registrador = new Register();
 	}
 	
 	public String iniciarSesion()
 	{
-		return login.inicioDeSesion(usersMap);		
+		return login.inicioDeSesion(mapaUsuarios);		
 	}
 	
 	public void registrarEmpleado()
 	{
-		registrador.registrarEmpleado(usersMap);
+		registrador.registrarEmpleado(mapaUsuarios);
 	}
-	 
+	
+	public void setMapaUsuarios(HashMap<String, Usuario> mapaUsuarios)
+	{
+		this.mapaUsuarios = mapaUsuarios;
+	}
+	
+	public HashMap<String, Usuario> getMapaUsuarios()
+	{
+		return mapaUsuarios;
+	}
 }

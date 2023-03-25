@@ -17,28 +17,32 @@ public class Register
 	public void registrarEmpleado(HashMap<String, Usuario> usersMap)
 	{
 		seleccionarTipoEmpleado();
-		String login = input("Nombre de usuario (login)");
-		String password1 = input("Contraseña (Password)");
-		String password2 = input("Confirmar contraseña");
 		
-		boolean userExists = usersMap.containsKey(login);
-		
-		if (!userExists)
+		if (tipoEmpleado != null)
 		{
-			if (password1.equals(password2))
+			String login = input("Nombre de usuario (login)");
+			String password1 = input("Contraseña (Password)");
+			String password2 = input("Confirmar contraseña");
+			
+			boolean userExists = usersMap.containsKey(login);
+			
+			if (!userExists)
 			{
-				Usuario nuevoUsuario = new Usuario(login, password1, this.tipoEmpleado);
-				usersMap.put(login, nuevoUsuario);
-				System.out.println("Nuevo usuario:\n" + nuevoUsuario.toString() + "\n");
+				if (password1.equals(password2))
+				{
+					Usuario nuevoUsuario = new Usuario(login, password1, this.tipoEmpleado);
+					usersMap.put(login, nuevoUsuario);
+					System.out.println("Nuevo usuario:\n" + nuevoUsuario.toString() + "\n");
+				}
+				else
+				{
+					System.out.println("\nLAS CONTRASEÑAS DEBEN DE SER IGUALES\n");
+				}
 			}
 			else
 			{
-				System.out.println("\nLAS CONTRASEÑAS DEBEN DE SER IGUALES\n");
+				System.out.println("\nNOMBRE DE USUARIO YA EXISTE\n");
 			}
-		}
-		else
-		{
-			System.out.println("\nNOMBRE DE USUARIO YA EXISTE\n");
 		}
 	}
 	

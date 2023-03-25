@@ -15,6 +15,11 @@ public class Usuario
 		this.tipoUsuario = tipo;
 	}
 
+	public String getLogin()
+	{
+		return login;
+	}
+	
 	public String getPassword()
 	{
 		return password;
@@ -24,6 +29,7 @@ public class Usuario
 	{
 		return tipoUsuario;
 	}
+	
 
 	@Override
 	public String toString()

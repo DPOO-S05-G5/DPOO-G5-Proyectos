@@ -1,32 +1,32 @@
 package consola;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import autenticador.AutenticadorDeUsuarios;
 import cargador.CargadorDeDatos;
 import salvador.SalvadorDeDatos;
 
-public class InterfazInicial
+public class InterfazInicial extends Interfaz
 {
 	
+	private InterfazAdmin interfazAdmin;
+	private InterfazRecepcion interfazRecepcion;
+	private InterfazServicios interfazServicios;
 	private AutenticadorDeUsuarios autenticador;
 	private CargadorDeDatos cargador;
 	private SalvadorDeDatos salvador;
 	//private CoordinadorPMS coordinador;
-	//private InterfazAdmin interfazAdmin;
-	//private InterfazRecepcion interfazRecepcion;
-	//private InterfazEmpleado interfazEmpleado;
 	
 	public InterfazInicial()
 	{
+		this.interfazAdmin = new InterfazAdmin();
+		this.interfazRecepcion = new InterfazRecepcion();
+		this.interfazServicios = new InterfazServicios();
 		this.autenticador = new AutenticadorDeUsuarios();
 		this.cargador = new CargadorDeDatos();
 		this.salvador = new SalvadorDeDatos();
 	}
 	
-	public void ejecutarAplicacion()
+	@Override
+	public void iniciarInterfaz()
 	{
 		System.out.println("\nProperty management system (PMS) - Hotel Villa Uniandes\n");
 		System.out.println("Cargando información del hotel...\n");
@@ -37,7 +37,7 @@ public class InterfazInicial
 		{
 			try
 			{
-				mostrarMenuDeInicio();
+				mostrarMenu();
 				int seleccion = Integer.parseInt(input("Seleccione una opción"));
 				
 				if (seleccion == 1)
@@ -61,8 +61,9 @@ public class InterfazInicial
 			}
 		}
 	}
-
-	private void mostrarMenuDeInicio()
+	
+	@Override
+	protected void mostrarMenu()
 	{
 		System.out.println("Opciones\n");
 		System.out.println("1. Iniciar sesión");
@@ -86,12 +87,12 @@ public class InterfazInicial
 		if (tipoUsuario != null)
 			System.out.println("Empleado de tipo: " + tipoUsuario + "\n");
 		
-//		if (tipoUsuario.equals("admin"))
-//			ejecutarInterfazAdmin();
-//		else if (tipoUsuario.equals("recepcionista"))
-//			ejecutarInterfazRecepcion();
-//		else if (tipoUsuario.equals("empleado"))
-//			ejecutarInterfazEmpleado();			
+		if (tipoUsuario.equals("admin"))
+			ejecutarInterfazAdmin();
+		else if (tipoUsuario.equals("recepcionista"))
+			ejecutarInterfazRecepcion();
+		else if (tipoUsuario.equals("empleado"))
+			ejecutarInterfazServicios();			
 	}
 	
 	private void ejecutarRegistrarEmpleado()
@@ -99,26 +100,25 @@ public class InterfazInicial
 		autenticador.registrarEmpleado();
 	}
 	
-	private String input(String mensaje)
+	private void ejecutarInterfazAdmin()
 	{
-		try
-		{
-			System.out.print(mensaje + ": ");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			return reader.readLine();
-		}
-		catch (IOException e)
-		{
-			System.out.println("Error leyendo de la consola");
-			e.printStackTrace();
-		}
-		return null;
+		interfazAdmin.iniciarInterfaz();
+	}
+	
+	private void ejecutarInterfazRecepcion()
+	{
+		interfazRecepcion.iniciarInterfaz();
+	}
+	
+	private void ejecutarInterfazServicios()
+	{
+		interfazServicios.iniciarInterfaz();
 	}
 
 	public static void main(String[] args)
 	{
 		InterfazInicial consola = new InterfazInicial();
-		consola.ejecutarAplicacion();
+		consola.iniciarInterfaz();
 	}
 
 }

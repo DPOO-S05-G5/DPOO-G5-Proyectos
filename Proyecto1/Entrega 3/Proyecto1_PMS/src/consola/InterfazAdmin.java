@@ -12,12 +12,16 @@ public class InterfazAdmin extends Interfaz
 	{
 		this.interfazRecepcion = new InterfazRecepcion();
 		this.interfazServicios = new InterfazServicios();
+		this.interfazTarifas = new InterfazTarifas();
+		this.interfazHabitaciones = new InterfazHabitaciones();
 	}
 	
 	@Override
 	public void iniciarInterfaz()
 	{
 		System.out.println("\nPortal de administración\n");
+		
+		ejecutarRevisionDeTarifas365Dias();
 		
 		boolean continuar = true;
 		while (continuar)
@@ -52,12 +56,18 @@ public class InterfazAdmin extends Interfaz
 		}
 	}
 
+	private void ejecutarRevisionDeTarifas365Dias()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	protected void mostrarMenu()
 	{
 		System.out.println("Opciones\n");
 		System.out.println("1. Agregar o editar tarifas");
-		System.out.println("2. Agregar o editar habitaciones");
+		System.out.println("2. Agregar o eliminar habitaciones");
 		System.out.println("3. Menú recepción");
 		System.out.println("4. Menú servicios");
 		System.out.println("5. Cerrar sesión");

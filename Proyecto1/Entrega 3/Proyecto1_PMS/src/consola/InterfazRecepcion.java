@@ -49,6 +49,42 @@ public class InterfazRecepcion extends Interfaz
 		}
 	}
 
+	private void ejecutarRealizarCheckOut()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarRealizarCheckIn()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarCancelarReserva()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarRealizarReserva()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarInfoHabitacion()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarInfoHuesped()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	protected void mostrarMenu()
 	{

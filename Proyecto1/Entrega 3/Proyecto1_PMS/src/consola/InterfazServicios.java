@@ -18,7 +18,7 @@ public class InterfazServicios extends Interfaz
 			try
 			{
 				mostrarMenu();
-				int seleccion = Integer.parseInt(input("Seleciione una opción"));
+				int seleccion = Integer.parseInt(input("Selecione una opción"));
 				
 				if (seleccion == 1)
 					ejecutarRegistrarConsumo();
@@ -41,12 +41,24 @@ public class InterfazServicios extends Interfaz
 		}
 	}
 
+	private void ejecutarGoToRestaurante()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarRegistrarConsumo()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	protected void mostrarMenu()
 	{
 		System.out.println("Opciones\n");
 		System.out.println("1. Registrar consumo");
 		System.out.println("2. Ir a restaurante");
-		System.out.println("3. Consultar información de una habitación");
+		System.out.println("3. Ir atrás (admin) / Cerrar sesión");
 	}
 }

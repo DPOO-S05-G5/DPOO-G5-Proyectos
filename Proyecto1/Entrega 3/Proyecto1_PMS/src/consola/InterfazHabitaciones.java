@@ -47,6 +47,7 @@ public class InterfazHabitaciones extends Interfaz
 			String tipoHabitacion = input("\nTipo de habitación (estandar / suite / suitedoble)");
 			String torre = input("Torre");
 			int piso = Integer.parseInt(input("Piso"));
+			String id = input("ID");
 			String tieneBalcon = input("Tiene balcon? (si/no)");
 			String tieneVista = input("Tiene vista? (si/no)");
 			String tieneCocina = input("Tiene cocina integrada? (si/no)");

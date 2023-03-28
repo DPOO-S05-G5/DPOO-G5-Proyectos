@@ -4,47 +4,32 @@ import java.util.ArrayList;
 
 public abstract class Habitacion
 {
-	private static ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas;
-	private ArrayList<Cama> camas;
-	private int capacidadAdultos;
-	private int capacidadNinos;
-	private static String tipo;
-	private boolean tieneBalcon;
 	private boolean tieneCocina;
+	private boolean tieneBalcon;
 	private boolean tieneVista;
 	private String torre;
 	private int piso;
-	private String id;
-	// TODO atributos que se necesiten para reservar o asociar huespedes si son necesarios
+	private String ID;
+	private ArrayList<Cama> camas;
+	private int capacidadAdultos;
+	private int capacidadNinos;
 	
-	
-	public abstract String textoInformacion();
+	public abstract void addTarifa(int mes, int diaMes, int diaSemana, int tarifa);
 	
 	public Habitacion()
 	{
 		
 	}
 	
-	public Habitacion(boolean tieneBalcon, boolean tieneCocina, boolean tieneVista, String torre, int piso, String id)
+	public Habitacion(boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String iD)
 	{
 		super();
-		this.tieneBalcon = tieneBalcon;
 		this.tieneCocina = tieneCocina;
+		this.tieneBalcon = tieneBalcon;
 		this.tieneVista = tieneVista;
 		this.torre = torre;
 		this.piso = piso;
-		this.id = id;
-		
-	}
-
-	public static ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> getTarifas()
-	{
-		return tarifas;
-	}
-
-	public static void setTarifas(ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas)
-	{
-		Habitacion.tarifas = tarifas;
+		ID = iD;
 	}
 
 	public ArrayList<Cama> getCamas()
@@ -57,34 +42,14 @@ public abstract class Habitacion
 		this.camas = camas;
 	}
 
-	public int getCapacidadAdultos()
+	public boolean isTieneCocina()
 	{
-		return capacidadAdultos;
+		return tieneCocina;
 	}
 
-	public void setCapacidadAdultos(int capacidadAdultos)
+	public void setTieneCocina(boolean tieneCocina)
 	{
-		this.capacidadAdultos = capacidadAdultos;
-	}
-
-	public int getCapacidadNinos()
-	{
-		return capacidadNinos;
-	}
-
-	public void setCapacidadNinos(int capacidadNinos)
-	{
-		this.capacidadNinos = capacidadNinos;
-	}
-
-	public static String getTipo()
-	{
-		return tipo;
-	}
-
-	public static void setTipo(String tipo)
-	{
-		Habitacion.tipo = tipo;
+		this.tieneCocina = tieneCocina;
 	}
 
 	public boolean isTieneBalcon()
@@ -95,16 +60,6 @@ public abstract class Habitacion
 	public void setTieneBalcon(boolean tieneBalcon)
 	{
 		this.tieneBalcon = tieneBalcon;
-	}
-
-	public boolean isTieneCocina()
-	{
-		return tieneCocina;
-	}
-
-	public void setTieneCocina(boolean tieneCocina)
-	{
-		this.tieneCocina = tieneCocina;
 	}
 
 	public boolean isTieneVista()
@@ -137,17 +92,33 @@ public abstract class Habitacion
 		this.piso = piso;
 	}
 
-	public String getId()
+	public String getID()
 	{
-		return id;
+		return ID;
 	}
 
-	public void setId(String id)
+	public void setID(String iD)
 	{
-		this.id = id;
+		ID = iD;
 	}
-	
-	
-	
 
+	public int getCapacidadAdultos()
+	{
+		return capacidadAdultos;
+	}
+
+	public void setCapacidadAdultos(int capacidadAdultos)
+	{
+		this.capacidadAdultos = capacidadAdultos;
+	}
+
+	public int getCapacidadNinos()
+	{
+		return capacidadNinos;
+	}
+
+	public void setCapacidadNinos(int capacidadNinos)
+	{
+		this.capacidadNinos = capacidadNinos;
+	}	
 }

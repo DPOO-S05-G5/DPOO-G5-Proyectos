@@ -1,45 +1,97 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 
 public class HabitacionEstandar extends Habitacion
 {
-	private static ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas;
-	private static String tipo;
-	private ArrayList<Cama> camas;
-	private int capacidadAdultos;
-	private int capacidadNinos;
-	private boolean tieneBalcon;
-	private boolean tieneCocina;
-	private boolean tieneVista;
-	private String torre;
-	private int piso;
-	private String id;
-	
-	
+	private static ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas = crearListaTarifas();;
+	private static String tipo = "estandar";
+
 	public HabitacionEstandar()
 	{
-		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public HabitacionEstandar(boolean tieneBalcon, boolean tieneCocina, boolean tieneVista, String torre, int capacidad, String id)
+
+	private static ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> crearListaTarifas()
 	{
-		super(tieneBalcon, tieneCocina, tieneVista, torre, capacidad, id);
-		HabitacionEstandar.tarifas = new ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>();
-		HabitacionEstandar.tipo = "estandar";
-		this.camas = new ArrayList<Cama>();
-		Cama cama1 = new Cama("doble");
-		camas.add(cama1);
-		super.setCapacidadAdultos(cama1.getCapacidadAdultos());
-		super.setCapacidadNinos(cama1.getCapacidadNinos());
+		int meses = 12;
+		int[] diasPorMes = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		int diasSemana = 7;
+		ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> listaTarifas = new ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>(meses);
+		
+		for (int i=0; i<meses; i++)
+		{
+			ArrayList<ArrayList<ArrayList<Integer>>> listaDiasDelMes = new ArrayList<ArrayList<ArrayList<Integer>>>(diasPorMes[i]);
+			
+			for (int j=0; j<diasPorMes[i]; j++)
+			{
+				ArrayList<ArrayList<Integer>> listaDiaDelMes = new ArrayList<ArrayList<Integer>>(diasSemana);
+				
+				for (int k=0; k<diasSemana; k++)
+				{
+					listaDiaDelMes.add(new ArrayList<Integer>());
+				}
+				listaDiasDelMes.add(listaDiaDelMes);
+			}
+			listaTarifas.add(listaDiasDelMes);
+			System.out.println("Mes: "+ i + " size: " + listaDiasDelMes.size());
+		}
+		
+		System.out.println("Meses: " + listaTarifas.size());
+		
+		return listaTarifas;
+	}
+
+	public HabitacionEstandar(boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso,
+			String iD)
+	{
+		super(tieneCocina, tieneBalcon, tieneVista, torre, piso, iD);
+
+		ArrayList<Cama> camas = new ArrayList<Cama>(Arrays.asList(new Cama("doble")));
+		super.setCamas(camas);
+		
+		int capacidadAdultos = 0;
+		int capacidadNinos = 0;
+		for (Cama cama : camas)
+		{
+			capacidadAdultos += cama.getCapacidadAdultos();
+			capacidadNinos += cama.getCapacidadNinos();
+		}
+		super.setCapacidadAdultos(capacidadAdultos);
+		super.setCapacidadNinos(capacidadNinos);
 	}
 	
+	public static ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> getTarifas()
+	{
+		return tarifas;
+	}
+
+	public static void setTarifas(ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas)
+	{
+		HabitacionEstandar.tarifas = tarifas;
+	}
+
 	@Override
-	public String textoInformacion()
+	public void addTarifa(int mes, int diaMes, int diaSemana, int tarifa)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+	}
+
+	public static String getTipo()
+	{
+		return tipo;
+	}
+
+	public static void setTipo(String tipo)
+	{
+		HabitacionEstandar.tipo = tipo;
+	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println(HabitacionEstandar.getTarifas());
 	}
 
 }

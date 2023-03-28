@@ -14,7 +14,6 @@ public abstract class Habitacion
 	private int capacidadAdultos;
 	private int capacidadNinos;
 	
-	public abstract void addTarifa(int mes, int diaMes, int diaSemana, int tarifa);
 	
 	public Habitacion()
 	{
@@ -120,5 +119,6 @@ public abstract class Habitacion
 	public void setCapacidadNinos(int capacidadNinos)
 	{
 		this.capacidadNinos = capacidadNinos;
-	}	
+	}
+	
 }

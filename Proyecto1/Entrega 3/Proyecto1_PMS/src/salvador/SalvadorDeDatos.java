@@ -21,6 +21,7 @@ public class SalvadorDeDatos
 	public void salvarDatosHotel(AutenticadorDeUsuarios autenticador)
 	{
 		salvarUsuarios(autenticador);
+		// salvarHabitaciones(coordinadorPMS);
 	}
 	
 	private void salvarUsuarios(AutenticadorDeUsuarios autenticador)

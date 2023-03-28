@@ -10,19 +10,25 @@ import java.util.HashMap;
 import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
 import modelo.CoordinadorPMS;
-import modelo.Habitacion;
 import modelo.HabitacionEstandar;
+import modelo.HabitacionSuite;
+import modelo.HabitacionSuiteDoble;
 
 public class CargadorDeDatos
 {
 	String nombreArchivoUsuarios;
 	HashMap<String, Usuario> mapaUsuarios;
-	ArrayList<HabitacionEstandar> listaHabitacionesEstandar;
+	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
+	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
+	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
 	
 	public CargadorDeDatos()
 	{
 		this.nombreArchivoUsuarios = "data/usuarios.xml";
 		this.mapaUsuarios = new HashMap<String, Usuario>();
+		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
+		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
+		this.mapaHabitacionesSuiteDoble = new HashMap<String, HabitacionSuiteDoble>();
 	}
 	
 	public void cargarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS)
@@ -45,7 +51,6 @@ public class CargadorDeDatos
 
 	private void cargarHabitacionesEstandar(CoordinadorPMS coordinadorPMS) 
 	{
-		String tipo = "estandar";
 		try
 		{
 			Object obj;
@@ -76,7 +81,8 @@ public class CargadorDeDatos
 					if (obj instanceof HabitacionEstandar)
 					{
 						HabitacionEstandar room = (HabitacionEstandar) obj;
-						listaHabitacionesEstandar.add(room);
+						String id = room.getID();
+						mapaHabitacionesEstandar.put(id, room);
 					}
 					else
 					{
@@ -100,27 +106,153 @@ public class CargadorDeDatos
 			e1.printStackTrace();
 		}
 		
-		for (HabitacionEstandar room : listaHabitacionesEstandar)
+		for (HashMap.Entry<String, HabitacionEstandar> entrada : mapaHabitacionesEstandar.entrySet())
 		{
-			System.out.println(room.getID());
+			System.out.println(entrada.getKey());
+			System.out.println(entrada.getValue().getID());
 		}
 		
 		System.out.println(HabitacionEstandar.getTarifas());
 		
-		
-		
+		coordinadorPMS.setHabitacionesEstandar(mapaHabitacionesEstandar);
 	}
 	
 	private void cargarHabitacionesSuite(CoordinadorPMS coordinadorPMS) 
 	{
-		// TODO Auto-generated method stub
+		try
+		{
+			Object obj;
+			FileInputStream fis = new FileInputStream("data/tarifasHabitacionesSuite.xml");
+			XMLDecoder decoder = new XMLDecoder(fis);
+			
+			obj = decoder.readObject();
+			if (obj instanceof ArrayList)
+			{
+				HabitacionSuite.setTarifas((ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>) obj);
+			}
+			else
+			{
+				System.err.println("No esta la lista en el archivo");
+			}
+			decoder.close();
+			fis.close();
+			
+			fis = new FileInputStream("data/habitacionesSuite.xml");
+			decoder = new XMLDecoder(fis);
+			
+			while (true)
+			{
+				try
+				{
+					obj = decoder.readObject();
+					
+					if (obj instanceof HabitacionSuite)
+					{
+						HabitacionSuite room = (HabitacionSuite) obj;
+						String id = room.getID();
+						mapaHabitacionesSuite.put(id, room);
+					}
+					else
+					{
+						System.err.println("objecto inesperado en el archivo");
+					}
+				}
+				catch (ArrayIndexOutOfBoundsException e3)
+				{
+					break;
+				}
+			}
+			decoder.close();
+			fis.close();
+		}
+		catch (FileNotFoundException e2)
+		{
+			return;
+		}
+		catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
+		
+		for (HashMap.Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet())
+		{
+			System.out.println(entrada.getKey());
+			System.out.println(entrada.getValue().getID());
+		}
+		
+		System.out.println(HabitacionSuite.getTarifas());
+		
+		coordinadorPMS.setHabitacionesSuite(mapaHabitacionesSuite);
 		
 	}
 
 	private void cargarHabitacionesSuiteDoble(CoordinadorPMS coordinadorPMS) 
 	{
-		// TODO Auto-generated method stub
+		try
+		{
+			Object obj;
+			FileInputStream fis = new FileInputStream("data/tarifasHabitacionesSuiteDoble.xml");
+			XMLDecoder decoder = new XMLDecoder(fis);
+			
+			obj = decoder.readObject();
+			if (obj instanceof ArrayList)
+			{
+				HabitacionSuiteDoble.setTarifas((ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>) obj);
+			}
+			else
+			{
+				System.err.println("No esta la lista en el archivo");
+			}
+			decoder.close();
+			fis.close();
+			
+			fis = new FileInputStream("data/habitacionesSuiteDoble.xml");
+			decoder = new XMLDecoder(fis);
+			
+			while (true)
+			{
+				try
+				{
+					obj = decoder.readObject();
+					
+					if (obj instanceof HabitacionSuiteDoble)
+					{
+						HabitacionSuiteDoble room = (HabitacionSuiteDoble) obj;
+						String id = room.getID();
+						mapaHabitacionesSuiteDoble.put(id, room);
+					}
+					else
+					{
+						System.err.println("objecto inesperado en el archivo");
+					}
+				}
+				catch (ArrayIndexOutOfBoundsException e3)
+				{
+					break;
+				}
+			}
+			decoder.close();
+			fis.close();
+		}
+		catch (FileNotFoundException e2)
+		{
+			return;
+		}
+		catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
 		
+		for (HashMap.Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet())
+		{
+			System.out.println(entrada.getKey());
+			System.out.println(entrada.getValue().getID());
+		}
+		
+		System.out.println(HabitacionSuiteDoble.getTarifas());
+		
+		coordinadorPMS.setHabitacionesSuiteDoble(mapaHabitacionesSuiteDoble);
+
 	}
 
 	private void cargarUsuarios(AutenticadorDeUsuarios autenticador)

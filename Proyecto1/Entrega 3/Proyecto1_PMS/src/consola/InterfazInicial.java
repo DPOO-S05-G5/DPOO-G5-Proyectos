@@ -2,6 +2,7 @@ package consola;
 
 import autenticador.AutenticadorDeUsuarios;
 import cargador.CargadorDeDatos;
+import modelo.CoordinadorPMS;
 import salvador.SalvadorDeDatos;
 
 public class InterfazInicial extends Interfaz
@@ -11,9 +12,10 @@ public class InterfazInicial extends Interfaz
 	private InterfazRecepcion interfazRecepcion;
 	private InterfazServicios interfazServicios;
 	private AutenticadorDeUsuarios autenticador;
+	private CoordinadorPMS coordinadorPMS;
 	private CargadorDeDatos cargador;
 	private SalvadorDeDatos salvador;
-	//private CoordinadorPMS coordinador;
+	
 	
 	public InterfazInicial()
 	{
@@ -21,6 +23,7 @@ public class InterfazInicial extends Interfaz
 		this.interfazRecepcion = new InterfazRecepcion();
 		this.interfazServicios = new InterfazServicios();
 		this.autenticador = new AutenticadorDeUsuarios();
+		this.coordinadorPMS = new CoordinadorPMS();
 		this.cargador = new CargadorDeDatos();
 		this.salvador = new SalvadorDeDatos();
 	}
@@ -73,7 +76,7 @@ public class InterfazInicial extends Interfaz
 	
 	private void ejecutarCargarDatosHotel()
 	{
-		cargador.cargarDatosHotel(autenticador);
+		cargador.cargarDatosHotel(autenticador, coordinadorPMS);
 	}
 	
 	private void ejecutarSalvarDatosHotel()

@@ -18,6 +18,12 @@ public class CargadorDeDatos
 {
 	String nombreArchivoUsuarios;
 	HashMap<String, Usuario> mapaUsuarios;
+	String nombreArchivoHabitacionesEstandar;
+	String nombreArchivoTarifasEstandar;
+	String nombreArchivoHabitacionesSuite;
+	String nombreArchivoTarifasSuite;
+	String nombreArchivoHabitacionesSuiteDoble;
+	String nombreArchivoTarifasSuiteDoble;
 	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
 	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
 	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
@@ -25,6 +31,12 @@ public class CargadorDeDatos
 	public CargadorDeDatos()
 	{
 		this.nombreArchivoUsuarios = "data/usuarios.xml";
+		this.nombreArchivoHabitacionesEstandar = "data/habitacionesEstandar.xml";
+		this.nombreArchivoTarifasEstandar = "data/tarifasHabitacionesEstandar.xml";
+		this.nombreArchivoHabitacionesSuite = "data/habitacionesSuite.xml";
+		this.nombreArchivoTarifasSuite = "data/tarifasHabitacionesSuite.xml";
+		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble";
+		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble";
 		this.mapaUsuarios = new HashMap<String, Usuario>();
 		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
 		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
@@ -35,8 +47,6 @@ public class CargadorDeDatos
 	{
 		cargarUsuarios(autenticador);
 		cargarHabitaciones(coordinadorPMS);
-		cargarProductosHabitacion(coordinadorPMS);
-		cargarProductosComedor(coordinadorPMS);
 	}
 
 	private void cargarHabitaciones(CoordinadorPMS coordinadorPMS) 
@@ -54,7 +64,7 @@ public class CargadorDeDatos
 		try
 		{
 			Object obj;
-			FileInputStream fis = new FileInputStream("data/tarifasHabitacionesEstandar.xml");
+			FileInputStream fis = new FileInputStream(nombreArchivoTarifasEstandar);
 			XMLDecoder decoder = new XMLDecoder(fis);
 			
 			obj = decoder.readObject();
@@ -69,7 +79,7 @@ public class CargadorDeDatos
 			decoder.close();
 			fis.close();
 			
-			fis = new FileInputStream("data/habitacionesEstandar.xml");
+			fis = new FileInputStream(nombreArchivoHabitacionesEstandar);
 			decoder = new XMLDecoder(fis);
 			
 			while (true)
@@ -122,7 +132,7 @@ public class CargadorDeDatos
 		try
 		{
 			Object obj;
-			FileInputStream fis = new FileInputStream("data/tarifasHabitacionesSuite.xml");
+			FileInputStream fis = new FileInputStream(nombreArchivoTarifasSuite);
 			XMLDecoder decoder = new XMLDecoder(fis);
 			
 			obj = decoder.readObject();
@@ -137,7 +147,7 @@ public class CargadorDeDatos
 			decoder.close();
 			fis.close();
 			
-			fis = new FileInputStream("data/habitacionesSuite.xml");
+			fis = new FileInputStream(nombreArchivoHabitacionesSuite);
 			decoder = new XMLDecoder(fis);
 			
 			while (true)
@@ -191,7 +201,7 @@ public class CargadorDeDatos
 		try
 		{
 			Object obj;
-			FileInputStream fis = new FileInputStream("data/tarifasHabitacionesSuiteDoble.xml");
+			FileInputStream fis = new FileInputStream(nombreArchivoTarifasSuiteDoble);
 			XMLDecoder decoder = new XMLDecoder(fis);
 			
 			obj = decoder.readObject();
@@ -206,7 +216,7 @@ public class CargadorDeDatos
 			decoder.close();
 			fis.close();
 			
-			fis = new FileInputStream("data/habitacionesSuiteDoble.xml");
+			fis = new FileInputStream(nombreArchivoHabitacionesSuiteDoble);
 			decoder = new XMLDecoder(fis);
 			
 			while (true)

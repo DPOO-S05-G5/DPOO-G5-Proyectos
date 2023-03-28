@@ -7,30 +7,144 @@ import java.util.HashMap;
 
 import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
+import modelo.CoordinadorPMS;
+import modelo.HabitacionEstandar;
+import modelo.HabitacionSuite;
+import modelo.HabitacionSuiteDoble;
 
 public class SalvadorDeDatos
 {
-	String nombrerArchivoUsuarios;
+	String nombreArchivoUsuarios;
 	HashMap<String, Usuario> mapaUsuarios;
+	String nombreArchivoHabitacionesEstandar;
+	String nombreArchivoTarifasEstandar;
+	String nombreArchivoHabitacionesSuite;
+	String nombreArchivoTarifasSuite;
+	String nombreArchivoHabitacionesSuiteDoble;
+	String nombreArchivoTarifasSuiteDoble;
+	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
+	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
+	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
 	
 	public SalvadorDeDatos()
 	{
-		this.nombrerArchivoUsuarios = "data/usuarios.xml";
+		this.nombreArchivoUsuarios = "data/usuarios.xml";
+		this.nombreArchivoHabitacionesEstandar = "data/habitacionesEstandar.xml";
+		this.nombreArchivoTarifasEstandar = "data/tarifasHabitacionesEstandar.xml";
+		this.nombreArchivoHabitacionesSuite = "data/habitacionesSuite.xml";
+		this.nombreArchivoTarifasSuite = "data/tarifasHabitacionesSuite.xml";
+		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble";
+		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble";
 	}
 	
-	public void salvarDatosHotel(AutenticadorDeUsuarios autenticador)
+	public void salvarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS)
 	{
 		salvarUsuarios(autenticador);
-		// salvarHabitaciones(coordinadorPMS);
+		salvarHabitacionesEstandar(coordinadorPMS);
+		salvarHabitacionesSuite(coordinadorPMS);
+		salvarHabitacionesSuiteDoble(coordinadorPMS);
 	}
 	
+	private void salvarHabitacionesEstandar(CoordinadorPMS coordinadorPMS) 
+	{
+		this.mapaHabitacionesEstandar = coordinadorPMS.getHabitacionesEstandar();
+		
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(nombreArchivoTarifasEstandar);
+			XMLEncoder encoder = new XMLEncoder(fos);
+			encoder.writeObject(HabitacionEstandar.getTarifas());
+			encoder.close();
+			fos.close();
+			
+			fos = new FileOutputStream(nombreArchivoHabitacionesEstandar);
+			encoder = new XMLEncoder(fos);
+			
+			for (HashMap.Entry<String, HabitacionEstandar> entrada : mapaHabitacionesEstandar.entrySet())
+			{
+				HabitacionEstandar room = (HabitacionEstandar) entrada.getValue();
+				System.out.println(room.getID());
+				encoder.writeObject(room);
+			}
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void salvarHabitacionesSuite(CoordinadorPMS coordinadorPMS) 
+	{
+		this.mapaHabitacionesSuite = coordinadorPMS.getHabitacionesSuite();
+		
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(nombreArchivoTarifasSuite);
+			XMLEncoder encoder = new XMLEncoder(fos);
+			encoder.writeObject(HabitacionSuite.getTarifas());
+			encoder.close();
+			fos.close();
+			
+			fos = new FileOutputStream(nombreArchivoHabitacionesSuite);
+			encoder = new XMLEncoder(fos);
+			
+			for (HashMap.Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet())
+			{
+				HabitacionSuite room = (HabitacionSuite) entrada.getValue();
+				System.out.println(room.getID());
+				encoder.writeObject(room);
+			}
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void salvarHabitacionesSuiteDoble(CoordinadorPMS coordinadorPMS) 
+	{
+		this.mapaHabitacionesSuiteDoble = coordinadorPMS.getHabitacionesSuiteDoble();
+		
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(nombreArchivoTarifasSuiteDoble);
+			XMLEncoder encoder = new XMLEncoder(fos);
+			encoder.writeObject(HabitacionSuiteDoble.getTarifas());
+			encoder.close();
+			fos.close();
+			
+			fos = new FileOutputStream(nombreArchivoHabitacionesSuiteDoble);
+			encoder = new XMLEncoder(fos);
+			
+			for (HashMap.Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet())
+			{
+				HabitacionSuiteDoble room = (HabitacionSuiteDoble) entrada.getValue();
+				System.out.println(room.getID());
+				encoder.writeObject(room);
+			}
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
 	private void salvarUsuarios(AutenticadorDeUsuarios autenticador)
 	{
 		this.mapaUsuarios = autenticador.getMapaUsuarios();
 		
 		try
 		{
-			FileOutputStream fos = new FileOutputStream(nombrerArchivoUsuarios);
+			FileOutputStream fos = new FileOutputStream(nombreArchivoUsuarios);
 			XMLEncoder encoder = new XMLEncoder(fos);
 			
 			for (HashMap.Entry<String, Usuario> entrada : mapaUsuarios.entrySet())

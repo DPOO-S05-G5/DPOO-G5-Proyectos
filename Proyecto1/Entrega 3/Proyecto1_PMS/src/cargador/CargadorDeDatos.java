@@ -321,7 +321,7 @@ public class CargadorDeDatos
 			System.out.println(entrada.getValue().getID());
 		}
 		
-		System.out.println(HabitacionSuiteDoble.getTarifas());
+		System.out.println(Producto.getTarifas());
 		
 		coordinadorPMS.setProducto(mapaProducto);
 

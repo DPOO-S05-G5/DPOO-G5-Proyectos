@@ -14,6 +14,7 @@ import modelo.HabitacionEstandar;
 import modelo.HabitacionSuite;
 import modelo.HabitacionSuiteDoble;
 import modelo.Producto;
+import modelo.Servicio;
 
 public class CargadorDeDatos {
 	String nombreArchivoUsuarios;
@@ -24,10 +25,13 @@ public class CargadorDeDatos {
 	String nombreArchivoTarifasSuite;
 	String nombreArchivoHabitacionesSuiteDoble;
 	String nombreArchivoTarifasSuiteDoble;
+	String nombreArchivoProducto;
+	String nombreArchivoServicio;
 	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
 	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
 	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
 	HashMap<String, Producto> mapaProducto;
+	HashMap<String, Servicio> mapaServicio;
 
 	public CargadorDeDatos() {
 		this.nombreArchivoUsuarios = "data/usuarios.xml";
@@ -37,11 +41,14 @@ public class CargadorDeDatos {
 		this.nombreArchivoTarifasSuite = "data/tarifasHabitacionesSuite.xml";
 		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble";
 		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble";
+		this.nombreArchivoProducto = "data/Producto";
+		this.nombreArchivoServicio = "data/Servicio";
 		this.mapaUsuarios = new HashMap<String, Usuario>();
 		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
 		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
 		this.mapaHabitacionesSuiteDoble = new HashMap<String, HabitacionSuiteDoble>();
 		this.mapaProducto = new HashMap<String, Producto>();
+		this.mapaServicio = new HashMap<String, Servicio>();
 	}
 
 	public void cargarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS) {
@@ -217,26 +224,21 @@ public class CargadorDeDatos {
 	private void cargarProductos(CoordinadorPMS coordinadorPMS) {
 		try {
 			Object obj;
-			FileInputStream fis = new FileInputStream("data/Producto.xml");
+			FileInputStream fis = new FileInputStream(nombreArchivoProducto);
 			XMLDecoder decoder = new XMLDecoder(fis);
 
 			obj = decoder.readObject();
-			if (obj instanceof ArrayList) {
-				Producto.setTarifas((ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>) obj);
-			} else {
-				System.err.println("No esta la lista en el archivo");
-			}
 			decoder.close();
 			fis.close();
 
-			fis = new FileInputStream("data/Productos.xml");
+			fis = new FileInputStream(nombreArchivoProducto);
 			decoder = new XMLDecoder(fis);
 
 			while (true) {
 				try {
 					obj = decoder.readObject();
 
-					if (obj instanceof HabitacionSuiteDoble) {
+					if (obj instanceof Producto) {
 						Producto producto = (Producto) obj;
 						String id = producto.getID();
 						mapaProducto.put(id, producto);
@@ -297,5 +299,52 @@ public class CargadorDeDatos {
 
 		autenticador.setMapaUsuarios(mapaUsuarios);
 
+	}
+	
+	
+	private void cargarServicio(CoordinadorPMS coordinadorPMS) {
+		try {
+			Object obj;
+			FileInputStream fis = new FileInputStream(nombreArchivoServicio);
+			XMLDecoder decoder = new XMLDecoder(fis);
+
+			obj = decoder.readObject();
+			decoder.close();
+			fis.close();
+
+			fis = new FileInputStream(nombreArchivoServicio);
+			decoder = new XMLDecoder(fis);
+
+			while (true) {
+				try {
+					obj = decoder.readObject();
+
+					if (obj instanceof HabitacionEstandar) {
+						Servicio servicio = (Servicio) obj;
+						String id = servicio.getID();
+						mapaServicio.put(id, servicio);
+					} else {
+						System.err.println("objecto inesperado en el archivo");
+					}
+				} catch (ArrayIndexOutOfBoundsException e3) {
+					break;
+				}
+			}
+			decoder.close();
+			fis.close();
+		} catch (FileNotFoundException e2) {
+			return;
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		for (HashMap.Entry<String, Servicio> entrada : mapaServicio.entrySet()) {
+			System.out.println(entrada.getKey());
+			System.out.println(entrada.getValue().getID());
+		}
+
+		System.out.println(Servicio.getTarifas());
+
+		coordinadorPMS.setServicio(mapaServicio);
 	}
 }

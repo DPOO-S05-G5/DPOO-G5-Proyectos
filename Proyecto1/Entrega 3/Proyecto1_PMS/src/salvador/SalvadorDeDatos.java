@@ -22,9 +22,12 @@ public class SalvadorDeDatos
 	String nombreArchivoTarifasSuite;
 	String nombreArchivoHabitacionesSuiteDoble;
 	String nombreArchivoTarifasSuiteDoble;
+	String nombreArchivoProductos;
 	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
 	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
 	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
+	HashMap<String, Producto> mapaProducto;
+	
 	
 	public SalvadorDeDatos()
 	{
@@ -35,6 +38,7 @@ public class SalvadorDeDatos
 		this.nombreArchivoTarifasSuite = "data/tarifasHabitacionesSuite.xml";
 		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble";
 		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble";
+		this.nombreArchivoProductos = "data/Productos";
 	}
 	
 	public void salvarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS)

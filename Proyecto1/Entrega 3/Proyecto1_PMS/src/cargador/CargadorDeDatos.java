@@ -13,6 +13,7 @@ import modelo.CoordinadorPMS;
 import modelo.HabitacionEstandar;
 import modelo.HabitacionSuite;
 import modelo.HabitacionSuiteDoble;
+import modelo.Producto;
 
 public class CargadorDeDatos
 {
@@ -21,6 +22,7 @@ public class CargadorDeDatos
 	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
 	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
 	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
+	HashMap<String, Producto> mapaProducto;
 	
 	public CargadorDeDatos()
 	{
@@ -29,14 +31,15 @@ public class CargadorDeDatos
 		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
 		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
 		this.mapaHabitacionesSuiteDoble = new HashMap<String, HabitacionSuiteDoble>();
+		this.mapaProducto = new HashMap<String, Producto>();
 	}
 	
 	public void cargarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS)
 	{
 		cargarUsuarios(autenticador);
 		cargarHabitaciones(coordinadorPMS);
-		cargarProductosHabitacion(coordinadorPMS);
-		cargarProductosComedor(coordinadorPMS);
+		cargarProductos(coordinadorPMS);
+	
 	}
 
 	private void cargarHabitaciones(CoordinadorPMS coordinadorPMS) 
@@ -255,6 +258,78 @@ public class CargadorDeDatos
 
 	}
 
+	private void cargarProductos(CoordinadorPMS coordinadorPMS) 
+	{
+		try
+		{
+			Object obj;
+			FileInputStream fis = new FileInputStream("data/Producto.xml");
+			XMLDecoder decoder = new XMLDecoder(fis);
+			
+			obj = decoder.readObject();
+			if (obj instanceof ArrayList)
+			{
+				Producto.setTarifas((ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>) obj);
+			}
+			else
+			{
+				System.err.println("No esta la lista en el archivo");
+			}
+			decoder.close();
+			fis.close();
+			
+			fis = new FileInputStream("data/Productos.xml");
+			decoder = new XMLDecoder(fis);
+			
+			while (true)
+			{
+				try
+				{
+					obj = decoder.readObject();
+					
+					if (obj instanceof HabitacionSuiteDoble)
+					{
+						Producto producto = (Producto) obj;
+						String id = producto.getID();
+						mapaProducto.put(id, producto);
+					}
+					else
+					{
+						System.err.println("objecto inesperado en el archivo");
+					}
+				}
+				catch (ArrayIndexOutOfBoundsException e3)
+				{
+					break;
+				}
+			}
+			decoder.close();
+			fis.close();
+		}
+		catch (FileNotFoundException e2)
+		{
+			return;
+		}
+		catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
+		
+		for (HashMap.Entry<String, Producto> entrada : mapaProducto.entrySet())
+		{
+			System.out.println(entrada.getKey());
+			System.out.println(entrada.getValue().getID());
+		}
+		
+		System.out.println(HabitacionSuiteDoble.getTarifas());
+		
+		coordinadorPMS.setProducto(mapaProducto);
+
+	}
+
+	
+	
+	
 	private void cargarUsuarios(AutenticadorDeUsuarios autenticador)
 	{	
 		try

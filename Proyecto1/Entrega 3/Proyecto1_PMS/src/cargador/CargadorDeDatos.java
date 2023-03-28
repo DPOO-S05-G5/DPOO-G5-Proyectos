@@ -29,6 +29,8 @@ public class CargadorDeDatos
 	{
 		cargarUsuarios(autenticador);
 		cargarHabitaciones(coordinadorPMS);
+		cargarProductosHabitacion(coordinadorPMS);
+		cargarProductosComedor(coordinadorPMS);
 	}
 
 	private void cargarHabitaciones(CoordinadorPMS coordinadorPMS) 

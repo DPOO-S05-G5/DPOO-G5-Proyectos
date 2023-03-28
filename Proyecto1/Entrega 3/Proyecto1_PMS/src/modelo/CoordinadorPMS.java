@@ -8,6 +8,8 @@ public class CoordinadorPMS {
 	private HashMap<String, HabitacionEstandar> habitacionesEstandar;
 	private HashMap<String, HabitacionSuite> habitacionesSuite;
 	private HashMap<String, HabitacionSuiteDoble> habitacionesSuiteDoble;
+	private HashMap<String, ProductosHabitacion> ProductosHabitacion;
+	private HashMap<String, ProductosComedor> ProductosComedor;
 	
 	public HashMap<String, HabitacionEstandar> getHabitacionesEstandar() 
 	{
@@ -40,6 +42,6 @@ public class CoordinadorPMS {
 		this.habitacionesSuiteDoble = habitacionesSuiteDoble;
 	}
 	
-		
+	
 
 }

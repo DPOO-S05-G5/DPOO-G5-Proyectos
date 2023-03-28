@@ -13,33 +13,48 @@ public class CoordinadorPMS {
 	{
 		return habitacionesEstandar;
 	}
+	
 	public void setHabitacionesEstandar(HashMap<String, HabitacionEstandar> habitacionesEstandar)
 	{
 		this.habitacionesEstandar = habitacionesEstandar;
 	}
 	
-	public void addHabitacioneEstandar(HabitacionEstandar habitacion)
+	public void addHabitacionEstandar(HabitacionEstandar habitacion)
 	{
 		String id = habitacion.getID();
 		this.habitacionesEstandar.put(id, habitacion);
 	}
+	
 	public HashMap<String, HabitacionSuite> getHabitacionesSuite()
 	{
 		return habitacionesSuite;
 	}
+	
 	public void setHabitacionesSuite(HashMap<String, HabitacionSuite> habitacionesSuite)
 	{
 		this.habitacionesSuite = habitacionesSuite;
 	}
+	
+	public void addHabitacionSuite(HabitacionSuite habitacion)
+	{
+		String id = habitacion.getID();
+		this.habitacionesSuite.put(id, habitacion);
+	}
+	
 	public HashMap<String, HabitacionSuiteDoble> getHabitacionesSuiteDoble()
 	{
 		return habitacionesSuiteDoble;
 	}
+	
 	public void setHabitacionesSuiteDoble(HashMap<String, HabitacionSuiteDoble> habitacionesSuiteDoble)
 	{
 		this.habitacionesSuiteDoble = habitacionesSuiteDoble;
 	}
 	
-		
+	public void addHabitacionSuiteDoble(HabitacionSuiteDoble habitacion)
+	{
+		String id = habitacion.getID();
+		this.habitacionesSuiteDoble.put(id, habitacion);
+	}
 
 }

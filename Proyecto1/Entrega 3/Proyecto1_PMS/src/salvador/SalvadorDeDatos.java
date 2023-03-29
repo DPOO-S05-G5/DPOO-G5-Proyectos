@@ -23,10 +23,12 @@ public class SalvadorDeDatos
 	String nombreArchivoHabitacionesSuiteDoble;
 	String nombreArchivoTarifasSuiteDoble;
 	String nombreArchivoProductos;
+	String nombreArchivoServicios;
 	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
 	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
 	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
 	HashMap<String, Producto> mapaProducto;
+	HashMap<String, Servicio> mapaServicio;
 	
 	
 	public SalvadorDeDatos()
@@ -39,6 +41,7 @@ public class SalvadorDeDatos
 		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble";
 		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble";
 		this.nombreArchivoProductos = "data/Productos";
+		this.nombreArchivoProductos = "data/Servicios";
 	}
 	
 	public void salvarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS)
@@ -47,6 +50,8 @@ public class SalvadorDeDatos
 		salvarHabitacionesEstandar(coordinadorPMS);
 		salvarHabitacionesSuite(coordinadorPMS);
 		salvarHabitacionesSuiteDoble(coordinadorPMS);
+		salvarProductos(coordinadorPMS);
+		salvarServicios(coordinadorPMS);
 	}
 	
 	private void salvarHabitacionesEstandar(CoordinadorPMS coordinadorPMS) 
@@ -164,6 +169,59 @@ public class SalvadorDeDatos
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	private void salvarProducto(CoordinadorPMS coordinadorPMS) 
+	{
+		this.mapaProducto = coordinadorPMS.getProducto();
+		
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(nombreArchivoProducto);
+			XMLEncoder encoder = new XMLEncoder(fos);
+			
+			
+			for (HashMap.Entry<String, Producto> entrada : mapaProducto.entrySet())
+			{
+				Producto producto = (Producto) entrada.getValue();
+				System.out.println(producto.getID());
+				encoder.writeObject(producto);
+			}
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	private void salvarServicio(CoordinadorPMS coordinadorPMS) 
+	{
+		this.mapaServicio = coordinadorPMS.getProducto();
+		
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(nombreArchivoServicio);
+			XMLEncoder encoder = new XMLEncoder(fos);
+			
+			
+			for (HashMap.Entry<String, Servicio> entrada : mapaServicio.entrySet())
+			{
+				Servicio servicio = (Servicio) entrada.getValue();
+				System.out.println(servicio.getID());
+				encoder.writeObject(servicio);
+			}
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
 
 }

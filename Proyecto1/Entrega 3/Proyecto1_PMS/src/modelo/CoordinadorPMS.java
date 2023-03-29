@@ -9,6 +9,7 @@ public class CoordinadorPMS {
 	private HashMap<String, HabitacionSuite> habitacionesSuite;
 	private HashMap<String, HabitacionSuiteDoble> habitacionesSuiteDoble;
 	private HashMap<String, Producto> producto;
+	private HashMap<String, Servicio> servicio;
 	
 	
 	public HashMap<String, HabitacionEstandar> getHabitacionesEstandar() 
@@ -16,6 +17,21 @@ public class CoordinadorPMS {
 		return habitacionesEstandar;
 	}
 	
+	public HashMap<String, Servicio> getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(HashMap<String, Servicio> servicio) {
+		this.servicio = servicio;
+		
+	}
+	
+	public void addServicio(Servicio servicio)
+	{
+		String id = servicio.getID();
+		this.servicio.put(id, servicio);
+	}
+
 	public void setHabitacionesEstandar(HashMap<String, HabitacionEstandar> habitacionesEstandar)
 	{
 		this.habitacionesEstandar = habitacionesEstandar;

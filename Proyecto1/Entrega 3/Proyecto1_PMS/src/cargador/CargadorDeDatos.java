@@ -262,8 +262,6 @@ public class CargadorDeDatos {
 			System.out.println(entrada.getValue().getID());
 		}
 		
-		System.out.println(Producto.getTarifas());
-		
 		coordinadorPMS.setProducto(mapaProducto);
 
 	}
@@ -342,9 +340,6 @@ public class CargadorDeDatos {
 			System.out.println(entrada.getKey());
 			System.out.println(entrada.getValue().getID());
 		}
-
-		System.out.println(Servicio.getTarifas());
-
 		coordinadorPMS.setServicio(mapaServicio);
 	}
 }

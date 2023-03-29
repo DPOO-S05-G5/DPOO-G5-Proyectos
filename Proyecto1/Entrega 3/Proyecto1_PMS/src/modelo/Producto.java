@@ -7,10 +7,33 @@ public abstract class Producto {
 	private String nombre;
 	private String ID;
 	private String precio;
+	private int horaInicial;
+	private int horaFinal;
 	private boolean servicioComedor;
 	private boolean servicioHabitacion;
 	
 	
+	
+	public int getHoraInicial() {
+		return horaInicial;
+	}
+
+
+	public void setHoraInicial(int horaInicial) {
+		this.horaInicial = horaInicial;
+	}
+
+
+	public int getHoraFinal() {
+		return horaFinal;
+	}
+
+
+	public void setHoraFinal(int horaFinal) {
+		this.horaFinal = horaFinal;
+	}
+
+
 	public Producto(String nombre, String ID, String precio,boolean servicioComedor,boolean servicioHabitacion)
 	{
 		
@@ -20,8 +43,6 @@ public abstract class Producto {
 	this.precio = precio;
 	this.servicioComedor = servicioComedor;
 	this.servicioHabitacion = servicioHabitacion;
-	
-	
 	
 	}
 

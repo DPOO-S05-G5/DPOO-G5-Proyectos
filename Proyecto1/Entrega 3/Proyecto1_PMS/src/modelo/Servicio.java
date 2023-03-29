@@ -7,6 +7,7 @@ public abstract class Servicio {
 	private String nombre;
 	private int precio;
 	private String ID;
+	
 	public boolean isDeSpa() {
 		return deSpa;
 	}

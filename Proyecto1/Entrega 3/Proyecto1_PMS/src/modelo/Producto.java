@@ -1,19 +1,54 @@
 package modelo;
 
-import java.util.ArrayList;
-
-public abstract class Producto {
+public class Producto {
 	
 	private String nombre;
 	private String ID;
-	private String precio;
+	private int precio;
 	private int horaInicial;
 	private int horaFinal;
 	private boolean servicioComedor;
 	private boolean servicioHabitacion;
+	private boolean esPostre;
+	private boolean esBebida;
+	private boolean esPlato;
 	
+	public Producto()
+	{
+		
+	}
 	
-	
+	public Producto(String nombre, String iD, int precio, int horaInicial, int horaFinal, boolean servicioComedor,
+			boolean servicioHabitacion, String tipo) {
+		super();
+		this.nombre = nombre;
+		ID = iD;
+		this.precio = precio;
+		this.horaInicial = horaInicial;
+		this.horaFinal = horaFinal;
+		this.servicioComedor = servicioComedor;
+		this.servicioHabitacion = servicioHabitacion;
+		if (tipo.equals("plato"))
+		{
+			setEsPlato(true);
+			setEsPostre(false);
+			setEsBebida(false);
+		}
+		else if (tipo.equals("bebida"))
+		{
+			setEsPlato(false);
+			setEsPostre(false);
+			setEsBebida(true);
+		}
+		else
+		{
+			setEsPlato(false);
+			setEsPostre(true);
+			setEsBebida(false);
+		}
+	}
+
+
 	public int getHoraInicial() {
 		return horaInicial;
 	}
@@ -31,19 +66,6 @@ public abstract class Producto {
 
 	public void setHoraFinal(int horaFinal) {
 		this.horaFinal = horaFinal;
-	}
-
-
-	public Producto(String nombre, String ID, String precio,boolean servicioComedor,boolean servicioHabitacion)
-	{
-		
-	super();
-	this.nombre = nombre;
-	this.ID = ID;
-	this.precio = precio;
-	this.servicioComedor = servicioComedor;
-	this.servicioHabitacion = servicioHabitacion;
-	
 	}
 
 
@@ -67,12 +89,12 @@ public abstract class Producto {
 	}
 
 
-	public String getPrecio() {
+	public int getPrecio() {
 		return precio;
 	}
 
 
-	public void setPrecio(String precio) {
+	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
 
@@ -94,6 +116,36 @@ public abstract class Producto {
 
 	public void setServicioHabitacion(boolean servicioHabitacion) {
 		this.servicioHabitacion = servicioHabitacion;
+	}
+
+
+	public boolean isEsPostre() {
+		return esPostre;
+	}
+
+
+	public void setEsPostre(boolean esPostre) {
+		this.esPostre = esPostre;
+	}
+
+
+	public boolean isEsBebida() {
+		return esBebida;
+	}
+
+
+	public void setEsBebida(boolean esBebida) {
+		this.esBebida = esBebida;
+	}
+
+
+	public boolean isEsPlato() {
+		return esPlato;
+	}
+
+
+	public void setEsPlato(boolean esPlato) {
+		this.esPlato = esPlato;
 	}
 	
 	

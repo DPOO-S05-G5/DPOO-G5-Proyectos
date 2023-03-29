@@ -128,4 +128,9 @@ public class CoordinadorPMS {
 		
 	}
 
+	public void cambiarDiasSemanaTarifa(String tipoHabitacion, ArrayList<Integer> dias) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

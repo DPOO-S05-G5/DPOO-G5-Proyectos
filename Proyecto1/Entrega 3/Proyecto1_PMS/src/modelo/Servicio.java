@@ -1,13 +1,32 @@
 package modelo;
 
-public abstract class Servicio {
+public class Servicio {
 	
 	private boolean deSpa;
 	private boolean deGuiaTuristico;
 	private String nombre;
 	private int precio;
 	private String ID;
+	private boolean disponibilidad;
+	private int duracion;
 	
+	public Servicio()
+	{
+		
+	}
+	
+	public Servicio(boolean deSpa, boolean deGuiaTuristico, String nombre, int precio, String iD,
+			boolean disponibilidad, int duracion) {
+		super();
+		this.deSpa = deSpa;
+		this.deGuiaTuristico = deGuiaTuristico;
+		this.nombre = nombre;
+		this.precio = precio;
+		ID = iD;
+		this.disponibilidad = disponibilidad;
+		this.duracion = duracion;
+	}
+
 	public boolean isDeSpa() {
 		return deSpa;
 	}
@@ -63,21 +82,5 @@ public abstract class Servicio {
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
-
-	private boolean disponibilidad;
-	private int duracion;
 	
-	
-	public Servicio(boolean deSpa, boolean deGuiaTuristico, String nombre, int precio, String ID, boolean disponibilidad,int duracion )
-	
-	{
-		super();
-		this.deSpa = deSpa;
-		this.deGuiaTuristico = deGuiaTuristico;
-		this.nombre = nombre;
-		this.precio = precio;
-		this.ID = ID;
-		this.disponibilidad = disponibilidad;
-		this.duracion = duracion;
-	}
 }

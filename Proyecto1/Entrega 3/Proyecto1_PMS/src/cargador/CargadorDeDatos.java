@@ -39,10 +39,10 @@ public class CargadorDeDatos {
 		this.nombreArchivoTarifasEstandar = "data/tarifasHabitacionesEstandar.xml";
 		this.nombreArchivoHabitacionesSuite = "data/habitacionesSuite.xml";
 		this.nombreArchivoTarifasSuite = "data/tarifasHabitacionesSuite.xml";
-		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble";
-		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble";
-		this.nombreArchivoProducto = "data/Producto";
-		this.nombreArchivoServicio = "data/Servicio";
+		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble.xml";
+		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble.xml";
+		this.nombreArchivoProducto = "data/Producto.xml";
+		this.nombreArchivoServicio = "data/Servicio.xml";
 		this.mapaUsuarios = new HashMap<String, Usuario>();
 		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
 		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
@@ -55,6 +55,7 @@ public class CargadorDeDatos {
 		cargarUsuarios(autenticador);
 		cargarHabitaciones(coordinadorPMS);
 		cargarProductos(coordinadorPMS);
+		cargarServicios(coordinadorPMS);
 
 	}
 
@@ -227,13 +228,6 @@ public class CargadorDeDatos {
 			FileInputStream fis = new FileInputStream(nombreArchivoProducto);
 			XMLDecoder decoder = new XMLDecoder(fis);
 
-			obj = decoder.readObject();
-			decoder.close();
-			fis.close();
-
-			fis = new FileInputStream(nombreArchivoProducto);
-			decoder = new XMLDecoder(fis);
-
 			while (true) {
 				try {
 					obj = decoder.readObject();
@@ -259,7 +253,7 @@ public class CargadorDeDatos {
 
 		for (HashMap.Entry<String, Producto> entrada : mapaProducto.entrySet()) {
 			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getID());
+			System.out.println(entrada.getValue().getNombre());
 		}
 		
 		coordinadorPMS.setProducto(mapaProducto);
@@ -300,7 +294,7 @@ public class CargadorDeDatos {
 	}
 	
 	
-	private void cargarServicio(CoordinadorPMS coordinadorPMS) {
+	private void cargarServicios(CoordinadorPMS coordinadorPMS) {
 		try {
 			Object obj;
 			FileInputStream fis = new FileInputStream(nombreArchivoServicio);
@@ -317,7 +311,7 @@ public class CargadorDeDatos {
 				try {
 					obj = decoder.readObject();
 
-					if (obj instanceof HabitacionEstandar) {
+					if (obj instanceof Servicio) {
 						Servicio servicio = (Servicio) obj;
 						String id = servicio.getID();
 						mapaServicio.put(id, servicio);
@@ -338,7 +332,7 @@ public class CargadorDeDatos {
 
 		for (HashMap.Entry<String, Servicio> entrada : mapaServicio.entrySet()) {
 			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getID());
+			System.out.println(entrada.getValue().getNombre());
 		}
 		coordinadorPMS.setServicio(mapaServicio);
 	}

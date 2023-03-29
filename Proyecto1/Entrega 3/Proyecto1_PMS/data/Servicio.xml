@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="19.0.2" class="java.beans.XMLDecoder">
+ <object class="modelo.Servicio">
+  <void property="ID">
+   <string>01</string>
+  </void>
+  <void property="deSpa">
+   <boolean>true</boolean>
+  </void>
+  <void property="disponibilidad">
+   <boolean>true</boolean>
+  </void>
+  <void property="duracion">
+   <int>100</int>
+  </void>
+  <void property="nombre">
+   <string>Masaje sencillo</string>
+  </void>
+  <void property="precio">
+   <int>150000</int>
+  </void>
+ </object>
+ <object class="modelo.Servicio">
+  <void property="ID">
+   <string>02</string>
+  </void>
+  <void property="deSpa">
+   <boolean>true</boolean>
+  </void>
+  <void property="disponibilidad">
+   <boolean>true</boolean>
+  </void>
+  <void property="duracion">
+   <int>80</int>
+  </void>
+  <void property="nombre">
+   <string>Exfoliacion</string>
+  </void>
+  <void property="precio">
+   <int>80000</int>
+  </void>
+ </object>
+ <object class="modelo.Servicio">
+  <void property="ID">
+   <string>03</string>
+  </void>
+  <void property="deSpa">
+   <boolean>true</boolean>
+  </void>
+  <void property="disponibilidad">
+   <boolean>true</boolean>
+  </void>
+  <void property="duracion">
+   <int>120</int>
+  </void>
+  <void property="nombre">
+   <string>Relajación</string>
+  </void>
+  <void property="precio">
+   <int>120000</int>
+  </void>
+ </object>
+ <object class="modelo.Servicio">
+  <void property="ID">
+   <string>04</string>
+  </void>
+  <void property="deGuiaTuristico">
+   <boolean>true</boolean>
+  </void>
+  <void property="disponibilidad">
+   <boolean>true</boolean>
+  </void>
+  <void property="duracion">
+   <int>4</int>
+  </void>
+  <void property="nombre">
+   <string>historico</string>
+  </void>
+  <void property="precio">
+   <int>70000</int>
+  </void>
+ </object>
+ <object class="modelo.Servicio">
+  <void property="ID">
+   <string>05</string>
+  </void>
+  <void property="deGuiaTuristico">
+   <boolean>true</boolean>
+  </void>
+  <void property="disponibilidad">
+   <boolean>true</boolean>
+  </void>
+  <void property="duracion">
+   <int>3</int>
+  </void>
+  <void property="nombre">
+   <string>caminata</string>
+  </void>
+  <void property="precio">
+   <int>70000</int>
+  </void>
+ </object>
+ <object class="modelo.Servicio">
+  <void property="ID">
+   <string>06</string>
+  </void>
+  <void property="deGuiaTuristico">
+   <boolean>true</boolean>
+  </void>
+  <void property="disponibilidad">
+   <boolean>true</boolean>
+  </void>
+  <void property="duracion">
+   <int>2</int>
+  </void>
+  <void property="nombre">
+   <string>taller</string>
+  </void>
+  <void property="precio">
+   <int>70000</int>
+  </void>
+ </object>
+</java>

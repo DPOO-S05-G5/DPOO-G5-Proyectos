@@ -95,4 +95,21 @@ public class CoordinadorPMS {
 		}
 	}
 
+	public void addTarifa(String tipoHabitacion, String[] listaFechaI, String[] listaFechaF, ArrayList<Integer> dias)
+	{
+		if (tipoHabitacion.equals("estandar"))
+		{
+			
+		}
+		else if (tipoHabitacion.equals("suite"))
+		{
+			
+		}
+		else if (tipoHabitacion.equals("suitedoble"))
+		{
+			
+		}
+		
+	}
+
 }

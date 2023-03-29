@@ -112,15 +112,14 @@ public class InterfazTarifas extends Interfaz
 			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
 			{
 				coordinadorPMS.mostrarTarifas(tipoHabitacion);
+				int tarifaSeleccionada = Integer.parseInt(input("Seleccione la tarifa para eliminar"));
+				coordinadorPMS.eliminarTarifa(tarifaSeleccionada);
 			}
 			else
 			{
 				System.out.println("Tipo de habitacion debe ser  \"estandar\" o \"suite\" o \"suite doble\".");
 			}
 			
-			
-			int tarifaSeleccionada = Integer.parseInt(input("Seleccione la tarifa para eliminar"));
-			// TODO Eliminar la tarifa elegida
 		}
 		catch (NumberFormatException e)
 		{
@@ -131,12 +130,17 @@ public class InterfazTarifas extends Interfaz
 	private void ejecutarEditarTarifa()
 	{
 		String tipoHabitacion = input("Tipo de habitación de la tarifa que desea editar (estandar / suite / suitedoble)");
-		
-		// TODO mostrar tarifas existentes para el tipo de habitación
-		
+				
 		try
 		{
-			int tarifaSeleccionada = Integer.parseInt(input("Seleccione la tarifa para editar"));
+			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
+			{
+				coordinadorPMS.mostrarTarifas(tipoHabitacion);
+			}
+			else
+			{
+				System.out.println("Tipo de habitacion debe ser  \"estandar\" o \"suite\" o \"suite doble\".");
+			}
 		}
 		catch (NumberFormatException e1)
 		{
@@ -174,37 +178,48 @@ public class InterfazTarifas extends Interfaz
 	private void ejecutarCambiarAtributo(int seleccion)
 	{
 		if (seleccion == 1)
-			ejecutarCambiarValorTarifa();
+			ejecutarCambiarValorTarifa(tipoHabitacion);
 		else if (seleccion == 2)
-			ejecutarCambiarFechaInicial();
+			ejecutarCambiarFechaInicial(tipoHabitacion);
 		else if (seleccion == 3)
-			ejecutarCambiarFechaFinal();
+			ejecutarCambiarFechaFinal(tipoHabitacion);
 		else
-			ejecutarCambiarDiasSemana();
+			ejecutarCambiarDiasSemana(tipoHabitacion);
 	}
 
-	private void ejecutarCambiarDiasSemana()
+	private void ejecutarCambiarDiasSemana(String tipoHabitacion)
 	{
 		// TODO Auto-generated method stub
-		String diasSemana = input("Dias de la semana donde se aplica la tarifa (Formato: L.M.I.J.V.S.D)");
+		String diasSemana = input("Dias de la semana donde se aplica la tarifa (Formato: L-M-I-J-V-S-D)");
+		String[] listaDiasSemana = diasSemana.split("-");
+		ArrayList<Integer> dias = new ArrayList<Integer>();
+		for (String dia : listaDiasSemana)
+		{
+			if (listaDias.contains(dia))
+			{
+				dias.add(mapaDias.get(dia));
+			}
+		}
+		coordinadorPMS.cambiarDiasSemanaTarifa(tipoHabitacion, dias);
 	}
 
-	private void ejecutarCambiarFechaFinal()
+	private void ejecutarCambiarFechaFinal(String tipoHabitacion)
 	{
 		// TODO Auto-generated method stub
 		String fechaFinal = input("Nueva fecha final");
 	}
 
-	private void ejecutarCambiarFechaInicial()
+	private void ejecutarCambiarFechaInicial(String tipoHabitacion)
 	{
 		// TODO Auto-generated method stub
 		String fechaInicial = input("Nueva fecha inicial");
 	}
 
-	private void ejecutarCambiarValorTarifa()
+	private void ejecutarCambiarValorTarifa(String tipoHabitacion)
 	{
 		// TODO Auto-generated method stub
-		int valorTarifa = Integer.parseInt(input("Nuevo valor de la tarifa"));		
+		int valorTarifa = Integer.parseInt(input("Nuevo valor de la tarifa"));
+		
 	}
 
 	@Override

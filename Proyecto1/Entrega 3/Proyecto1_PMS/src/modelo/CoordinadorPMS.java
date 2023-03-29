@@ -8,8 +8,8 @@ public class CoordinadorPMS {
 	private HashMap<String, HabitacionEstandar> habitacionesEstandar;
 	private HashMap<String, HabitacionSuite> habitacionesSuite;
 	private HashMap<String, HabitacionSuiteDoble> habitacionesSuiteDoble;
-	private HashMap<String, ProductosHabitacion> ProductosHabitacion;
-	private HashMap<String, ProductosComedor> ProductosComedor;
+	private HashMap<String, Producto> producto;
+	
 	
 	public HashMap<String, HabitacionEstandar> getHabitacionesEstandar() 
 	{
@@ -58,5 +58,24 @@ public class CoordinadorPMS {
 		String id = habitacion.getID();
 		this.habitacionesSuiteDoble.put(id, habitacion);
 	}
+	
+	
+	public HashMap<String, Producto> getProducto() 
+	{
+		return producto;
+	}
+	
+	public void setProducto(HashMap<String, Producto> producto)
+	{
+		this.producto = producto ;
+	}
+	
+	public void addProducto(Producto producto)
+	{
+		String id = producto.getID();
+		this.producto.put(id, producto);
+	}
+	
+	
 
 }

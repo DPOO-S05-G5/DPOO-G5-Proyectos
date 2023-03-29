@@ -1,5 +1,10 @@
 package modelo;
 
-public class Spa {
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Spa extends Servicio
+{
 
 }

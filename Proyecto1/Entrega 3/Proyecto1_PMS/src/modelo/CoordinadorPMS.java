@@ -75,7 +75,24 @@ public class CoordinadorPMS {
 		String id = producto.getID();
 		this.producto.put(id, producto);
 	}
-	
-	
+
+	public void addHabitacion(String tipoHabitacion, boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String id)
+	{
+		if (tipoHabitacion.equals("estandar"))
+		{
+			HabitacionEstandar habitacion = new HabitacionEstandar(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
+			habitacionesEstandar.put(id, habitacion);
+		}
+		else if (tipoHabitacion.equals("suite"))
+		{
+			HabitacionSuite habitacion = new HabitacionSuite(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
+			habitacionesSuite.put(id, habitacion);
+		}
+		else if (tipoHabitacion.equals("suitedoble"))
+		{
+			HabitacionSuiteDoble habitacion = new HabitacionSuiteDoble(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
+			habitacionesSuiteDoble.put(id,  habitacion);
+		}
+	}
 
 }

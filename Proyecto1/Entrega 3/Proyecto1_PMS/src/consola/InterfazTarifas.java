@@ -1,16 +1,34 @@
 package consola;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import modelo.CoordinadorPMS;
 
 public class InterfazTarifas extends Interfaz
 {
 	private  CoordinadorPMS coordinadorPMS;
+	private String[] tiposHabitacion;
+	private ArrayList<String> listaDias;
+	private HashMap<String, Integer> mapaDias;
 
 	public InterfazTarifas(CoordinadorPMS coordinadorPMS) 
 	{
 		this.coordinadorPMS = coordinadorPMS;
+		this.tiposHabitacion = new String[]{"estandar", "suite", "suitedoble"};
+		this.listaDias = new ArrayList<String>();
+		this.mapaDias = new HashMap<String, Integer>();
+		listaDias.add("D");
+		listaDias.add("L");
+		listaDias.add("M");
+		listaDias.add("I");
+		listaDias.add("J");
+		listaDias.add("V");
+		listaDias.add("S");
+		for (int i=0; i<7; i++)
+		{
+			mapaDias.put(listaDias.get(i), i);
+		}
 	}
 
 	@Override
@@ -53,12 +71,31 @@ public class InterfazTarifas extends Interfaz
 	{
 		try 
 		{
-			String tipoHabitacion = input("Tipo de habitación (estandar / suite / suitedoble)");
+			String tipoHabitacion = input("Tipo de habitación (estandar / suite / suitedoble)").toLowerCase();
 			int valorTarifa = Integer.parseInt(input("Valor de la tarifa"));
 			String fechaInicial = input("Fecha inicial (dd-mm)");
 			String fechaFinal = input("Fecha final (dd-mm)");
-			String diasSemana = input("Dias de la semana (Formato: L.M.I.J.V.S.D)");
-			
+			String diasSemana = input("Dias de la semana (Formato: L-M-I-J-V-S-D)").toUpperCase();
+			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
+			{
+				String[] listaFechaI = fechaInicial.split("-");
+				String[] listaFechaF = fechaFinal.split("-");
+				String[] listaDiasIngresados = diasSemana.split("-");
+				ArrayList<Integer> dias = new ArrayList<Integer>();
+				for (String dia : listaDiasIngresados)
+				{
+					if (listaDias.contains(dia))
+					{
+						dias.add(mapaDias.get(dia));
+					}
+				}
+				
+				coordinadorPMS.addTarifa(tipoHabitacion, listaFechaI, listaFechaF, dias);
+			}
+			else
+			{
+				System.out.println("Tipo de habitacion debe ser  \"estandar\" o \"suite\" o \"suite doble\".");
+			}
 		}
 		catch (NumberFormatException e)
 		{
@@ -71,9 +108,16 @@ public class InterfazTarifas extends Interfaz
 	{
 		try
 		{
-			String tipoHabitacion = input("Tipo de habitación de la tarifa que desea eliminar (estandar / suite / suitedoble)");
+			String tipoHabitacion = input("Tipo de habitación de la tarifa que desea eliminar (estandar / suite / suitedoble)").toLowerCase();
+			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
+			{
+				coordinadorPMS.mostrarTarifas(tipoHabitacion);
+			}
+			else
+			{
+				System.out.println("Tipo de habitacion debe ser  \"estandar\" o \"suite\" o \"suite doble\".");
+			}
 			
-			// TODO mostrar tarifas existentes para el tipo de habitación
 			
 			int tarifaSeleccionada = Integer.parseInt(input("Seleccione la tarifa para eliminar"));
 			// TODO Eliminar la tarifa elegida

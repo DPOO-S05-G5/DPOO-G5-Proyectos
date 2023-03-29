@@ -111,9 +111,9 @@ public class InterfazTarifas extends Interfaz
 			String tipoHabitacion = input("Tipo de habitación de la tarifa que desea eliminar (estandar / suite / suitedoble)").toLowerCase();
 			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
 			{
-				coordinadorPMS.mostrarTarifas(tipoHabitacion);
+				//coordinadorPMS.mostrarTarifas(tipoHabitacion);
 				int tarifaSeleccionada = Integer.parseInt(input("Seleccione la tarifa para eliminar"));
-				coordinadorPMS.eliminarTarifa(tarifaSeleccionada);
+				//coordinadorPMS.eliminarTarifa(tarifaSeleccionada);
 			}
 			else
 			{
@@ -135,7 +135,7 @@ public class InterfazTarifas extends Interfaz
 		{
 			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
 			{
-				coordinadorPMS.mostrarTarifas(tipoHabitacion);
+				//coordinadorPMS.mostrarTarifas(tipoHabitacion);
 			}
 			else
 			{
@@ -177,14 +177,14 @@ public class InterfazTarifas extends Interfaz
 
 	private void ejecutarCambiarAtributo(int seleccion)
 	{
-		if (seleccion == 1)
-			ejecutarCambiarValorTarifa(tipoHabitacion);
-		else if (seleccion == 2)
-			ejecutarCambiarFechaInicial(tipoHabitacion);
-		else if (seleccion == 3)
-			ejecutarCambiarFechaFinal(tipoHabitacion);
-		else
-			ejecutarCambiarDiasSemana(tipoHabitacion);
+//		if (seleccion == 1)
+//			ejecutarCambiarValorTarifa(tipoHabitacion);
+//		else if (seleccion == 2)
+//			ejecutarCambiarFechaInicial(tipoHabitacion);
+//		else if (seleccion == 3)
+//			ejecutarCambiarFechaFinal(tipoHabitacion);
+//		else
+//			ejecutarCambiarDiasSemana(tipoHabitacion);
 	}
 
 	private void ejecutarCambiarDiasSemana(String tipoHabitacion)

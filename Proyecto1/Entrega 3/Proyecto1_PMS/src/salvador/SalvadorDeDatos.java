@@ -11,6 +11,8 @@ import modelo.CoordinadorPMS;
 import modelo.HabitacionEstandar;
 import modelo.HabitacionSuite;
 import modelo.HabitacionSuiteDoble;
+import modelo.Producto;
+import modelo.Servicio;
 
 public class SalvadorDeDatos
 {
@@ -41,7 +43,7 @@ public class SalvadorDeDatos
 		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble";
 		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble";
 		this.nombreArchivoProductos = "data/Productos";
-		this.nombreArchivoProductos = "data/Servicios";
+		this.nombreArchivoServicios = "data/Servicios";
 	}
 	
 	public void salvarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS)
@@ -171,13 +173,13 @@ public class SalvadorDeDatos
 		}
 	}
 	
-	private void salvarProducto(CoordinadorPMS coordinadorPMS) 
+	private void salvarProductos(CoordinadorPMS coordinadorPMS) 
 	{
 		this.mapaProducto = coordinadorPMS.getProducto();
 		
 		try
 		{
-			FileOutputStream fos = new FileOutputStream(nombreArchivoProducto);
+			FileOutputStream fos = new FileOutputStream(nombreArchivoProductos);
 			XMLEncoder encoder = new XMLEncoder(fos);
 			
 			
@@ -198,13 +200,13 @@ public class SalvadorDeDatos
 	}
 	
 	
-	private void salvarServicio(CoordinadorPMS coordinadorPMS) 
+	private void salvarServicios(CoordinadorPMS coordinadorPMS) 
 	{
-		this.mapaServicio = coordinadorPMS.getProducto();
+		this.mapaServicio = coordinadorPMS.getServicio();
 		
 		try
 		{
-			FileOutputStream fos = new FileOutputStream(nombreArchivoServicio);
+			FileOutputStream fos = new FileOutputStream(nombreArchivoServicios);
 			XMLEncoder encoder = new XMLEncoder(fos);
 			
 			

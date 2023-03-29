@@ -2,8 +2,16 @@ package consola;
 
 import java.util.ArrayList;
 
+import modelo.CoordinadorPMS;
+
 public class InterfazTarifas extends Interfaz
 {
+	private  CoordinadorPMS coordinadorPMS;
+
+	public InterfazTarifas(CoordinadorPMS coordinadorPMS) 
+	{
+		this.coordinadorPMS = coordinadorPMS;
+	}
 
 	@Override
 	public void iniciarInterfaz()
@@ -47,16 +55,16 @@ public class InterfazTarifas extends Interfaz
 		{
 			String tipoHabitacion = input("Tipo de habitación (estandar / suite / suitedoble)");
 			int valorTarifa = Integer.parseInt(input("Valor de la tarifa"));
-			String fechaInicial = input("Fecha inicial");
-			String fechaFinal = input("Fecha final");
+			String fechaInicial = input("Fecha inicial (dd-mm)");
+			String fechaFinal = input("Fecha final (dd-mm)");
 			String diasSemana = input("Dias de la semana (Formato: L.M.I.J.V.S.D)");
+			
 		}
 		catch (NumberFormatException e)
 		{
 			System.out.println("El valor de la tarifa debe ser un valor numercio.");
 		}
 		
-		// TODO Enviar información al coordinador/controlador para crear las tarifas
 	}
 	
 	private void ejecutarEliminarTarifa()

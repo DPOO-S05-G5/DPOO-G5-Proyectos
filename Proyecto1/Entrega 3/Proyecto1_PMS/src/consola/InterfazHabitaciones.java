@@ -1,8 +1,15 @@
 package consola;
 
+import modelo.CoordinadorPMS;
+
 public class InterfazHabitaciones extends Interfaz
 {
-
+	private  CoordinadorPMS coordinadorPMS;
+	
+	public InterfazHabitaciones(CoordinadorPMS coordinadorPMS)
+	{
+		 this.coordinadorPMS = coordinadorPMS;
+	}
 	@Override
 	public void iniciarInterfaz()
 	{
@@ -51,14 +58,14 @@ public class InterfazHabitaciones extends Interfaz
 			String tieneBalcon = input("Tiene balcon? (si/no)");
 			String tieneVista = input("Tiene vista? (si/no)");
 			String tieneCocina = input("Tiene cocina integrada? (si/no)");
+			
+			coordinadorPMS.addHabitacion(tipoHabitacion, torre, piso, id, tieneBalcon, tieneVista, tieneCocina);
 		}
 		catch (NumberFormatException e)
 		{
 			System.out.println("El piso de la habitación debe ser un valor numerico.");
 		}
 		
-		// TODO Enviar información al coordinador/controlador para crear las habitaciones
-	
 	}
 	private void ejecutarEliminarHabitacion()
 	{

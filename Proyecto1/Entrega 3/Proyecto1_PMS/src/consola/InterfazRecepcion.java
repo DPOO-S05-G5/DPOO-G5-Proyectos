@@ -1,10 +1,14 @@
 package consola;
 
+import modelo.CoordinadorPMS;
+
 public class InterfazRecepcion extends Interfaz
 {
-	public InterfazRecepcion()
+	private CoordinadorPMS coordinadorPMS;
+	
+	public InterfazRecepcion(CoordinadorPMS coordinadorPMS)
 	{
-		
+		this.coordinadorPMS = coordinadorPMS;
 	}
 	
 	@Override

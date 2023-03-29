@@ -1,5 +1,7 @@
 package consola;
 
+import modelo.CoordinadorPMS;
+
 public class InterfazAdmin extends Interfaz
 {
 	
@@ -7,13 +9,15 @@ public class InterfazAdmin extends Interfaz
 	private InterfazHabitaciones interfazHabitaciones;
 	private InterfazRecepcion interfazRecepcion;
 	private InterfazServicios interfazServicios;
+	private CoordinadorPMS coordinadorPMS;
 	
-	public InterfazAdmin()
+	public InterfazAdmin(CoordinadorPMS coordinadorPMS)
 	{
-		this.interfazRecepcion = new InterfazRecepcion();
-		this.interfazServicios = new InterfazServicios();
-		this.interfazTarifas = new InterfazTarifas();
-		this.interfazHabitaciones = new InterfazHabitaciones();
+		this.coordinadorPMS = coordinadorPMS;
+		this.interfazRecepcion = new InterfazRecepcion(coordinadorPMS);
+		this.interfazServicios = new InterfazServicios(coordinadorPMS);
+		this.interfazTarifas = new InterfazTarifas(coordinadorPMS);
+		this.interfazHabitaciones = new InterfazHabitaciones(coordinadorPMS);
 	}
 	
 	@Override
@@ -92,4 +96,5 @@ public class InterfazAdmin extends Interfaz
 	{
 		interfazServicios.iniciarInterfaz();
 	}
+
 }

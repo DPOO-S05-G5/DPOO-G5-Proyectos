@@ -19,9 +19,9 @@ public class InterfazInicial extends Interfaz
 	
 	public InterfazInicial()
 	{
-		this.interfazAdmin = new InterfazAdmin();
-		this.interfazRecepcion = new InterfazRecepcion();
-		this.interfazServicios = new InterfazServicios();
+		this.interfazAdmin = new InterfazAdmin(coordinadorPMS);
+		this.interfazRecepcion = new InterfazRecepcion(coordinadorPMS);
+		this.interfazServicios = new InterfazServicios(coordinadorPMS);
 		this.autenticador = new AutenticadorDeUsuarios();
 		this.coordinadorPMS = new CoordinadorPMS();
 		this.cargador = new CargadorDeDatos();
@@ -81,7 +81,7 @@ public class InterfazInicial extends Interfaz
 	
 	private void ejecutarSalvarDatosHotel()
 	{
-		salvador.salvarDatosHotel(autenticador);
+		salvador.salvarDatosHotel(autenticador, coordinadorPMS);
 	}
 	
 	private void ejecutarIniciarSesion()

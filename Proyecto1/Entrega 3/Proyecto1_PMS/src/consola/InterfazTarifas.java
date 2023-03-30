@@ -11,13 +11,16 @@ public class InterfazTarifas extends Interfaz
 	private String[] tiposHabitacion;
 	private ArrayList<String> listaDias;
 	private HashMap<String, Integer> mapaDias;
+	private HashMap<Integer, Integer> mapaDiasMes;
 
 	public InterfazTarifas(CoordinadorPMS coordinadorPMS) 
 	{
 		this.coordinadorPMS = coordinadorPMS;
 		this.tiposHabitacion = new String[]{"estandar", "suite", "suitedoble"};
+		
 		this.listaDias = new ArrayList<String>();
 		this.mapaDias = new HashMap<String, Integer>();
+		
 		listaDias.add("D");
 		listaDias.add("L");
 		listaDias.add("M");
@@ -25,9 +28,18 @@ public class InterfazTarifas extends Interfaz
 		listaDias.add("J");
 		listaDias.add("V");
 		listaDias.add("S");
+		
 		for (int i=0; i<7; i++)
 		{
 			mapaDias.put(listaDias.get(i), i);
+		}
+		
+		this.mapaDiasMes = new HashMap<Integer, Integer>();
+		int[] diasMes = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		
+		for (int i=0; i<12; i++)
+		{
+			mapaDiasMes.put(i+1, diasMes[i]);
 		}
 	}
 
@@ -73,17 +85,17 @@ public class InterfazTarifas extends Interfaz
 		{
 			String tipoHabitacion = input("Tipo de habitación (estandar / suite / suitedoble)").toLowerCase();
 			int valorTarifa = Integer.parseInt(input("Valor de la tarifa"));
-			String fechaInicial = input("Fecha inicial (dd-mm)");
-			String fechaFinal = input("Fecha final (dd-mm)");
+			String fechaInicialInput = input("Fecha inicial (dd-mm)");
+			String fechaFinalInput = input("Fecha final (dd-mm)");
 			String diasSemana = input("Dias de la semana (Formato: L-M-I-J-V-S-D)").toUpperCase();
 			
 			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
 			{
-				String[] listaFechaI = fechaInicial.split("-");
-				String[] listaFechaF = fechaFinal.split("-");
+				String[] listaFechaI = fechaInicialInput.split("-");
+				String[] listaFechaF = fechaFinalInput.split("-");
 				
-				ArrayList<Integer> fechaInicial = fechaAListaInt(fechaInicial);
-				ArrayList<Integer> fechaFinal = fechaAListaInt(fechaFinal);
+				ArrayList<Integer> fechaInicial = fechaAListaInt(listaFechaI);
+				ArrayList<Integer> fechaFinal = fechaAListaInt(listaFechaF);
 				
 				String[] listaDiasIngresados = diasSemana.split("-");
 				ArrayList<Integer> dias = new ArrayList<Integer>();
@@ -116,7 +128,7 @@ public class InterfazTarifas extends Interfaz
 			String tipoHabitacion = input("Tipo de habitación de la tarifa que desea eliminar (estandar / suite / suitedoble)").toLowerCase();
 			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
 			{
-				coordinadorPMS.mostrarTarifas(tipoHabitacion);
+				ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas = coordinadorPMS.getTarifas(tipoHabitacion);
 				int tarifaSeleccionada = Integer.parseInt(input("Seleccione la tarifa para eliminar"));
 				coordinadorPMS.eliminarTarifa(tarifaSeleccionada);
 			}
@@ -140,7 +152,7 @@ public class InterfazTarifas extends Interfaz
 		{
 			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
 			{
-				coordinadorPMS.mostrarTarifas(tipoHabitacion);
+				ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas = coordinadorPMS.getTarifas(tipoHabitacion);
 			}
 			else
 			{
@@ -235,22 +247,29 @@ public class InterfazTarifas extends Interfaz
 	{
 		ArrayList<Integer> listaFinal = new ArrayList<Integer>();
 		
-		for (String s : lista)
+		int dia = Integer.parseInt(lista[0]);
+		int mes = Integer.parseInt(lista[1]);
+		
+		if ((0 < mes) && (mes <= 12))
 		{
-			try
-			{	
-				int i = Integer.parseInt(s);
-				if ((0 < i) && (i < 5))
-					listaFinal.add(Integer.parseInt(s));
-				else
-					System.out.println("No hay opción " + i + '.');
-			}
-			catch (NumberFormatException e2)
+			int diasMes = mapaDiasMes.get(mes);
+			if ((0 < dia) && (dia <= diasMes))
 			{
-				System.out.println("Debe seleccionar los números de las opciones (Formato: 1,2,3,4).");
-				break;
+				listaFinal.add(mes);
+				listaFinal.add(dia);
 			}
-		} 
+			else
+			{
+				System.out.println("Dia no valido.");
+				return null;
+			}
+		}
+		else
+		{
+			System.out.println("Mes no valido.");
+			return null;
+		}
+	 
 		
 		return listaFinal;
 	}

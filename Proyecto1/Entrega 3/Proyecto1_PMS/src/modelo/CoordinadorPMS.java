@@ -113,23 +113,63 @@ public class CoordinadorPMS {
 
 	public void addTarifa(String tipoHabitacion, ArrayList<Integer> listaFechaI, ArrayList<Integer> listaFechaF, ArrayList<Integer> dias, int valor)
 	{
-		// TODO 
+		if (listaFechaI.get(0).equals(listaFechaF.get(0)))
+			addTarifaMismoMes(tipoHabitacion, listaFechaI, listaFechaF, dias, valor);
+		else
+			addTarifaDifMes(tipoHabitacion, listaFechaI, listaFechaF, dias, valor);
+		
 		if (tipoHabitacion.equals("estandar"))
-		{
-			
-		}
-		else if (tipoHabitacion.equals("suite"))
-		{
-			
-		}
-		else if (tipoHabitacion.equals("suitedoble"))
-		{
-			
-		}
+			{
+				HabitacionEstandar.addTarifa(valor, valor, valor, valor);
+			}
+			else if (tipoHabitacion.equals("suite"))
+			{
+				HabitacionSuite.addTarifa(valor, valor, valor, valor);
+			}
+			else
+			{
+				HabitacionSuiteDoble.addTarifa(valor, valor, valor, valor);
+			}	
+	}
+	
+	private void addTarifaDifMes(String tipoHabitacion, ArrayList<Integer> listaFechaI, ArrayList<Integer> listaFechaF,
+			ArrayList<Integer> dias, int valor) 
+	{
+		// TODO Auto-generated method stub
 		
 	}
 
-	public void cambiarDiasSemanaTarifa(String tipoHabitacion, ArrayList<Integer> dias) {
+	private void addTarifaMismoMes(String tipoHabitacion, ArrayList<Integer> listaFechaI,
+			ArrayList<Integer> listaFechaF, ArrayList<Integer> dias, int valor) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> getTarifas(String tipoHabitacion)
+	{
+		if (tipoHabitacion.equals("estandar"))
+		{
+			return HabitacionEstandar.getTarifas();
+		}
+		else if (tipoHabitacion.equals("suite"))
+		{
+			return HabitacionSuite.getTarifas();
+		}
+		else
+		{
+			return HabitacionSuiteDoble.getTarifas();
+		}
+	}
+
+	public void cambiarDiasSemanaTarifa(String tipoHabitacion, ArrayList<Integer> dias) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void eliminarTarifa(int tarifaSeleccionada) 
+	{
 		// TODO Auto-generated method stub
 		
 	}

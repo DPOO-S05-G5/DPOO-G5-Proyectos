@@ -113,6 +113,7 @@ public class CoordinadorPMS {
 
 	public void addTarifa(String tipoHabitacion, String[] listaFechaI, String[] listaFechaF, ArrayList<Integer> dias)
 	{
+		// TODO 
 		if (tipoHabitacion.equals("estandar"))
 		{
 			

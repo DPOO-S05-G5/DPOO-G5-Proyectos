@@ -111,9 +111,9 @@ public class InterfazTarifas extends Interfaz
 			String tipoHabitacion = input("Tipo de habitación de la tarifa que desea eliminar (estandar / suite / suitedoble)").toLowerCase();
 			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
 			{
-				//coordinadorPMS.mostrarTarifas(tipoHabitacion);
+				coordinadorPMS.mostrarTarifas(tipoHabitacion);
 				int tarifaSeleccionada = Integer.parseInt(input("Seleccione la tarifa para eliminar"));
-				//coordinadorPMS.eliminarTarifa(tarifaSeleccionada);
+				coordinadorPMS.eliminarTarifa(tarifaSeleccionada);
 			}
 			else
 			{
@@ -135,7 +135,7 @@ public class InterfazTarifas extends Interfaz
 		{
 			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
 			{
-				//coordinadorPMS.mostrarTarifas(tipoHabitacion);
+				coordinadorPMS.mostrarTarifas(tipoHabitacion);
 			}
 			else
 			{
@@ -171,25 +171,24 @@ public class InterfazTarifas extends Interfaz
 		
 		for (int seleccion : listAtributosACambiar)
 		{
-			ejecutarCambiarAtributo(seleccion);
+			ejecutarCambiarAtributo(seleccion, tipoHabitacion);
 		}
 	}
 
-	private void ejecutarCambiarAtributo(int seleccion)
+	private void ejecutarCambiarAtributo(int seleccion, String tipoHabitacion)
 	{
-//		if (seleccion == 1)
-//			ejecutarCambiarValorTarifa(tipoHabitacion);
-//		else if (seleccion == 2)
-//			ejecutarCambiarFechaInicial(tipoHabitacion);
-//		else if (seleccion == 3)
-//			ejecutarCambiarFechaFinal(tipoHabitacion);
-//		else
-//			ejecutarCambiarDiasSemana(tipoHabitacion);
+		if (seleccion == 1)
+			ejecutarCambiarValorTarifa(tipoHabitacion);
+		else if (seleccion == 2)
+			ejecutarCambiarFechaInicial(tipoHabitacion);
+		else if (seleccion == 3)
+			ejecutarCambiarFechaFinal(tipoHabitacion);
+		else
+			ejecutarCambiarDiasSemana(tipoHabitacion);
 	}
 
 	private void ejecutarCambiarDiasSemana(String tipoHabitacion)
 	{
-		// TODO Auto-generated method stub
 		String diasSemana = input("Dias de la semana donde se aplica la tarifa (Formato: L-M-I-J-V-S-D)");
 		String[] listaDiasSemana = diasSemana.split("-");
 		ArrayList<Integer> dias = new ArrayList<Integer>();
@@ -206,7 +205,27 @@ public class InterfazTarifas extends Interfaz
 	private void ejecutarCambiarFechaFinal(String tipoHabitacion)
 	{
 		// TODO Auto-generated method stub
-		String fechaFinal = input("Nueva fecha final");
+		String fechaFinal = input("Nueva fecha final (dd-mm)");
+		String[] listaFecha = fechaFinal.split("-");
+		ArrayList<Integer> fecha = new ArrayList<Integer>();
+		for (String str : listaFecha)
+		{
+			try
+			{	
+				int i = Integer.parseInt(str);
+				if ((0 < i) && (i < 5))
+					fecha.add(Integer.parseInt(s));
+				else
+					System.out.println("No hay opción " + i + '.');
+			}
+			catch (NumberFormatException e2)
+			{
+				System.out.println("Debe seleccionar los números de las opciones (Formato: 1,2,3,4).");
+				break;
+			}
+		}
+		}
+		coordinadorPMS.cambiarFechaFinal(tipoHabitacion, listaFecha);
 	}
 
 	private void ejecutarCambiarFechaInicial(String tipoHabitacion)

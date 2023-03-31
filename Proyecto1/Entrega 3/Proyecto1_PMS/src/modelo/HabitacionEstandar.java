@@ -89,6 +89,23 @@ public class HabitacionEstandar extends Habitacion
 		listaDiasSemana.sort(null);
 		System.out.println(tarifas);
 	}
+	
+
+	public static void removeTarifa(int mes, int diaMes, int diaSemana)
+	{
+		ArrayList<ArrayList<ArrayList<Integer>>> listaDiasDelMes = tarifas.get(mes);
+		
+		ArrayList<ArrayList<Integer>> listaDiaDeMes = listaDiasDelMes.get(diaMes);
+		
+		ArrayList<Integer> listaDiasSemana = listaDiaDeMes.get(diaSemana);
+		
+		for (int i = 0; i<listaDiasSemana.size(); i++)
+		{
+			listaDiasSemana.set(i, 0);
+		}
+
+		System.out.println(tarifas);
+	}
 
 	public static String getTipo()
 	{

@@ -70,9 +70,17 @@ public class HabitacionSuite extends Habitacion {
 		HabitacionSuite.tarifas = tarifas;
 	}
 
-	public static void addTarifa(int mes, int diaMes, int diaSemana, int tarifa) {
-		// TODO Auto-generated method stub
-
+	public static void addTarifa(int mes, int diaMes, int diaSemana, int tarifa)
+	{
+		ArrayList<ArrayList<ArrayList<Integer>>> listaDiasDelMes = tarifas.get(mes);
+		
+		ArrayList<ArrayList<Integer>> listaDiaDeMes = listaDiasDelMes.get(diaMes);
+		
+		ArrayList<Integer> listaDiasSemana = listaDiaDeMes.get(diaSemana);
+		
+		listaDiasSemana.add(tarifa);
+		listaDiasSemana.sort(null);
+		System.out.println(tarifas);
 	}
 
 	public static String getTipo() {
@@ -81,6 +89,23 @@ public class HabitacionSuite extends Habitacion {
 
 	public static void setTipo(String tipo) {
 		HabitacionSuite.tipo = tipo;
+	}
+
+	public static void removeTarifa(int mes, int diaMes, int diaSemana)
+	{
+		ArrayList<ArrayList<ArrayList<Integer>>> listaDiasDelMes = tarifas.get(mes);
+		
+		ArrayList<ArrayList<Integer>> listaDiaDeMes = listaDiasDelMes.get(diaMes);
+		
+		ArrayList<Integer> listaDiasSemana = listaDiaDeMes.get(diaSemana);
+		
+		for (int i = 0; i<listaDiasSemana.size(); i++)
+		{
+			listaDiasSemana.set(i, 0);
+		}
+
+		System.out.println(tarifas);
+		
 	}
 
 }

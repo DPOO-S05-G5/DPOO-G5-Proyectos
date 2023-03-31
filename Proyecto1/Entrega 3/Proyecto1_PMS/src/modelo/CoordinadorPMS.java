@@ -164,15 +164,15 @@ public class CoordinadorPMS {
 			{
 				if (tipoHabitacion.equals("estandar"))
 				{
-					HabitacionEstandar.addTarifa(mesI, diaMes, dia, valor);
+					HabitacionEstandar.addTarifa(mesF, diaMes, dia, valor);
 				}
 				else if (tipoHabitacion.equals("suite"))
 				{
-					HabitacionSuite.addTarifa(mesI, diaMes, dia, valor);
+					HabitacionSuite.addTarifa(mesF, diaMes, dia, valor);
 				}
 				else
 				{
-					HabitacionSuiteDoble.addTarifa(mesI, diaMes, dia, valor);
+					HabitacionSuiteDoble.addTarifa(mesF, diaMes, dia, valor);
 				}
 			}
 		}
@@ -191,46 +191,93 @@ public class CoordinadorPMS {
 			for (int dia : dias)
 			{
 				if (tipoHabitacion.equals("estandar"))
-				{
 					HabitacionEstandar.addTarifa(mes, diaMes, dia, valor);
+				else if (tipoHabitacion.equals("suite"))
+					HabitacionSuite.addTarifa(mes, diaMes, dia, valor);
+				else
+					HabitacionSuiteDoble.addTarifa(mes, diaMes, dia, valor);
+			}
+		}
+	}
+
+	public void eliminarTarifa(String tipoHabitacion, ArrayList<Integer> listaFechaI, ArrayList<Integer> listaFechaF,
+			ArrayList<Integer> dias)
+	{
+		if (listaFechaI.get(0).equals(listaFechaF.get(0)))
+			eliminarTarifaMismoMes(tipoHabitacion, listaFechaI, listaFechaF, dias);
+		else
+			eliminarTarifaDifMes(tipoHabitacion, listaFechaI, listaFechaF, dias);
+	
+	}
+
+
+	private void eliminarTarifaDifMes(String tipoHabitacion, ArrayList<Integer> listaFechaI,
+			ArrayList<Integer> listaFechaF, ArrayList<Integer> dias)
+	{
+
+		int mesI = listaFechaI.get(0);
+		int diaI = listaFechaI.get(1);
+		int mesF = listaFechaF.get(0);
+		int diaF = listaFechaF.get(1);
+		
+		for (int diaMes=diaI; diaMes < mapaDiasMes.get(mesI) ; diaMes++)
+		{
+			for (int dia : dias)
+			{
+				if (tipoHabitacion.equals("estandar"))
+				{
+					HabitacionEstandar.removeTarifa(mesI, diaMes, dia);
 				}
 				else if (tipoHabitacion.equals("suite"))
 				{
-					HabitacionSuite.addTarifa(mes, diaMes, dia, valor);
+					HabitacionSuite.removeTarifa(mesI, diaMes, dia);
 				}
 				else
 				{
-					HabitacionSuiteDoble.addTarifa(mes, diaMes, dia, valor);
+					HabitacionSuiteDoble.removeTarifa(mesI, diaMes, dia);
+				}
+			}
+		}
+		
+		for (int diaMes=0; diaMes<=diaF; diaMes++)
+		{
+			for (int dia : dias)
+			{
+				if (tipoHabitacion.equals("estandar"))
+				{
+					HabitacionEstandar.removeTarifa(mesF, diaMes, dia);
+				}
+				else if (tipoHabitacion.equals("suite"))
+				{
+					HabitacionSuite.removeTarifa(mesF, diaMes, dia);
+				}
+				else
+				{
+					HabitacionSuiteDoble.removeTarifa(mesF, diaMes, dia);
 				}
 			}
 		}
 	}
 
-	public ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> getTarifas(String tipoHabitacion)
+	private void eliminarTarifaMismoMes(String tipoHabitacion, ArrayList<Integer> listaFechaI,
+			ArrayList<Integer> listaFechaF, ArrayList<Integer> dias)
 	{
-		if (tipoHabitacion.equals("estandar"))
-		{
-			return HabitacionEstandar.getTarifas();
-		}
-		else if (tipoHabitacion.equals("suite"))
-		{
-			return HabitacionSuite.getTarifas();
-		}
-		else
-		{
-			return HabitacionSuiteDoble.getTarifas();
-		}
-	}
-
-	public void cambiarDiasSemanaTarifa(String tipoHabitacion, ArrayList<Integer> dias) 
-	{
-		// TODO Auto-generated method stub
+		int mes = listaFechaI.get(0);
+		int diaI = listaFechaI.get(1);
+		int diaF = listaFechaF.get(1);
 		
-	}
-
-	public void eliminarTarifa(int tarifaSeleccionada) 
-	{
-		// TODO Auto-generated method stub
+		for (int diaMes=diaI; diaMes<=diaF; diaMes++)
+		{
+			for (int dia : dias)
+			{
+				if (tipoHabitacion.equals("estandar"))
+					HabitacionEstandar.removeTarifa(mes, diaMes, dia);
+				else if (tipoHabitacion.equals("suite"))
+					HabitacionSuite.removeTarifa(mes, diaMes, dia);
+				else
+					HabitacionSuiteDoble.removeTarifa(mes, diaMes, dia);
+			}
+		}
 		
 	}
 

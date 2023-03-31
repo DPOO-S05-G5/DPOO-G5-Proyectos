@@ -39,7 +39,7 @@ public class InterfazTarifas extends Interfaz
 		
 		for (int i=0; i<12; i++)
 		{
-			mapaDiasMes.put(i+1, diasMes[i]);
+			mapaDiasMes.put(i, diasMes[i]);
 		}
 	}
 
@@ -247,13 +247,13 @@ public class InterfazTarifas extends Interfaz
 	{
 		ArrayList<Integer> listaFinal = new ArrayList<Integer>();
 		
-		int dia = Integer.parseInt(lista[0]);
-		int mes = Integer.parseInt(lista[1]);
+		int dia = Integer.parseInt(lista[0])-1;
+		int mes = Integer.parseInt(lista[1])-1;
 		
-		if ((0 < mes) && (mes <= 12))
+		if ((0 <= mes) && (mes < 12))
 		{
 			int diasMes = mapaDiasMes.get(mes);
-			if ((0 < dia) && (dia <= diasMes))
+			if ((0 <= dia) && (dia < diasMes))
 			{
 				listaFinal.add(mes);
 				listaFinal.add(dia);

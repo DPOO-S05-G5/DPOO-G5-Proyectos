@@ -19,13 +19,13 @@ public class InterfazInicial extends Interfaz
 	
 	public InterfazInicial()
 	{
+		this.coordinadorPMS = new CoordinadorPMS();
+		this.cargador = new CargadorDeDatos();
+		this.salvador = new SalvadorDeDatos();
 		this.interfazAdmin = new InterfazAdmin(coordinadorPMS);
 		this.interfazRecepcion = new InterfazRecepcion(coordinadorPMS);
 		this.interfazServicios = new InterfazServicios(coordinadorPMS);
 		this.autenticador = new AutenticadorDeUsuarios();
-		this.coordinadorPMS = new CoordinadorPMS();
-		this.cargador = new CargadorDeDatos();
-		this.salvador = new SalvadorDeDatos();
 	}
 	
 	@Override

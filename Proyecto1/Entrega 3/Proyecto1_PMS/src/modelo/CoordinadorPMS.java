@@ -10,6 +10,18 @@ public class CoordinadorPMS {
 	private HashMap<String, HabitacionSuiteDoble> habitacionesSuiteDoble;
 	private HashMap<String, Producto> producto;
 	private HashMap<String, Servicio> servicio;
+	private HashMap<Integer, Integer> mapaDiasMes;
+	
+	public CoordinadorPMS()
+	{
+		this.mapaDiasMes = new HashMap<Integer, Integer>();
+		int[] diasMes = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		
+		for (int i=0; i<12; i++)
+		{
+			mapaDiasMes.put(i, diasMes[i]);
+		}
+	}
 	
 	
 	public HashMap<String, HabitacionEstandar> getHabitacionesEstandar() 
@@ -117,33 +129,81 @@ public class CoordinadorPMS {
 			addTarifaMismoMes(tipoHabitacion, listaFechaI, listaFechaF, dias, valor);
 		else
 			addTarifaDifMes(tipoHabitacion, listaFechaI, listaFechaF, dias, valor);
-		
-		if (tipoHabitacion.equals("estandar"))
-			{
-				HabitacionEstandar.addTarifa(valor, valor, valor, valor);
-			}
-			else if (tipoHabitacion.equals("suite"))
-			{
-				HabitacionSuite.addTarifa(valor, valor, valor, valor);
-			}
-			else
-			{
-				HabitacionSuiteDoble.addTarifa(valor, valor, valor, valor);
-			}	
 	}
 	
 	private void addTarifaDifMes(String tipoHabitacion, ArrayList<Integer> listaFechaI, ArrayList<Integer> listaFechaF,
 			ArrayList<Integer> dias, int valor) 
 	{
-		// TODO Auto-generated method stub
+		int mesI = listaFechaI.get(0);
+		int diaI = listaFechaI.get(1);
+		int mesF = listaFechaF.get(0);
+		int diaF = listaFechaF.get(1);
+		
+		for (int diaMes=diaI; diaMes < mapaDiasMes.get(mesI) ; diaMes++)
+		{
+			for (int dia : dias)
+			{
+				if (tipoHabitacion.equals("estandar"))
+				{
+					HabitacionEstandar.addTarifa(mesI, diaMes, dia, valor);
+				}
+				else if (tipoHabitacion.equals("suite"))
+				{
+					HabitacionSuite.addTarifa(mesI, diaMes, dia, valor);
+				}
+				else
+				{
+					HabitacionSuiteDoble.addTarifa(mesI, diaMes, dia, valor);
+				}
+			}
+		}
+		
+		for (int diaMes=0; diaMes<=diaF; diaMes++)
+		{
+			for (int dia : dias)
+			{
+				if (tipoHabitacion.equals("estandar"))
+				{
+					HabitacionEstandar.addTarifa(mesI, diaMes, dia, valor);
+				}
+				else if (tipoHabitacion.equals("suite"))
+				{
+					HabitacionSuite.addTarifa(mesI, diaMes, dia, valor);
+				}
+				else
+				{
+					HabitacionSuiteDoble.addTarifa(mesI, diaMes, dia, valor);
+				}
+			}
+		}
 		
 	}
 
 	private void addTarifaMismoMes(String tipoHabitacion, ArrayList<Integer> listaFechaI,
 			ArrayList<Integer> listaFechaF, ArrayList<Integer> dias, int valor) 
 	{
-		// TODO Auto-generated method stub
+		int mes = listaFechaI.get(0);
+		int diaI = listaFechaI.get(1);
+		int diaF = listaFechaF.get(1);
 		
+		for (int diaMes=diaI; diaMes<=diaF; diaMes++)
+		{
+			for (int dia : dias)
+			{
+				if (tipoHabitacion.equals("estandar"))
+				{
+					HabitacionEstandar.addTarifa(mes, diaMes, dia, valor);
+				}
+				else if (tipoHabitacion.equals("suite"))
+				{
+					HabitacionSuite.addTarifa(mes, diaMes, dia, valor);
+				}
+				else
+				{
+					HabitacionSuiteDoble.addTarifa(mes, diaMes, dia, valor);
+				}
+			}
+		}
 	}
 
 	public ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> getTarifas(String tipoHabitacion)

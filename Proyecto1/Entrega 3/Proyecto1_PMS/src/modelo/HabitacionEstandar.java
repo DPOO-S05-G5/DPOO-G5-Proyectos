@@ -87,6 +87,7 @@ public class HabitacionEstandar extends Habitacion
 		
 		listaDiasSemana.add(tarifa);
 		listaDiasSemana.sort(null);
+		System.out.println(tarifas);
 	}
 
 	public static String getTipo()

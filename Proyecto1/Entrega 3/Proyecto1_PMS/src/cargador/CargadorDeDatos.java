@@ -30,8 +30,8 @@ public class CargadorDeDatos {
 	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
 	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
 	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
-	HashMap<String, Producto> mapaProducto;
-	HashMap<String, Servicio> mapaServicio;
+	HashMap<String, Producto> mapaProductos;
+	HashMap<String, Servicio> mapaServicios;
 
 	public CargadorDeDatos() {
 		this.nombreArchivoUsuarios = "data/usuarios.xml";
@@ -47,8 +47,8 @@ public class CargadorDeDatos {
 		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
 		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
 		this.mapaHabitacionesSuiteDoble = new HashMap<String, HabitacionSuiteDoble>();
-		this.mapaProducto = new HashMap<String, Producto>();
-		this.mapaServicio = new HashMap<String, Servicio>();
+		this.mapaProductos = new HashMap<String, Producto>();
+		this.mapaServicios = new HashMap<String, Servicio>();
 	}
 
 	public void cargarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS) {
@@ -235,7 +235,7 @@ public class CargadorDeDatos {
 					if (obj instanceof Producto) {
 						Producto producto = (Producto) obj;
 						String id = producto.getID();
-						mapaProducto.put(id, producto);
+						mapaProductos.put(id, producto);
 					} else {
 						System.err.println("objecto inesperado en el archivo");
 					}
@@ -251,12 +251,12 @@ public class CargadorDeDatos {
 			e1.printStackTrace();
 		}
 
-		for (HashMap.Entry<String, Producto> entrada : mapaProducto.entrySet()) {
+		for (HashMap.Entry<String, Producto> entrada : mapaProductos.entrySet()) {
 			System.out.println(entrada.getKey());
 			System.out.println(entrada.getValue().getNombre());
 		}
 		
-		coordinadorPMS.setProducto(mapaProducto);
+		coordinadorPMS.setProductos(mapaProductos);
 
 	}
 
@@ -314,7 +314,7 @@ public class CargadorDeDatos {
 					if (obj instanceof Servicio) {
 						Servicio servicio = (Servicio) obj;
 						String id = servicio.getID();
-						mapaServicio.put(id, servicio);
+						mapaServicios.put(id, servicio);
 					} else {
 						System.err.println("objecto inesperado en el archivo");
 					}
@@ -330,10 +330,10 @@ public class CargadorDeDatos {
 			e1.printStackTrace();
 		}
 
-		for (HashMap.Entry<String, Servicio> entrada : mapaServicio.entrySet()) {
+		for (HashMap.Entry<String, Servicio> entrada : mapaServicios.entrySet()) {
 			System.out.println(entrada.getKey());
 			System.out.println(entrada.getValue().getNombre());
 		}
-		coordinadorPMS.setServicio(mapaServicio);
+		coordinadorPMS.setServicios(mapaServicios);
 	}
 }

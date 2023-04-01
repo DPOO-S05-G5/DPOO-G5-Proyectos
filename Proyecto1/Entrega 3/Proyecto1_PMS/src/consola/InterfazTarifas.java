@@ -9,8 +9,8 @@ public class InterfazTarifas extends Interfaz
 {
 	private  CoordinadorPMS coordinadorPMS;
 	private String[] tiposHabitacion;
-	private ArrayList<String> listaDias;
-	private HashMap<String, Integer> mapaDias;
+	private ArrayList<String> listaDiasSemana;
+	private HashMap<String, Integer> mapaDiasSemana;
 	private HashMap<Integer, Integer> mapaDiasMes;
 
 	public InterfazTarifas(CoordinadorPMS coordinadorPMS) 
@@ -18,20 +18,20 @@ public class InterfazTarifas extends Interfaz
 		this.coordinadorPMS = coordinadorPMS;
 		this.tiposHabitacion = new String[]{"estandar", "suite", "suitedoble"};
 		
-		this.listaDias = new ArrayList<String>();
-		this.mapaDias = new HashMap<String, Integer>();
+		this.listaDiasSemana = new ArrayList<String>();
+		this.mapaDiasSemana = new HashMap<String, Integer>();
 		
-		listaDias.add("D");
-		listaDias.add("L");
-		listaDias.add("M");
-		listaDias.add("I");
-		listaDias.add("J");
-		listaDias.add("V");
-		listaDias.add("S");
+		listaDiasSemana.add("D");
+		listaDiasSemana.add("L");
+		listaDiasSemana.add("M");
+		listaDiasSemana.add("I");
+		listaDiasSemana.add("J");
+		listaDiasSemana.add("V");
+		listaDiasSemana.add("S");
 		
 		for (int i=0; i<7; i++)
 		{
-			mapaDias.put(listaDias.get(i), i);
+			mapaDiasSemana.put(listaDiasSemana.get(i), i);
 		}
 		
 		this.mapaDiasMes = new HashMap<Integer, Integer>();
@@ -101,9 +101,9 @@ public class InterfazTarifas extends Interfaz
 				ArrayList<Integer> dias = new ArrayList<Integer>();
 				for (String dia : listaDiasIngresados)
 				{
-					if (listaDias.contains(dia))
+					if (listaDiasSemana.contains(dia))
 					{
-						dias.add(mapaDias.get(dia));
+						dias.add(mapaDiasSemana.get(dia));
 					}
 				}
 				
@@ -113,11 +113,13 @@ public class InterfazTarifas extends Interfaz
 			else
 			{
 				System.out.println("Tipo de habitacion debe ser \"estandar\" o \"suite\" o \"suite doble\".");
+				return;
 			}
 		}
 		catch (NumberFormatException e)
 		{
-			System.out.println("El valor de la tarifa debe ser un valor numercio.");
+			System.out.println("El valor de la tarifa debe ser un valor numerico.");
+			return;
 		}
 		
 	}
@@ -144,9 +146,9 @@ public class InterfazTarifas extends Interfaz
 				ArrayList<Integer> dias = new ArrayList<Integer>();
 				for (String dia : listaDiasIngresados)
 				{
-					if (listaDias.contains(dia))
+					if (listaDiasSemana.contains(dia))
 					{
-						dias.add(mapaDias.get(dia));
+						dias.add(mapaDiasSemana.get(dia));
 					}
 				}
 				
@@ -155,11 +157,13 @@ public class InterfazTarifas extends Interfaz
 			else
 			{
 				System.out.println("Tipo de habitacion debe ser \"estandar\" o \"suite\" o \"suite doble\".");
+				return;
 			}
 		}
 		catch (NumberFormatException e)
 		{
 			System.out.println("El valor de la tarifa debe ser un valor numercio.");
+			return;
 		}
 		
 	}
@@ -185,22 +189,24 @@ public class InterfazTarifas extends Interfaz
 				ArrayList<Integer> dias = new ArrayList<Integer>();
 				for (String dia : listaDiasIngresados)
 				{
-					if (listaDias.contains(dia))
+					if (listaDiasSemana.contains(dia))
 					{
-						dias.add(mapaDias.get(dia));
+						dias.add(mapaDiasSemana.get(dia));
 					}
 				}
-				
+				if (fechaInicial != null && fechaFinal != null)
 				coordinadorPMS.eliminarTarifa(tipoHabitacion, fechaInicial, fechaFinal, dias);
 			}
 			else
 			{
 				System.out.println("Tipo de habitacion debe ser \"estandar\" o \"suite\" o \"suite doble\".");
+				return;
 			}
 		}
 		catch (NumberFormatException e)
 		{
 			System.out.println("El valor de la tarifa debe ser un valor numercio.");
+			return;
 		}		
 	}
 	

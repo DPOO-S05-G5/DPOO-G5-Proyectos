@@ -62,8 +62,8 @@ public class InterfazAdmin extends Interfaz
 
 	private void ejecutarRevisionDeTarifas365Dias()
 	{
-		// TODO Auto-generated method stub
-		
+		String tarifas = coordinadorPMS.revisarTarifas();
+		System.out.println(tarifas);
 	}
 
 	@Override

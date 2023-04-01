@@ -12,6 +12,7 @@ public class InterfazHabitaciones extends Interfaz
 		 this.coordinadorPMS = coordinadorPMS;
 		 this.tiposHabitacion = new String[]{"estandar", "suite", "suitedoble"};
 	}
+	
 	@Override
 	public void iniciarInterfaz()
 	{
@@ -58,6 +59,7 @@ public class InterfazHabitaciones extends Interfaz
 			String tieneBalcon = input("Tiene balcon? (si/no)").toLowerCase();
 			String tieneVista = input("Tiene vista? (si/no)").toLowerCase();
 			String tieneCocina = input("Tiene cocina integrada? (si/no)").toLowerCase();
+			
 			boolean balcon;
 			boolean vista;
 			boolean cocina;
@@ -73,8 +75,13 @@ public class InterfazHabitaciones extends Interfaz
 				vista = true;
 			else
 				vista = false;
+			
 			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
-				coordinadorPMS.addHabitacion(tipoHabitacion, cocina, balcon, vista, torre, piso, id);
+			{	
+				String roomInfo = coordinadorPMS.addHabitacion(tipoHabitacion, cocina, balcon, vista, torre, piso, id);
+				System.out.println(roomInfo);
+			}
+			
 			else
 				System.out.println("Tipo de habitacion debe ser  \"estandar\" o \"suite\" o \"suite doble\".");
 		}

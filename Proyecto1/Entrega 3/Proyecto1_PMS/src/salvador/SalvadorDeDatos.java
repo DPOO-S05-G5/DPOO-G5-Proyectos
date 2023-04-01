@@ -29,8 +29,8 @@ public class SalvadorDeDatos
 	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
 	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
 	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
-	HashMap<String, Producto> mapaProducto;
-	HashMap<String, Servicio> mapaServicio;
+	HashMap<String, Producto> mapaProductos;
+	HashMap<String, Servicio> mapaServicios;
 	
 	
 	public SalvadorDeDatos()
@@ -71,11 +71,14 @@ public class SalvadorDeDatos
 			fos = new FileOutputStream(nombreArchivoHabitacionesEstandar);
 			encoder = new XMLEncoder(fos);
 			
-			for (HashMap.Entry<String, HabitacionEstandar> entrada : mapaHabitacionesEstandar.entrySet())
+			if (mapaHabitacionesEstandar != null)
 			{
-				HabitacionEstandar room = (HabitacionEstandar) entrada.getValue();
-				System.out.println(room.getID());
-				encoder.writeObject(room);
+				for (HashMap.Entry<String, HabitacionEstandar> entrada : mapaHabitacionesEstandar.entrySet())
+				{
+					HabitacionEstandar room = (HabitacionEstandar) entrada.getValue();
+					System.out.println(room.getID());
+					encoder.writeObject(room);
+				}
 			}
 			encoder.close();
 			fos.close();
@@ -102,11 +105,14 @@ public class SalvadorDeDatos
 			fos = new FileOutputStream(nombreArchivoHabitacionesSuite);
 			encoder = new XMLEncoder(fos);
 			
-			for (HashMap.Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet())
+			if (mapaHabitacionesSuite != null)
 			{
-				HabitacionSuite room = (HabitacionSuite) entrada.getValue();
-				System.out.println(room.getID());
-				encoder.writeObject(room);
+				for (HashMap.Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet())
+				{
+					HabitacionSuite room = (HabitacionSuite) entrada.getValue();
+					System.out.println(room.getID());
+					encoder.writeObject(room);
+				}
 			}
 			encoder.close();
 			fos.close();
@@ -133,11 +139,14 @@ public class SalvadorDeDatos
 			fos = new FileOutputStream(nombreArchivoHabitacionesSuiteDoble);
 			encoder = new XMLEncoder(fos);
 			
-			for (HashMap.Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet())
+			if (mapaHabitacionesSuiteDoble != null)
 			{
-				HabitacionSuiteDoble room = (HabitacionSuiteDoble) entrada.getValue();
-				System.out.println(room.getID());
-				encoder.writeObject(room);
+				for (HashMap.Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet())
+				{
+					HabitacionSuiteDoble room = (HabitacionSuiteDoble) entrada.getValue();
+					System.out.println(room.getID());
+					encoder.writeObject(room);
+				}
 			}
 			encoder.close();
 			fos.close();
@@ -157,12 +166,14 @@ public class SalvadorDeDatos
 		{
 			FileOutputStream fos = new FileOutputStream(nombreArchivoUsuarios);
 			XMLEncoder encoder = new XMLEncoder(fos);
-			
-			for (HashMap.Entry<String, Usuario> entrada : mapaUsuarios.entrySet())
+			if (mapaUsuarios != null)
 			{
-				Usuario usuario = (Usuario) entrada.getValue();
-				System.out.println(usuario.toString());
-				encoder.writeObject(usuario);
+				for (HashMap.Entry<String, Usuario> entrada : mapaUsuarios.entrySet())
+				{
+					Usuario usuario = (Usuario) entrada.getValue();
+					System.out.println(usuario.toString());
+					encoder.writeObject(usuario);
+				}
 			}
 			encoder.close();
 			fos.close();
@@ -175,19 +186,21 @@ public class SalvadorDeDatos
 	
 	private void salvarProductos(CoordinadorPMS coordinadorPMS) 
 	{
-		this.mapaProducto = coordinadorPMS.getProducto();
+		this.mapaProductos = coordinadorPMS.getProductos();
 		
 		try
 		{
 			FileOutputStream fos = new FileOutputStream(nombreArchivoProductos);
 			XMLEncoder encoder = new XMLEncoder(fos);
 			
-			
-			for (HashMap.Entry<String, Producto> entrada : mapaProducto.entrySet())
+			if (mapaProductos != null)
 			{
-				Producto producto = (Producto) entrada.getValue();
-				System.out.println(producto.getID());
-				encoder.writeObject(producto);
+				for (HashMap.Entry<String, Producto> entrada : mapaProductos.entrySet())
+				{
+					Producto producto = (Producto) entrada.getValue();
+					System.out.println(producto.getID());
+					encoder.writeObject(producto);
+				}
 			}
 			encoder.close();
 			fos.close();
@@ -202,19 +215,21 @@ public class SalvadorDeDatos
 	
 	private void salvarServicios(CoordinadorPMS coordinadorPMS) 
 	{
-		this.mapaServicio = coordinadorPMS.getServicio();
+		this.mapaServicios = coordinadorPMS.getServicios();
 		
 		try
 		{
 			FileOutputStream fos = new FileOutputStream(nombreArchivoServicios);
 			XMLEncoder encoder = new XMLEncoder(fos);
 			
-			
-			for (HashMap.Entry<String, Servicio> entrada : mapaServicio.entrySet())
+			if (mapaServicios != null)
 			{
-				Servicio servicio = (Servicio) entrada.getValue();
-				System.out.println(servicio.getID());
-				encoder.writeObject(servicio);
+				for (HashMap.Entry<String, Servicio> entrada : mapaServicios.entrySet())
+				{
+					Servicio servicio = (Servicio) entrada.getValue();
+					System.out.println(servicio.getID());
+					encoder.writeObject(servicio);
+				}
 			}
 			encoder.close();
 			fos.close();

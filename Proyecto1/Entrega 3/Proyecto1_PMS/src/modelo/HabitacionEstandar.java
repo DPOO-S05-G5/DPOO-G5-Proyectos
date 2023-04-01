@@ -98,12 +98,7 @@ public class HabitacionEstandar extends Habitacion
 		ArrayList<ArrayList<Integer>> listaDiaDeMes = listaDiasDelMes.get(diaMes);
 		
 		ArrayList<Integer> listaDiasSemana = listaDiaDeMes.get(diaSemana);
-		
-		for (int i = 0; i<listaDiasSemana.size(); i++)
-		{
-			listaDiasSemana.set(i, 0);
-		}
-
+		listaDiasSemana.clear();
 		System.out.println(tarifas);
 	}
 

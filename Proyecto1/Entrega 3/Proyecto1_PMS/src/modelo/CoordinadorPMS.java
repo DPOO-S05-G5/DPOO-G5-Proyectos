@@ -8,9 +8,11 @@ public class CoordinadorPMS {
 	private HashMap<String, HabitacionEstandar> habitacionesEstandar;
 	private HashMap<String, HabitacionSuite> habitacionesSuite;
 	private HashMap<String, HabitacionSuiteDoble> habitacionesSuiteDoble;
-	private HashMap<String, Producto> producto;
-	private HashMap<String, Servicio> servicio;
+	private HashMap<String, Producto> productos;
+	private HashMap<String, Servicio> servicios;
 	private HashMap<Integer, Integer> mapaDiasMes;
+	private ArrayList<String> listaDiasSemana;
+	private HashMap<Integer, String> mapaDiasSemana;
 	
 	public CoordinadorPMS()
 	{
@@ -21,6 +23,22 @@ public class CoordinadorPMS {
 		{
 			mapaDiasMes.put(i, diasMes[i]);
 		}
+		
+		this.listaDiasSemana = new ArrayList<String>();
+		this.mapaDiasSemana = new HashMap<Integer, String>();
+		
+		listaDiasSemana.add("D");
+		listaDiasSemana.add("L");
+		listaDiasSemana.add("M");
+		listaDiasSemana.add("I");
+		listaDiasSemana.add("J");
+		listaDiasSemana.add("V");
+		listaDiasSemana.add("S");
+		
+		for (int i=0; i<7; i++)
+		{
+			mapaDiasSemana.put(i, listaDiasSemana.get(i));
+		}
 	}
 	
 	
@@ -29,19 +47,19 @@ public class CoordinadorPMS {
 		return habitacionesEstandar;
 	}
 	
-	public HashMap<String, Servicio> getServicio() {
-		return servicio;
+	public HashMap<String, Servicio> getServicios() {
+		return servicios;
 	}
 
-	public void setServicio(HashMap<String, Servicio> servicio) {
-		this.servicio = servicio;
+	public void setServicios(HashMap<String, Servicio> servicio) {
+		this.servicios = servicio;
 		
 	}
 	
 	public void addServicio(Servicio servicio)
 	{
 		String id = servicio.getID();
-		this.servicio.put(id, servicio);
+		this.servicios.put(id, servicio);
 	}
 
 	public void setHabitacionesEstandar(HashMap<String, HabitacionEstandar> habitacionesEstandar)
@@ -88,39 +106,45 @@ public class CoordinadorPMS {
 	}
 	
 	
-	public HashMap<String, Producto> getProducto() 
+	public HashMap<String, Producto> getProductos() 
 	{
-		return producto;
+		return productos;
 	}
 	
-	public void setProducto(HashMap<String, Producto> producto)
+	public void setProductos(HashMap<String, Producto> producto)
 	{
-		this.producto = producto ;
+		this.productos = producto ;
 	}
 	
 	public void addProducto(Producto producto)
 	{
 		String id = producto.getID();
-		this.producto.put(id, producto);
+		this.productos.put(id, producto);
 	}
 
-	public void addHabitacion(String tipoHabitacion, boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String id)
+	public String addHabitacion(String tipoHabitacion, boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String id)
 	{
+		String infoHabitacion = "";
+		
 		if (tipoHabitacion.equals("estandar"))
 		{
 			HabitacionEstandar habitacion = new HabitacionEstandar(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
 			habitacionesEstandar.put(id, habitacion);
+			infoHabitacion = habitacion.toString();
 		}
 		else if (tipoHabitacion.equals("suite"))
 		{
 			HabitacionSuite habitacion = new HabitacionSuite(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
 			habitacionesSuite.put(id, habitacion);
+			infoHabitacion = habitacion.toString();
 		}
 		else if (tipoHabitacion.equals("suitedoble"))
 		{
 			HabitacionSuiteDoble habitacion = new HabitacionSuiteDoble(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
 			habitacionesSuiteDoble.put(id,  habitacion);
+			infoHabitacion = habitacion.toString();
 		}
+		return infoHabitacion;
 	}
 
 	public void addTarifa(String tipoHabitacion, ArrayList<Integer> listaFechaI, ArrayList<Integer> listaFechaF, ArrayList<Integer> dias, int valor)
@@ -279,6 +303,47 @@ public class CoordinadorPMS {
 			}
 		}
 		
+	}
+
+
+	public String revisarTarifas() 
+	{
+		String textoFinal = "";
+		
+		ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifasEstandar = HabitacionEstandar.getTarifas();
+		ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifasSuite = HabitacionSuite.getTarifas();
+		ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifasSuiteDoble = HabitacionSuiteDoble.getTarifas();
+		
+		for (int mes=0; mes<12; mes++)
+		{
+			ArrayList<ArrayList<ArrayList<Integer>>> diasMes = tarifasEstandar.get(mes);
+			
+			for (int diaMes=0; diaMes<diasMes.size(); diaMes++)
+			{
+				ArrayList<ArrayList<Integer>> diasSemana = diasMes.get(diaMes);
+				ArrayList<String> diasSemanaSinTarifa = new ArrayList<String>();
+				for (int diaSemana=0; diaSemana<diasSemana.size(); diaSemana++)
+				{
+					ArrayList<Integer> listaDia = diasSemana.get(diaSemana);
+					if (listaDia.isEmpty())
+					{
+						diasSemanaSinTarifa.add(mapaDiasSemana.get(diaSemana));
+					}
+				}
+				if (diasSemanaSinTarifa != null)
+				{
+					textoFinal += addFechaSinTarifa(mes, diaMes, diasSemanaSinTarifa);
+				}
+			}
+		}
+		
+		return textoFinal;
+	}
+
+
+	private String addFechaSinTarifa(int mes, int diaMes, ArrayList<String> diasSemana) 
+	{
+		return "Mes: " + (mes+1) + " | Dia: " + (diaMes+1) + " | Dias de la semana: " + diasSemana + "\n";
 	}
 
 }

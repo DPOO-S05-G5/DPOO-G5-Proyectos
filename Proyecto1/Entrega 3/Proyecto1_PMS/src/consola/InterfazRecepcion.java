@@ -203,7 +203,27 @@ public class InterfazRecepcion extends Interfaz
 
 	private void ejecutarRealizarReserva()
 	{
-		// TODO Auto-generated method stub
+		LocalDate fechaHoy = LocalDate.now();
+		try
+		{
+			while (true)
+			{
+				String nombreHuespedResponsable = input("Nombre del huesped responsable");
+				String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
+				String documentoHuesped = input("Documento de ID");
+				String correoHuesped = input("Correo electronico");
+				String numeroCelular = input("Numero de celular");
+				int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
+				int totalAdultos = Integer.parseInt(input("Numero de adultos"));
+				int totalNinos = Integer.parseInt(input("Numero de niños"));
+				
+				ArrayList<Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
+				
+				for (Habitacion hab : habitacionesDisponibles)
+				{
+					System.out.println(hab.toString());
+				}
+			}
 		
 	}
 

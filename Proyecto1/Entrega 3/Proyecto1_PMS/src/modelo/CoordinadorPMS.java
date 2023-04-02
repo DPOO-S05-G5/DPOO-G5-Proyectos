@@ -4,10 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 public class CoordinadorPMS {
 	
+	private static final String SUITEDOBLE = "suitedoble";
+	private static final String SUITE = "suite";
+	private static final String ESTANDAR = "estandar";
 	private HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
 	private HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
 	private HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
@@ -73,7 +77,7 @@ public class CoordinadorPMS {
 	
 	public void addHabitacionEstandar(HabitacionEstandar habitacion)
 	{
-		String id = habitacion.getID();
+		String id = habitacion.getId();
 		this.mapaHabitacionesEstandar.put(id, habitacion);
 	}
 	
@@ -89,7 +93,7 @@ public class CoordinadorPMS {
 	
 	public void addHabitacionSuite(HabitacionSuite habitacion)
 	{
-		String id = habitacion.getID();
+		String id = habitacion.getId();
 		this.mapaHabitacionesSuite.put(id, habitacion);
 	}
 	
@@ -105,7 +109,7 @@ public class CoordinadorPMS {
 	
 	public void addHabitacionSuiteDoble(HabitacionSuiteDoble habitacion)
 	{
-		String id = habitacion.getID();
+		String id = habitacion.getId();
 		this.mapaHabitacionesSuiteDoble.put(id, habitacion);
 	}
 	
@@ -130,19 +134,19 @@ public class CoordinadorPMS {
 	{
 		String infoHabitacion = "";
 		
-		if (tipoHabitacion.equals("estandar"))
+		if (tipoHabitacion.equals(ESTANDAR))
 		{
 			HabitacionEstandar habitacion = new HabitacionEstandar(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
 			mapaHabitacionesEstandar.put(id, habitacion);
 			infoHabitacion = habitacion.toString();
 		}
-		else if (tipoHabitacion.equals("suite"))
+		else if (tipoHabitacion.equals(SUITE))
 		{
 			HabitacionSuite habitacion = new HabitacionSuite(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
 			mapaHabitacionesSuite.put(id, habitacion);
 			infoHabitacion = habitacion.toString();
 		}
-		else if (tipoHabitacion.equals("suitedoble"))
+		else if (tipoHabitacion.equals(SUITEDOBLE))
 		{
 			HabitacionSuiteDoble habitacion = new HabitacionSuiteDoble(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
 			mapaHabitacionesSuiteDoble.put(id,  habitacion);
@@ -171,11 +175,11 @@ public class CoordinadorPMS {
 		{
 			for (int dia : dias)
 			{
-				if (tipoHabitacion.equals("estandar"))
+				if (tipoHabitacion.equals(ESTANDAR))
 				{
 					HabitacionEstandar.addTarifa(mesI, diaMes, dia, valor);
 				}
-				else if (tipoHabitacion.equals("suite"))
+				else if (tipoHabitacion.equals(SUITE))
 				{
 					HabitacionSuite.addTarifa(mesI, diaMes, dia, valor);
 				}
@@ -190,11 +194,11 @@ public class CoordinadorPMS {
 		{
 			for (int dia : dias)
 			{
-				if (tipoHabitacion.equals("estandar"))
+				if (tipoHabitacion.equals(ESTANDAR))
 				{
 					HabitacionEstandar.addTarifa(mesF, diaMes, dia, valor);
 				}
-				else if (tipoHabitacion.equals("suite"))
+				else if (tipoHabitacion.equals(SUITE))
 				{
 					HabitacionSuite.addTarifa(mesF, diaMes, dia, valor);
 				}
@@ -218,9 +222,9 @@ public class CoordinadorPMS {
 		{
 			for (int dia : dias)
 			{
-				if (tipoHabitacion.equals("estandar"))
+				if (tipoHabitacion.equals(ESTANDAR))
 					HabitacionEstandar.addTarifa(mes, diaMes, dia, valor);
-				else if (tipoHabitacion.equals("suite"))
+				else if (tipoHabitacion.equals(SUITE))
 					HabitacionSuite.addTarifa(mes, diaMes, dia, valor);
 				else
 					HabitacionSuiteDoble.addTarifa(mes, diaMes, dia, valor);
@@ -252,11 +256,11 @@ public class CoordinadorPMS {
 		{
 			for (int dia : dias)
 			{
-				if (tipoHabitacion.equals("estandar"))
+				if (tipoHabitacion.equals(ESTANDAR))
 				{
 					HabitacionEstandar.removeTarifa(mesI, diaMes, dia);
 				}
-				else if (tipoHabitacion.equals("suite"))
+				else if (tipoHabitacion.equals(SUITE))
 				{
 					HabitacionSuite.removeTarifa(mesI, diaMes, dia);
 				}
@@ -271,11 +275,11 @@ public class CoordinadorPMS {
 		{
 			for (int dia : dias)
 			{
-				if (tipoHabitacion.equals("estandar"))
+				if (tipoHabitacion.equals(ESTANDAR))
 				{
 					HabitacionEstandar.removeTarifa(mesF, diaMes, dia);
 				}
-				else if (tipoHabitacion.equals("suite"))
+				else if (tipoHabitacion.equals(SUITE))
 				{
 					HabitacionSuite.removeTarifa(mesF, diaMes, dia);
 				}
@@ -298,9 +302,9 @@ public class CoordinadorPMS {
 		{
 			for (int dia : dias)
 			{
-				if (tipoHabitacion.equals("estandar"))
+				if (tipoHabitacion.equals(ESTANDAR))
 					HabitacionEstandar.removeTarifa(mes, diaMes, dia);
-				else if (tipoHabitacion.equals("suite"))
+				else if (tipoHabitacion.equals(SUITE))
 					HabitacionSuite.removeTarifa(mes, diaMes, dia);
 				else
 					HabitacionSuiteDoble.removeTarifa(mes, diaMes, dia);
@@ -397,10 +401,10 @@ public class CoordinadorPMS {
 	}
 
 
-	public ArrayList<Habitacion> getHabitacionesDesocupadas(int numeroDeNoches, LocalDate fechaInicial)
+	public LinkedHashMap<Integer, Habitacion> getHabitacionesDesocupadas(int numeroDeNoches, LocalDate fechaInicial)
 	{
 		LocalDate fechaFinal = fechaInicial.plusDays(numeroDeNoches);
-		ArrayList<Habitacion> habitacionesDesocupadas = new ArrayList<Habitacion>();
+		ArrayList<Habitacion> listaHabitacionesDesocupadas = new ArrayList<Habitacion>();
 		
 		if (mapaHabitacionesEstandar != null)
 		{
@@ -425,7 +429,7 @@ public class CoordinadorPMS {
 					}
 					if (desocupada)
 					{
-						habitacionesDesocupadas.add(habitacion);
+						listaHabitacionesDesocupadas.add(habitacion);
 					}
 				}	
 			}
@@ -453,7 +457,7 @@ public class CoordinadorPMS {
 					}
 					if (desocupada)
 					{
-						habitacionesDesocupadas.add(habitacion);
+						listaHabitacionesDesocupadas.add(habitacion);
 					}
 				}
 			}
@@ -481,15 +485,25 @@ public class CoordinadorPMS {
 					}
 					if (desocupada)
 					{
-						habitacionesDesocupadas.add(habitacion);
+						listaHabitacionesDesocupadas.add(habitacion);
 					}
 				}
 			}
 		}
 		
-		Collections.sort(habitacionesDesocupadas, new ComparadorHabitaciones());
+		LinkedHashMap<Integer, Habitacion> mapaHabitacionesDesocupadas = new LinkedHashMap<Integer, Habitacion>();
+		if (listaHabitacionesDesocupadas != null)
+		{
+			Collections.sort(listaHabitacionesDesocupadas, new ComparadorHabitaciones());
+			int i = 1;
+			for (Habitacion hab : listaHabitacionesDesocupadas)
+			{
+				mapaHabitacionesDesocupadas.put(i, hab);
+				i++;
+			}
+		}
 		
-		return habitacionesDesocupadas;
+		return mapaHabitacionesDesocupadas;
 	}
 	
 	private boolean fechasDentroDeRango(LocalDate fechaInicialRango, LocalDate fechaFinalRango, LocalDate fechaInicial, LocalDate fechaFinal)
@@ -513,10 +527,70 @@ public class CoordinadorPMS {
 		return mapaReservas;
 	}
 
+	
 
 	public void setMapaReservas(HashMap<String, Reserva> mapaReservas)
 	{
 		this.mapaReservas = mapaReservas;
+	}
+
+
+	public void addHuesped(boolean isAdulto, String tipoHabitacion, String idHabitacion, String nombre,
+			String apellidos, String idHuesped)
+	{
+		if (isAdulto)
+		{
+			if (tipoHabitacion.equals(ESTANDAR))
+			{
+				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				habitacion.addHuespedAdulto(huesped);
+			}
+			else if (tipoHabitacion.equals(SUITE))
+			{
+				HabitacionSuite habitacion = mapaHabitacionesSuite.get(idHabitacion);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				habitacion.addHuespedAdulto(huesped);
+			}
+			else
+			{
+				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(idHabitacion);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				habitacion.addHuespedAdulto(huesped);
+			}
+		}
+		else
+		{
+			if (tipoHabitacion.equals(ESTANDAR))
+			{
+				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				habitacion.addHuespedNinio(huesped);
+			}
+			else if (tipoHabitacion.equals(SUITE))
+			{
+				HabitacionSuite habitacion = mapaHabitacionesSuite.get(idHabitacion);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				habitacion.addHuespedNinio(huesped);
+			}
+			else
+			{
+				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(idHabitacion);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				habitacion.addHuespedNinio(huesped);
+			}
+		}
+		
+	}
+
+
+	public void addHuespedResponsable(String tipoHabitacion, String idHabitacion, String nombres,
+			String apellidos, String idHuesped, String correo, String numeroCelular)
+	{
+		HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
+		Huesped huesped = new Huesped(idHuesped, nombres, apellidos, correo, numeroCelular, idHabitacion, mapaReservas.size()+1);
+		habitacion.addHuespedAdulto(huesped);
+		
 	}
 
 }

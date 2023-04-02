@@ -16,7 +16,8 @@ public abstract class Habitacion
 	private int capacidadAdultos;
 	private int capacidadNinos;
 	private Huesped huespedReserva;
-	private HashMap<String, Huesped> huespedes;
+	private HashMap<String, Huesped> huespedesAdultos;
+	private HashMap<String, Huesped> huespedesNinios;
 	private HashMap<String, Reserva> reservas;
 	
 	
@@ -35,7 +36,7 @@ public abstract class Habitacion
 		this.torre = torre;
 		this.piso = piso;
 		this.id = iD;
-		this.huespedes = new HashMap<String, Huesped>();
+		this.setHuespedesAdultos(new HashMap<String, Huesped>());
 		this.reservas = new HashMap<String, Reserva>();
 	}
 
@@ -99,14 +100,14 @@ public abstract class Habitacion
 		this.piso = piso;
 	}
 
-	public String getID()
+	public String getId()
 	{
 		return id;
 	}
 
-	public void setID(String iD)
+	public void setID(String id)
 	{
-		id = iD;
+		this.id = id;
 	}
 
 	public int getCapacidadAdultos()
@@ -142,16 +143,6 @@ public abstract class Habitacion
 				+ capacidadAdultos + ", capacidadNinos=" + capacidadNinos + "]";
 	}
 
-	public HashMap<String, Huesped> getHuespedes()
-	{
-		return huespedes;
-	}
-
-	public void setHuespedes(HashMap<String, Huesped> huespedes)
-	{
-		this.huespedes = huespedes;
-	}
-
 	public String getTipo()
 	{
 		return tipo;
@@ -181,6 +172,34 @@ public abstract class Habitacion
 	{
 		this.reservas = reservas;
 	}
+
+	public HashMap<String, Huesped> getHuespedesAdultos()
+	{
+		return huespedesAdultos;
+	}
+
+	public void setHuespedesAdultos(HashMap<String, Huesped> huespedesAdultos)
+	{
+		this.huespedesAdultos = huespedesAdultos;
+	}
 	
+	public void addHuespedAdulto(Huesped huesped)
+	{
+		huespedesAdultos.put(huesped.getId(), huesped);
+	}
+
+	public HashMap<String, Huesped> getHuespedesNinios()
+	{
+		return huespedesNinios;
+	}
+
+	public void setHuespedesNinios(HashMap<String, Huesped> huespedesNinios)
+	{
+		this.huespedesNinios = huespedesNinios;
+	}
 	
+	public void addHuespedNinio(Huesped huesped)
+	{
+		huespedesNinios.put(huesped.getId(), huesped);
+	}
 }

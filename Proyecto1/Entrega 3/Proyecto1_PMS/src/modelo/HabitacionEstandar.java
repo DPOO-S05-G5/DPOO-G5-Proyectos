@@ -203,7 +203,7 @@ public class HabitacionEstandar extends Habitacion
 		
 		for (HabitacionEstandar room : roomsLoaded)
 		{
-			System.out.println(room.getID());
+			System.out.println(room.getId());
 		}
 		
 		System.out.println(HabitacionEstandar.getTarifas());

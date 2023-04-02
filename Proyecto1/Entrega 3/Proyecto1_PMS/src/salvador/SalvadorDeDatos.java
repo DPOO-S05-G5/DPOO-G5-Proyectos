@@ -76,7 +76,7 @@ public class SalvadorDeDatos
 				for (HashMap.Entry<String, HabitacionEstandar> entrada : mapaHabitacionesEstandar.entrySet())
 				{
 					HabitacionEstandar room = (HabitacionEstandar) entrada.getValue();
-					System.out.println(room.getID());
+					System.out.println(room.getId());
 					encoder.writeObject(room);
 				}
 			}
@@ -110,7 +110,7 @@ public class SalvadorDeDatos
 				for (HashMap.Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet())
 				{
 					HabitacionSuite room = (HabitacionSuite) entrada.getValue();
-					System.out.println(room.getID());
+					System.out.println(room.getId());
 					encoder.writeObject(room);
 				}
 			}
@@ -144,7 +144,7 @@ public class SalvadorDeDatos
 				for (HashMap.Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet())
 				{
 					HabitacionSuiteDoble room = (HabitacionSuiteDoble) entrada.getValue();
-					System.out.println(room.getID());
+					System.out.println(room.getId());
 					encoder.writeObject(room);
 				}
 			}

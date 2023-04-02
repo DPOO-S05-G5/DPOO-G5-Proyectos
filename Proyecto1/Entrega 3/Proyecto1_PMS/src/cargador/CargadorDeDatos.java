@@ -91,7 +91,7 @@ public class CargadorDeDatos {
 
 					if (obj instanceof HabitacionEstandar) {
 						HabitacionEstandar room = (HabitacionEstandar) obj;
-						String id = room.getID();
+						String id = room.getId();
 						mapaHabitacionesEstandar.put(id, room);
 					} else {
 						System.err.println("objecto inesperado en el archivo");
@@ -110,7 +110,7 @@ public class CargadorDeDatos {
 
 		for (HashMap.Entry<String, HabitacionEstandar> entrada : mapaHabitacionesEstandar.entrySet()) {
 			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getID());
+			System.out.println(entrada.getValue().getId());
 		}
 
 		System.out.println(HabitacionEstandar.getTarifas());
@@ -142,7 +142,7 @@ public class CargadorDeDatos {
 
 					if (obj instanceof HabitacionSuite) {
 						HabitacionSuite room = (HabitacionSuite) obj;
-						String id = room.getID();
+						String id = room.getId();
 						mapaHabitacionesSuite.put(id, room);
 					} else {
 						System.err.println("objecto inesperado en el archivo");
@@ -161,7 +161,7 @@ public class CargadorDeDatos {
 
 		for (HashMap.Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet()) {
 			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getID());
+			System.out.println(entrada.getValue().getId());
 		}
 
 		System.out.println(HabitacionSuite.getTarifas());
@@ -194,7 +194,7 @@ public class CargadorDeDatos {
 
 					if (obj instanceof HabitacionSuiteDoble) {
 						HabitacionSuiteDoble room = (HabitacionSuiteDoble) obj;
-						String id = room.getID();
+						String id = room.getId();
 						mapaHabitacionesSuiteDoble.put(id, room);
 					} else {
 						System.err.println("objecto inesperado en el archivo");
@@ -213,7 +213,7 @@ public class CargadorDeDatos {
 
 		for (HashMap.Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet()) {
 			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getID());
+			System.out.println(entrada.getValue().getId());
 		}
 
 		System.out.println(HabitacionSuiteDoble.getTarifas());

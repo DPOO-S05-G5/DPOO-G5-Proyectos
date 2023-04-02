@@ -431,7 +431,11 @@ public class CoordinadorPMS {
 					{
 						listaHabitacionesDesocupadas.add(habitacion);
 					}
-				}	
+				}
+				else
+				{
+					listaHabitacionesDesocupadas.add(habitacion);
+				}
 			}
 		}
 		if (mapaHabitacionesSuite != null)
@@ -460,6 +464,10 @@ public class CoordinadorPMS {
 						listaHabitacionesDesocupadas.add(habitacion);
 					}
 				}
+				else
+				{
+					listaHabitacionesDesocupadas.add(habitacion);
+				}
 			}
 		}
 		if (mapaHabitacionesSuiteDoble != null)
@@ -487,6 +495,10 @@ public class CoordinadorPMS {
 					{
 						listaHabitacionesDesocupadas.add(habitacion);
 					}
+				}
+				else
+				{
+					listaHabitacionesDesocupadas.add(habitacion);
 				}
 			}
 		}

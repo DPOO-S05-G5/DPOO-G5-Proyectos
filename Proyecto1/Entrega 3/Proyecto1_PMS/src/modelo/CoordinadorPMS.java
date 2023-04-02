@@ -1,18 +1,22 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class CoordinadorPMS {
 	
-	private HashMap<String, HabitacionEstandar> habitacionesEstandar;
-	private HashMap<String, HabitacionSuite> habitacionesSuite;
-	private HashMap<String, HabitacionSuiteDoble> habitacionesSuiteDoble;
-	private HashMap<String, Producto> productos;
-	private HashMap<String, Servicio> servicios;
+	private HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
+	private HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
+	private HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
+	private HashMap<String, Producto> mapaProductos;
+	private HashMap<String, Servicio> mapaServicios;
 	private HashMap<Integer, Integer> mapaDiasMes;
 	private ArrayList<String> listaDiasSemana;
 	private HashMap<Integer, String> mapaDiasSemana;
+	private HashMap<String, Reserva> mapaReservas;
 	
 	public CoordinadorPMS()
 	{
@@ -44,82 +48,82 @@ public class CoordinadorPMS {
 	
 	public HashMap<String, HabitacionEstandar> getHabitacionesEstandar() 
 	{
-		return habitacionesEstandar;
+		return mapaHabitacionesEstandar;
 	}
 	
 	public HashMap<String, Servicio> getServicios() {
-		return servicios;
+		return mapaServicios;
 	}
 
 	public void setServicios(HashMap<String, Servicio> servicio) {
-		this.servicios = servicio;
+		this.mapaServicios = servicio;
 		
 	}
 	
 	public void addServicio(Servicio servicio)
 	{
 		String id = servicio.getID();
-		this.servicios.put(id, servicio);
+		this.mapaServicios.put(id, servicio);
 	}
 
 	public void setHabitacionesEstandar(HashMap<String, HabitacionEstandar> habitacionesEstandar)
 	{
-		this.habitacionesEstandar = habitacionesEstandar;
+		this.mapaHabitacionesEstandar = habitacionesEstandar;
 	}
 	
 	public void addHabitacionEstandar(HabitacionEstandar habitacion)
 	{
 		String id = habitacion.getID();
-		this.habitacionesEstandar.put(id, habitacion);
+		this.mapaHabitacionesEstandar.put(id, habitacion);
 	}
 	
 	public HashMap<String, HabitacionSuite> getHabitacionesSuite()
 	{
-		return habitacionesSuite;
+		return mapaHabitacionesSuite;
 	}
 	
 	public void setHabitacionesSuite(HashMap<String, HabitacionSuite> habitacionesSuite)
 	{
-		this.habitacionesSuite = habitacionesSuite;
+		this.mapaHabitacionesSuite = habitacionesSuite;
 	}
 	
 	public void addHabitacionSuite(HabitacionSuite habitacion)
 	{
 		String id = habitacion.getID();
-		this.habitacionesSuite.put(id, habitacion);
+		this.mapaHabitacionesSuite.put(id, habitacion);
 	}
 	
 	public HashMap<String, HabitacionSuiteDoble> getHabitacionesSuiteDoble()
 	{
-		return habitacionesSuiteDoble;
+		return mapaHabitacionesSuiteDoble;
 	}
 	
 	public void setHabitacionesSuiteDoble(HashMap<String, HabitacionSuiteDoble> habitacionesSuiteDoble)
 	{
-		this.habitacionesSuiteDoble = habitacionesSuiteDoble;
+		this.mapaHabitacionesSuiteDoble = habitacionesSuiteDoble;
 	}
 	
 	public void addHabitacionSuiteDoble(HabitacionSuiteDoble habitacion)
 	{
 		String id = habitacion.getID();
-		this.habitacionesSuiteDoble.put(id, habitacion);
+		this.mapaHabitacionesSuiteDoble.put(id, habitacion);
 	}
 	
 	
 	public HashMap<String, Producto> getProductos() 
 	{
-		return productos;
+		return mapaProductos;
 	}
 	
 	public void setProductos(HashMap<String, Producto> producto)
 	{
-		this.productos = producto ;
+		this.mapaProductos = producto ;
 	}
 	
 	public void addProducto(Producto producto)
 	{
 		String id = producto.getID();
-		this.productos.put(id, producto);
+		this.mapaProductos.put(id, producto);
 	}
 
 	public String addHabitacion(String tipoHabitacion, boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String id)
@@ -129,19 +133,19 @@ public class CoordinadorPMS {
 		if (tipoHabitacion.equals("estandar"))
 		{
 			HabitacionEstandar habitacion = new HabitacionEstandar(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
-			habitacionesEstandar.put(id, habitacion);
+			mapaHabitacionesEstandar.put(id, habitacion);
 			infoHabitacion = habitacion.toString();
 		}
 		else if (tipoHabitacion.equals("suite"))
 		{
 			HabitacionSuite habitacion = new HabitacionSuite(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
-			habitacionesSuite.put(id, habitacion);
+			mapaHabitacionesSuite.put(id, habitacion);
 			infoHabitacion = habitacion.toString();
 		}
 		else if (tipoHabitacion.equals("suitedoble"))
 		{
 			HabitacionSuiteDoble habitacion = new HabitacionSuiteDoble(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
-			habitacionesSuiteDoble.put(id,  habitacion);
+			mapaHabitacionesSuiteDoble.put(id,  habitacion);
 			infoHabitacion = habitacion.toString();
 		}
 		return infoHabitacion;
@@ -337,6 +341,52 @@ public class CoordinadorPMS {
 			}
 		}
 		
+		for (int mes=0; mes<12; mes++)
+		{
+			ArrayList<ArrayList<ArrayList<Integer>>> diasMes = tarifasSuite.get(mes);
+			
+			for (int diaMes=0; diaMes<diasMes.size(); diaMes++)
+			{
+				ArrayList<ArrayList<Integer>> diasSemana = diasMes.get(diaMes);
+				ArrayList<String> diasSemanaSinTarifa = new ArrayList<String>();
+				for (int diaSemana=0; diaSemana<diasSemana.size(); diaSemana++)
+				{
+					ArrayList<Integer> listaDia = diasSemana.get(diaSemana);
+					if (listaDia.isEmpty())
+					{
+						diasSemanaSinTarifa.add(mapaDiasSemana.get(diaSemana));
+					}
+				}
+				if (diasSemanaSinTarifa != null)
+				{
+					textoFinal += addFechaSinTarifa(mes, diaMes, diasSemanaSinTarifa);
+				}
+			}
+		}
+		
+		for (int mes=0; mes<12; mes++)
+		{
+			ArrayList<ArrayList<ArrayList<Integer>>> diasMes = tarifasSuiteDoble.get(mes);
+			
+			for (int diaMes=0; diaMes<diasMes.size(); diaMes++)
+			{
+				ArrayList<ArrayList<Integer>> diasSemana = diasMes.get(diaMes);
+				ArrayList<String> diasSemanaSinTarifa = new ArrayList<String>();
+				for (int diaSemana=0; diaSemana<diasSemana.size(); diaSemana++)
+				{
+					ArrayList<Integer> listaDia = diasSemana.get(diaSemana);
+					if (listaDia.isEmpty())
+					{
+						diasSemanaSinTarifa.add(mapaDiasSemana.get(diaSemana));
+					}
+				}
+				if (diasSemanaSinTarifa != null)
+				{
+					textoFinal += addFechaSinTarifa(mes, diaMes, diasSemanaSinTarifa);
+				}
+			}
+		}
+		
 		return textoFinal;
 	}
 
@@ -344,6 +394,129 @@ public class CoordinadorPMS {
 	private String addFechaSinTarifa(int mes, int diaMes, ArrayList<String> diasSemana) 
 	{
 		return "Mes: " + (mes+1) + " | Dia: " + (diaMes+1) + " | Dias de la semana: " + diasSemana + "\n";
+	}
+
+
+	public ArrayList<Habitacion> getHabitacionesDesocupadas(int numeroDeNoches, LocalDate fechaInicial)
+	{
+		LocalDate fechaFinal = fechaInicial.plusDays(numeroDeNoches);
+		ArrayList<Habitacion> habitacionesDesocupadas = new ArrayList<Habitacion>();
+		
+		if (mapaHabitacionesEstandar != null)
+		{
+			for (Entry<String, HabitacionEstandar> entradaHabitacion : mapaHabitacionesEstandar.entrySet())
+			{
+				Habitacion habitacion = (Habitacion) entradaHabitacion.getValue();
+				HashMap<String, Reserva> reservas = habitacion.getReservas();
+				if (reservas != null)
+				{
+					boolean desocupada = true;
+					for (Entry<String, Reserva> entradaReserva : reservas.entrySet())
+					{
+						Reserva reserva = entradaReserva.getValue();
+						LocalDate fechaI = reserva.getFechaInicial();
+						LocalDate fechaF = reserva.getFechaFinal();
+						
+						if (fechasDentroDeRango(fechaI, fechaF, fechaInicial, fechaFinal))
+						{
+							desocupada = false;
+							break;
+						}
+					}
+					if (desocupada)
+					{
+						habitacionesDesocupadas.add(habitacion);
+					}
+				}	
+			}
+		}
+		if (mapaHabitacionesSuite != null)
+		{
+			for (Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet())
+			{
+				Habitacion habitacion = (Habitacion) entrada.getValue();
+				HashMap<String, Reserva> reservas = habitacion.getReservas();
+				if (reservas != null)
+				{
+					boolean desocupada = true;
+					for (Entry<String, Reserva> entradaReserva : reservas.entrySet())
+					{
+						Reserva reserva = entradaReserva.getValue();
+						LocalDate fechaI = reserva.getFechaInicial();
+						LocalDate fechaF = reserva.getFechaFinal();
+						
+						if (fechasDentroDeRango(fechaI, fechaF, fechaInicial, fechaFinal))
+						{
+							desocupada = false;
+							break;
+						}
+					}
+					if (desocupada)
+					{
+						habitacionesDesocupadas.add(habitacion);
+					}
+				}
+			}
+		}
+		if (mapaHabitacionesSuiteDoble != null)
+		{
+			for (Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet())
+			{
+				Habitacion habitacion = (Habitacion) entrada.getValue();
+				HashMap<String, Reserva> reservas = habitacion.getReservas();
+				if (reservas != null)
+				{
+					boolean desocupada = true;
+					for (Entry<String, Reserva> entradaReserva : reservas.entrySet())
+					{
+						Reserva reserva = entradaReserva.getValue();
+						LocalDate fechaI = reserva.getFechaInicial();
+						LocalDate fechaF = reserva.getFechaFinal();
+						
+						if (fechasDentroDeRango(fechaI, fechaF, fechaInicial, fechaFinal))
+						{
+							desocupada = false;
+							break;
+						}
+					}
+					if (desocupada)
+					{
+						habitacionesDesocupadas.add(habitacion);
+					}
+				}
+			}
+		}
+		
+		Collections.sort(habitacionesDesocupadas, new ComparadorHabitaciones());
+		
+		return habitacionesDesocupadas;
+	}
+	
+	private boolean fechasDentroDeRango(LocalDate fechaInicialRango, LocalDate fechaFinalRango, LocalDate fechaInicial, LocalDate fechaFinal)
+	{
+		boolean fechaFinalDentroDeReserva = (fechaFinal.isBefore(fechaFinalRango) && fechaFinal.isAfter(fechaInicialRango)) || fechaFinal.isEqual(fechaInicialRango) || fechaFinal.isEqual(fechaFinalRango);
+		boolean fechaInicialDentroDeReserva = (fechaInicial.isBefore(fechaFinalRango) && fechaInicial.isAfter(fechaInicialRango)) || fechaInicial.isEqual(fechaInicialRango) || fechaInicial.isEqual(fechaFinalRango);
+		boolean fechaReservaDentroDeRango = fechaFinal.isAfter(fechaFinalRango) && fechaInicial.isBefore(fechaInicialRango);
+		
+		return fechaFinalDentroDeReserva || fechaInicialDentroDeReserva || fechaReservaDentroDeRango;
+	}
+
+
+	public Reserva getReserva(String idHuesped)
+	{		
+		return mapaReservas.get(idHuesped);
+	}
+
+
+	public HashMap<String, Reserva> getMapaReservas()
+	{
+		return mapaReservas;
+	}
+
+
+	public void setMapaReservas(HashMap<String, Reserva> mapaReservas)
+	{
+		this.mapaReservas = mapaReservas;
 	}
 
 }

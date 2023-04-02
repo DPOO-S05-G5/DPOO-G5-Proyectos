@@ -10,18 +10,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 public class HabitacionEstandar extends Habitacion
 {
+	private static final String TIPO = "estandar";
 	private static ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas = crearListaTarifas();
-	private static String tipo = "estandar";
+	private static String tipo = TIPO;
 
 	public HabitacionEstandar()
 	{
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public HabitacionEstandar(boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso,
 			String iD)
 	{
-		super(tieneCocina, tieneBalcon, tieneVista, torre, piso, iD);
+		super(TIPO, tieneCocina, tieneBalcon, tieneVista, torre, piso, iD);
 
 		ArrayList<Cama> camas = new ArrayList<Cama>(Arrays.asList(new Cama("doble")));
 		super.setCamas(camas);
@@ -100,16 +101,6 @@ public class HabitacionEstandar extends Habitacion
 		ArrayList<Integer> listaDiasSemana = listaDiaDeMes.get(diaSemana);
 		listaDiasSemana.clear();
 		System.out.println(tarifas);
-	}
-
-	public static String getTipo()
-	{
-		return tipo;
-	}
-
-	public static void setTipo(String tipo)
-	{
-		HabitacionEstandar.tipo = tipo;
 	}
 	
 	public static void main(String[] args)

@@ -1,13 +1,14 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public abstract class Reserva {
 
 	private int cedulaReservador;
 	private int precioTotal;
-	private int fechaInicial;
-	private int fechaFinal;
+	private LocalDate fechaInicial;
+	private LocalDate fechaFinal;
 	private ArrayList<Habitacion> habitacion;
 	private int cantidadHuespedes;
 	private Huesped Reservador;
@@ -33,22 +34,22 @@ public abstract class Reserva {
 	}
 
 
-	public int getFechaInicial() {
+	public LocalDate getFechaInicial() {
 		return fechaInicial;
 	}
 
 
-	public void setFechaInicial(int fechaInicial) {
+	public void setFechaInicial(LocalDate fechaInicial) {
 		this.fechaInicial = fechaInicial;
 	}
 
 
-	public int getFechaFinal() {
+	public LocalDate getFechaFinal() {
 		return fechaFinal;
 	}
 
 
-	public void setFechaFinal(int fechaFinal) {
+	public void setFechaFinal(LocalDate fechaFinal) {
 		this.fechaFinal = fechaFinal;
 	}
 

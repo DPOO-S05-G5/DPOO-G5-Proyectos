@@ -1,9 +1,11 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Habitacion
 {
+	private String tipo;
 	private boolean tieneCocina;
 	private boolean tieneBalcon;
 	private boolean tieneVista;
@@ -13,6 +15,9 @@ public abstract class Habitacion
 	private ArrayList<Cama> camas;
 	private int capacidadAdultos;
 	private int capacidadNinos;
+	private Huesped huespedReserva;
+	private HashMap<String, Huesped> huespedes;
+	private HashMap<String, Reserva> reservas;
 	
 	
 	public Habitacion()
@@ -20,15 +25,18 @@ public abstract class Habitacion
 		
 	}
 	
-	public Habitacion(boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String iD)
+	public Habitacion(String tipo, boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String iD)
 	{
 		super();
+		this.tipo = tipo;
 		this.tieneCocina = tieneCocina;
 		this.tieneBalcon = tieneBalcon;
 		this.tieneVista = tieneVista;
 		this.torre = torre;
 		this.piso = piso;
 		this.id = iD;
+		this.huespedes = new HashMap<String, Huesped>();
+		this.reservas = new HashMap<String, Reserva>();
 	}
 
 	public ArrayList<Cama> getCamas()
@@ -132,6 +140,46 @@ public abstract class Habitacion
 		return "Habitacion [tieneCocina=" + tieneCocina + ", tieneBalcon=" + tieneBalcon + ", tieneVista=" + tieneVista
 				+ ", torre=" + torre + ", piso=" + piso + ", id=" + id + ", camas=" + camas + ", capacidadAdultos="
 				+ capacidadAdultos + ", capacidadNinos=" + capacidadNinos + "]";
+	}
+
+	public HashMap<String, Huesped> getHuespedes()
+	{
+		return huespedes;
+	}
+
+	public void setHuespedes(HashMap<String, Huesped> huespedes)
+	{
+		this.huespedes = huespedes;
+	}
+
+	public String getTipo()
+	{
+		return tipo;
+	}
+
+	public void setTipo(String tipo)
+	{
+		this.tipo = tipo;
+	}
+
+	public Huesped getHuespedReserva()
+	{
+		return huespedReserva;
+	}
+
+	public void setHuespedReserva(Huesped huespedReserva)
+	{
+		this.huespedReserva = huespedReserva;
+	}
+
+	public HashMap<String, Reserva> getReservas()
+	{
+		return reservas;
+	}
+
+	public void setReservas(HashMap<String, Reserva> reservas)
+	{
+		this.reservas = reservas;
 	}
 	
 	

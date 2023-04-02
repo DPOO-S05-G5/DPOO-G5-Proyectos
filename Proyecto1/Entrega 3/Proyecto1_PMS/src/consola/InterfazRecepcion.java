@@ -1,6 +1,11 @@
 package consola;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import modelo.CoordinadorPMS;
+import modelo.Habitacion;
+import modelo.Reserva;
 
 public class InterfazRecepcion extends Interfaz
 {
@@ -53,13 +58,67 @@ public class InterfazRecepcion extends Interfaz
 		}
 	}
 
-	private void ejecutarRealizarCheckOut()
+	private void ejecutarRealizarCheckIn()
 	{
-		// TODO Auto-generated method stub
+		String esConReserva = input("El huesped ya tiene reserva? (si / no)").toLowerCase();
+		
+		if (esConReserva.equals("si"))
+		{
+			ejecutarCheckInConReserva();
+		}
+		else if (esConReserva.equals("no"))
+		{
+			ejecutarCheckInSinReserva();
+		}
+		else
+			System.out.println("Opcion no valida.");
+	}
+	
+	private void ejecutarCheckInSinReserva()
+	{
+		LocalDate fechaHoy = LocalDate.now();
+		try
+		{
+			while (true)
+			{
+				String nombreHuespedResponsable = input("Nombre del huesped responsable");
+				String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
+				String documentoHuesped = input("Documento de ID");
+				String correoHuesped = input("Correo electronico");
+				String numeroCelular = input("Numero de celular");
+				int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
+				int totalAdultos = Integer.parseInt(input("Numero de adultos"));
+				int totalNinos = Integer.parseInt(input("Numero de niños"));
+				
+				ArrayList<Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
+				
+				for (Habitacion hab : habitacionesDisponibles)
+				{
+					System.out.println(hab.toString());
+				}
+			}
+		}
+		catch (NumberFormatException e1)
+		{
+			System.out.println("El numero de personas debe ser un valor numerico positivo");
+		}
+	}
+
+	private void ejecutarCheckInConReserva()
+	{
+		String idHuesped =  input("Documento de ID");
+		Reserva reserva = coordinadorPMS.getReserva(idHuesped);
+		if (reserva == null)
+		{
+			System.out.println("Reserva no encontrada para documeno de ID: " + idHuesped);
+			return;
+		}
+		
+		System.out.println(reserva.toString());
 		
 	}
 
-	private void ejecutarRealizarCheckIn()
+	private void ejecutarRealizarCheckOut()
 	{
 		// TODO Auto-generated method stub
 		

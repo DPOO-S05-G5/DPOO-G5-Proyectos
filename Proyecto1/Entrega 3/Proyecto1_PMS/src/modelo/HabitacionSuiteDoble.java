@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class HabitacionSuiteDoble extends Habitacion
 {
+	private static final String TIPO = "suitedoble";
 	private static ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas = crearListaTarifas();
-	private static String tipo = "suitedoble";
 
 	public HabitacionSuiteDoble()
 	{
@@ -16,7 +16,7 @@ public class HabitacionSuiteDoble extends Habitacion
 	public HabitacionSuiteDoble(boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso,
 			String iD)
 	{
-		super(tieneCocina, tieneBalcon, tieneVista, torre, piso, iD);
+		super(TIPO, tieneCocina, tieneBalcon, tieneVista, torre, piso, iD);
 
 		ArrayList<Cama> camas = new ArrayList<Cama>(Arrays.asList(new Cama("doble"), new Cama("doble"), new Cama("sofacama")));
 		super.setCamas(camas);
@@ -83,16 +83,6 @@ public class HabitacionSuiteDoble extends Habitacion
 		listaDiasSemana.add(tarifa);
 		listaDiasSemana.sort(null);
 		System.out.println(tarifas);
-	}
-
-	public static String getTipo()
-	{
-		return tipo;
-	}
-
-	public static void setTipo(String tipo)
-	{
-		HabitacionSuiteDoble.tipo = tipo;
 	}
 	
 	public static void main(String[] args)

@@ -171,7 +171,6 @@ public class SalvadorDeDatos
 				for (HashMap.Entry<String, Usuario> entrada : mapaUsuarios.entrySet())
 				{
 					Usuario usuario = (Usuario) entrada.getValue();
-					System.out.println(usuario.toString());
 					encoder.writeObject(usuario);
 				}
 			}

@@ -12,7 +12,6 @@ public class HabitacionEstandar extends Habitacion
 {
 	private static final String TIPO = "estandar";
 	private static ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifas = crearListaTarifas();
-	private static String tipo = TIPO;
 
 	public HabitacionEstandar()
 	{

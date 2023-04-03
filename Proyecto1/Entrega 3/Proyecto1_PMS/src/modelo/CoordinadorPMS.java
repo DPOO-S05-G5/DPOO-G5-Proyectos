@@ -24,7 +24,13 @@ public class CoordinadorPMS {
 	
 	public CoordinadorPMS()
 	{
+		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
+		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
+		this.mapaHabitacionesSuiteDoble = new HashMap<String, HabitacionSuiteDoble>();
+		this.mapaProductos = new HashMap<String, Producto>();
+		this.mapaServicios = new HashMap<String, Servicio>();
 		this.mapaDiasMes = new HashMap<Integer, Integer>();
+		
 		int[] diasMes = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		
 		for (int i=0; i<12; i++)
@@ -47,6 +53,8 @@ public class CoordinadorPMS {
 		{
 			mapaDiasSemana.put(i, listaDiasSemana.get(i));
 		}
+		
+		this.mapaReservas = new HashMap<String, Reserva>();
 	}
 	
 	
@@ -433,9 +441,7 @@ public class CoordinadorPMS {
 					}
 				}
 				else
-				{
 					listaHabitacionesDesocupadas.add(habitacion);
-				}
 			}
 		}
 		if (mapaHabitacionesSuite != null)
@@ -465,9 +471,7 @@ public class CoordinadorPMS {
 					}
 				}
 				else
-				{
 					listaHabitacionesDesocupadas.add(habitacion);
-				}
 			}
 		}
 		if (mapaHabitacionesSuiteDoble != null)
@@ -497,9 +501,7 @@ public class CoordinadorPMS {
 					}
 				}
 				else
-				{
 					listaHabitacionesDesocupadas.add(habitacion);
-				}
 			}
 		}
 		
@@ -555,19 +557,19 @@ public class CoordinadorPMS {
 			if (tipoHabitacion.equals(ESTANDAR))
 			{
 				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
 				habitacion.addHuespedAdulto(huesped);
 			}
 			else if (tipoHabitacion.equals(SUITE))
 			{
 				HabitacionSuite habitacion = mapaHabitacionesSuite.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
 				habitacion.addHuespedAdulto(huesped);
 			}
 			else
 			{
 				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
 				habitacion.addHuespedAdulto(huesped);
 			}
 		}
@@ -576,19 +578,19 @@ public class CoordinadorPMS {
 			if (tipoHabitacion.equals(ESTANDAR))
 			{
 				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
 				habitacion.addHuespedNinio(huesped);
 			}
 			else if (tipoHabitacion.equals(SUITE))
 			{
 				HabitacionSuite habitacion = mapaHabitacionesSuite.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
 				habitacion.addHuespedNinio(huesped);
 			}
 			else
 			{
 				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion, mapaReservas.size()+1);
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
 				habitacion.addHuespedNinio(huesped);
 			}
 		}
@@ -600,7 +602,7 @@ public class CoordinadorPMS {
 			String apellidos, String idHuesped, String correo, String numeroCelular)
 	{
 		HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
-		Huesped huesped = new Huesped(idHuesped, nombres, apellidos, correo, numeroCelular, idHabitacion, mapaReservas.size()+1);
+		Huesped huesped = new Huesped(idHuesped, nombres, apellidos, correo, numeroCelular, idHabitacion);
 		habitacion.addHuespedAdulto(huesped);
 		
 	}

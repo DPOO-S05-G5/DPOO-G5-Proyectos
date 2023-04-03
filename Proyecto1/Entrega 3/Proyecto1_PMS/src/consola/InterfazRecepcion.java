@@ -2,6 +2,8 @@ package consola;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;
@@ -79,29 +81,102 @@ public class InterfazRecepcion extends Interfaz
 		LocalDate fechaHoy = LocalDate.now();
 		try
 		{
-			while (true)
+			String nombreHuespedResponsable = input("Nombre del huesped responsable");
+			String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
+			String documentoHuesped = input("Documento de ID");
+			String correoHuesped = input("Correo electronico");
+			String numeroCelular = input("Numero de celular");
+			int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
+			int totalHuespedes = Integer.parseInt(input("Numero de huespedes"));
+			int huespedesNoAsignados = totalHuespedes;
+			LinkedHashMap<Integer, Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
+			
+			if (habitacionesDisponibles != null)
 			{
-				String nombreHuespedResponsable = input("Nombre del huesped responsable");
-				String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
-				String documentoHuesped = input("Documento de ID");
-				String correoHuesped = input("Correo electronico");
-				String numeroCelular = input("Numero de celular");
-				int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
-				int totalAdultos = Integer.parseInt(input("Numero de adultos"));
-				int totalNinos = Integer.parseInt(input("Numero de niños"));
-				
-				ArrayList<Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
-				
-				for (Habitacion hab : habitacionesDisponibles)
+				String strHabitacionesDisponibles = "0. Cancelar\n";
+				for (Entry<Integer, Habitacion> entry : habitacionesDisponibles.entrySet())
 				{
-					System.out.println(hab.toString());
+					Habitacion hab = entry.getValue();
+					strHabitacionesDisponibles += entry.getKey() + ": " + hab.toString() + "\n";
+				}
+				while(huespedesNoAsignados > 0)
+				{
+					System.out.println(strHabitacionesDisponibles);	
+					System.out.println("Huespedes sin habitacion: " + huespedesNoAsignados);
+					int seleccion = Integer.parseInt(input("Seleccione una habitacion"));
+					if (seleccion == 0)
+						break;
+					
+					Habitacion habitacion = habitacionesDisponibles.get(seleccion);
+					if (habitacion != null)
+					{
+						int adultosAsignadosHab = 0;
+						int niniosAsignadosHab = 0;
+						
+						if (huespedesNoAsignados == totalHuespedes)
+						{
+							agregarHuespedResponsable(habitacion.getTipo(), habitacion.getId(), nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
+							adultosAsignadosHab++;
+							huespedesNoAsignados--;
+						}
+						
+						while (true)
+						{
+							
+							System.out.println("1. Agregar ocupante adulto");
+							System.out.println("2. Agregar ocupante niño");
+							System.out.println("3. Confirmar configuracion de habitacion");
+							int seleccion2 = Integer.parseInt(input("Seleccionar una opcion"));
+							if (seleccion2 == 1)
+							{
+								if((adultosAsignadosHab < habitacion.getCapacidadAdultos()) && (huespedesNoAsignados > 0))
+								{	
+									agregarHuesped(true, habitacion.getTipo(), habitacion.getId());
+									huespedesNoAsignados--;
+									adultosAsignadosHab++;
+								}
+							}
+							else if (seleccion2 == 2)
+							{
+								if((niniosAsignadosHab < habitacion.getCapacidadNinos()) && (huespedesNoAsignados > 0))
+								{
+									agregarHuesped(false, habitacion.getTipo(), habitacion.getId());
+									huespedesNoAsignados--;
+									niniosAsignadosHab++;
+								}
+							}
+							else
+								break;
+						}
+					}
+					else
+						System.out.println("Opcion no valida.");
 				}
 			}
+			else
+				System.out.println("No hay habitaciones disponbles entre " + fechaHoy + " y " + fechaHoy.plusDays(numeroDeNoches-1));
 		}
 		catch (NumberFormatException e1)
 		{
 			System.out.println("El numero de personas debe ser un valor numerico positivo");
 		}
+	}
+
+	private void agregarHuespedResponsable(String tipo, String id, String nombre,
+			String apellidos, String idHuesped, String correo, String numeroCelular)
+	{
+		coordinadorPMS.addHuespedResponsable(tipo, id, nombre, apellidos, idHuesped, correo, numeroCelular);
+		
+	}
+
+	private void agregarHuesped(boolean isAdulto, String tipo, String id)
+	{
+		String nombre = input("Nombre del huesped");
+		String apellido = input("Apellidos del huesped");
+		String idHuesped = input("Documento de identidad");
+		
+		coordinadorPMS.addHuesped(isAdulto, tipo, id, nombre, apellido, idHuesped);
+		
 	}
 
 	private void ejecutarCheckInConReserva()
@@ -143,18 +218,24 @@ public class InterfazRecepcion extends Interfaz
 				String correoHuesped = input("Correo electronico");
 				String numeroCelular = input("Numero de celular");
 				int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
-				int totalAdultos = Integer.parseInt(input("Numero de adultos"));
-				int totalNinos = Integer.parseInt(input("Numero de niños"));
+				int totalHuespedes = Integer.parseInt(input("Numero de huespedes"));
 				
-				String huespedResponsable = nombreHuespedResponsable.
+				String huespedResponsable = nombreHuespedResponsable;
 				
-				ArrayList<Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
+				LinkedHashMap<Integer, Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
 				
-				for (Habitacion hab : habitacionesDisponibles)
+				String strHabitacionesDisponibles = "";
+				for (Entry<Integer, Habitacion> entry : habitacionesDisponibles.entrySet())
 				{
-					System.out.println(hab.toString());
+					Habitacion hab = entry.getValue();
+					strHabitacionesDisponibles += entry.getKey() + ": " + hab.toString() + "\n";
 				}
 			}
+		}
+		catch (NumberFormatException e)
+		{
+			System.out.println("El numero de personas debe ser un valor numerico positivo");
+		}
 		
 	}
 

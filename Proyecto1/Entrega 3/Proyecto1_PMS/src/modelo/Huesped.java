@@ -8,7 +8,6 @@ public class Huesped {
 	private String correo;
 	private String numeroCelular;
 	private String idHabitacion;
-	private int idReserva;
 	
 	public Huesped()
 	{
@@ -16,7 +15,7 @@ public class Huesped {
 	}
 	
 	public Huesped(String id, String nombres, String apellidos, String correo, String numeroCelular,
-			String idHabitacion, int idReserva)
+			String idHabitacion)
 	{
 		super();
 		this.id = id;
@@ -25,16 +24,14 @@ public class Huesped {
 		this.correo = correo;
 		this.numeroCelular = numeroCelular;
 		this.idHabitacion = idHabitacion;
-		this.idReserva = idReserva;
 	}
 
-	public Huesped(String idHuesped, String nombres, String apellidos, String idHabitacion, int idReserva)
+	public Huesped(String idHuesped, String nombres, String apellidos, String idHabitacion)
 	{
 		this.id = idHuesped;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.idHabitacion = idHabitacion;
-		this.setIdReserva(idReserva);
 	}
 	
 	public String getId()
@@ -85,15 +82,4 @@ public class Huesped {
 	{
 		this.idHabitacion = idHabitacion;
 	}
-
-	public int getIdReserva()
-	{
-		return idReserva;
-	}
-
-	public void setIdReserva(int idReserva)
-	{
-		this.idReserva = idReserva;
-	}
-
 }

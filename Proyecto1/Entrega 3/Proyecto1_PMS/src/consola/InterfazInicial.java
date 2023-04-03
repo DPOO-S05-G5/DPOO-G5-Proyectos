@@ -88,14 +88,16 @@ public class InterfazInicial extends Interfaz
 	{
 		String tipoUsuario = autenticador.iniciarSesion();
 		if (tipoUsuario != null)
+		{
 			System.out.println("Empleado de tipo: " + tipoUsuario + "\n");
 		
-		if (tipoUsuario.equals("admin"))
-			ejecutarInterfazAdmin();
-		else if (tipoUsuario.equals("recepcionista"))
-			ejecutarInterfazRecepcion();
-		else if (tipoUsuario.equals("empleado"))
-			ejecutarInterfazServicios();			
+			if (tipoUsuario.equals("admin"))
+				ejecutarInterfazAdmin();
+			else if (tipoUsuario.equals("recepcionista"))
+				ejecutarInterfazRecepcion();
+			else if (tipoUsuario.equals("empleado"))
+				ejecutarInterfazServicios();
+		}
 	}
 	
 	private void ejecutarRegistrarEmpleado()

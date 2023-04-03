@@ -36,7 +36,8 @@ public abstract class Habitacion
 		this.torre = torre;
 		this.piso = piso;
 		this.id = iD;
-		this.setHuespedesAdultos(new HashMap<String, Huesped>());
+		this.huespedesAdultos = new HashMap<String, Huesped>();
+		this.huespedesNinios = new HashMap<String, Huesped>();
 		this.reservas = new HashMap<String, Reserva>();
 	}
 

@@ -196,7 +196,17 @@ public class InterfazRecepcion extends Interfaz
 
 	private void ejecutarRealizarCheckOut()
 	{
-		// TODO Auto-generated method stub
+		String idHuesped =  input("Documento de ID");
+		Huesped huesped = coordinadorPMS.getHuesped(idHuesped);
+		Reserva reserva = coordinadorPMS.getReserva(idHuesped);
+		
+		String factura = coordinadorPMS.realizarTextoFactura(huesped)
+		String facturaPagada = input("El huesped ya realizó el pago? (si / no)").toLowerCase();
+		
+		if (facturaPagada.equals("si"))
+		{
+			;
+		}
 		
 	}
 

@@ -200,13 +200,8 @@ public class InterfazRecepcion extends Interfaz
 		Huesped huesped = coordinadorPMS.getHuesped(idHuesped);
 		Reserva reserva = coordinadorPMS.getReserva(idHuesped);
 		
-		String factura = coordinadorPMS.realizarTextoFactura(huesped)
-		String facturaPagada = input("El huesped ya realizó el pago? (si / no)").toLowerCase();
-		
-		if (facturaPagada.equals("si"))
-		{
-			coordinadorPMS.cancelarReserva(huesped);
-		}
+		String factura = coordinadorPMS.realizarTextoFactura(huesped);
+		System.out.println(factura);
 		
 	}
 

@@ -12,7 +12,7 @@ public abstract class Habitacion
 	private boolean tieneVista;
 	private String torre;
 	private int piso;
-	private String id;
+	private String ID;
 	private ArrayList<Cama> camas;
 	private int capacidadAdultos;
 	private int capacidadNinos;
@@ -27,7 +27,7 @@ public abstract class Habitacion
 		
 	}
 	
-	public Habitacion(String tipo, boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String iD)
+	public Habitacion(String tipo, boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String id)
 	{
 		super();
 		this.tipo = tipo;
@@ -36,7 +36,7 @@ public abstract class Habitacion
 		this.tieneVista = tieneVista;
 		this.torre = torre;
 		this.piso = piso;
-		this.id = iD;
+		this.ID = id;
 		this.huespedesAdultos = new HashMap<String, Huesped>();
 		this.huespedesNinios = new HashMap<String, Huesped>();
 		this.reservas = new HashMap<String, Reserva>();
@@ -102,14 +102,14 @@ public abstract class Habitacion
 		this.piso = piso;
 	}
 
-	public String getId()
+	public String getID()
 	{
-		return id;
+		return ID;
 	}
 
 	public void setID(String id)
 	{
-		this.id = id;
+		this.ID = id;
 	}
 
 	public int getCapacidadAdultos()
@@ -134,14 +134,14 @@ public abstract class Habitacion
 	
 	public String getUbicacion()
 	{
-		return "Habitacion " + id +" -> Torre: " + torre + ", Piso: " + piso;
+		return "Habitacion " + ID +" -> Torre: " + torre + ", Piso: " + piso;
 	}
 
 	@Override
 	public String toString() 
 	{
 		return "Habitacion [tieneCocina=" + tieneCocina + ", tieneBalcon=" + tieneBalcon + ", tieneVista=" + tieneVista
-				+ ", torre=" + torre + ", piso=" + piso + ", id=" + id + ", camas=" + camas + ", capacidadAdultos="
+				+ ", torre=" + torre + ", piso=" + piso + ", id=" + ID + ", camas=" + camas + ", capacidadAdultos="
 				+ capacidadAdultos + ", capacidadNinos=" + capacidadNinos + "]";
 	}
 

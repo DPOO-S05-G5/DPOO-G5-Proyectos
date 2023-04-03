@@ -11,7 +11,9 @@ import modelo.CoordinadorPMS;
 import modelo.HabitacionEstandar;
 import modelo.HabitacionSuite;
 import modelo.HabitacionSuiteDoble;
+import modelo.Huesped;
 import modelo.Producto;
+import modelo.Reserva;
 import modelo.Servicio;
 
 public class SalvadorDeDatos
@@ -26,11 +28,16 @@ public class SalvadorDeDatos
 	String nombreArchivoTarifasSuiteDoble;
 	String nombreArchivoProductos;
 	String nombreArchivoServicios;
+	String nombreArchivoReservas;
+	String nombreArchivoHuespedes;
 	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
 	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
 	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
 	HashMap<String, Producto> mapaProductos;
 	HashMap<String, Servicio> mapaServicios;
+	HashMap<String, Reserva> mapaReservas;
+	HashMap<String, Huesped> mapaHuespedes;
+
 	
 	
 	public SalvadorDeDatos()
@@ -44,6 +51,8 @@ public class SalvadorDeDatos
 		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble.xml";
 		this.nombreArchivoProductos = "data/Productos.xml";
 		this.nombreArchivoServicios = "data/Servicios.xml";
+		this.nombreArchivoReservas = "data/Reservas.xml";
+		this.nombreArchivoHuespedes = "data/Huespedes.xml";
 	}
 	
 	public void salvarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS)
@@ -54,8 +63,67 @@ public class SalvadorDeDatos
 		salvarHabitacionesSuiteDoble(coordinadorPMS);
 		salvarProductos(coordinadorPMS);
 		salvarServicios(coordinadorPMS);
+		salvarHuespedes(coordinadorPMS);
+		salvarReservas(coordinadorPMS);
 	}
 	
+	private void salvarReservas(CoordinadorPMS coordinadorPMS)
+	{
+		this.mapaReservas = coordinadorPMS.getMapaReservas();
+		
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(nombreArchivoReservas);
+			XMLEncoder encoder = new XMLEncoder(fos);
+			
+			if (mapaReservas != null)
+			{
+				for (HashMap.Entry<String, Reserva> entrada : mapaReservas.entrySet())
+				{
+					Reserva reserva = (Reserva) entrada.getValue();
+					System.out.println(reserva.getId());
+					encoder.writeObject(reserva);
+				}
+			}
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void salvarHuespedes(CoordinadorPMS coordinadorPMS)
+	{
+		this.mapaHuespedes = coordinadorPMS.getMapaHuespedes();
+		
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(nombreArchivoHuespedes);
+			XMLEncoder encoder = new XMLEncoder(fos);
+			
+			if (mapaHuespedes != null)
+			{
+				for (HashMap.Entry<String, Huesped> entrada : mapaHuespedes.entrySet())
+				{
+					Huesped huesped = (Huesped) entrada.getValue();
+					System.out.println(huesped.getId());
+					encoder.writeObject(huesped);
+				}
+			}
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 	private void salvarHabitacionesEstandar(CoordinadorPMS coordinadorPMS) 
 	{
 		this.mapaHabitacionesEstandar = coordinadorPMS.getHabitacionesEstandar();
@@ -76,7 +144,7 @@ public class SalvadorDeDatos
 				for (HashMap.Entry<String, HabitacionEstandar> entrada : mapaHabitacionesEstandar.entrySet())
 				{
 					HabitacionEstandar room = (HabitacionEstandar) entrada.getValue();
-					System.out.println(room.getId());
+					System.out.println(room.getID());
 					encoder.writeObject(room);
 				}
 			}
@@ -110,7 +178,7 @@ public class SalvadorDeDatos
 				for (HashMap.Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet())
 				{
 					HabitacionSuite room = (HabitacionSuite) entrada.getValue();
-					System.out.println(room.getId());
+					System.out.println(room.getID());
 					encoder.writeObject(room);
 				}
 			}
@@ -144,7 +212,7 @@ public class SalvadorDeDatos
 				for (HashMap.Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet())
 				{
 					HabitacionSuiteDoble room = (HabitacionSuiteDoble) entrada.getValue();
-					System.out.println(room.getId());
+					System.out.println(room.getID());
 					encoder.writeObject(room);
 				}
 			}

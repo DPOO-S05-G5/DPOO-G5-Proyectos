@@ -9,6 +9,7 @@ public class Servicio {
 	private String ID;
 	private boolean disponibilidad;
 	private int duracion;
+	private String textoFactura;
 	
 	public Servicio()
 	{
@@ -82,5 +83,18 @@ public class Servicio {
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
+
+	public String getTextoFactura()
+	{
+		textoFactura = nombre + ": ";
+		return textoFactura;
+	}
+
+	public void setTextoFactura(String textoFactura)
+	{
+		this.textoFactura = textoFactura;
+	}
+	
+	
 	
 }

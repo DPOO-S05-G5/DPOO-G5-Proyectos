@@ -56,6 +56,7 @@ public class CoordinadorPMS {
 		}
 		
 		this.mapaReservas = new HashMap<String, Reserva>();
+		this.mapaHuespedes = new HashMap<String, Huesped>();
 	}
 	
 	
@@ -86,7 +87,7 @@ public class CoordinadorPMS {
 	
 	public void addHabitacionEstandar(HabitacionEstandar habitacion)
 	{
-		String id = habitacion.getId();
+		String id = habitacion.getID();
 		this.mapaHabitacionesEstandar.put(id, habitacion);
 	}
 	
@@ -102,7 +103,7 @@ public class CoordinadorPMS {
 	
 	public void addHabitacionSuite(HabitacionSuite habitacion)
 	{
-		String id = habitacion.getId();
+		String id = habitacion.getID();
 		this.mapaHabitacionesSuite.put(id, habitacion);
 	}
 	
@@ -118,7 +119,7 @@ public class CoordinadorPMS {
 	
 	public void addHabitacionSuiteDoble(HabitacionSuiteDoble habitacion)
 	{
-		String id = habitacion.getId();
+		String id = habitacion.getID();
 		this.mapaHabitacionesSuiteDoble.put(id, habitacion);
 	}
 	
@@ -550,28 +551,28 @@ public class CoordinadorPMS {
 	}
 
 
-	public void addHuesped(boolean isAdulto, String tipoHabitacion, String idHabitacion, String nombre,
+	public void addHuesped(boolean isAdulto, String tipoHabitacion, ArrayList<Habitacion> habs, String nombre,
 			String apellidos, String idHuesped)
 	{
 		if (isAdulto)
 		{
 			if (tipoHabitacion.equals(ESTANDAR))
 			{
-				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
+				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(habs.get(0));
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
 				habitacion.addHuespedAdulto(huesped);
 				mapaHuespedes.put(huesped.getId(), huesped);
 			}
 			else if (tipoHabitacion.equals(SUITE))
 			{
-				HabitacionSuite habitacion = mapaHabitacionesSuite.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
+				HabitacionSuite habitacion = mapaHabitacionesSuite.get(habs.get(0));
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
 				habitacion.addHuespedAdulto(huesped);
 			}
 			else
 			{
-				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
+				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(habs.get(0));
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
 				habitacion.addHuespedAdulto(huesped);
 				mapaHuespedes.put(huesped.getId(), huesped);
 			}
@@ -580,49 +581,44 @@ public class CoordinadorPMS {
 		{
 			if (tipoHabitacion.equals(ESTANDAR))
 			{
-				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
+				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(habs.get(0));
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
 				habitacion.addHuespedNinio(huesped);
 				mapaHuespedes.put(huesped.getId(), huesped);
 			}
 			else if (tipoHabitacion.equals(SUITE))
 			{
-				HabitacionSuite habitacion = mapaHabitacionesSuite.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
+				HabitacionSuite habitacion = mapaHabitacionesSuite.get(habs.get(0));
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
 				habitacion.addHuespedNinio(huesped);
 			}
 			else
 			{
-				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(idHabitacion);
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
+				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(habs.get(0));
+				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
 				habitacion.addHuespedNinio(huesped);
 			}
 		}
 		
 	}
-
-
-	public void addHuespedResponsable(String tipoHabitacion, String idHabitacion, String nombres,
-			String apellidos, String idHuesped, String correo, String numeroCelular)
-	{
-		HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
-		Huesped huesped = new Huesped(idHuesped, nombres, apellidos, correo, numeroCelular, idHabitacion);
-		habitacion.addHuespedAdulto(huesped);
-		mapaHuespedes.put(huesped.getId(), huesped);
-		
-	}
 	
-	public Huesped addHuespedResponsable(String nombre, String apellidos, String idHuesped, String correo, String celular)
+	public Huesped addHuespedResponsable(String nombre, String apellidos, String idHuesped, String correo, String celular, ArrayList<Habitacion> habs)
 	{
-		Huesped huesped = new Huesped(nombre, apellidos, correo, celular);
+		Huesped huesped = new Huesped(nombre, apellidos, idHuesped, correo, celular, habs);
 		mapaHuespedes.put(huesped.getId(), huesped);
 		return huesped;
 	}
 
-
-	public void addReserva(Huesped huesped, int numHuespedes, int noches, LocalDate fechaInicial)
+	public Huesped addHuespedResponsable(String nombre, String apellidos, String idHuesped, String correo, String celular)
 	{
-		mapaReservas.put(huesped.getId(), new Reserva(huesped, numHuespedes, noches, fechaInicial));
+		Huesped huesped = new Huesped(nombre, apellidos, idHuesped, correo, celular);
+		mapaHuespedes.put(huesped.getId(), huesped);
+		return huesped;
+	}
+
+	public void addReserva(Huesped huesped, int numHuespedes, int noches, LocalDate fechaInicial, ArrayList<Habitacion> habs)
+	{
+		mapaReservas.put(huesped.getId(), new Reserva(huesped, numHuespedes, noches, fechaInicial, habs));
 		
 	}
 	

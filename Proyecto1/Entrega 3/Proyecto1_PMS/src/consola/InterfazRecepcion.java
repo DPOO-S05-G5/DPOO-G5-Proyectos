@@ -116,7 +116,7 @@ public class InterfazRecepcion extends Interfaz
 						
 						if (huespedesNoAsignados == totalHuespedes)
 						{
-							agregarHuespedResponsable(habitacion.getTipo(), habitacion.getId(), nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
+							Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
 							adultosAsignadosHab++;
 							huespedesNoAsignados--;
 						}
@@ -132,7 +132,7 @@ public class InterfazRecepcion extends Interfaz
 							{
 								if((adultosAsignadosHab < habitacion.getCapacidadAdultos()) && (huespedesNoAsignados > 0))
 								{	
-									agregarHuesped(true, habitacion.getTipo(), habitacion.getId());
+									Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
 									huespedesNoAsignados--;
 									adultosAsignadosHab++;
 								}
@@ -141,7 +141,8 @@ public class InterfazRecepcion extends Interfaz
 							{
 								if((niniosAsignadosHab < habitacion.getCapacidadNinos()) && (huespedesNoAsignados > 0))
 								{
-									agregarHuesped(false, habitacion.getTipo(), habitacion.getId());
+									Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
+
 									huespedesNoAsignados--;
 									niniosAsignadosHab++;
 								}
@@ -163,14 +164,8 @@ public class InterfazRecepcion extends Interfaz
 		}
 	}
 
-	private void agregarHuespedResponsable(String tipo, String id, String nombre,
-			String apellidos, String idHuesped, String correo, String numeroCelular)
-	{
-		coordinadorPMS.addHuespedResponsable(tipo, id, nombre, apellidos, idHuesped, correo, numeroCelular);
-		
-	}
 
-	private void agregarHuesped(boolean isAdulto, String tipo, String id)
+	private void agregarHuesped(boolean isAdulto, String tipo, ArrayList<Habitacion> id)
 	{
 		String nombre = input("Nombre del huesped");
 		String apellido = input("Apellidos del huesped");
@@ -210,9 +205,9 @@ public class InterfazRecepcion extends Interfaz
 		String documentoHuesped = input("Documento de ID del huésped responsable");
 		Huesped huesped = coordinadorPMS.getHuesped(documentoHuesped);
 		LocalDate fechaHoy = LocalDate.now();
-		Reserva reserva = coordinadorPMS.getReserva(documentoHuesped)
+		Reserva reserva = coordinadorPMS.getReserva(documentoHuesped);
 		
-		if ((fechaHoy - reserva.getFechaInicial()) >= 48)
+		if (fechaHoy.plusDays(2).isEqual(reserva.getFechaFinal()))
 		{
 			coordinadorPMS.cancelarReserva(huesped);
 		}
@@ -228,33 +223,34 @@ public class InterfazRecepcion extends Interfaz
 		LocalDate fechaHoy = LocalDate.now();
 		try
 		{
-			while (true)
+		
+			String nombreHuespedResponsable = input("Nombre del huesped responsable");
+			String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
+			String documentoHuesped = input("Documento de ID");
+			String correoHuesped = input("Correo electronico");
+			String numeroCelular = input("Numero de celular");
+			int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
+			int totalHuespedes = Integer.parseInt(input("Numero de huespedes"));
+			LinkedHashMap<Integer, Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
+			String strHabitacionesDisponibles = "0. Cancelar\n";
+			for (Entry<Integer, Habitacion> entry : habitacionesDisponibles.entrySet())
 			{
-				String nombreHuespedResponsable = input("Nombre del huesped responsable");
-				String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
-				String documentoHuesped = input("Documento de ID");
-				String correoHuesped = input("Correo electronico");
-				String numeroCelular = input("Numero de celular");
-				int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
-				int totalHuespedes = Integer.parseInt(input("Numero de huespedes"));
-				LinkedHashMap<Integer, Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
-				String strHabitacionesDisponibles = "0. Cancelar\n";
-				for (Entry<Integer, Habitacion> entry : habitacionesDisponibles.entrySet())
-				{
-					Habitacion hab = entry.getValue();
-					strHabitacionesDisponibles += entry.getKey() + ": " + hab.toString() + "\n";
-					
-				}
-				String[] habitacionesSeleccionadas = input("Seleccione las habitaciones deseadas (formato: 1-2-3...)").split("-");
-				ArrayList<Integer> listaSeleccionadas = new ArrayList<Integer>();
-				for (String seleccion : habitacionesSeleccionadas)
-				{
-					listaSeleccionadas.add(Integer.parseInt(seleccion));
-				}
+				Habitacion hab = entry.getValue();
+				strHabitacionesDisponibles += entry.getKey() + ": " + hab.toString() + "\n";
 				
-				Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
-				coordinadorPMS.addReserva(huesped, totalHuespedes, numeroDeNoches-1, fechaHoy);
 			}
+			System.out.println(strHabitacionesDisponibles);
+			String[] habitacionesSeleccionadas = input("Seleccione las habitaciones deseadas (formato: 1-2-3...)").split("-");
+			ArrayList<Habitacion> listaSeleccionadas = new ArrayList<Habitacion>();
+			for (String seleccion : habitacionesSeleccionadas)
+			{
+				Habitacion hab = habitacionesDisponibles.get(seleccion);
+				listaSeleccionadas.add(hab);
+			}
+			
+			Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
+			coordinadorPMS.addReserva(huesped, totalHuespedes, numeroDeNoches-1, fechaHoy, listaSeleccionadas);
+			
 		}
 		catch (NumberFormatException e)
 		{
@@ -275,7 +271,10 @@ public class InterfazRecepcion extends Interfaz
 	{
 		String idHuesped = input("ID del huesped responsable");
 		Huesped huesped = coordinadorPMS.getHuesped(idHuesped);
-		System.out.println(huesped.toString());
+		if (huesped == null)
+			System.out.println("Huesped no encontrado");
+		else
+			System.out.println(huesped.toString());
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class CrearProductos {
 		
 		try
 		{
-			FileOutputStream fos = new FileOutputStream("data/Producto.xml");
+			FileOutputStream fos = new FileOutputStream("data/productos.xml");
 			XMLEncoder encoder = new XMLEncoder(fos);
 			
 			

@@ -1,3 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="19.0.2" class="java.beans.XMLDecoder">
+ <object class="modelo.HabitacionEstandar">
+  <void property="ID">
+   <string>202B</string>
+  </void>
+  <void property="camas">
+   <object class="java.util.ArrayList">
+    <void method="add">
+     <object class="modelo.Cama">
+      <void property="capacidadAdultos">
+       <int>2</int>
+      </void>
+      <void property="capacidadNinos">
+       <int>3</int>
+      </void>
+      <void property="tipo">
+       <string>doble</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void property="capacidadAdultos">
+   <int>2</int>
+  </void>
+  <void property="capacidadNinos">
+   <int>3</int>
+  </void>
+  <void property="huespedesAdultos">
+   <object class="java.util.HashMap"/>
+  </void>
+  <void property="huespedesNinios">
+   <object class="java.util.HashMap"/>
+  </void>
+  <void property="piso">
+   <int>2</int>
+  </void>
+  <void property="reservas">
+   <object class="java.util.HashMap"/>
+  </void>
+  <void property="tieneBalcon">
+   <boolean>true</boolean>
+  </void>
+  <void property="tieneVista">
+   <boolean>true</boolean>
+  </void>
+  <void property="tipo">
+   <string>estandar</string>
+  </void>
+  <void property="torre">
+   <string>2</string>
+  </void>
+ </object>
 </java>

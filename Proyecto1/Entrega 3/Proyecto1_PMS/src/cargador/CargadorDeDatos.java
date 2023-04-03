@@ -10,6 +10,7 @@ import java.util.HashMap;
 import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
 import modelo.CoordinadorPMS;
+import modelo.Habitacion;
 import modelo.HabitacionEstandar;
 import modelo.HabitacionSuite;
 import modelo.HabitacionSuiteDoble;
@@ -41,8 +42,8 @@ public class CargadorDeDatos {
 		this.nombreArchivoTarifasSuite = "data/tarifasHabitacionesSuite.xml";
 		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble.xml";
 		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble.xml";
-		this.nombreArchivoProducto = "data/Producto.xml";
-		this.nombreArchivoServicio = "data/Servicio.xml";
+		this.nombreArchivoProducto = "data/productos.xml";
+		this.nombreArchivoServicio = "data/servicios.xml";
 		this.mapaUsuarios = new HashMap<String, Usuario>();
 		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
 		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
@@ -89,10 +90,10 @@ public class CargadorDeDatos {
 				try {
 					obj = decoder.readObject();
 
-					if (obj instanceof HabitacionEstandar) {
-						HabitacionEstandar room = (HabitacionEstandar) obj;
-						String id = room.getId();
-						mapaHabitacionesEstandar.put(id, room);
+					if (obj instanceof Habitacion) {
+						Habitacion room = (Habitacion) obj;
+						String id = room.getID();
+						mapaHabitacionesEstandar.put(id, (HabitacionEstandar) room);
 					} else {
 						System.err.println("objecto inesperado en el archivo");
 					}
@@ -110,7 +111,7 @@ public class CargadorDeDatos {
 
 		for (HashMap.Entry<String, HabitacionEstandar> entrada : mapaHabitacionesEstandar.entrySet()) {
 			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getId());
+			System.out.println(entrada.getValue().getID());
 		}
 
 		System.out.println(HabitacionEstandar.getTarifas());
@@ -142,7 +143,7 @@ public class CargadorDeDatos {
 
 					if (obj instanceof HabitacionSuite) {
 						HabitacionSuite room = (HabitacionSuite) obj;
-						String id = room.getId();
+						String id = room.getID();
 						mapaHabitacionesSuite.put(id, room);
 					} else {
 						System.err.println("objecto inesperado en el archivo");
@@ -161,7 +162,6 @@ public class CargadorDeDatos {
 
 		for (HashMap.Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet()) {
 			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getId());
 		}
 
 		System.out.println(HabitacionSuite.getTarifas());
@@ -194,7 +194,7 @@ public class CargadorDeDatos {
 
 					if (obj instanceof HabitacionSuiteDoble) {
 						HabitacionSuiteDoble room = (HabitacionSuiteDoble) obj;
-						String id = room.getId();
+						String id = room.getID();
 						mapaHabitacionesSuiteDoble.put(id, room);
 					} else {
 						System.err.println("objecto inesperado en el archivo");
@@ -213,7 +213,7 @@ public class CargadorDeDatos {
 
 		for (HashMap.Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet()) {
 			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getId());
+			System.out.println(entrada.getValue().getID());
 		}
 
 		System.out.println(HabitacionSuiteDoble.getTarifas());

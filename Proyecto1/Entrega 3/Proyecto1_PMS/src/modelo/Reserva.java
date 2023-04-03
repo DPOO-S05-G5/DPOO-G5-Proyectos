@@ -13,20 +13,23 @@ public class Reserva {
 	private ArrayList<Habitacion> habitaciones;
 	private int cantidadHuespedes;
 	private Huesped reservador;
+	private String id;
 	
 	public Reserva()
 	{
 		
 	}
 	
-	public Reserva(Huesped huesped, int numHuespedes, int noches, LocalDate fechaInicial)
+	public Reserva(Huesped huesped, int numHuespedes, int noches, LocalDate fechaInicial, ArrayList<Habitacion> habs)
 	{
 		this.cedulaReservador = huesped.getId();
 		this.fechaInicial = fechaInicial;
 		this.fechaFinal = fechaInicial.plusDays(noches);
 		this.noches = noches;
+		this.habitaciones = habs;
 		this.cantidadHuespedes = numHuespedes;
-		this.reservador = huesped;	
+		this.reservador = huesped;
+		this.id = huesped.getId();
 		calcularPrecioTotal();
 	}
 	
@@ -147,5 +150,15 @@ public class Reserva {
 
 	public void setReservador(Huesped reservador) {
 		this.reservador = reservador;
+	}
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 }

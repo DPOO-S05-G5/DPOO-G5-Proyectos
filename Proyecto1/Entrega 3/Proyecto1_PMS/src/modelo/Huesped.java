@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Huesped {
 	
 	private String id;
@@ -7,15 +9,15 @@ public class Huesped {
 	private String apellidos;
 	private String correo;
 	private String numeroCelular;
-	private String idHabitacion;
+	private ArrayList<Habitacion> habs;
 	
 	public Huesped()
 	{
 		
 	}
 	
-	public Huesped(String id, String nombres, String apellidos, String correo, String numeroCelular,
-			String idHabitacion)
+	public Huesped(String nombres, String apellidos, String id, String correo, String numeroCelular,
+			ArrayList<Habitacion> habs)
 	{
 		super();
 		this.id = id;
@@ -23,15 +25,26 @@ public class Huesped {
 		this.apellidos = apellidos;
 		this.correo = correo;
 		this.numeroCelular = numeroCelular;
-		this.idHabitacion = idHabitacion;
+		this.habs = habs;
+	}
+	
+	public Huesped(String nombres, String apellidos, String id, String correo, String numeroCelular)
+	{
+		super();
+		this.id = id;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.correo = correo;
+		this.numeroCelular = numeroCelular;
 	}
 
-	public Huesped(String idHuesped, String nombres, String apellidos, String idHabitacion)
+	public Huesped(String nombres, String apellidos, String idHuesped, ArrayList<Habitacion> habs)
 	{
 		this.id = idHuesped;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
-		this.idHabitacion = idHabitacion;
+		this.habs = habs;
+		
 	}
 	
 	public String getId()
@@ -74,12 +87,12 @@ public class Huesped {
 	{
 		this.numeroCelular = numeroCelular;
 	}
-	public String getIdHabitacion()
+	public ArrayList<Habitacion> getHabitaciones()
 	{
-		return idHabitacion;
+		return habs;
 	}
-	public void setIdHabitacion(String idHabitacion)
+	public void setHabitaciones(ArrayList<Habitacion> habs)
 	{
-		this.idHabitacion = idHabitacion;
+		this.habs = habs;
 	}
 }

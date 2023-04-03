@@ -23,7 +23,7 @@ public class CrearServicios {
 		
 		try
 		{
-			FileOutputStream fos = new FileOutputStream("data/Servicio.xml");
+			FileOutputStream fos = new FileOutputStream("data/servicios.xml");
 			XMLEncoder encoder = new XMLEncoder(fos);
 			
 			

@@ -209,7 +209,15 @@ public class InterfazRecepcion extends Interfaz
 	{
 		String documentoHuesped = input("Documento de ID del huésped responsable");
 		Huesped huesped = coordinadorPMS.getHuesped(documentoHuesped);
-		coordinadorPMS.cancelarReserva(huesped);
+		if (tiempo <= 48)
+		{
+			coordinadorPMS.cancelarReserva(huesped);
+		}
+		else
+		{
+			System.out.println("La reserva está fuera del tiempo permitido para ser cancelada.");
+		}	
+		
 	}
 
 	private void ejecutarRealizarReserva()

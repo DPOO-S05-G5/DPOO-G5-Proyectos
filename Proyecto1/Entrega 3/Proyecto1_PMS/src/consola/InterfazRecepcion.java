@@ -209,7 +209,10 @@ public class InterfazRecepcion extends Interfaz
 	{
 		String documentoHuesped = input("Documento de ID del huésped responsable");
 		Huesped huesped = coordinadorPMS.getHuesped(documentoHuesped);
-		if (tiempo <= 48)
+		LocalDate fechaHoy = LocalDate.now();
+		Reserva reserva = coordinadorPMS.getReserva(documentoHuesped)
+		
+		if ((fechaHoy - reserva.getFechaInicial()) >= 48)
 		{
 			coordinadorPMS.cancelarReserva(huesped);
 		}

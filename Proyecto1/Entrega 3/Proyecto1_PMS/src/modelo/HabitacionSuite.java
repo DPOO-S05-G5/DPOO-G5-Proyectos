@@ -37,7 +37,7 @@ public class HabitacionSuite extends Habitacion {
 		int[] diasPorMes = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 		int diasSemana = 7;
 		ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> listaTarifas = new ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>(meses);
-		
+		System.out.println("TARIFAS SUITE");
 		for (int i=0; i<meses; i++)
 		{
 			ArrayList<ArrayList<ArrayList<Integer>>> listaDiasDelMes = new ArrayList<ArrayList<ArrayList<Integer>>>(diasPorMes[i]);
@@ -81,7 +81,6 @@ public class HabitacionSuite extends Habitacion {
 		
 		listaDiasSemana.add(tarifa);
 		listaDiasSemana.sort(null);
-		System.out.println(tarifas);
 	}
 
 	public static void removeTarifa(int mes, int diaMes, int diaSemana)
@@ -93,8 +92,6 @@ public class HabitacionSuite extends Habitacion {
 		ArrayList<Integer> listaDiasSemana = listaDiaDeMes.get(diaSemana);
 		
 		listaDiasSemana.clear();
-
-		System.out.println(tarifas);
 		
 	}
 	

@@ -40,10 +40,10 @@ public class SalvadorDeDatos
 		this.nombreArchivoTarifasEstandar = "data/tarifasHabitacionesEstandar.xml";
 		this.nombreArchivoHabitacionesSuite = "data/habitacionesSuite.xml";
 		this.nombreArchivoTarifasSuite = "data/tarifasHabitacionesSuite.xml";
-		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble";
-		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble";
-		this.nombreArchivoProductos = "data/Productos";
-		this.nombreArchivoServicios = "data/Servicios";
+		this.nombreArchivoHabitacionesSuiteDoble = "data/habitacionesSuiteDoble.xml";
+		this.nombreArchivoTarifasSuiteDoble = "data/tarifasHabitacionesSuiteDoble.xml";
+		this.nombreArchivoProductos = "data/Productos.xml";
+		this.nombreArchivoServicios = "data/Servicios.xml";
 	}
 	
 	public void salvarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS)

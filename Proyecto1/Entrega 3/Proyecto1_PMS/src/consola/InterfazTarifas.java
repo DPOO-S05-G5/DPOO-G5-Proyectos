@@ -228,13 +228,13 @@ public class InterfazTarifas extends Interfaz
 			else
 			{
 				System.out.println("Dia no valido.");
-				return null;
+				return listaFinal;
 			}
 		}
 		else
 		{
 			System.out.println("Mes no valido.");
-			return null;
+			return listaFinal;
 		}
 		return listaFinal;
 	}

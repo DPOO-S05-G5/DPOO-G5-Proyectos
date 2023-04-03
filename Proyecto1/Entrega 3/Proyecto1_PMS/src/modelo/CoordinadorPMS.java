@@ -21,6 +21,7 @@ public class CoordinadorPMS {
 	private ArrayList<String> listaDiasSemana;
 	private HashMap<Integer, String> mapaDiasSemana;
 	private HashMap<String, Reserva> mapaReservas;
+	private HashMap<String, Huesped> mapaHuespedes;
 	
 	public CoordinadorPMS()
 	{
@@ -559,6 +560,7 @@ public class CoordinadorPMS {
 				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
 				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
 				habitacion.addHuespedAdulto(huesped);
+				mapaHuespedes.put(huesped.getId(), huesped);
 			}
 			else if (tipoHabitacion.equals(SUITE))
 			{
@@ -571,6 +573,7 @@ public class CoordinadorPMS {
 				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(idHabitacion);
 				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
 				habitacion.addHuespedAdulto(huesped);
+				mapaHuespedes.put(huesped.getId(), huesped);
 			}
 		}
 		else
@@ -580,6 +583,7 @@ public class CoordinadorPMS {
 				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
 				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, idHabitacion);
 				habitacion.addHuespedNinio(huesped);
+				mapaHuespedes.put(huesped.getId(), huesped);
 			}
 			else if (tipoHabitacion.equals(SUITE))
 			{
@@ -604,7 +608,61 @@ public class CoordinadorPMS {
 		HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(idHabitacion);
 		Huesped huesped = new Huesped(idHuesped, nombres, apellidos, correo, numeroCelular, idHabitacion);
 		habitacion.addHuespedAdulto(huesped);
+		mapaHuespedes.put(huesped.getId(), huesped);
 		
 	}
+	
+	public Huesped addHuespedResponsable(String nombre, String apellidos, String idHuesped, String correo, String celular)
+	{
+		Huesped huesped = new Huesped(nombre, apellidos, correo, celular);
+		mapaHuespedes.put(huesped.getId(), huesped);
+		return huesped;
+	}
+
+
+	public void addReserva(Huesped huesped, int numHuespedes, int noches, LocalDate fechaInicial)
+	{
+		mapaReservas.put(huesped.getId(), new Reserva(huesped, numHuespedes, noches, fechaInicial));
+		
+	}
+
+
+	public Habitacion getHabitacion(String tipo, String id)
+	{
+		// TODO Auto-generated method stub
+		if (tipo.equals(ESTANDAR))
+		{
+			return mapaHabitacionesEstandar.get(id);
+		}
+		else if (tipo.equals(SUITE))
+		{
+			return mapaHabitacionesSuite.get(id);
+		}
+		else
+		{
+			return mapaHabitacionesSuiteDoble.get(id);
+		}
+		
+	}
+
+
+	public HashMap<String, Huesped> getMapaHuespedes()
+	{
+		return mapaHuespedes;
+	}
+
+
+	public void setMapaHuespedes(HashMap<String, Huesped> mapaHuespedes)
+	{
+		this.mapaHuespedes = mapaHuespedes;
+	}
+
+
+	public Huesped getHuesped(String idHuesped)
+	{
+		return mapaHuespedes.get(idHuesped);
+	}
+	
+	
 
 }

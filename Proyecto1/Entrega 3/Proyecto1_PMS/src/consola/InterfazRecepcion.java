@@ -7,9 +7,8 @@ import java.util.Map.Entry;
 
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;
-import modelo.HashMap;
+import modelo.Huesped;
 import modelo.Reserva;
-import modelo.String;
 
 public class InterfazRecepcion extends Interfaz
 {
@@ -221,18 +220,23 @@ public class InterfazRecepcion extends Interfaz
 				String numeroCelular = input("Numero de celular");
 				int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
 				int totalHuespedes = Integer.parseInt(input("Numero de huespedes"));
-					
+				LinkedHashMap<Integer, Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
 				String strHabitacionesDisponibles = "0. Cancelar\n";
 				for (Entry<Integer, Habitacion> entry : habitacionesDisponibles.entrySet())
 				{
 					Habitacion hab = entry.getValue();
-					Habitacion tipo = getTipo(hab);
-					Habitacion id = getId(hab)
 					strHabitacionesDisponibles += entry.getKey() + ": " + hab.toString() + "\n";
 					
 				}
-				Huesped huespedResponsable = coordinadorPMS.addHuespedResponsable(tipo, id, nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular)
-				Reserva reserva = coordinadorPMS.addReserva(huespedResponsable);
+				String[] habitacionesSeleccionadas = input("Seleccione las habitaciones deseadas (formato: 1-2-3...)").split("-");
+				ArrayList<Integer> listaSeleccionadas = new ArrayList<Integer>();
+				for (String seleccion : habitacionesSeleccionadas)
+				{
+					listaSeleccionadas.add(Integer.parseInt(seleccion));
+				}
+				
+				Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
+				coordinadorPMS.addReserva(huesped, totalHuespedes, numeroDeNoches-1, fechaHoy);
 			}
 		}
 		catch (NumberFormatException e)
@@ -244,31 +248,17 @@ public class InterfazRecepcion extends Interfaz
 
 	private void ejecutarInfoHabitacion()
 	{
-		try
-		{
-			while (true)
-			{
-				String nombreHuespedResponsable = input("Nombre del huesped responsable");
-				for (Entry<Integer, Habitacion> entry : nombreHuespedResponsable.entrySet())
-				{
-					Habitacion hab = entry.getValue();
-				}
-			}
-		}
-		
+		String tipo = input("Tipo");
+		String id = input("ID de la habitacion");
+		Habitacion hab = coordinadorPMS.getHabitacion(tipo, id);
+		System.out.println(hab.toString());
 	}
 
 	private void ejecutarInfoHuesped()
 	{
-;
-		try
-		{
-			while (true)
-			{
-				String nombreHuespedResponsable = input("Nombre del huesped responsable");
-			}
-		}
-		
+		String idHuesped = input("ID del huesped responsable");
+		Huesped huesped = coordinadorPMS.getHuesped(idHuesped);
+		System.out.println(huesped.toString());
 	}
 
 	@Override

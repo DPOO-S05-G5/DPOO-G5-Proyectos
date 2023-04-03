@@ -3,23 +3,37 @@ package modelo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public abstract class Reserva {
+public class Reserva {
 
-	private int cedulaReservador;
+	private String cedulaReservador;
 	private int precioTotal;
 	private LocalDate fechaInicial;
 	private LocalDate fechaFinal;
-	private ArrayList<Habitacion> habitacion;
+	private ArrayList<Habitacion> habitaciones;
 	private int cantidadHuespedes;
-	private Huesped Reservador;
+	private Huesped reservador;
 	
+	public Reserva()
+	{
+		
+	}
 	
-	public int getCedulaReservador() {
+	public Reserva(Huesped huesped, int numHuespedes, int noches, LocalDate fechaInicial)
+	{
+		this.cedulaReservador = huesped.getId();
+		this.fechaInicial = fechaInicial;
+		this.fechaFinal = fechaInicial.plusDays(noches);
+		this.cantidadHuespedes = numHuespedes;
+		this.reservador = huesped;
+		
+	}
+	
+	public String getCedulaReservador() {
 		return cedulaReservador;
 	}
 
 
-	public void setCedulaReservador(int cedulaReservador) {
+	public void setCedulaReservador(String cedulaReservador) {
 		this.cedulaReservador = cedulaReservador;
 	}
 
@@ -54,13 +68,13 @@ public abstract class Reserva {
 	}
 
 
-	public ArrayList<Habitacion> getHabitacion() {
-		return habitacion;
+	public ArrayList<Habitacion> getHabitaciones() {
+		return habitaciones;
 	}
 
 
-	public void setHabitacion(ArrayList<Habitacion> habitacion) {
-		this.habitacion = habitacion;
+	public void setHabitaciones(ArrayList<Habitacion> habitacion) {
+		this.habitaciones = habitacion;
 	}
 
 
@@ -75,21 +89,11 @@ public abstract class Reserva {
 
 
 	public Huesped getReservador() {
-		return Reservador;
+		return reservador;
 	}
 
 
 	public void setReservador(Huesped reservador) {
-		Reservador = reservador;
+		this.reservador = reservador;
 	}
-
-
-	public Reserva()
-	{
-		
-	}
-	
-	
-	
-	
 }

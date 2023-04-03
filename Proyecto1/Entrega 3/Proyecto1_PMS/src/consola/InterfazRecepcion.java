@@ -202,8 +202,9 @@ public class InterfazRecepcion extends Interfaz
 
 	private void ejecutarCancelarReserva()
 	{
-		// TODO Auto-generated method stub
-		
+		String documentoHuesped = input("Documento de ID del huésped responsable");
+		Huesped huesped = coordinadorPMS.getHuesped(documentoHuesped);
+		coordinadorPMS.cacelarReserva(huesped);
 	}
 
 	private void ejecutarRealizarReserva()

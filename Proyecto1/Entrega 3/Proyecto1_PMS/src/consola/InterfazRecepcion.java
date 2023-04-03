@@ -214,7 +214,7 @@ public class InterfazRecepcion extends Interfaz
 	{
 		String documentoHuesped = input("Documento de ID del huésped responsable");
 		Huesped huesped = coordinadorPMS.getHuesped(documentoHuesped);
-		coordinadorPMS.cacelarReserva(huesped);
+		coordinadorPMS.cancelarReserva(huesped);
 	}
 
 	private void ejecutarRealizarReserva()

@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -102,6 +103,12 @@ public class HabitacionSuiteDoble extends Habitacion
 
 		System.out.println(tarifas);
 		
+	}
+	
+	public static int calcularTarifaFecha(LocalDate fecha)
+	{
+		int tarifa = 0;
+		return tarifa;
 	}
 
 }

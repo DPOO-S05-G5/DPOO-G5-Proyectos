@@ -21,13 +21,13 @@ public class InterfazTarifas extends Interfaz
 		this.listaDiasSemana = new ArrayList<String>();
 		this.mapaDiasSemana = new HashMap<String, Integer>();
 		
-		listaDiasSemana.add("D");
 		listaDiasSemana.add("L");
 		listaDiasSemana.add("M");
 		listaDiasSemana.add("I");
 		listaDiasSemana.add("J");
 		listaDiasSemana.add("V");
 		listaDiasSemana.add("S");
+		listaDiasSemana.add("D");
 		
 		for (int i=0; i<7; i++)
 		{

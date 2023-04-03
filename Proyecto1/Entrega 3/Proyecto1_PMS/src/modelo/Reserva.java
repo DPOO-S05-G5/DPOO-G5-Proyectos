@@ -9,6 +9,7 @@ public class Reserva {
 	private int precioTotal;
 	private LocalDate fechaInicial;
 	private LocalDate fechaFinal;
+	private int noches;
 	private ArrayList<Habitacion> habitaciones;
 	private int cantidadHuespedes;
 	private Huesped reservador;
@@ -23,9 +24,10 @@ public class Reserva {
 		this.cedulaReservador = huesped.getId();
 		this.fechaInicial = fechaInicial;
 		this.fechaFinal = fechaInicial.plusDays(noches);
+		this.noches = noches;
 		this.cantidadHuespedes = numHuespedes;
-		this.reservador = huesped;
-		
+		this.reservador = huesped;	
+		calcularPrecioTotal();
 	}
 	
 	public String getCedulaReservador() {
@@ -45,6 +47,56 @@ public class Reserva {
 
 	public void setPrecioTotal(int precioTotal) {
 		this.precioTotal = precioTotal;
+	}
+	
+	public void calcularPrecioTotal()
+	{
+		precioTotal = 0;
+		LocalDate fechaEnRevision = fechaInicial;
+		for (Habitacion hab : habitaciones)
+		{
+			if (hab instanceof HabitacionEstandar)
+			{
+				if (noches > 1)
+				{
+					while(!fechaEnRevision.equals(fechaFinal))
+					{
+						precioTotal += HabitacionEstandar.calcularTarifaFecha(fechaEnRevision);
+						fechaEnRevision = fechaEnRevision.plusDays(1);
+					}
+				}
+				else
+					precioTotal += HabitacionEstandar.calcularTarifaFecha(fechaInicial);
+			}
+			
+			else if (hab instanceof HabitacionSuite)
+			{
+				if (noches > 1)
+				{
+					while(!fechaEnRevision.equals(fechaFinal))
+					{
+						precioTotal += HabitacionSuite.calcularTarifaFecha(fechaEnRevision);
+						fechaEnRevision = fechaEnRevision.plusDays(1);
+					}
+				}
+				else
+					precioTotal += HabitacionSuite.calcularTarifaFecha(fechaInicial);
+			}
+			else
+			{
+				if (noches > 1)
+				{
+					while(!fechaEnRevision.equals(fechaFinal))
+					{
+						precioTotal += HabitacionSuiteDoble.calcularTarifaFecha(fechaEnRevision);
+						fechaEnRevision = fechaEnRevision.plusDays(1);
+					}
+				}
+				else
+					precioTotal += HabitacionSuiteDoble.calcularTarifaFecha(fechaInicial);
+			}
+		}	
+			
 	}
 
 

@@ -7,7 +7,9 @@ import java.util.Map.Entry;
 
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;
+import modelo.HashMap;
 import modelo.Reserva;
+import modelo.String;
 
 public class InterfazRecepcion extends Interfaz
 {
@@ -219,17 +221,18 @@ public class InterfazRecepcion extends Interfaz
 				String numeroCelular = input("Numero de celular");
 				int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
 				int totalHuespedes = Integer.parseInt(input("Numero de huespedes"));
-				
-				String huespedResponsable = nombreHuespedResponsable;
-				
-				LinkedHashMap<Integer, Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
-				
-				String strHabitacionesDisponibles = "";
+					
+				String strHabitacionesDisponibles = "0. Cancelar\n";
 				for (Entry<Integer, Habitacion> entry : habitacionesDisponibles.entrySet())
 				{
 					Habitacion hab = entry.getValue();
+					Habitacion tipo = getTipo(hab);
+					Habitacion id = getId(hab)
 					strHabitacionesDisponibles += entry.getKey() + ": " + hab.toString() + "\n";
+					
 				}
+				Huesped huespedResponsable = coordinadorPMS.addHuespedResponsable(tipo, id, nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular)
+				Reserva reserva = coordinadorPMS.addReserva(huespedResponsable);
 			}
 		}
 		catch (NumberFormatException e)
@@ -241,13 +244,30 @@ public class InterfazRecepcion extends Interfaz
 
 	private void ejecutarInfoHabitacion()
 	{
-		// TODO Auto-generated method stub
+		try
+		{
+			while (true)
+			{
+				String nombreHuespedResponsable = input("Nombre del huesped responsable");
+				for (Entry<Integer, Habitacion> entry : nombreHuespedResponsable.entrySet())
+				{
+					Habitacion hab = entry.getValue();
+				}
+			}
+		}
 		
 	}
 
 	private void ejecutarInfoHuesped()
 	{
-		// TODO Auto-generated method stub
+;
+		try
+		{
+			while (true)
+			{
+				String nombreHuespedResponsable = input("Nombre del huesped responsable");
+			}
+		}
 		
 	}
 

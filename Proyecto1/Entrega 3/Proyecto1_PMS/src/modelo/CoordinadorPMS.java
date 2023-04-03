@@ -631,7 +631,7 @@ public class CoordinadorPMS {
 		mapaReservas.remove(huesped.getId());	
 	}
 	
-	public void realizarTextoFactura(Huesped huesped)
+	public String realizarTextoFactura(Huesped huesped)
 	{
 		String textoFactura = "";
 		return textoFactura;	

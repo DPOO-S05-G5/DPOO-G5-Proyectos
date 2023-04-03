@@ -625,6 +625,11 @@ public class CoordinadorPMS {
 		mapaReservas.put(huesped.getId(), new Reserva(huesped, numHuespedes, noches, fechaInicial));
 		
 	}
+	
+	public void cancelarReserva(Huesped huesped)
+	{
+		mapaReservas.remove(huesped.getId());	
+	}
 
 
 	public Habitacion getHabitacion(String tipo, String id)

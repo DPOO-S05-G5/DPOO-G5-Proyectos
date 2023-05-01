@@ -4,672 +4,189 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
-public class CoordinadorPMS {
-	
-	private static final String SUITEDOBLE = "suitedoble";
-	private static final String SUITE = "suite";
+import controlador.Controlador;
+import salvador.SalvadorDeDatos;
+
+public class CoordinadorPMS
+{
 	private static final String ESTANDAR = "estandar";
-	private HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
-	private HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
-	private HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
-	private HashMap<String, Producto> mapaProductos;
-	private HashMap<String, Servicio> mapaServicios;
-	private HashMap<Integer, Integer> mapaDiasMes;
-	private ArrayList<String> listaDiasSemana;
-	private HashMap<Integer, String> mapaDiasSemana;
-	private HashMap<String, Reserva> mapaReservas;
-	private HashMap<String, Huesped> mapaHuespedes;
-	
-	public CoordinadorPMS()
+	private static final String SUITE = "suite";
+	private static final String SUITEDOBLE = "suitedoble";
+	private Controlador controlador;
+	private SalvadorDeDatos salvador;
+	private HashMap<String, TarifasHabitacion> tarifasHotel;
+	private HashMap<String, Habitacion> mapaHabitaciones;
+
+	public CoordinadorPMS(Controlador controlador)
 	{
-		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
-		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
-		this.mapaHabitacionesSuiteDoble = new HashMap<String, HabitacionSuiteDoble>();
-		this.mapaProductos = new HashMap<String, Producto>();
-		this.mapaServicios = new HashMap<String, Servicio>();
-		this.mapaDiasMes = new HashMap<Integer, Integer>();
-		
-		int[] diasMes = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-		
-		for (int i=0; i<12; i++)
-		{
-			mapaDiasMes.put(i, diasMes[i]);
-		}
-		
-		this.listaDiasSemana = new ArrayList<String>();
-		this.mapaDiasSemana = new HashMap<Integer, String>();
-		
-		listaDiasSemana.add("L");
-		listaDiasSemana.add("M");
-		listaDiasSemana.add("I");
-		listaDiasSemana.add("J");
-		listaDiasSemana.add("V");
-		listaDiasSemana.add("S");
-		listaDiasSemana.add("D");
-		
-		for (int i=0; i<7; i++)
-		{
-			mapaDiasSemana.put(i, listaDiasSemana.get(i));
-		}
-		
-		this.mapaReservas = new HashMap<String, Reserva>();
-		this.mapaHuespedes = new HashMap<String, Huesped>();
+		this.controlador = controlador;
+		this.salvador = new SalvadorDeDatos();
+		this.tarifasHotel = new HashMap<String, TarifasHabitacion>();
+		tarifasHotel.put(ESTANDAR, new TarifasHabitacion(ESTANDAR));
+		tarifasHotel.put(SUITE, new TarifasHabitacion(SUITE));
+		tarifasHotel.put(SUITEDOBLE, new TarifasHabitacion(SUITEDOBLE));
+
 	}
 	
-	
-	public HashMap<String, HabitacionEstandar> getHabitacionesEstandar() 
+	public HashMap<String, TarifasHabitacion> getTarifasHotel()
 	{
-		return mapaHabitacionesEstandar;
-	}
-	
-	public HashMap<String, Servicio> getServicios() {
-		return mapaServicios;
+		return tarifasHotel;
 	}
 
-	public void setServicios(HashMap<String, Servicio> servicio) {
-		this.mapaServicios = servicio;
+	public void setTarifasHotel(HashMap<String, TarifasHabitacion> tarifasHotel)
+	{
+		this.tarifasHotel = tarifasHotel;
+	}
+	
+	public void agregarTarifa(String tipo, int valor, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<Integer> diasTarifa)
+	{
+		TarifasHabitacion tarifas = tarifasHotel.get(tipo);
+		tarifas.addTarifaEnRangoFechas(valor, fechaInicial, fechaFinal, diasTarifa);
+		salvador.salvarTarifasHabitacion(tarifas);
+	}
+	
+	public void eliminarTarifas(String tipo, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<Integer> diasTarifa)
+	{
+		TarifasHabitacion tarifas = tarifasHotel.get(tipo);
+		tarifas.eliminarTarifasEnRangoFechas(fechaInicial, fechaFinal, diasTarifa);
+	}
+	
+	public String getFechasSinTarifaStr()
+	{
+		String fechasSinTarifa = "FECHAS SIN TARIFA";
 		
-	}
-	
-	public void addServicio(Servicio servicio)
-	{
-		String id = servicio.getID();
-		this.mapaServicios.put(id, servicio);
-	}
-
-	public void setHabitacionesEstandar(HashMap<String, HabitacionEstandar> habitacionesEstandar)
-	{
-		this.mapaHabitacionesEstandar = habitacionesEstandar;
-	}
-	
-	public void addHabitacionEstandar(HabitacionEstandar habitacion)
-	{
-		String id = habitacion.getID();
-		this.mapaHabitacionesEstandar.put(id, habitacion);
-	}
-	
-	public HashMap<String, HabitacionSuite> getHabitacionesSuite()
-	{
-		return mapaHabitacionesSuite;
-	}
-	
-	public void setHabitacionesSuite(HashMap<String, HabitacionSuite> habitacionesSuite)
-	{
-		this.mapaHabitacionesSuite = habitacionesSuite;
-	}
-	
-	public void addHabitacionSuite(HabitacionSuite habitacion)
-	{
-		String id = habitacion.getID();
-		this.mapaHabitacionesSuite.put(id, habitacion);
-	}
-	
-	public HashMap<String, HabitacionSuiteDoble> getHabitacionesSuiteDoble()
-	{
-		return mapaHabitacionesSuiteDoble;
-	}
-	
-	public void setHabitacionesSuiteDoble(HashMap<String, HabitacionSuiteDoble> habitacionesSuiteDoble)
-	{
-		this.mapaHabitacionesSuiteDoble = habitacionesSuiteDoble;
-	}
-	
-	public void addHabitacionSuiteDoble(HabitacionSuiteDoble habitacion)
-	{
-		String id = habitacion.getID();
-		this.mapaHabitacionesSuiteDoble.put(id, habitacion);
-	}
-	
-	
-	public HashMap<String, Producto> getProductos() 
-	{
-		return mapaProductos;
-	}
-	
-	public void setProductos(HashMap<String, Producto> producto)
-	{
-		this.mapaProductos = producto ;
-	}
-	
-	public void addProducto(Producto producto)
-	{
-		String id = producto.getID();
-		this.mapaProductos.put(id, producto);
-	}
-
-	public String addHabitacion(String tipoHabitacion, boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String id)
-	{
-		String infoHabitacion = "";
+		for (Entry<String, TarifasHabitacion> entry : tarifasHotel.entrySet())
+		{
+			TarifasHabitacion tarifas = entry.getValue();
+			String tipo = tarifas.getTipoHabitacion();
+			fechasSinTarifa += "\n" + tipo.toUpperCase() + ": \n";
+			
+			fechasSinTarifa += tarifas.fechasSinTarifa();
+		}
 		
-		if (tipoHabitacion.equals(ESTANDAR))
-		{
-			HabitacionEstandar habitacion = new HabitacionEstandar(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
-			mapaHabitacionesEstandar.put(id, habitacion);
-			infoHabitacion = habitacion.toString();
-		}
-		else if (tipoHabitacion.equals(SUITE))
-		{
-			HabitacionSuite habitacion = new HabitacionSuite(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
-			mapaHabitacionesSuite.put(id, habitacion);
-			infoHabitacion = habitacion.toString();
-		}
-		else if (tipoHabitacion.equals(SUITEDOBLE))
-		{
-			HabitacionSuiteDoble habitacion = new HabitacionSuiteDoble(tieneCocina, tieneBalcon, tieneVista, torre, piso, id);
-			mapaHabitacionesSuiteDoble.put(id,  habitacion);
-			infoHabitacion = habitacion.toString();
-		}
-		return infoHabitacion;
+		return fechasSinTarifa;
+	}
+	
+	public boolean existeHabitacion(String id)
+	{
+		return mapaHabitaciones.containsKey(id);
 	}
 
-	public void addTarifa(String tipoHabitacion, ArrayList<Integer> listaFechaI, ArrayList<Integer> listaFechaF, ArrayList<Integer> dias, int valor)
+	public void putHabitacion(String tipo, boolean cocina, boolean balcon, boolean vista, String torre, int piso,
+			String id)
 	{
-		if (listaFechaI.get(0).equals(listaFechaF.get(0)))
-			addTarifaMismoMes(tipoHabitacion, listaFechaI, listaFechaF, dias, valor);
+		Habitacion hab;
+		if (tipo.equals(ESTANDAR))
+			hab = (Habitacion) new HabitacionEstandar(cocina, balcon, vista, torre, piso, id);
+		else if (tipo.equals(SUITE))
+			hab = (Habitacion) new HabitacionSuite(cocina, balcon, vista, torre, piso, id);
 		else
-			addTarifaDifMes(tipoHabitacion, listaFechaI, listaFechaF, dias, valor);
-	}
-	
-	private void addTarifaDifMes(String tipoHabitacion, ArrayList<Integer> listaFechaI, ArrayList<Integer> listaFechaF,
-			ArrayList<Integer> dias, int valor) 
-	{
-		int mesI = listaFechaI.get(0);
-		int diaI = listaFechaI.get(1);
-		int mesF = listaFechaF.get(0);
-		int diaF = listaFechaF.get(1);
-		
-		for (int diaMes=diaI; diaMes < mapaDiasMes.get(mesI) ; diaMes++)
-		{
-			for (int dia : dias)
-			{
-				if (tipoHabitacion.equals(ESTANDAR))
-				{
-					HabitacionEstandar.addTarifa(mesI, diaMes, dia, valor);
-				}
-				else if (tipoHabitacion.equals(SUITE))
-				{
-					HabitacionSuite.addTarifa(mesI, diaMes, dia, valor);
-				}
-				else
-				{
-					HabitacionSuiteDoble.addTarifa(mesI, diaMes, dia, valor);
-				}
-			}
-		}
-		
-		for (int diaMes=0; diaMes<=diaF; diaMes++)
-		{
-			for (int dia : dias)
-			{
-				if (tipoHabitacion.equals(ESTANDAR))
-				{
-					HabitacionEstandar.addTarifa(mesF, diaMes, dia, valor);
-				}
-				else if (tipoHabitacion.equals(SUITE))
-				{
-					HabitacionSuite.addTarifa(mesF, diaMes, dia, valor);
-				}
-				else
-				{
-					HabitacionSuiteDoble.addTarifa(mesF, diaMes, dia, valor);
-				}
-			}
-		}
-		
+			hab = (Habitacion) new HabitacionSuiteDoble(cocina, balcon, vista, torre, piso, id);
+		mapaHabitaciones.put(id, hab);
 	}
 
-	private void addTarifaMismoMes(String tipoHabitacion, ArrayList<Integer> listaFechaI,
-			ArrayList<Integer> listaFechaF, ArrayList<Integer> dias, int valor) 
+	public String infoHabitacion(String id)
 	{
-		int mes = listaFechaI.get(0);
-		int diaI = listaFechaI.get(1);
-		int diaF = listaFechaF.get(1);
-		
-		for (int diaMes=diaI; diaMes<=diaF; diaMes++)
-		{
-			for (int dia : dias)
-			{
-				if (tipoHabitacion.equals(ESTANDAR))
-					HabitacionEstandar.addTarifa(mes, diaMes, dia, valor);
-				else if (tipoHabitacion.equals(SUITE))
-					HabitacionSuite.addTarifa(mes, diaMes, dia, valor);
-				else
-					HabitacionSuiteDoble.addTarifa(mes, diaMes, dia, valor);
-			}
-		}
+		Habitacion habitacion = mapaHabitaciones.get(id);
+		salvador.salvarHabitacion(habitacion);
+		return habitacion.toString();
 	}
 
-	public void eliminarTarifa(String tipoHabitacion, ArrayList<Integer> listaFechaI, ArrayList<Integer> listaFechaF,
-			ArrayList<Integer> dias)
+	public void setHabitaciones(HashMap<String, Habitacion> mapaHabitaciones)
 	{
-		if (listaFechaI.get(0).equals(listaFechaF.get(0)))
-			eliminarTarifaMismoMes(tipoHabitacion, listaFechaI, listaFechaF, dias);
+		this.mapaHabitaciones = mapaHabitaciones;		
+	}
+
+	public boolean eliminarHabitacion(String id)
+	{
+		if (mapaHabitaciones.containsKey(id))
+		{
+			mapaHabitaciones.remove(id);
+			salvador.borrarHabitacion(id);
+			return true;
+		}
 		else
-			eliminarTarifaDifMes(tipoHabitacion, listaFechaI, listaFechaF, dias);
-	
+			return false;
 	}
 
-
-	private void eliminarTarifaDifMes(String tipoHabitacion, ArrayList<Integer> listaFechaI,
-			ArrayList<Integer> listaFechaF, ArrayList<Integer> dias)
+	public HashMap<String, Habitacion> getHabitaciones()
 	{
-
-		int mesI = listaFechaI.get(0);
-		int diaI = listaFechaI.get(1);
-		int mesF = listaFechaF.get(0);
-		int diaF = listaFechaF.get(1);
-		
-		for (int diaMes=diaI; diaMes < mapaDiasMes.get(mesI) ; diaMes++)
-		{
-			for (int dia : dias)
-			{
-				if (tipoHabitacion.equals(ESTANDAR))
-				{
-					HabitacionEstandar.removeTarifa(mesI, diaMes, dia);
-				}
-				else if (tipoHabitacion.equals(SUITE))
-				{
-					HabitacionSuite.removeTarifa(mesI, diaMes, dia);
-				}
-				else
-				{
-					HabitacionSuiteDoble.removeTarifa(mesI, diaMes, dia);
-				}
-			}
-		}
-		
-		for (int diaMes=0; diaMes<=diaF; diaMes++)
-		{
-			for (int dia : dias)
-			{
-				if (tipoHabitacion.equals(ESTANDAR))
-				{
-					HabitacionEstandar.removeTarifa(mesF, diaMes, dia);
-				}
-				else if (tipoHabitacion.equals(SUITE))
-				{
-					HabitacionSuite.removeTarifa(mesF, diaMes, dia);
-				}
-				else
-				{
-					HabitacionSuiteDoble.removeTarifa(mesF, diaMes, dia);
-				}
-			}
-		}
+		return mapaHabitaciones;
 	}
 
-	private void eliminarTarifaMismoMes(String tipoHabitacion, ArrayList<Integer> listaFechaI,
-			ArrayList<Integer> listaFechaF, ArrayList<Integer> dias)
+	public String catalogoHabitaciones()
 	{
-		int mes = listaFechaI.get(0);
-		int diaI = listaFechaI.get(1);
-		int diaF = listaFechaF.get(1);
-		
-		for (int diaMes=diaI; diaMes<=diaF; diaMes++)
+		String catalogo = "";
+		if (mapaHabitaciones.isEmpty())
+			catalogo = "No hay habitaciones";
+		else
 		{
-			for (int dia : dias)
-			{
-				if (tipoHabitacion.equals(ESTANDAR))
-					HabitacionEstandar.removeTarifa(mes, diaMes, dia);
-				else if (tipoHabitacion.equals(SUITE))
-					HabitacionSuite.removeTarifa(mes, diaMes, dia);
-				else
-					HabitacionSuiteDoble.removeTarifa(mes, diaMes, dia);
-			}
-		}
-		
-	}
-
-
-	public String revisarTarifas() 
-	{
-		String textoFinal = "";
-		
-		ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifasEstandar = HabitacionEstandar.getTarifas();
-		ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifasSuite = HabitacionSuite.getTarifas();
-		ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> tarifasSuiteDoble = HabitacionSuiteDoble.getTarifas();
-		
-		for (int mes=0; mes<12; mes++)
-		{
-			ArrayList<ArrayList<ArrayList<Integer>>> diasMes = tarifasEstandar.get(mes);
+			ArrayList<Habitacion> listaHabitaciones = new ArrayList<Habitacion>();
+			for (Entry<String, Habitacion> entry : mapaHabitaciones.entrySet())
+				listaHabitaciones.add(entry.getValue());
 			
-			for (int diaMes=0; diaMes<diasMes.size(); diaMes++)
-			{
-				ArrayList<ArrayList<Integer>> diasSemana = diasMes.get(diaMes);
-				ArrayList<String> diasSemanaSinTarifa = new ArrayList<String>();
-				for (int diaSemana=0; diaSemana<diasSemana.size(); diaSemana++)
-				{
-					ArrayList<Integer> listaDia = diasSemana.get(diaSemana);
-					if (listaDia.isEmpty())
-					{
-						diasSemanaSinTarifa.add(mapaDiasSemana.get(diaSemana));
-					}
-				}
-				if (diasSemanaSinTarifa != null)
-				{
-					textoFinal += addFechaSinTarifa(mes, diaMes, diasSemanaSinTarifa);
-				}
-			}
-		}
-		
-		for (int mes=0; mes<12; mes++)
-		{
-			ArrayList<ArrayList<ArrayList<Integer>>> diasMes = tarifasSuite.get(mes);
+			Collections.sort(listaHabitaciones, new ComparadorHabitaciones());
 			
-			for (int diaMes=0; diaMes<diasMes.size(); diaMes++)
-			{
-				ArrayList<ArrayList<Integer>> diasSemana = diasMes.get(diaMes);
-				ArrayList<String> diasSemanaSinTarifa = new ArrayList<String>();
-				for (int diaSemana=0; diaSemana<diasSemana.size(); diaSemana++)
-				{
-					ArrayList<Integer> listaDia = diasSemana.get(diaSemana);
-					if (listaDia.isEmpty())
-					{
-						diasSemanaSinTarifa.add(mapaDiasSemana.get(diaSemana));
-					}
-				}
-				if (diasSemanaSinTarifa != null)
-				{
-					textoFinal += addFechaSinTarifa(mes, diaMes, diasSemanaSinTarifa);
-				}
-			}
+			for (Habitacion hab : listaHabitaciones)
+				catalogo += "\n" + hab.toString();
 		}
-		
-		for (int mes=0; mes<12; mes++)
-		{
-			ArrayList<ArrayList<ArrayList<Integer>>> diasMes = tarifasSuiteDoble.get(mes);
-			
-			for (int diaMes=0; diaMes<diasMes.size(); diaMes++)
-			{
-				ArrayList<ArrayList<Integer>> diasSemana = diasMes.get(diaMes);
-				ArrayList<String> diasSemanaSinTarifa = new ArrayList<String>();
-				for (int diaSemana=0; diaSemana<diasSemana.size(); diaSemana++)
-				{
-					ArrayList<Integer> listaDia = diasSemana.get(diaSemana);
-					if (listaDia.isEmpty())
-					{
-						diasSemanaSinTarifa.add(mapaDiasSemana.get(diaSemana));
-					}
-				}
-				if (diasSemanaSinTarifa != null)
-				{
-					textoFinal += addFechaSinTarifa(mes, diaMes, diasSemanaSinTarifa);
-				}
-			}
-		}
-		
-		return textoFinal;
+
+		return catalogo;
 	}
 
-
-	private String addFechaSinTarifa(int mes, int diaMes, ArrayList<String> diasSemana) 
+	public ArrayList<Habitacion> getHabitacionesDisponibles(LocalDate initialDate, int numeroDeNoches)
 	{
-		return "Mes: " + (mes+1) + " | Dia: " + (diaMes+1) + " | Dias de la semana: " + diasSemana + "\n";
-	}
-
-
-	public LinkedHashMap<Integer, Habitacion> getHabitacionesDesocupadas(int numeroDeNoches, LocalDate fechaInicial)
-	{
-		LocalDate fechaFinal = fechaInicial.plusDays(numeroDeNoches);
-		ArrayList<Habitacion> listaHabitacionesDesocupadas = new ArrayList<Habitacion>();
+		ArrayList<Habitacion> habitacionesDisponibles = new ArrayList<Habitacion>();
+		LocalDate finalDate = initialDate.plusDays(numeroDeNoches);
 		
-		if (mapaHabitacionesEstandar != null)
+		if (mapaHabitaciones != null)
 		{
-			for (Entry<String, HabitacionEstandar> entradaHabitacion : mapaHabitacionesEstandar.entrySet())
+			for (Entry<String, Habitacion> entryHabitacion : mapaHabitaciones.entrySet())
 			{
-				Habitacion habitacion = (Habitacion) entradaHabitacion.getValue();
+				Habitacion habitacion = entryHabitacion.getValue();
 				HashMap<String, Reserva> reservas = habitacion.getReservas();
+				
 				if (reservas != null)
 				{
-					boolean desocupada = true;
-					for (Entry<String, Reserva> entradaReserva : reservas.entrySet())
+					boolean disponible = true;
+					
+					for (Entry<String, Reserva> entryReserva : reservas.entrySet())
 					{
-						Reserva reserva = entradaReserva.getValue();
-						LocalDate fechaI = reserva.getFechaInicial();
-						LocalDate fechaF = reserva.getFechaFinal();
+						Reserva reserva = entryReserva.getValue();
+						LocalDate initialDateReserva = reserva.getFechaInicial();
+						LocalDate finalDateReserva = reserva.getFechaFinal();
 						
-						if (fechasDentroDeRango(fechaI, fechaF, fechaInicial, fechaFinal))
+						if(fechasDentroDeRango(initialDateReserva, finalDateReserva, initialDate, finalDate))
 						{
-							desocupada = false;
+							disponible = false;
 							break;
 						}
 					}
-					if (desocupada)
+					if (disponible)
 					{
-						listaHabitacionesDesocupadas.add(habitacion);
+						habitacionesDisponibles.add(habitacion);
 					}
 				}
 				else
-					listaHabitacionesDesocupadas.add(habitacion);
-			}
-		}
-		if (mapaHabitacionesSuite != null)
-		{
-			for (Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet())
-			{
-				Habitacion habitacion = (Habitacion) entrada.getValue();
-				HashMap<String, Reserva> reservas = habitacion.getReservas();
-				if (reservas != null)
 				{
-					boolean desocupada = true;
-					for (Entry<String, Reserva> entradaReserva : reservas.entrySet())
-					{
-						Reserva reserva = entradaReserva.getValue();
-						LocalDate fechaI = reserva.getFechaInicial();
-						LocalDate fechaF = reserva.getFechaFinal();
-						
-						if (fechasDentroDeRango(fechaI, fechaF, fechaInicial, fechaFinal))
-						{
-							desocupada = false;
-							break;
-						}
-					}
-					if (desocupada)
-					{
-						listaHabitacionesDesocupadas.add(habitacion);
-					}
+					habitacionesDisponibles.add(habitacion);
 				}
-				else
-					listaHabitacionesDesocupadas.add(habitacion);
-			}
-		}
-		if (mapaHabitacionesSuiteDoble != null)
-		{
-			for (Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet())
-			{
-				Habitacion habitacion = (Habitacion) entrada.getValue();
-				HashMap<String, Reserva> reservas = habitacion.getReservas();
-				if (reservas != null)
-				{
-					boolean desocupada = true;
-					for (Entry<String, Reserva> entradaReserva : reservas.entrySet())
-					{
-						Reserva reserva = entradaReserva.getValue();
-						LocalDate fechaI = reserva.getFechaInicial();
-						LocalDate fechaF = reserva.getFechaFinal();
-						
-						if (fechasDentroDeRango(fechaI, fechaF, fechaInicial, fechaFinal))
-						{
-							desocupada = false;
-							break;
-						}
-					}
-					if (desocupada)
-					{
-						listaHabitacionesDesocupadas.add(habitacion);
-					}
-				}
-				else
-					listaHabitacionesDesocupadas.add(habitacion);
 			}
 		}
 		
-		LinkedHashMap<Integer, Habitacion> mapaHabitacionesDesocupadas = new LinkedHashMap<Integer, Habitacion>();
-		if (listaHabitacionesDesocupadas != null)
-		{
-			Collections.sort(listaHabitacionesDesocupadas, new ComparadorHabitaciones());
-			int i = 1;
-			for (Habitacion hab : listaHabitacionesDesocupadas)
-			{
-				mapaHabitacionesDesocupadas.put(i, hab);
-				i++;
-			}
-		}
+		Collections.sort(habitacionesDisponibles, new ComparadorHabitaciones());
 		
-		return mapaHabitacionesDesocupadas;
+		return habitacionesDisponibles;
 	}
 	
 	private boolean fechasDentroDeRango(LocalDate fechaInicialRango, LocalDate fechaFinalRango, LocalDate fechaInicial, LocalDate fechaFinal)
 	{
 		boolean fechaFinalDentroDeReserva = (fechaFinal.isBefore(fechaFinalRango) && fechaFinal.isAfter(fechaInicialRango)) || fechaFinal.isEqual(fechaInicialRango) || fechaFinal.isEqual(fechaFinalRango);
 		boolean fechaInicialDentroDeReserva = (fechaInicial.isBefore(fechaFinalRango) && fechaInicial.isAfter(fechaInicialRango)) || fechaInicial.isEqual(fechaInicialRango) || fechaInicial.isEqual(fechaFinalRango);
-		boolean fechaReservaDentroDeRango = fechaFinal.isAfter(fechaFinalRango) && fechaInicial.isBefore(fechaInicialRango);
+		boolean rangoDentroDeFechas = fechaFinal.isAfter(fechaFinalRango) && fechaInicial.isBefore(fechaInicialRango);
 		
-		return fechaFinalDentroDeReserva || fechaInicialDentroDeReserva || fechaReservaDentroDeRango;
+		return fechaFinalDentroDeReserva || fechaInicialDentroDeReserva || rangoDentroDeFechas;
 	}
-
-
-	public Reserva getReserva(String idHuesped)
-	{		
-		return mapaReservas.get(idHuesped);
-	}
-
-
-	public HashMap<String, Reserva> getMapaReservas()
-	{
-		return mapaReservas;
-	}
-
-	
-
-	public void setMapaReservas(HashMap<String, Reserva> mapaReservas)
-	{
-		this.mapaReservas = mapaReservas;
-	}
-
-
-	public void addHuesped(boolean isAdulto, String tipoHabitacion, ArrayList<Habitacion> habs, String nombre,
-			String apellidos, String idHuesped)
-	{
-		if (isAdulto)
-		{
-			if (tipoHabitacion.equals(ESTANDAR))
-			{
-				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(habs.get(0));
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
-				habitacion.addHuespedAdulto(huesped);
-				mapaHuespedes.put(huesped.getId(), huesped);
-			}
-			else if (tipoHabitacion.equals(SUITE))
-			{
-				HabitacionSuite habitacion = mapaHabitacionesSuite.get(habs.get(0));
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
-				habitacion.addHuespedAdulto(huesped);
-			}
-			else
-			{
-				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(habs.get(0));
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
-				habitacion.addHuespedAdulto(huesped);
-				mapaHuespedes.put(huesped.getId(), huesped);
-			}
-		}
-		else
-		{
-			if (tipoHabitacion.equals(ESTANDAR))
-			{
-				HabitacionEstandar habitacion = mapaHabitacionesEstandar.get(habs.get(0));
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
-				habitacion.addHuespedNinio(huesped);
-				mapaHuespedes.put(huesped.getId(), huesped);
-			}
-			else if (tipoHabitacion.equals(SUITE))
-			{
-				HabitacionSuite habitacion = mapaHabitacionesSuite.get(habs.get(0));
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
-				habitacion.addHuespedNinio(huesped);
-			}
-			else
-			{
-				HabitacionSuiteDoble habitacion = mapaHabitacionesSuiteDoble.get(habs.get(0));
-				Huesped huesped = new Huesped(idHuesped, nombre, apellidos, habs);
-				habitacion.addHuespedNinio(huesped);
-			}
-		}
-		
-	}
-	
-	public Huesped addHuespedResponsable(String nombre, String apellidos, String idHuesped, String correo, String celular, ArrayList<Habitacion> habs)
-	{
-		Huesped huesped = new Huesped(nombre, apellidos, idHuesped, correo, celular, habs);
-		mapaHuespedes.put(huesped.getId(), huesped);
-		return huesped;
-	}
-
-	public Huesped addHuespedResponsable(String nombre, String apellidos, String idHuesped, String correo, String celular)
-	{
-		Huesped huesped = new Huesped(nombre, apellidos, idHuesped, correo, celular);
-		mapaHuespedes.put(huesped.getId(), huesped);
-		return huesped;
-	}
-
-	public void addReserva(Huesped huesped, int numHuespedes, int noches, LocalDate fechaInicial, ArrayList<Habitacion> habs)
-	{
-		mapaReservas.put(huesped.getId(), new Reserva(huesped, numHuespedes, noches, fechaInicial, habs));
-		
-	}
-	
-	public void cancelarReserva(Huesped huesped)
-	{
-		mapaReservas.remove(huesped.getId());	
-	}
-	
-	public String realizarTextoFactura(Huesped huesped)
-	{
-		String textoFactura = "";
-		return textoFactura;	
-	}
-
-
-	public Habitacion getHabitacion(String tipo, String id)
-	{
-		// TODO Auto-generated method stub
-		if (tipo.equals(ESTANDAR))
-		{
-			return mapaHabitacionesEstandar.get(id);
-		}
-		else if (tipo.equals(SUITE))
-		{
-			return mapaHabitacionesSuite.get(id);
-		}
-		else
-		{
-			return mapaHabitacionesSuiteDoble.get(id);
-		}
-		
-	}
-
-
-	public HashMap<String, Huesped> getMapaHuespedes()
-	{
-		return mapaHuespedes;
-	}
-
-
-	public void setMapaHuespedes(HashMap<String, Huesped> mapaHuespedes)
-	{
-		this.mapaHuespedes = mapaHuespedes;
-	}
-
-
-	public Huesped getHuesped(String idHuesped)
-	{
-		return mapaHuespedes.get(idHuesped);
-	}
-	
-	
-
 }

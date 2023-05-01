@@ -1,16 +1,14 @@
 package consola;
 
-import modelo.CoordinadorPMS;
+import controlador.Controlador;
 
 public class InterfazHabitaciones extends Interfaz
 {
-	private  CoordinadorPMS coordinadorPMS;
-	private String[] tiposHabitacion;
+	private Controlador controlador;
 	
-	public InterfazHabitaciones(CoordinadorPMS coordinadorPMS)
+	public InterfazHabitaciones(Controlador controlador)
 	{
-		 this.coordinadorPMS = coordinadorPMS;
-		 this.tiposHabitacion = new String[]{"estandar", "suite", "suitedoble"};
+		this.controlador = controlador;
 	}
 	
 	@Override
@@ -29,6 +27,10 @@ public class InterfazHabitaciones extends Interfaz
 				if (seleccion == 1)
 					ejecutarCrearHabitacion();
 				else if (seleccion == 2)
+					ejecutarEliminarHabitacion();
+				else if (seleccion == 3)
+					ejecutarMostrarCatalogoHabitaciones();
+				else if (seleccion == 4)
 				{
 					System.out.println();
 					continuar = false;
@@ -43,6 +45,7 @@ public class InterfazHabitaciones extends Interfaz
 				System.out.println("Debe seleccionar uno de los números de las opciones.");
 			}
 		}
+
 	}
 
 	private void ejecutarCrearHabitacion()
@@ -76,9 +79,9 @@ public class InterfazHabitaciones extends Interfaz
 			else
 				vista = false;
 			
-			if (tipoHabitacion.equals(tiposHabitacion[0]) || tipoHabitacion.equals(tiposHabitacion[1]) || tipoHabitacion.equals(tiposHabitacion[2]))
+			if (Controlador.getTiposHabitacion().contains(tipoHabitacion))
 			{	
-				String roomInfo = coordinadorPMS.addHabitacion(tipoHabitacion, cocina, balcon, vista, torre, piso, id);
+				String roomInfo = controlador.agregarHabitacion(tipoHabitacion, cocina, balcon, vista, torre, piso, id);
 				System.out.println(roomInfo);
 			}
 			
@@ -88,8 +91,18 @@ public class InterfazHabitaciones extends Interfaz
 		catch (NumberFormatException e)
 		{
 			System.out.println("El piso de la habitación debe ser un valor numerico.");
-		}
-		
+		}		
+	}
+	
+	public void ejecutarEliminarHabitacion()
+	{
+		String id = input("ID de la habitación a eliminar");
+		System.out.println(controlador.eliminarHabitacion(id));
+	}
+	
+	public void ejecutarMostrarCatalogoHabitaciones()
+	{
+		System.out.println(controlador.mostrarCatalogoHabitaciones());
 	}
 
 	@Override
@@ -97,7 +110,9 @@ public class InterfazHabitaciones extends Interfaz
 	{
 		System.out.println("Opciones\n");
 		System.out.println("1. Crear nueva habitación");
-		System.out.println("2. Salir");
+		System.out.println("2. Eliminar habitación");
+		System.out.println("3. Catálogo de habitaciones");
+		System.out.println("4. Salir");
 	}
-	
+
 }

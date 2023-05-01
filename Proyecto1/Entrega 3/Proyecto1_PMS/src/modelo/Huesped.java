@@ -1,98 +1,105 @@
 package modelo;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Huesped {
-	
+public class Huesped
+{
+	private String nombre;
+	private String apellido;
 	private String id;
-	private String nombres;
-	private String apellidos;
 	private String correo;
-	private String numeroCelular;
-	private ArrayList<Habitacion> habs;
+	private String celular;
+	private HashMap<String, Reserva> reservas;
+	private Habitacion habitacionActual;
 	
 	public Huesped()
 	{
 		
 	}
-	
-	public Huesped(String nombres, String apellidos, String id, String correo, String numeroCelular,
-			ArrayList<Habitacion> habs)
+
+	public Huesped(String nombre, String apellido, String id, String correo, String celular)
 	{
-		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
 		this.id = id;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
 		this.correo = correo;
-		this.numeroCelular = numeroCelular;
-		this.habs = habs;
-	}
-	
-	public Huesped(String nombres, String apellidos, String id, String correo, String numeroCelular)
-	{
-		super();
-		this.id = id;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.correo = correo;
-		this.numeroCelular = numeroCelular;
+		this.celular = celular;
+		this.reservas = new HashMap<String, Reserva>();
 	}
 
-	public Huesped(String nombres, String apellidos, String idHuesped, ArrayList<Habitacion> habs)
+	public String getNombre()
 	{
-		this.id = idHuesped;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.habs = habs;
-		
+		return nombre;
 	}
-	
+
+	public void setNombre(String nombre)
+	{
+		this.nombre = nombre;
+	}
+
+	public String getApellido()
+	{
+		return apellido;
+	}
+
+	public void setApellido(String apellido)
+	{
+		this.apellido = apellido;
+	}
+
 	public String getId()
 	{
 		return id;
 	}
+
 	public void setId(String id)
 	{
 		this.id = id;
 	}
-	public String getNombres()
-	{
-		return nombres;
-	}
-	public void setNombres(String nombres)
-	{
-		this.nombres = nombres;
-	}
-	public String getApellidos()
-	{
-		return apellidos;
-	}
-	public void setApellidos(String apellidos)
-	{
-		this.apellidos = apellidos;
-	}
+
 	public String getCorreo()
 	{
 		return correo;
 	}
+
 	public void setCorreo(String correo)
 	{
 		this.correo = correo;
 	}
-	public String getNumeroCelular()
+
+	public String getCelular()
 	{
-		return numeroCelular;
+		return celular;
 	}
-	public void setNumeroCelular(String numeroCelular)
+
+	public void setCelular(String celular)
 	{
-		this.numeroCelular = numeroCelular;
+		this.celular = celular;
 	}
-	public ArrayList<Habitacion> getHabitaciones()
+
+	public HashMap<String, Reserva> getReservas()
 	{
-		return habs;
+		return reservas;
 	}
-	public void setHabitaciones(ArrayList<Habitacion> habs)
+
+	public void setReservas(HashMap<String, Reserva> reservas)
 	{
-		this.habs = habs;
+		this.reservas = reservas;
+	}
+
+	public Habitacion getHabitacionActual()
+	{
+		return habitacionActual;
+	}
+
+	public void setHabitacionActual(Habitacion habitacionActual)
+	{
+		this.habitacionActual = habitacionActual;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return apellido + " " + nombre + ", ID: " + id + "\n\t" + correo + "\n\t" + celular + "\n\tHabitación: " + habitacionActual.getId();
 	}
 }

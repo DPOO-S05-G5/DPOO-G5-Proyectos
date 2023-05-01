@@ -1,6 +1,5 @@
 package modelo;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,44 +11,41 @@ public abstract class Habitacion
 	private boolean tieneVista;
 	private String torre;
 	private int piso;
-	private String ID;
+	private String id;
 	private ArrayList<Cama> camas;
 	private int capacidadAdultos;
-	private int capacidadNinos;
-	private Huesped huespedReserva;
-	private HashMap<String, Huesped> huespedesAdultos;
-	private HashMap<String, Huesped> huespedesNinios;
+	private int capacidadNinios;
+	// private HashMap<String, Huesped> huespedes;
+	// private Reserva reservaActual;
 	private HashMap<String, Reserva> reservas;
-	
 	
 	public Habitacion()
 	{
 		
 	}
 	
-	public Habitacion(String tipo, boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String id)
+	
+	public Habitacion(String tipo, boolean cocina, boolean balcon, boolean vista, String torre, int piso, String id)
 	{
-		super();
 		this.tipo = tipo;
-		this.tieneCocina = tieneCocina;
-		this.tieneBalcon = tieneBalcon;
-		this.tieneVista = tieneVista;
+		this.tieneCocina = cocina;
+		this.tieneBalcon = balcon;
+		this.tieneVista = vista;
 		this.torre = torre;
 		this.piso = piso;
-		this.ID = id;
-		this.huespedesAdultos = new HashMap<String, Huesped>();
-		this.huespedesNinios = new HashMap<String, Huesped>();
+		this.id = id;
 		this.reservas = new HashMap<String, Reserva>();
 	}
 
-	public ArrayList<Cama> getCamas()
+
+	public String getTipo()
 	{
-		return camas;
+		return tipo;
 	}
 
-	public void setCamas(ArrayList<Cama> camas)
+	public void setTipo(String tipo)
 	{
-		this.camas = camas;
+		this.tipo = tipo;
 	}
 
 	public boolean isTieneCocina()
@@ -102,14 +98,24 @@ public abstract class Habitacion
 		this.piso = piso;
 	}
 
-	public String getID()
+	public String getId()
 	{
-		return ID;
+		return id;
 	}
 
-	public void setID(String id)
+	public void setId(String id)
 	{
-		this.ID = id;
+		this.id = id;
+	}
+
+	public ArrayList<Cama> getCamas()
+	{
+		return camas;
+	}
+
+	public void setCamas(ArrayList<Cama> camas)
+	{
+		this.camas = camas;
 	}
 
 	public int getCapacidadAdultos()
@@ -122,47 +128,14 @@ public abstract class Habitacion
 		this.capacidadAdultos = capacidadAdultos;
 	}
 
-	public int getCapacidadNinos()
+	public int getCapacidadNinios()
 	{
-		return capacidadNinos;
+		return capacidadNinios;
 	}
 
-	public void setCapacidadNinos(int capacidadNinos)
+	public void setCapacidadNinios(int capacidadNinios)
 	{
-		this.capacidadNinos = capacidadNinos;
-	}
-	
-	public String getUbicacion()
-	{
-		return "Habitacion " + ID +" -> Torre: " + torre + ", Piso: " + piso;
-	}
-
-	@Override
-	public String toString() 
-	{
-		return "Habitacion [tieneCocina=" + tieneCocina + ", tieneBalcon=" + tieneBalcon + ", tieneVista=" + tieneVista
-				+ ", torre=" + torre + ", piso=" + piso + ", id=" + ID + ", camas=" + camas + ", capacidadAdultos="
-				+ capacidadAdultos + ", capacidadNinos=" + capacidadNinos + "]";
-	}
-
-	public String getTipo()
-	{
-		return tipo;
-	}
-
-	public void setTipo(String tipo)
-	{
-		this.tipo = tipo;
-	}
-
-	public Huesped getHuespedReserva()
-	{
-		return huespedReserva;
-	}
-
-	public void setHuespedReserva(Huesped huespedReserva)
-	{
-		this.huespedReserva = huespedReserva;
+		this.capacidadNinios = capacidadNinios;
 	}
 
 	public HashMap<String, Reserva> getReservas()
@@ -170,38 +143,51 @@ public abstract class Habitacion
 		return reservas;
 	}
 
+
 	public void setReservas(HashMap<String, Reserva> reservas)
 	{
 		this.reservas = reservas;
 	}
 
-	public HashMap<String, Huesped> getHuespedesAdultos()
+	public void addReserva(Reserva reserva)
 	{
-		return huespedesAdultos;
-	}
-
-	public void setHuespedesAdultos(HashMap<String, Huesped> huespedesAdultos)
-	{
-		this.huespedesAdultos = huespedesAdultos;
+		this.reservas.put(reserva.getId(), reserva);
 	}
 	
-	public void addHuespedAdulto(Huesped huesped)
+	@Override
+	public String toString()
 	{
-		huespedesAdultos.put(huesped.getId(), huesped);
-	}
-
-	public HashMap<String, Huesped> getHuespedesNinios()
-	{
-		return huespedesNinios;
-	}
-
-	public void setHuespedesNinios(HashMap<String, Huesped> huespedesNinios)
-	{
-		this.huespedesNinios = huespedesNinios;
-	}
+		String info = "Habitacion " + tipo + " " + id + ":";
+		
+		info += "\n\tTorre: " + torre;
+		info += "\n\tPiso: " + piso;
+		
+		info += "\n\tCamas:";
+		for (Cama cama : camas)
+			info += "\n\t\t" + cama.toString();
+		
+		info += "\n\tCapacidad adultos: " + capacidadAdultos;
+		info += "\n\tCapacidad Niños: " + capacidadNinios;
+		
+		info += "\n\tTiene cocina? ";
+		if (tieneCocina)
+			info += "Si";
+		else
+			info += "No"; 
+		
+		info += "\n\tTiene balcón? ";
+		if (tieneBalcon)
+			info += "Si";
+		else
+			info += "No"; 
+		
+		info += "\n\tTiene vista? ";
+		if (tieneVista)
+			info += "Si";
+		else
+			info += "No"; 
+		
+		return info;
+	}	
 	
-	public void addHuespedNinio(Huesped huesped)
-	{
-		huespedesNinios.put(huesped.getId(), huesped);
-	}
 }

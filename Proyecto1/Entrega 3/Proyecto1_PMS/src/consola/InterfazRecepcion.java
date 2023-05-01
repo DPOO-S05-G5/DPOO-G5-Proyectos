@@ -1,22 +1,16 @@
 package consola;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map.Entry;
 
-import modelo.CoordinadorPMS;
-import modelo.Habitacion;
-import modelo.Huesped;
-import modelo.Reserva;
+import controlador.Controlador;
 
 public class InterfazRecepcion extends Interfaz
 {
-	private CoordinadorPMS coordinadorPMS;
+	private Controlador controlador;
 	
-	public InterfazRecepcion(CoordinadorPMS coordinadorPMS)
+	public InterfazRecepcion(Controlador controlador)
 	{
-		this.coordinadorPMS = coordinadorPMS;
+		this.controlador = controlador;
 	}
 	
 	@Override
@@ -33,18 +27,20 @@ public class InterfazRecepcion extends Interfaz
 				int seleccion = Integer.parseInt(input("Selecione una opción"));
 				
 				if (seleccion == 1)
-					ejecutarInfoHuesped();
+					ejecutarCheckIn();
 				else if (seleccion == 2)
-					ejecutarInfoHabitacion();
+					ejecutarCheckOut();
 				else if (seleccion == 3)
-					ejecutarRealizarReserva();
+					ejecutarGetInfoHuesped();
 				else if (seleccion == 4)
-					ejecutarCancelarReserva();
+					ejecutarGetInfoHabitacion();
 				else if (seleccion == 5)
-					ejecutarRealizarCheckIn();
+					ejecutarGetHabitacionesDisponibles();
 				else if (seleccion == 6)
-					ejecutarRealizarCheckOut();
+					ejecutarReservar();
 				else if (seleccion == 7)
+					ejecutarCancelarReserva();
+				else if (seleccion == 8)
 				{
 					System.out.println();
 					continuar = false;
@@ -61,7 +57,7 @@ public class InterfazRecepcion extends Interfaz
 		}
 	}
 
-	private void ejecutarRealizarCheckIn()
+	private void ejecutarCheckIn()
 	{
 		String esConReserva = input("El huesped ya tiene reserva? (si / no)").toLowerCase();
 		
@@ -74,9 +70,10 @@ public class InterfazRecepcion extends Interfaz
 			ejecutarCheckInSinReserva();
 		}
 		else
-			System.out.println("Opcion no valida.");
+			System.out.println("Opción no válida.");
+		
 	}
-	
+
 	private void ejecutarCheckInSinReserva()
 	{
 		LocalDate fechaHoy = LocalDate.now();
@@ -84,209 +81,107 @@ public class InterfazRecepcion extends Interfaz
 		{
 			String nombreHuespedResponsable = input("Nombre del huesped responsable");
 			String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
-			String documentoHuesped = input("Documento de ID");
-			String correoHuesped = input("Correo electronico");
-			String numeroCelular = input("Numero de celular");
+			String documentoHuespedResponsable = input("Documento de ID");
+			String correoHuespedResponsable = input("Correo electronico");
+			String celularHuespedResponsable = input("Número de celular");
 			int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
-			int totalHuespedes = Integer.parseInt(input("Numero de huespedes"));
+			int totalHuespedes = Integer.parseInt(input("Número de huéspedes"));
 			int huespedesNoAsignados = totalHuespedes;
-			LinkedHashMap<Integer, Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
 			
-			if (habitacionesDisponibles != null)
+			String habitacionesDisponibles = controlador.getInfoHabitacionesDisponibles(fechaHoy, numeroDeNoches);
+			System.out.println(habitacionesDisponibles);
+			if (habitacionesDisponibles.startsWith("1"))
 			{
-				String strHabitacionesDisponibles = "0. Cancelar\n";
-				for (Entry<Integer, Habitacion> entry : habitacionesDisponibles.entrySet())
+				while (huespedesNoAsignados > 0)
 				{
-					Habitacion hab = entry.getValue();
-					strHabitacionesDisponibles += entry.getKey() + ": " + hab.toString() + "\n";
-				}
-				while(huespedesNoAsignados > 0)
-				{
-					System.out.println(strHabitacionesDisponibles);	
-					System.out.println("Huespedes sin habitacion: " + huespedesNoAsignados);
-					int seleccion = Integer.parseInt(input("Seleccione una habitacion"));
-					if (seleccion == 0)
-						break;
-					
-					Habitacion habitacion = habitacionesDisponibles.get(seleccion);
-					if (habitacion != null)
+					System.out.println(habitacionesDisponibles);
+					String idHabitacion = ("Escriba el id de la habitación seleccionada");
+					boolean existeHabitacion = controlador.existeHabitacion(idHabitacion);
+					if (existeHabitacion)
 					{
-						int adultosAsignadosHab = 0;
-						int niniosAsignadosHab = 0;
-						
-						if (huespedesNoAsignados == totalHuespedes)
+						boolean continuar = true;
+						while (continuar && controlador.habitacionNoLlena(idHabitacion) && huespedesNoAsignados > 0)
 						{
-							Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
-							adultosAsignadosHab++;
-							huespedesNoAsignados--;
-						}
-						
-						while (true)
-						{
-							
-							System.out.println("1. Agregar ocupante adulto");
-							System.out.println("2. Agregar ocupante niño");
-							System.out.println("3. Confirmar configuracion de habitacion");
-							int seleccion2 = Integer.parseInt(input("Seleccionar una opcion"));
-							if (seleccion2 == 1)
-							{
-								if((adultosAsignadosHab < habitacion.getCapacidadAdultos()) && (huespedesNoAsignados > 0))
-								{	
-									Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
-									huespedesNoAsignados--;
-									adultosAsignadosHab++;
-								}
-							}
-							else if (seleccion2 == 2)
-							{
-								if((niniosAsignadosHab < habitacion.getCapacidadNinos()) && (huespedesNoAsignados > 0))
-								{
-									Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
-
-									huespedesNoAsignados--;
-									niniosAsignadosHab++;
-								}
-							}
+							System.out.println("1. Agregar huéspued a la habitación");
+							System.out.println("2. Finalizar configuración de la habitación");
+							int seleccion = Integer.parseInt(input("Elija una opción"));
+							if (seleccion == 1)
+								ejecutarAgregarHuespedAHabitacion();
+							else if (seleccion == 2)
+								continuar = false;
 							else
-								break;
+								
+								
 						}
 					}
 					else
-						System.out.println("Opcion no valida.");
+						System.out.println("ID incorrecto.");
 				}
 			}
-			else
-				System.out.println("No hay habitaciones disponbles entre " + fechaHoy + " y " + fechaHoy.plusDays(numeroDeNoches-1));
+				
+				
 		}
-		catch (NumberFormatException e1)
+		catch (NumberFormatException e)
 		{
-			System.out.println("El numero de personas debe ser un valor numerico positivo");
+			System.out.println("Debe de usar valores numéricos enteros positivos y el número debe estar dentro de las opciones.");
 		}
-	}
-
-
-	private void agregarHuesped(boolean isAdulto, String tipo, ArrayList<Habitacion> id)
-	{
-		String nombre = input("Nombre del huesped");
-		String apellido = input("Apellidos del huesped");
-		String idHuesped = input("Documento de identidad");
-		
-		coordinadorPMS.addHuesped(isAdulto, tipo, id, nombre, apellido, idHuesped);
 		
 	}
 
 	private void ejecutarCheckInConReserva()
 	{
-		String idHuesped =  input("Documento de ID");
-		Reserva reserva = coordinadorPMS.getReserva(idHuesped);
-		if (reserva == null)
-		{
-			System.out.println("Reserva no encontrada para documeno de ID: " + idHuesped);
-			return;
-		}
-		
-		System.out.println(reserva.toString());
+		// TODO Auto-generated method stub
 		
 	}
 
-	private void ejecutarRealizarCheckOut()
+	private void ejecutarCheckOut()
 	{
-		String idHuesped =  input("Documento de ID");
-		Huesped huesped = coordinadorPMS.getHuesped(idHuesped);
-		Reserva reserva = coordinadorPMS.getReserva(idHuesped);
+		// TODO Auto-generated method stub
 		
-		String factura = coordinadorPMS.realizarTextoFactura(huesped);
-		System.out.println(factura);
+	}
+
+	private void ejecutarGetInfoHuesped()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarGetInfoHabitacion()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarGetHabitacionesDisponibles()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarReservar()
+	{
+		// TODO Auto-generated method stub
 		
 	}
 
 	private void ejecutarCancelarReserva()
 	{
-		String documentoHuesped = input("Documento de ID del huésped responsable");
-		Huesped huesped = coordinadorPMS.getHuesped(documentoHuesped);
-		LocalDate fechaHoy = LocalDate.now();
-		Reserva reserva = coordinadorPMS.getReserva(documentoHuesped);
+		// TODO Auto-generated method stub
 		
-		if (fechaHoy.plusDays(2).isEqual(reserva.getFechaFinal()))
-		{
-			coordinadorPMS.cancelarReserva(huesped);
-		}
-		else
-		{
-			System.out.println("La reserva está fuera del tiempo permitido para ser cancelada.");
-		}	
-		
-	}
-
-	private void ejecutarRealizarReserva()
-	{
-		LocalDate fechaHoy = LocalDate.now();
-		try
-		{
-		
-			String nombreHuespedResponsable = input("Nombre del huesped responsable");
-			String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
-			String documentoHuesped = input("Documento de ID");
-			String correoHuesped = input("Correo electronico");
-			String numeroCelular = input("Numero de celular");
-			int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
-			int totalHuespedes = Integer.parseInt(input("Numero de huespedes"));
-			LinkedHashMap<Integer, Habitacion> habitacionesDisponibles = coordinadorPMS.getHabitacionesDesocupadas(numeroDeNoches-1, fechaHoy);
-			String strHabitacionesDisponibles = "0. Cancelar\n";
-			for (Entry<Integer, Habitacion> entry : habitacionesDisponibles.entrySet())
-			{
-				Habitacion hab = entry.getValue();
-				strHabitacionesDisponibles += entry.getKey() + ": " + hab.toString() + "\n";
-				
-			}
-			System.out.println(strHabitacionesDisponibles);
-			String[] habitacionesSeleccionadas = input("Seleccione las habitaciones deseadas (formato: 1-2-3...)").split("-");
-			ArrayList<Habitacion> listaSeleccionadas = new ArrayList<Habitacion>();
-			for (String seleccion : habitacionesSeleccionadas)
-			{
-				Habitacion hab = habitacionesDisponibles.get(seleccion);
-				listaSeleccionadas.add(hab);
-			}
-			
-			Huesped huesped = coordinadorPMS.addHuespedResponsable(nombreHuespedResponsable, apellidosHuespedResponsable, documentoHuesped, correoHuesped, numeroCelular);
-			coordinadorPMS.addReserva(huesped, totalHuespedes, numeroDeNoches-1, fechaHoy, listaSeleccionadas);
-			
-		}
-		catch (NumberFormatException e)
-		{
-			System.out.println("El numero de personas debe ser un valor numerico positivo");
-		}
-		
-	}
-
-	private void ejecutarInfoHabitacion()
-	{
-		String tipo = input("Tipo");
-		String id = input("ID de la habitacion");
-		Habitacion hab = coordinadorPMS.getHabitacion(tipo, id);
-		System.out.println(hab.toString());
-	}
-
-	private void ejecutarInfoHuesped()
-	{
-		String idHuesped = input("ID del huesped responsable");
-		Huesped huesped = coordinadorPMS.getHuesped(idHuesped);
-		if (huesped == null)
-			System.out.println("Huesped no encontrado");
-		else
-			System.out.println(huesped.toString());
 	}
 
 	@Override
 	protected void mostrarMenu()
 	{
 		System.out.println("Opciones\n");
-		System.out.println("1. Consultar información de un huésped");
-		System.out.println("2. Consultar información de una habitación");
-		System.out.println("3. Realizar una reserva");
-		System.out.println("4. Cancelar una reserva");
-		System.out.println("5. Realizar Check-In");
-		System.out.println("6. Realizar Check-Out");
-		System.out.println("7. Ir atrás (admin) / Cerrar sesión");
+		System.out.println("1. Realizar Check-In");
+		System.out.println("2. Realizar Check-Out");
+		System.out.println("3. Consultar información de un huésped");
+		System.out.println("4. Consultar información de una habitación");
+		System.out.println("5. Ver habitaciones disponibles");
+		System.out.println("6. Realizar una reserva");
+		System.out.println("7. Cancelar una reserva");;
+		System.out.println("8. Ir atrás (admin) / Cerrar sesión");
 	}
+
 }

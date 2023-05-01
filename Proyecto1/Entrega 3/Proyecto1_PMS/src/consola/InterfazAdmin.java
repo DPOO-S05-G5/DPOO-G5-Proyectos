@@ -1,23 +1,12 @@
 package consola;
 
-import modelo.CoordinadorPMS;
-
 public class InterfazAdmin extends Interfaz
 {
+	private InterfazPrincipal interfazPrincipal;
 	
-	private InterfazTarifas interfazTarifas;
-	private InterfazHabitaciones interfazHabitaciones;
-	private InterfazRecepcion interfazRecepcion;
-	private InterfazServicios interfazServicios;
-	private CoordinadorPMS coordinadorPMS;
-	
-	public InterfazAdmin(CoordinadorPMS coordinadorPMS)
+	public InterfazAdmin(InterfazPrincipal interfazPrincipal)
 	{
-		this.coordinadorPMS = coordinadorPMS;
-		this.interfazRecepcion = new InterfazRecepcion(coordinadorPMS);
-		this.interfazServicios = new InterfazServicios(coordinadorPMS);
-		this.interfazTarifas = new InterfazTarifas(coordinadorPMS);
-		this.interfazHabitaciones = new InterfazHabitaciones(coordinadorPMS);
+		this.interfazPrincipal = interfazPrincipal;
 	}
 	
 	@Override
@@ -25,7 +14,7 @@ public class InterfazAdmin extends Interfaz
 	{
 		System.out.println("\nPortal de administración\n");
 		
-		ejecutarRevisionDeTarifas365Dias();
+		System.out.println(ejecutarRevisionDeTarifas365Dias());
 		
 		boolean continuar = true;
 		while (continuar)
@@ -59,11 +48,30 @@ public class InterfazAdmin extends Interfaz
 			}
 		}
 	}
-
-	private void ejecutarRevisionDeTarifas365Dias()
+	
+	private String ejecutarRevisionDeTarifas365Dias()
 	{
-		String tarifas = coordinadorPMS.revisarTarifas();
-		System.out.println(tarifas);
+		return interfazPrincipal.ejecutarRevisionDeTarifas365Dias();
+	}
+
+	private void ejecutarInterfazTarifas()
+	{
+		interfazPrincipal.ejecutarInterfazTarifas();		
+	}
+
+	private void ejecutarInterfazHabitaciones()
+	{
+		interfazPrincipal.ejecutarInterfazHabitaciones();		
+	}
+
+	private void goToInterfazRecepcion()
+	{
+		interfazPrincipal.ejecutarInterfazRecepcion();
+	}
+
+	private void goToInterfazServicios()
+	{
+		interfazPrincipal.ejecutarInterfazServicios();
 	}
 
 	@Override
@@ -76,25 +84,4 @@ public class InterfazAdmin extends Interfaz
 		System.out.println("4. Menú servicios");
 		System.out.println("5. Cerrar sesión");
 	}
-	
-	private void ejecutarInterfazTarifas()
-	{
-		interfazTarifas.iniciarInterfaz();
-	}
-	
-	private void ejecutarInterfazHabitaciones()
-	{
-		interfazHabitaciones.iniciarInterfaz();
-	}
-	
-	private void goToInterfazRecepcion()
-	{
-		interfazRecepcion.iniciarInterfaz();
-	}
-	
-	private void goToInterfazServicios()
-	{
-		interfazServicios.iniciarInterfaz();
-	}
-
 }

@@ -2,9 +2,13 @@ package modelo;
 
 public class Cama
 {
+	private static final String SOFACAMA = "sofacama";
+	private static final String INFANTIL = "infantil";
+	private static final String SENCILLA = "sencilla";
+	private static final String DOBLE = "doble";
 	private String tipo;
 	private int capacidadAdultos;
-	private int capacidadNinos;
+	private int capacidadNinios;
 	
 	public Cama()
 	{
@@ -15,25 +19,25 @@ public class Cama
 	{
 		this.tipo = tipo;
 		
-		if (this.tipo == "doble")
+		if (this.tipo == DOBLE)
 		{
 			capacidadAdultos = 2;
-			capacidadNinos = 3;
+			capacidadNinios = 3;
 		}
-		else if (this.tipo == "sencilla")
+		else if (this.tipo == SENCILLA)
 		{
 			capacidadAdultos = 1;
-			capacidadNinos = 2;
+			capacidadNinios = 2;
 		}
-		else if (this.tipo == "nino")
+		else if (this.tipo == INFANTIL)
 		{
 			capacidadAdultos = 0;
-			capacidadNinos = 1;
+			capacidadNinios = 1;
 		}
-		else if (this.tipo == "sofacama")
+		else if (this.tipo == SOFACAMA)
 		{
 			capacidadAdultos = 1;
-			capacidadNinos = 1;
+			capacidadNinios = 1;
 		}	
 	}
 
@@ -57,20 +61,40 @@ public class Cama
 		this.capacidadAdultos = capacidadAdultos;
 	}
 
-	public int getCapacidadNinos()
+	public int getCapacidadNinios()
 	{
-		return capacidadNinos;
+		return capacidadNinios;
 	}
 
-	public void setCapacidadNinos(int capacidadNinos)
+	public void setCapacidadNinios(int capacidadNinios)
 	{
-		this.capacidadNinos = capacidadNinos;
+		this.capacidadNinios = capacidadNinios;
+	}
+	
+	public static String getSofacama()
+	{
+		return SOFACAMA;
+	}
+
+	public static String getInfantil()
+	{
+		return INFANTIL;
+	}
+
+	public static String getSencilla()
+	{
+		return SENCILLA;
+	}
+
+	public static String getDoble()
+	{
+		return DOBLE;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Cama [tipo=" + tipo + ", capacidadAdultos=" + capacidadAdultos + ", capacidadNinos=" + capacidadNinos
-				+ "]";
+		return tipo + ", " + capacidadAdultos + " adultos" + ", " + capacidadNinios + " niños";
 	}
+
 }

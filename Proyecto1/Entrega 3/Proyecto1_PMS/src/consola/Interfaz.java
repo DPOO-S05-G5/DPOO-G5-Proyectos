@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
 public abstract class Interfaz
 {
 	public abstract void iniciarInterfaz();
 	protected abstract void mostrarMenu();
-	
+
 	protected String input(String mensaje)
 	{
 		try
@@ -23,5 +24,5 @@ public abstract class Interfaz
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}	
 }

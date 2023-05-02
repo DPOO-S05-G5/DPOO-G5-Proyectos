@@ -12,6 +12,7 @@ import cargador.CargadorDeDatos;
 import consola.InterfazPrincipal;
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;
+import modelo.Tarifas;
 import modelo.TarifasHabitacion;
 
 public class Controlador
@@ -205,9 +206,9 @@ public class Controlador
 		return listaFinal;
 	}
 
-	public void setTarifas(HashMap<String, TarifasHabitacion> mapaTarifas)
+	public void setTarifas(Tarifas tarifas)
 	{
-		coordinadorPMS.setTarifasHotel(mapaTarifas);
+		coordinadorPMS.setTarifasHotel(tarifas);
 	}
 
 	public String revisionTarifas365Dias()

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import autenticador.Usuario;
 import controlador.Controlador;
 import modelo.Habitacion;
+import modelo.Tarifas;
 import modelo.TarifasHabitacion;
 
 public class CargadorDeDatos
@@ -21,7 +22,7 @@ public class CargadorDeDatos
 	private String carpetaServicios;
 	private String carpetaProductos;
 	private HashMap<String, Usuario> mapaUsuarios;
-	private HashMap<String, TarifasHabitacion> mapaTarifas;
+	private Tarifas tarifas;
 	private HashMap<String, Habitacion> mapaHabitaciones;
 	
 	public CargadorDeDatos(Controlador controlador)
@@ -35,7 +36,7 @@ public class CargadorDeDatos
 		this.carpetaProductos = "data/productos/";
 		
 		this.mapaUsuarios = new HashMap<String, Usuario>();
-		this.mapaTarifas = new HashMap<String, TarifasHabitacion>();
+		this.tarifas = new Tarifas();
 		this.mapaHabitaciones = new HashMap<String, Habitacion>();
 	}
 	
@@ -99,43 +100,7 @@ public class CargadorDeDatos
 	
 	public void cargarTarifasHabitacion()
 	{
-		File directorio = new File(carpetaTarifas);
-		String[] hijos = directorio.list();
-		if (hijos != null)
-		{
-			for (String archivo : hijos)
-			{
-				try 
-				{
-					FileInputStream fis = new FileInputStream(carpetaTarifas + archivo);
-					XMLDecoder decoder = new XMLDecoder(fis);
-					Object obj;
-
-					while (true) {
-						try {
-							obj = decoder.readObject();
-
-							if (obj instanceof TarifasHabitacion) {
-								TarifasHabitacion tarifas = (TarifasHabitacion) obj;
-								String tipo = tarifas.getTipoHabitacion();
-								mapaTarifas.put(tipo, tarifas);
-							} else {
-								System.err.println("objecto inesperado en el archivo");
-							}
-						} catch (ArrayIndexOutOfBoundsException e3) {
-							break;
-						}
-					}
-					decoder.close();
-					fis.close();
-				} 
-				catch (IOException e1) 
-				{
-					e1.printStackTrace();
-				}
-			}
-			controlador.setTarifas(mapaTarifas);
-		}
+		// TODO cargar tarifas
 	}
 	
 	public void cargarHabitaciones()
@@ -178,4 +143,6 @@ public class CargadorDeDatos
 			controlador.setHabitaciones(mapaHabitaciones);
 		}
 	}
+	
+	// TODO una funcion para cargar todo tipo de datos
 }

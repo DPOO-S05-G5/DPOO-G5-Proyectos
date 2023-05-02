@@ -1,14 +1,14 @@
 package consola;
 
-import modelo.CoordinadorPMS;
+import controlador.Controlador;
 
 public class InterfazServicios extends Interfaz
 {
-	private CoordinadorPMS coordinadorPMS;
+	private Controlador controlador;
 	
-	public InterfazServicios(CoordinadorPMS coordinadorPMS)
+	public InterfazServicios(Controlador controlador)
 	{
-		this.coordinadorPMS = coordinadorPMS;
+		this.controlador = controlador;
 	}
 
 

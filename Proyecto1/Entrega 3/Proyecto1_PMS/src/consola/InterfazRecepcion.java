@@ -85,40 +85,10 @@ public class InterfazRecepcion extends Interfaz
 			String correoHuespedResponsable = input("Correo electronico");
 			String celularHuespedResponsable = input("Número de celular");
 			int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
-			int totalHuespedes = Integer.parseInt(input("Número de huéspedes"));
-			int huespedesNoAsignados = totalHuespedes;
-			
-			String habitacionesDisponibles = controlador.getInfoHabitacionesDisponibles(fechaHoy, numeroDeNoches);
-			System.out.println(habitacionesDisponibles);
-			if (habitacionesDisponibles.startsWith("1"))
-			{
-				while (huespedesNoAsignados > 0)
-				{
-					System.out.println(habitacionesDisponibles);
-					String idHabitacion = ("Escriba el id de la habitación seleccionada");
-					boolean existeHabitacion = controlador.existeHabitacion(idHabitacion);
-					if (existeHabitacion)
-					{
-						boolean continuar = true;
-						while (continuar && controlador.habitacionNoLlena(idHabitacion) && huespedesNoAsignados > 0)
-						{
-							System.out.println("1. Agregar huéspued a la habitación");
-							System.out.println("2. Finalizar configuración de la habitación");
-							int seleccion = Integer.parseInt(input("Elija una opción"));
-							if (seleccion == 1)
-								ejecutarAgregarHuespedAHabitacion();
-							else if (seleccion == 2)
-								continuar = false;
-							else
-								
-								
-						}
-					}
-					else
-						System.out.println("ID incorrecto.");
-				}
-			}
-				
+			System.out.println();
+			int numeroHabEstandar = Integer.parseInt(input("¿Cuantas habitaciones Estándar?"));
+			int numeroHabSuite = Integer.parseInt(input("¿Cuantas habitaciones Suite?"));
+			int numeroHabSuiteDoble = Integer.parseInt(input("¿Cuantas habitaciones Suite Doble?"));
 				
 		}
 		catch (NumberFormatException e)

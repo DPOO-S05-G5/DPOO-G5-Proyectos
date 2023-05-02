@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 import autenticador.Usuario;
 import modelo.Habitacion;
+import modelo.Tarifas;
 import modelo.TarifasHabitacion;
 
 public class SalvadorDeDatos
@@ -45,20 +46,9 @@ public class SalvadorDeDatos
 		}
 	}
 
-	public void salvarTarifasHabitacion(TarifasHabitacion tarifas)
+	public void salvarTarifasHabitacion(Tarifas tarifas)
 	{
-		try
-		{
-			FileOutputStream fos = new FileOutputStream(carpetaTarifas + tarifas.getTipoHabitacion() + ".xml");
-			XMLEncoder encoder = new XMLEncoder(fos);
-			encoder.writeObject(tarifas);
-			encoder.close();
-			fos.close();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}	
+		// TODO salvar tarifas
 	}
 	
 	public void salvarHabitacion(Habitacion habitacion)
@@ -93,4 +83,6 @@ public class SalvadorDeDatos
 			}
 		}		
 	}
+	
+	// TODO funcion para salvar todos los datos
 }

@@ -16,57 +16,41 @@ public class CoordinadorPMS
 	private static final String SUITEDOBLE = "suitedoble";
 	private Controlador controlador;
 	private SalvadorDeDatos salvador;
-	private HashMap<String, TarifasHabitacion> tarifasHotel;
+	private Tarifas tarifas;
 	private HashMap<String, Habitacion> mapaHabitaciones;
 
 	public CoordinadorPMS(Controlador controlador)
 	{
 		this.controlador = controlador;
 		this.salvador = new SalvadorDeDatos();
-		this.tarifasHotel = new HashMap<String, TarifasHabitacion>();
-		tarifasHotel.put(ESTANDAR, new TarifasHabitacion(ESTANDAR));
-		tarifasHotel.put(SUITE, new TarifasHabitacion(SUITE));
-		tarifasHotel.put(SUITEDOBLE, new TarifasHabitacion(SUITEDOBLE));
 
 	}
 	
-	public HashMap<String, TarifasHabitacion> getTarifasHotel()
+	public Tarifas getTarifasHotel()
 	{
-		return tarifasHotel;
+		return tarifas;
 	}
 
-	public void setTarifasHotel(HashMap<String, TarifasHabitacion> tarifasHotel)
+	public void setTarifasHotel(Tarifas tarifasHotel)
 	{
-		this.tarifasHotel = tarifasHotel;
+		this.tarifas = tarifasHotel;
 	}
 	
 	public void agregarTarifa(String tipo, int valor, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<Integer> diasTarifa)
 	{
-		TarifasHabitacion tarifas = tarifasHotel.get(tipo);
-		tarifas.addTarifaEnRangoFechas(valor, fechaInicial, fechaFinal, diasTarifa);
-		salvador.salvarTarifasHabitacion(tarifas);
+		// TODO agregar tarifa
 	}
 	
 	public void eliminarTarifas(String tipo, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<Integer> diasTarifa)
 	{
-		TarifasHabitacion tarifas = tarifasHotel.get(tipo);
-		tarifas.eliminarTarifasEnRangoFechas(fechaInicial, fechaFinal, diasTarifa);
+		// TODO eliminar tarifa
 	}
 	
 	public String getFechasSinTarifaStr()
 	{
-		String fechasSinTarifa = "FECHAS SIN TARIFA";
-		
-		for (Entry<String, TarifasHabitacion> entry : tarifasHotel.entrySet())
-		{
-			TarifasHabitacion tarifas = entry.getValue();
-			String tipo = tarifas.getTipoHabitacion();
-			fechasSinTarifa += "\n" + tipo.toUpperCase() + ": \n";
-			
-			fechasSinTarifa += tarifas.fechasSinTarifa();
-		}
-		
-		return fechasSinTarifa;
+		// TODO dar info de fechas sin tarifa
+
+		return null;
 	}
 	
 	public boolean existeHabitacion(String id)

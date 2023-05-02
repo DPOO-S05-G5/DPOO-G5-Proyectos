@@ -3,39 +3,31 @@ package autenticador;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 
 public class Login
 {
-	
-	public String inicioDeSesion(HashMap<String, Usuario> usersMap)
+	public String getLogin()
 	{
-		
-		String login = input("Nombre de usuario (login)");
-		String password = input("Contraseña (Password)");
-		Usuario user = usersMap.get(login);
-		
-		if (user != null)
-		{
-			String userPassword = user.getPassword();
-			if (userPassword.equals(password))
-			{
-				return user.getTipoUsuario();
-			}
-			else
-			{
-				System.out.println("\nCONTRASEÑA INCORRECTA\n");
-			}
-		}
-		else
-		{
-			System.out.println("\nUSUARIO NO EXISTE\n");
-		}
-		
+		return input("Nombre de usuario (login)");
+	}
+	
+	public String getPassword()
+	{
+		return input("Contraseña (Password)");
+	}
+	
+	public String incorrectPassword()
+	{
+		System.out.println("\nCONTRASEÑA INCORRECTA\n");
 		return null;
 	}
 	
-
+	public String userNotFound()
+	{
+		System.out.println("\nUSUARIO NO EXISTE\n");
+		return null;
+	}
+	
 	private String input(String mensaje)
 	{
 		try
@@ -51,5 +43,4 @@ public class Login
 		}
 		return null;
 	}
-	
 }

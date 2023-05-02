@@ -5,7 +5,7 @@ public class Usuario
 	
 	private String login;
 	private String password;
-	private String tipoUsuario;
+	private String type;
 	
 	public Usuario()
 	{
@@ -16,7 +16,7 @@ public class Usuario
 	{
 		this.login = login;
 		this.password = password;
-		this.tipoUsuario = tipo;
+		this.type = tipo;
 	}
 
 	public String getLogin()
@@ -29,9 +29,9 @@ public class Usuario
 		return password;
 	}
 
-	public String getTipoUsuario()
+	public String getType()
 	{
-		return tipoUsuario;
+		return type;
 	}
 
 	public void setLogin(String login)
@@ -44,15 +44,15 @@ public class Usuario
 		this.password = password;
 	}
 
-	public void setTipoUsuario(String tipoUsuario)
+	public void setType(String type)
 	{
-		this.tipoUsuario = tipoUsuario;
+		this.type = type;
 	}
-
+	
 	@Override
 	public String toString()
 	{
-		return "Usuario [login=" + login + ", password=" + password + ", tipoUsuario=" + tipoUsuario + "]";
+		return "Usuario: " + login + "\n\tTipo: " + type + "\n";
 	}
 
 }

@@ -22,7 +22,7 @@ public class InterfazPrincipal extends Interfaz
 		this.controlador = new Controlador(this, autenticador);
 		this.interfazAdmin = new InterfazAdmin(this);
 		this.interfazRecepcion = new InterfazRecepcion(controlador);
-		this.interfazServicios = new InterfazServicios(this);
+		this.interfazServicios = new InterfazServicios(controlador); 
 		this.interfazTarifas = new InterfazTarifas(controlador);
 		this.interfazHabitaciones = new InterfazHabitaciones(controlador);
 		

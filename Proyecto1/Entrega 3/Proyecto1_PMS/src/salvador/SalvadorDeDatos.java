@@ -1,17 +1,13 @@
 package salvador;
 
-import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 
 import autenticador.Usuario;
 import modelo.Habitacion;
-import modelo.Tarifas;
-import modelo.TarifasHabitacion;
+import modelo.Tarifa;
 
 public class SalvadorDeDatos
 {
@@ -46,9 +42,20 @@ public class SalvadorDeDatos
 		}
 	}
 
-	public void salvarTarifasHabitacion(Tarifas tarifas)
+	public void salvarTarifa(Tarifa tarifa)
 	{
-		// TODO salvar tarifas
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(carpetaTarifas + tarifa.toString() + ".xml");
+			XMLEncoder encoder = new XMLEncoder(fos);
+			encoder.writeObject(tarifa);
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void salvarHabitacion(Habitacion habitacion)
@@ -83,6 +90,4 @@ public class SalvadorDeDatos
 			}
 		}		
 	}
-	
-	// TODO funcion para salvar todos los datos
 }

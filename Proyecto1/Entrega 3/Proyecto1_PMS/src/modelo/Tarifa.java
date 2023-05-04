@@ -16,6 +16,7 @@ public class Tarifa
 	
 	public Tarifa(Fecha fecha)
 	{
+		setFecha(fecha);
 		crearMapaDiasSemana();
 	}
 	
@@ -59,4 +60,9 @@ public class Tarifa
 			mapaDiasSemana.put(dia, 0);
 		}
 	}
+
+    public String toString() 
+	{
+        return "tarifa-" + fecha.toString();
+    }
 }

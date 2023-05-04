@@ -37,4 +37,9 @@ public class Fecha
 	}
 	
 	
+	public String toString()
+	{
+		return mes + "-" + dia;
+	}
+	
 }

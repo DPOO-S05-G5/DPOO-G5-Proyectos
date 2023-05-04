@@ -4,10 +4,13 @@ import java.util.HashMap;
 
 public class Tarifa
 {
+	private static final String ESTANDAR = "estandar";
+	private static final String SUITE = "suite";
+	private static final String SUITE_DOBLE = "suitedoble";
 	private static final String[] DIAS = {"L", "M", "I", "J", "V", "S", "D"};
 	
 	private Fecha fecha;
-	private HashMap<String, Integer> mapaDiasSemana;
+	private HashMap<String, HashMap<String, Integer>> mapaDiasSemana;
 	
 	public Tarifa()
 	{
@@ -20,7 +23,7 @@ public class Tarifa
 		crearMapaDiasSemana();
 	}
 	
-	public Tarifa(Fecha fecha, HashMap<String, Integer> mapaDiasSemana)
+	public Tarifa(Fecha fecha, HashMap<String, HashMap<String, Integer>> mapaDiasSemana)
 	{
 		this.fecha = fecha;
 		this.mapaDiasSemana = mapaDiasSemana;
@@ -36,31 +39,45 @@ public class Tarifa
 		this.fecha = fecha;
 	}
 
-	public HashMap<String, Integer> getMapaDiasSemana()
+	public HashMap<String, HashMap<String, Integer>> getMapaDiasSemana()
 	{
 		return mapaDiasSemana;
 	}
 
-	public void setMapaTarifasDiaSemana(HashMap<String, Integer> mapaTarifasDiaSemana)
+	public void setMapaTarifasDiaSemana(HashMap<String, HashMap<String, Integer>> mapaTarifasDiaSemana)
 	{
 		this.mapaDiasSemana = mapaTarifasDiaSemana;
 	}
 	
-	public void addTarifa(String dia, int valor)
+	public void addTarifa(String dia, String tipo, int valor)
 	{
-		mapaDiasSemana.replace(dia, valor);
+		mapaDiasSemana.get(dia).replace(tipo, valor);
 	}
 	
 	private void crearMapaDiasSemana()
 	{
-		mapaDiasSemana = new HashMap<String, Integer>();
+		mapaDiasSemana = new HashMap<String, HashMap<String, Integer>>();
 		
 		for (String dia : DIAS)
 		{
-			mapaDiasSemana.put(dia, 0);
+			HashMap<String, Integer> mapaTipos = new HashMap<String, Integer>();
+			mapaTipos.put(ESTANDAR, null);
+			mapaTipos.put(SUITE, null);
+			mapaTipos.put(SUITE_DOBLE, null);
+			mapaDiasSemana.put(dia, mapaTipos);
 		}
 	}
-
+	
+	public String infoTarifa() 
+	{
+		String info;
+		
+		info = toString() + "\n";
+		info += mapaDiasSemana.toString();
+		
+		return info;
+	}
+	@Override
     public String toString() 
 	{
         return "tarifa-" + fecha.toString();

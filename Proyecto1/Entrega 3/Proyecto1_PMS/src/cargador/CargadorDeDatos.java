@@ -109,7 +109,7 @@ public class CargadorDeDatos
 					}
 					else 
 					{
-						System.err.println("objecto inesperado en el archivo");
+						System.err.println("objecto inesperado en el archivo" + directorio + archivo);
 					}
 				} 
 				catch (ArrayIndexOutOfBoundsException e3)

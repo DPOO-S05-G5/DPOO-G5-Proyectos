@@ -13,7 +13,7 @@ public class CoordinadorPMS
 {
 	private static final String ESTANDAR = "estandar";
 	private static final String SUITE = "suite";
-	private static final String SUITEDOBLE = "suitedoble";
+	private static final String SUITE_DOBLE = "suitedoble";
 	private Controlador controlador;
 	private SalvadorDeDatos salvador;
 	private Tarifas tarifas;
@@ -36,12 +36,14 @@ public class CoordinadorPMS
 		this.tarifas = tarifasHotel;
 	}
 	
-	public void agregarTarifa(String tipo, int valor, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<Integer> diasTarifa)
+	public void agregarTarifa(String tipo, int valor, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<String> diasTarifa)
 	{
-		// TODO agregar tarifa
+		ArrayList<Tarifa> tarifasEditadas = tarifas.addTarifa(tipo, valor, fechaInicial, fechaFinal, diasTarifa);
+		for (Tarifa tarifa : tarifasEditadas)
+			salvador.salvarTarifa(tarifa);
 	}
 	
-	public void eliminarTarifas(String tipo, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<Integer> diasTarifa)
+	public void eliminarTarifas(String tipo, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<String> diasTarifa)
 	{
 		// TODO eliminar tarifa
 	}

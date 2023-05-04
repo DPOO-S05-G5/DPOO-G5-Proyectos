@@ -75,11 +75,7 @@ public class InterfazPrincipal extends Interfaz
 	
 	private void ejecutarRegistrarEmpleado()
 	{
-		String tipoEmpleado = autenticador.registrarUsuario();
-		if (tipoEmpleado != null)
-			System.out.println("Usuario de tipo " + tipoEmpleado + " registrado.");
-		else
-			System.out.println("No se registró el usuario.");
+		System.out.println(autenticador.registrarUsuario());
 	}
 
 	private void ejecutarIniciarSesion()

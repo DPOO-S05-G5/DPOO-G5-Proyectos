@@ -97,11 +97,11 @@ public class Controlador
 					return "Fecha inválida (dd-mm).";
 				
 				String[] listaDias = dias.split("-");
-				ArrayList<Integer> diasTarifa = new ArrayList<Integer>();
+				ArrayList<String> diasTarifa = new ArrayList<String>();
 				for (String dia : listaDias)
 				{
 					if (DIAS_SEMANA.contains(dia))
-						diasTarifa.add(MAPA_DIAS_SEMANA.get(dia));
+						diasTarifa.add(dia);
 				}
 				
 				coordinadorPMS.agregarTarifa(tipo, valor, fechaInicial, fechaFinal, diasTarifa);
@@ -132,11 +132,11 @@ public class Controlador
 					return "Fecha inválida (dd-mm).";
 				
 				String[] listaDias = dias.split("-");
-				ArrayList<Integer> diasTarifa = new ArrayList<Integer>();
+				ArrayList<String> diasTarifa = new ArrayList<String>();
 				for (String dia : listaDias)
 				{
 					if (DIAS_SEMANA.contains(dia))
-						diasTarifa.add(MAPA_DIAS_SEMANA.get(dia));
+						diasTarifa.add(dia);
 				}
 				
 				coordinadorPMS.eliminarTarifas(tipo, fechaInicial, fechaFinal, diasTarifa);
@@ -154,7 +154,7 @@ public class Controlador
 	
 	
 	private String infoTarifa(String tipo, int valor, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal,
-			ArrayList<Integer> diasTarifa)
+			ArrayList<String> diasTarifa)
 	{
 		String infoTarifa = "Nueva Tarifa:" + "\n\tTipo de habitacion: " + tipo + "\n\tValor:" + valor + "\n\tFechas de validez: ";
 		infoTarifa += fechaToString(fechaInicial) + " hasta " + fechaToString(fechaFinal);
@@ -164,15 +164,15 @@ public class Controlador
 
 	private String fechaToString(ArrayList<Integer> fecha)
 	{
-		return (fecha.get(1)+1) + " de " + STRINGS_MESES[fecha.get(0)];
+		return (fecha.get(1)) + " de " + STRINGS_MESES[fecha.get(0)-1];
 	}
 
-	private String diasToString(ArrayList<Integer> diasTarifa)
+	private String diasToString(ArrayList<String> diasTarifa)
 	{
 		String diasString = "";
 		for (int i=0; i<diasTarifa.size(); i++)
 		{
-			diasString += STRINGS_DIAS_SEMANA[diasTarifa.get(i)];
+			diasString += diasTarifa.get(i);
 			
 			if (i != diasTarifa.size()-1)
 				diasString += ", ";
@@ -186,13 +186,13 @@ public class Controlador
 	{
 		ArrayList<Integer> listaFinal = new ArrayList<Integer>();
 		
-		int dia = Integer.parseInt(lista[0])-1;
-		int mes = Integer.parseInt(lista[1])-1;
+		int dia = Integer.parseInt(lista[0]);
+		int mes = Integer.parseInt(lista[1]);
 		
-		if ((0 <= mes) && (mes < 12))
+		if ((0 < mes) && (mes <= 12))
 		{
-			int diasMes = DIASXMES[mes];
-			if ((0 <= dia) && (dia < diasMes))
+			int diasMes = DIASXMES[mes-1];
+			if ((0 < dia) && (dia <= diasMes))
 			{
 				listaFinal.add(mes);
 				listaFinal.add(dia);

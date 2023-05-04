@@ -1,12 +1,21 @@
 package modelo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Map.Entry;
+import java.util.NavigableMap;
 import java.util.TreeMap;
+
+import salvador.SalvadorDeDatos;
 
 public class Tarifas
 {
 	private static final int MESES = 12;
 	private static final int[] DIASXMES = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	
 	private TreeMap<Fecha, Tarifa> arbolTarifas;
 	
 	public Tarifas()
@@ -40,7 +49,7 @@ public class Tarifas
 		{
 			for (int j=0; j<DIASXMES[i]; j++)
 			{
-				Fecha fecha = new Fecha(i+1, j+i);
+				Fecha fecha = new Fecha(i+1, j+1);
 				Tarifa tarifa = new Tarifa(fecha);
 				arbolTarifas.put(fecha, tarifa);
 			}
@@ -56,16 +65,36 @@ public class Tarifas
 	{
 		this.arbolTarifas = arbolTarifas;
 	}	
+	
 
-	public void addTarifa(Tarifa tarifa)
+	public ArrayList<Tarifa> addTarifa(String tipo, int valor, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal,
+			ArrayList<String> diasTarifa) 
 	{
-		Fecha fechaTarifa = tarifa.getFecha();
-		arbolTarifas.put(fechaTarifa, tarifa);
+		ArrayList<Tarifa> tarifasEditadas = new ArrayList<Tarifa>();
+		
+		Fecha fechaI = new Fecha(fechaInicial.get(0), fechaInicial.get(1));
+		Fecha fechaF = new Fecha(fechaFinal.get(0), fechaFinal.get(1));
+		NavigableMap<Fecha, Tarifa> fechasEnRango = arbolTarifas.subMap(fechaI, true, fechaF, true);
+		
+		for (Entry<Fecha, Tarifa> entry : fechasEnRango.entrySet())
+		{
+			Tarifa tarifa = entry.getValue();
+			for (String dia : diasTarifa)
+				tarifa.addTarifa(dia, tipo, valor);
+			tarifasEditadas.add(tarifa);
+		}
+		
+		for (Entry<Fecha, Tarifa> entry: arbolTarifas.entrySet())
+		{
+			System.out.println(entry.getValue().infoTarifa());
+		}
+		
+		return tarifasEditadas;
 	}
 	
-	public void replaceTarifa(Tarifa tarifa)
+	public void replaceTarifa(String tipo, int valor, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal,
+			ArrayList<String> diasTarifa)
 	{
-		Fecha fechaTarifa = tarifa.getFecha();
-		arbolTarifas.replace(fechaTarifa, tarifa);
+		addTarifa(tipo, valor, fechaInicial, fechaFinal, diasTarifa);
 	}
 }

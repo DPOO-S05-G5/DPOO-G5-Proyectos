@@ -11,26 +11,23 @@ import modelo.Tarifa;
 
 public class SalvadorDeDatos
 {
-	private String carpetaUsuarios;
-	private String carpetaTarifas;
-	private String carpetaHabitaciones;
-	private String carpetaServicios;
-	private String carpetaProductos;
+	private static final String DATA_DIR = "data/";
+	private static final String USUARIOS_DIR = DATA_DIR + "usuarios/";
+	private static final String TARIFAS_DIR = DATA_DIR + "tarifas/";
+	private static final String HABITACIONES_DIR = DATA_DIR + "habitaciones/";
+	private static final String SERVICIOS_DIR = DATA_DIR + "servicios/";
+	private static final String PRODUCTOS_DIR = DATA_DIR + "productos/";
 	
 	public SalvadorDeDatos()
 	{
-		this.carpetaUsuarios = "data/usuarios/";
-		this.carpetaTarifas = "data/tarifas/";
-		this.carpetaHabitaciones = "data/habitaciones/";
-		this.carpetaServicios = "data/servicios/";
-		this.carpetaProductos = "data/productos/";
+		
 	}
 	
 	public void salvarUsuario(Usuario usuario)
 	{
 		try
 		{
-			FileOutputStream fos = new FileOutputStream(carpetaUsuarios + usuario.getLogin() + ".xml");
+			FileOutputStream fos = new FileOutputStream(USUARIOS_DIR + usuario.getLogin() + ".xml");
 			XMLEncoder encoder = new XMLEncoder(fos);
 			encoder.writeObject(usuario);
 			encoder.close();
@@ -46,7 +43,7 @@ public class SalvadorDeDatos
 	{
 		try
 		{
-			FileOutputStream fos = new FileOutputStream(carpetaTarifas + tarifa.toString() + ".xml");
+			FileOutputStream fos = new FileOutputStream(TARIFAS_DIR + tarifa.toString() + ".xml");
 			XMLEncoder encoder = new XMLEncoder(fos);
 			encoder.writeObject(tarifa);
 			encoder.close();
@@ -62,7 +59,7 @@ public class SalvadorDeDatos
 	{
 		try
 		{
-			FileOutputStream fos = new FileOutputStream(carpetaHabitaciones + habitacion.getId() + ".xml");
+			FileOutputStream fos = new FileOutputStream(HABITACIONES_DIR + habitacion.getId() + ".xml");
 			XMLEncoder encoder = new XMLEncoder(fos);
 			encoder.writeObject(habitacion);
 			encoder.close();
@@ -76,7 +73,7 @@ public class SalvadorDeDatos
 
 	public void borrarHabitacion(String id)
 	{
-		File directorio = new File(carpetaHabitaciones);
+		File directorio = new File(HABITACIONES_DIR);
 		String[] hijos = directorio.list();
 		if (hijos != null)
 		{
@@ -84,7 +81,7 @@ public class SalvadorDeDatos
 			{
 				if (archivo.equals(id + ".xml"))
 				{
-					File archivoAEliminar = new File(carpetaHabitaciones + archivo);
+					File archivoAEliminar = new File(HABITACIONES_DIR + archivo);
 					archivoAEliminar.delete();
 				}
 			}

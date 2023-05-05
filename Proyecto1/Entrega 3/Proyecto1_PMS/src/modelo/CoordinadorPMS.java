@@ -39,6 +39,7 @@ public class CoordinadorPMS
 	public void agregarTarifa(String tipo, int valor, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<String> diasTarifa)
 	{
 		ArrayList<Tarifa> tarifasEditadas = tarifas.addTarifa(tipo, valor, fechaInicial, fechaFinal, diasTarifa);
+		System.out.println(tarifasEditadas);
 		for (Tarifa tarifa : tarifasEditadas)
 			salvador.salvarTarifa(tarifa);
 	}

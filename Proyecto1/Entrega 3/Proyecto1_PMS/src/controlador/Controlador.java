@@ -266,4 +266,16 @@ public class Controlador
 	{
 		return coordinadorPMS.existeHabitacion(idHabitacion);
 	}
+
+	public boolean revisarHabitacion(int numeroHabEstandar, int numeroHabSuite, int numeroHabSuiteDoble, String fechaInicial, String fechaFinal) 
+	{
+		String[] listaFechaI = fechaInicial.split("-");
+		String[] listaFechaF = fechaFinal.split("-");
+		LocalDate fechaI = LocalDate.of(Integer.parseInt(listaFechaI[0]), Integer.parseInt(listaFechaI[1]), Integer.parseInt(listaFechaI[2]));
+		LocalDate fechaF = LocalDate.of(Integer.parseInt(listaFechaF[0]), Integer.parseInt(listaFechaF[1]), Integer.parseInt(listaFechaF[2]));
+		
+		boolean disponible = true;
+		
+		return disponible;
+	}
 }

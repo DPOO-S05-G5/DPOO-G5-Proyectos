@@ -10,11 +10,11 @@ public class Tarifa
 	private static final String[] DIAS = {"L", "M", "I", "J", "V", "S", "D"};
 	
 	private Fecha fecha;
-	private HashMap<String, HashMap<String, Integer>> mapaDiasSemana;
+	private HashMap<String, HashMap<String, Integer>> mapaDiasSemana = crearMapaDiasSemana();
 	
 	public Tarifa()
 	{
-		crearMapaDiasSemana();
+		
 	}
 	
 	public Tarifa(Fecha fecha)
@@ -44,7 +44,7 @@ public class Tarifa
 		return mapaDiasSemana;
 	}
 
-	public void setMapaTarifasDiaSemana(HashMap<String, HashMap<String, Integer>> mapaTarifasDiaSemana)
+	public void setMapaDiaSemana(HashMap<String, HashMap<String, Integer>> mapaTarifasDiaSemana)
 	{
 		this.mapaDiasSemana = mapaTarifasDiaSemana;
 	}
@@ -54,7 +54,7 @@ public class Tarifa
 		mapaDiasSemana.get(dia).replace(tipo, valor);
 	}
 	
-	private void crearMapaDiasSemana()
+	private HashMap<String, HashMap<String, Integer>> crearMapaDiasSemana()
 	{
 		mapaDiasSemana = new HashMap<String, HashMap<String, Integer>>();
 		
@@ -66,6 +66,8 @@ public class Tarifa
 			mapaTipos.put(SUITE_DOBLE, null);
 			mapaDiasSemana.put(dia, mapaTipos);
 		}
+		
+		return mapaDiasSemana;
 	}
 	
 	public String infoTarifa() 

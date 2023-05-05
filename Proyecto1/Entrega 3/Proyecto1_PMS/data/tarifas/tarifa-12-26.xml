@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="19.0.2" class="java.beans.XMLDecoder">
- <object class="modelo.Tarifa">
+ <object class="modelo.Tarifa" id="Tarifa0">
   <void property="fecha">
    <object class="modelo.Fecha">
     <void property="dia">
@@ -10,6 +10,15 @@
      <int>12</int>
     </void>
    </object>
+  </void>
+  <void id="HashMap0" property="mapaDiasSemana">
+   <void method="get">
+    <string>D</string>
+    <void method="put">
+     <string>suite</string>
+     <int>5000</int>
+    </void>
+   </void>
   </void>
  </object>
 </java>

@@ -38,17 +38,17 @@ public class Tarifa
 	{
 		this.fecha = fecha;
 	}
-
-	public HashMap<String, HashMap<String, Integer>> getMapaDiasSemana()
+	
+	public HashMap<String, HashMap<String, Integer>> getMapaDiasSemana() 
 	{
 		return mapaDiasSemana;
 	}
 
-	public void setMapaDiaSemana(HashMap<String, HashMap<String, Integer>> mapaTarifasDiaSemana)
+	public void setMapaDiasSemana(HashMap<String, HashMap<String, Integer>> mapaDiasSemana) 
 	{
-		this.mapaDiasSemana = mapaTarifasDiaSemana;
+		this.mapaDiasSemana = mapaDiasSemana;
 	}
-	
+
 	public void addTarifa(String dia, String tipo, int valor)
 	{
 		mapaDiasSemana.get(dia).replace(tipo, valor);

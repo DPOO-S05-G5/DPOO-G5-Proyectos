@@ -4,17 +4,17 @@ import java.util.HashMap;
 
 public class Tarifa
 {
-	private static final String ESTANDAR = "estandar";
-	private static final String SUITE = "suite";
-	private static final String SUITE_DOBLE = "suitedoble";
+	public static final String ESTANDAR = "estandar";
+	public static final String SUITE = "suite";
+	public static final String SUITE_DOBLE = "suitedoble";
 	private static final String[] DIAS = {"L", "M", "I", "J", "V", "S", "D"};
 	
 	private Fecha fecha;
-	private HashMap<String, HashMap<String, Integer>> mapaDiasSemana;
+	private HashMap<String, HashMap<String, Integer>> mapaDiasSemana = crearMapaDiasSemana();
 	
 	public Tarifa()
 	{
-		crearMapaDiasSemana();
+		
 	}
 	
 	public Tarifa(Fecha fecha)
@@ -38,23 +38,28 @@ public class Tarifa
 	{
 		this.fecha = fecha;
 	}
-
-	public HashMap<String, HashMap<String, Integer>> getMapaDiasSemana()
+	
+	public HashMap<String, HashMap<String, Integer>> getMapaDiasSemana() 
 	{
 		return mapaDiasSemana;
 	}
 
-	public void setMapaTarifasDiaSemana(HashMap<String, HashMap<String, Integer>> mapaTarifasDiaSemana)
+	public void setMapaDiasSemana(HashMap<String, HashMap<String, Integer>> mapaDiasSemana) 
 	{
-		this.mapaDiasSemana = mapaTarifasDiaSemana;
+		this.mapaDiasSemana = mapaDiasSemana;
 	}
-	
+
 	public void addTarifa(String dia, String tipo, int valor)
 	{
 		mapaDiasSemana.get(dia).replace(tipo, valor);
 	}
+
+	public void removeTarifa(String dia, String tipo)
+	{
+		mapaDiasSemana.get(dia).replace(tipo, null);
+	}
 	
-	private void crearMapaDiasSemana()
+	private HashMap<String, HashMap<String, Integer>> crearMapaDiasSemana()
 	{
 		mapaDiasSemana = new HashMap<String, HashMap<String, Integer>>();
 		
@@ -66,6 +71,8 @@ public class Tarifa
 			mapaTipos.put(SUITE_DOBLE, null);
 			mapaDiasSemana.put(dia, mapaTipos);
 		}
+		
+		return mapaDiasSemana;
 	}
 	
 	public String infoTarifa() 

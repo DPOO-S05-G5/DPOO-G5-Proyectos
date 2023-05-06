@@ -76,26 +76,7 @@ public class InterfazRecepcion extends Interfaz
 
 	private void ejecutarCheckInSinReserva()
 	{
-		LocalDate fechaHoy = LocalDate.now();
-		try
-		{
-			String nombreHuespedResponsable = input("Nombre del huesped responsable");
-			String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
-			String documentoHuespedResponsable = input("Documento de ID");
-			String correoHuespedResponsable = input("Correo electronico");
-			String celularHuespedResponsable = input("Número de celular");
-			int numeroDeNoches = Integer.parseInt(input("¿Cuantas noches?"));
-			System.out.println();
-			int numeroHabEstandar = Integer.parseInt(input("¿Cuantas habitaciones Estándar?"));
-			int numeroHabSuite = Integer.parseInt(input("¿Cuantas habitaciones Suite?"));
-			int numeroHabSuiteDoble = Integer.parseInt(input("¿Cuantas habitaciones Suite Doble?"));
-				
-		}
-		catch (NumberFormatException e)
-		{
-			System.out.println("Debe de usar valores numéricos enteros positivos y el número debe estar dentro de las opciones.");
-		}
-		
+		// TODO check in sin reserva
 	}
 
 	private void ejecutarCheckInConReserva()
@@ -130,7 +111,46 @@ public class InterfazRecepcion extends Interfaz
 
 	private void ejecutarReservar()
 	{
-		// TODO Auto-generated method stub
+		// TODO Revervar habitaciones
+		try
+		{
+			String nombreHuespedResponsable = input("Nombre del huesped responsable");
+			String apellidosHuespedResponsable = input("Apellidos del huesped responsable");
+			String documentoHuespedResponsable = input("Documento de ID");
+			String correoHuespedResponsable = input("Correo electronico");
+			String celularHuespedResponsable = input("Número de celular");
+			String fechaInicial = input("Fecha inicial (aaaa-mm-dd)");
+			String fechaFinal = input("Fecha final (aaaa-mm-dd)");
+			int numeroHabEstandar = Integer.parseInt(input("¿Cuantas habitaciones Estándar?"));
+			int numeroHabSuite = Integer.parseInt(input("¿Cuantas habitaciones Suite?"));
+			int numeroHabSuiteDoble = Integer.parseInt(input("¿Cuantas habitaciones Suite Doble?"));
+			
+			boolean disponibles = controlador.revisarDisponibilidad(numeroHabEstandar, numeroHabSuite, numeroHabSuiteDoble, fechaInicial, fechaFinal);
+			
+			if (disponibles)
+			{		
+				int numeroHuespedes = Integer.parseInt(input("¿Cuantos huépedes?"));
+				
+				for (int i=0; i<numeroHuespedes; i++)
+				{
+					controlador.agregarHuesped();
+				}
+				
+				System.out.println("Reserva exitosa!");
+			}
+			else
+				System.out.println("No hay habitaciones disponbles para las fechas dadas");
+							
+		}
+		catch (NumberFormatException e)
+		{
+			System.out.println("Debe de usar valores numéricos enteros positivos y el número debe estar dentro de las opciones.");
+		}
+		
+	}
+	
+	private void agregarHuesped()
+	{
 		
 	}
 

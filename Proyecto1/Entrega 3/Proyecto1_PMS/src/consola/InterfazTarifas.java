@@ -49,8 +49,8 @@ public class InterfazTarifas extends Interfaz
 	{
 		String tipo = input("Tipo de habitación (estandar / suite / suitedoble)").toLowerCase();
 		int valor = Integer.parseInt(input("Valor de la tarifa"));
-		String fechaInicial = input("Fecha inicial (dd-mm)");
-		String fechaFinal = input("Fecha final (dd-mm)");
+		String fechaInicial = input("Fecha inicial (mm-dd)");
+		String fechaFinal = input("Fecha final (mm-dd)");
 		String dias = input("Días de la semana (Formato: L-M-I-J-V-S-D)").toUpperCase();
 		
 		System.out.println(controlador.crearTarifa(tipo, valor, fechaInicial, fechaFinal, dias));

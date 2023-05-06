@@ -97,4 +97,29 @@ public class Tarifas
 	{
 		addTarifa(tipo, valor, fechaInicial, fechaFinal, diasTarifa);
 	}
+
+	public ArrayList<Tarifa> removeTarifa(String tipo, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal,
+			ArrayList<String> diasTarifa)
+	{
+		ArrayList<Tarifa> tarifasEditadas = new ArrayList<Tarifa>();
+		
+		Fecha fechaI = new Fecha(fechaInicial.get(0), fechaInicial.get(1));
+		Fecha fechaF = new Fecha(fechaFinal.get(0), fechaFinal.get(1));
+		NavigableMap<Fecha, Tarifa> fechasEnRango = arbolTarifas.subMap(fechaI, true, fechaF, true);
+		
+		for (Entry<Fecha, Tarifa> entry : fechasEnRango.entrySet())
+		{
+			Tarifa tarifa = entry.getValue();
+			for (String dia : diasTarifa)
+				tarifa.removeTarifa(dia, tipo);
+			tarifasEditadas.add(tarifa);
+		}
+		
+		for (Entry<Fecha, Tarifa> entry: arbolTarifas.entrySet())
+		{
+			System.out.println(entry.getValue().infoTarifa());
+		}
+		
+		return tarifasEditadas;
+	}
 }

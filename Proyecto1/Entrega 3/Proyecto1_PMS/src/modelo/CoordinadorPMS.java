@@ -46,16 +46,46 @@ public class CoordinadorPMS
 	
 	public void eliminarTarifas(String tipo, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<String> diasTarifa)
 	{
-		// TODO eliminar tarifa
+		ArrayList<Tarifa> tarifasEditadas = tarifas.removeTarifa(tipo, fechaInicial, fechaFinal, diasTarifa);
+		System.out.println(tarifasEditadas);
+		for (Tarifa tarifa : tarifasEditadas)
+			salvador.salvarTarifa(tarifa);
 	}
 	
-	public String getFechasSinTarifaStr()
+	public ArrayList<String> getFechasSinTarifaStr()
 	{
 		// TODO dar info de fechas sin tarifa
+		ArrayList<String> tarifasSinValor = new ArrayList<String>();
+		for (Entry<Fecha, Tarifa> entry : tarifas.getArbolTarifas().entrySet())
+		{
+			Fecha fecha = entry.getKey();
+			HashMap<String, HashMap<String, Integer>> mapaDiasTarifa = entry.getValue().getMapaDiasSemana();
+			String infoFecha = "Mes: " + fecha.getMes() + " Dia: " + fecha.getDia();
+			
+			for (Entry<String, HashMap<String, Integer>> dia : mapaDiasTarifa.entrySet())
+			{
+				String infoDia = dia.getKey() + ": ";
+				HashMap<String, Integer> mapaTarifasTipoHabitacion = dia.getValue();
+				
+				if (mapaTarifasTipoHabitacion.get(Tarifa.ESTANDAR) == null)
+					infoDia += ESTANDAR + ", ";
+				if (mapaTarifasTipoHabitacion.get(Tarifa.SUITE) == null)
+					infoDia += SUITE + ", ";
+				if (mapaTarifasTipoHabitacion.get(Tarifa.SUITE_DOBLE) == null)
+					infoDia += SUITE_DOBLE + ", ";
+				if (!infoDia.endsWith(": "))
+				{
+					infoDia = infoDia.substring(0, infoDia.length() - 2);
+					infoFecha += "\n" + infoDia + "\n";
+				}
+			}
+			if (!infoFecha.endsWith(": "))
+				tarifasSinValor.add(infoFecha);
+		}
 
-		return null;
+		return tarifasSinValor;
 	}
-	
+
 	public boolean existeHabitacion(String id)
 	{
 		return mapaHabitaciones.containsKey(id);

@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public class Tarifa
 {
-	private static final String ESTANDAR = "estandar";
-	private static final String SUITE = "suite";
-	private static final String SUITE_DOBLE = "suitedoble";
+	public static final String ESTANDAR = "estandar";
+	public static final String SUITE = "suite";
+	public static final String SUITE_DOBLE = "suitedoble";
 	private static final String[] DIAS = {"L", "M", "I", "J", "V", "S", "D"};
 	
 	private Fecha fecha;
@@ -52,6 +52,11 @@ public class Tarifa
 	public void addTarifa(String dia, String tipo, int valor)
 	{
 		mapaDiasSemana.get(dia).replace(tipo, valor);
+	}
+
+	public void removeTarifa(String dia, String tipo)
+	{
+		mapaDiasSemana.get(dia).replace(tipo, null);
 	}
 	
 	private HashMap<String, HashMap<String, Integer>> crearMapaDiasSemana()

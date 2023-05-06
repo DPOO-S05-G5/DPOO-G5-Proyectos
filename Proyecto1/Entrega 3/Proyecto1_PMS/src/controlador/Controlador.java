@@ -273,7 +273,7 @@ public class Controlador
 		return coordinadorPMS.existeHabitacion(idHabitacion);
 	}
 
-	public boolean revisarHabitacion(int numeroHabEstandar, int numeroHabSuite, int numeroHabSuiteDoble, String fechaInicial, String fechaFinal) 
+	public boolean revisarDisponibilidad(int numeroHabEstandar, int numeroHabSuite, int numeroHabSuiteDoble, String fechaInicial, String fechaFinal) 
 	{
 		String[] listaFechaI = fechaInicial.split("-");
 		String[] listaFechaF = fechaFinal.split("-");

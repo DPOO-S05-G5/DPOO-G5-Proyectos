@@ -31,7 +31,7 @@ public class Reserva
 		this.fechaFinal = fechaFinal;
 		this.noches = noches;
 		this.habitaciones = habitaciones;
-		this.precioTotal = calcularPrecioTotal();	
+		this.precioTotal = calcularPrecioTotal();
 	}
 
 	private int calcularPrecioTotal()
@@ -40,7 +40,7 @@ public class Reserva
 		return 0;
 	}
 
-	public Huesped getReservador()
+    public Huesped getReservador()
 	{
 		return reservador;
 	}
@@ -129,4 +129,37 @@ public class Reserva
 	{
 		this.habitaciones = habitaciones;
 	}
+
+	public int getNumeroHabEstandar() 
+	{
+		int contador = 0;
+        for (Habitacion habitacion : habitaciones)
+		{
+			if (habitacion instanceof HabitacionEstandar)
+				contador ++;
+		}
+		return contador;
+	}
+
+	public int getNumeroHabSuite() 
+	{
+        int contador = 0;
+        for (Habitacion habitacion : habitaciones)
+		{
+			if (habitacion instanceof HabitacionSuite)
+				contador ++;
+		}
+		return contador;
+    }
+
+    public int getNumeroHabSuiteDoble() 
+	{
+        int contador = 0;
+        for (Habitacion habitacion : habitaciones)
+		{
+			if (habitacion instanceof HabitacionSuiteDoble)
+				contador ++;
+		}
+		return contador;
+    }
 }

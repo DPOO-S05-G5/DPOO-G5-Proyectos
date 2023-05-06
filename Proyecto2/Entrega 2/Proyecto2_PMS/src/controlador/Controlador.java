@@ -10,10 +10,10 @@ import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
 import cargador.CargadorDeDatos;
 import consola.InterfazPrincipal;
+import modelo.Calendario;
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;
 import modelo.Tarifas;
-import modelo.TarifasHabitacion;
 
 public class Controlador
 {
@@ -35,8 +35,8 @@ public class Controlador
 	{
 		this.interfaz = interfaz;
 		this.autenticador = autenticador;
-		this.cargador = new CargadorDeDatos(this);
 		this.coordinadorPMS = new CoordinadorPMS(this);
+		this.cargador = new CargadorDeDatos(this, coordinadorPMS);
 	}
 	
 	public static ArrayList<String> getTiposHabitacion()
@@ -280,8 +280,16 @@ public class Controlador
 		LocalDate fechaI = LocalDate.of(Integer.parseInt(listaFechaI[0]), Integer.parseInt(listaFechaI[1]), Integer.parseInt(listaFechaI[2]));
 		LocalDate fechaF = LocalDate.of(Integer.parseInt(listaFechaF[0]), Integer.parseInt(listaFechaF[1]), Integer.parseInt(listaFechaF[2]));
 		
-		boolean disponible = true;
-		
-		return disponible;
+		return coordinadorPMS.revisarDisponibilidad(numeroHabEstandar, numeroHabSuite, numeroHabSuiteDoble, fechaI, fechaF);
 	}
+
+    public void agregarHuesped() 
+	{
+
+    }
+
+    public void setCalendario(Calendario calendario) 
+	{
+		coordinadorPMS.setCalendario(calendario);
+    }
 }

@@ -148,11 +148,6 @@ public class InterfazRecepcion extends Interfaz
 		}
 		
 	}
-	
-	private void agregarHuesped()
-	{
-		
-	}
 
 	private void ejecutarCancelarReserva()
 	{

@@ -11,8 +11,11 @@ import java.util.HashMap;
 
 import autenticador.Usuario;
 import controlador.Controlador;
+import modelo.Calendario;
+import modelo.CoordinadorPMS;
 import modelo.Fecha;
 import modelo.Habitacion;
+import modelo.Reserva;
 import modelo.Tarifa;
 import modelo.Tarifas;
 
@@ -21,25 +24,32 @@ public class CargadorDeDatos
 	private static final String DATA_DIR = "data/";
 	
 	private Controlador controlador;
+	private CoordinadorPMS coordinadorPMS;
 	private HashMap<String, Usuario> mapaUsuarios;
 	private Tarifas tarifas;
+	private Calendario calendario;
 	private HashMap<String, Habitacion> mapaHabitaciones;
+	private HashMap<String, Reserva> mapaReservas;
 	
-	public CargadorDeDatos(Controlador controlador)
+	public CargadorDeDatos(Controlador controlador, CoordinadorPMS coordinadorPMS)
 	{
-		this.controlador = controlador;		
+		this.controlador = controlador;	
+		this.coordinadorPMS = coordinadorPMS;	
 		this.mapaUsuarios = new HashMap<String, Usuario>();
 		this.tarifas = new Tarifas();
+		this.calendario = new Calendario(coordinadorPMS);
 		this.mapaHabitaciones = new HashMap<String, Habitacion>();
+		this.mapaReservas = new HashMap<String, Reserva>();
 	}
 	
 	public HashMap<String, Integer> infoDeCarga()
 	{
 		HashMap<String, Integer> dictInfoCarga = new HashMap<String, Integer>();
 		
-		dictInfoCarga.put("Usuarios", mapaUsuarios.size());
-		dictInfoCarga.put("Habitaciones", mapaHabitaciones.size());
-		dictInfoCarga.put("Tarifas", tarifas.getArbolTarifas().size());
+		dictInfoCarga.put("Usuarios: ", mapaUsuarios.size());
+		dictInfoCarga.put("Habitaciones: ", mapaHabitaciones.size());
+		dictInfoCarga.put("Tarifas: ", tarifas.getArbolTarifas().size());
+		dictInfoCarga.put("Reservas: ", mapaReservas.size());
 		
 		return dictInfoCarga;
 	}
@@ -72,6 +82,7 @@ public class CargadorDeDatos
 		
 		controlador.setUsuarios(mapaUsuarios);
 		controlador.setTarifas(tarifas);
+		controlador.setCalendario(calendario);
 		controlador.setHabitaciones(mapaHabitaciones);
 	}
 	
@@ -106,6 +117,15 @@ public class CargadorDeDatos
 						Habitacion hab = (Habitacion) obj;
 						String id = hab.getId();
 						mapaHabitaciones.put(id, hab);
+						coordinadorPMS.getCantidadTiposHabitacion().put(hab.getTipo(), coordinadorPMS.getCantidadTiposHabitacion().get(hab.getTipo()) + 1);
+
+					}
+					else if (obj instanceof Reserva)
+					{
+						Reserva reserva = (Reserva) obj;
+						String id = reserva.getId();
+						mapaReservas.put(id, reserva);
+						calendario.addReserva(reserva);
 					}
 					else 
 					{

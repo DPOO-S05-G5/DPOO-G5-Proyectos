@@ -11,21 +11,31 @@ import salvador.SalvadorDeDatos;
 
 public class CoordinadorPMS
 {
-	private static final String ESTANDAR = "estandar";
-	private static final String SUITE = "suite";
-	private static final String SUITE_DOBLE = "suitedoble";
+	public static final String ESTANDAR = "estandar";
+	public static final String SUITE = "suite";
+	public static final String SUITE_DOBLE = "suitedoble";
 	private Controlador controlador;
 	private SalvadorDeDatos salvador;
 	private Tarifas tarifas;
+	private Calendario calendario;
 	private HashMap<String, Habitacion> mapaHabitaciones;
+	private HashMap<String, Integer> cantidadTiposHabitacion;
 
 	public CoordinadorPMS(Controlador controlador)
 	{
 		this.controlador = controlador;
-		this.salvador = new SalvadorDeDatos();
-
+		this.salvador = new SalvadorDeDatos(this);
+		this.cantidadTiposHabitacion = new HashMap<String, Integer>();
+		cantidadTiposHabitacion.put(ESTANDAR, 0);
+		cantidadTiposHabitacion.put(SUITE, 0);
+		cantidadTiposHabitacion.put(SUITE_DOBLE, 0);
 	}
 	
+	public HashMap<String, Integer> getCantidadTiposHabitacion() 
+	{
+		return cantidadTiposHabitacion;
+	}
+
 	public Tarifas getTarifasHotel()
 	{
 		return tarifas;
@@ -205,5 +215,16 @@ public class CoordinadorPMS
 		boolean rangoDentroDeFechas = fechaFinal.isAfter(fechaFinalRango) && fechaInicial.isBefore(fechaInicialRango);
 		
 		return fechaFinalDentroDeReserva || fechaInicialDentroDeReserva || rangoDentroDeFechas;
+	}
+
+    public boolean revisarDisponibilidad(int numeroHabEstandar, int numeroHabSuite, int numeroHabSuiteDoble,
+            LocalDate fechaI, LocalDate fechaF) 
+	{
+        return calendario.revisarDisponibilidad(numeroHabEstandar, numeroHabSuite, numeroHabSuiteDoble, fechaI, fechaF);
+    }
+
+	public void setCalendario(Calendario calendario) 
+	{
+		this.calendario = calendario;
 	}
 }

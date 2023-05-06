@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import autenticador.Usuario;
+import modelo.CoordinadorPMS;
 import modelo.Habitacion;
 import modelo.Tarifa;
 
@@ -17,10 +18,11 @@ public class SalvadorDeDatos
 	private static final String HABITACIONES_DIR = DATA_DIR + "habitaciones/";
 	private static final String SERVICIOS_DIR = DATA_DIR + "servicios/";
 	private static final String PRODUCTOS_DIR = DATA_DIR + "productos/";
+	private CoordinadorPMS coordinadorPMS;
 	
-	public SalvadorDeDatos()
+	public SalvadorDeDatos(CoordinadorPMS coordinadorPMS)
 	{
-		
+		this.coordinadorPMS = coordinadorPMS;
 	}
 	
 	public void salvarUsuario(Usuario usuario)
@@ -64,6 +66,7 @@ public class SalvadorDeDatos
 			encoder.writeObject(habitacion);
 			encoder.close();
 			fos.close();
+			coordinadorPMS.getCantidadTiposHabitacion().put(habitacion.getTipo(), coordinadorPMS.getCantidadTiposHabitacion().get(habitacion.getTipo()) + 1);
 		}
 		catch (IOException e)
 		{

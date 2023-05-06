@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import InterfazGrafica.VentanaPrincipal;
 import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
 import cargador.CargadorDeDatos;
+import consola.InterfazPrincipal;
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;
 import modelo.Tarifas;
@@ -25,25 +25,20 @@ public class Controlador
 	private static final String[] STRINGS_MESES = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 	private static final HashMap<String, Integer> MAPA_DIAS_SEMANA = crearMapaDiasSemana();
 	private static final int[] DIASXMES = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	private VentanaPrincipal interfaz;
+	private InterfazPrincipal interfaz;
 	private AutenticadorDeUsuarios autenticador;
 	private CargadorDeDatos cargador;
 	private CoordinadorPMS coordinadorPMS;
 	
 
-	public Controlador(VentanaPrincipal ventanaPrincipal, AutenticadorDeUsuarios autenticador)
+	public Controlador(InterfazPrincipal interfaz, AutenticadorDeUsuarios autenticador)
 	{
-		this.interfaz = ventanaPrincipal;
+		this.interfaz = interfaz;
 		this.autenticador = autenticador;
 		this.cargador = new CargadorDeDatos(this);
 		this.coordinadorPMS = new CoordinadorPMS(this);
 	}
 	
-	public Controlador()
-	{
-		// TODO Auto-generated constructor stub
-	}
-
 	public static ArrayList<String> getTiposHabitacion()
 	{
 		return TIPOS_HABITACION;
@@ -99,7 +94,7 @@ public class Controlador
 				ArrayList<Integer> fechaFinal = dateToIntArray(listaFechaF);
 				
 				if (fechaInicial == null || fechaFinal == null)
-					return "Fecha inválida (dd-mm).";
+					return "Fecha inválida (mm-dd).";
 				
 				String[] listaDias = dias.split("-");
 				ArrayList<String> diasTarifa = new ArrayList<String>();
@@ -191,8 +186,8 @@ public class Controlador
 	{
 		ArrayList<Integer> listaFinal = new ArrayList<Integer>();
 		
-		int dia = Integer.parseInt(lista[0]);
-		int mes = Integer.parseInt(lista[1]);
+		int mes = Integer.parseInt(lista[0]);
+		int dia = Integer.parseInt(lista[1]);
 		
 		if ((0 < mes) && (mes <= 12))
 		{
@@ -218,7 +213,13 @@ public class Controlador
 
 	public String revisionTarifas365Dias()
 	{
-		return coordinadorPMS.getFechasSinTarifaStr();
+		ArrayList<String> listaFechas = coordinadorPMS.getFechasSinTarifaStr();
+
+		String infoFechasStr = "Fechas sin tarifa: \n";
+		for (String fecha : listaFechas)
+			infoFechasStr += "\t" + fecha;
+
+		return infoFechasStr;
 	}
 
 	public String agregarHabitacion(String tipo, boolean cocina, boolean balcon, boolean vista, String torre,
@@ -270,5 +271,17 @@ public class Controlador
 	public boolean existeHabitacion(String idHabitacion)
 	{
 		return coordinadorPMS.existeHabitacion(idHabitacion);
+	}
+
+	public boolean revisarDisponibilidad(int numeroHabEstandar, int numeroHabSuite, int numeroHabSuiteDoble, String fechaInicial, String fechaFinal) 
+	{
+		String[] listaFechaI = fechaInicial.split("-");
+		String[] listaFechaF = fechaFinal.split("-");
+		LocalDate fechaI = LocalDate.of(Integer.parseInt(listaFechaI[0]), Integer.parseInt(listaFechaI[1]), Integer.parseInt(listaFechaI[2]));
+		LocalDate fechaF = LocalDate.of(Integer.parseInt(listaFechaF[0]), Integer.parseInt(listaFechaF[1]), Integer.parseInt(listaFechaF[2]));
+		
+		boolean disponible = true;
+		
+		return disponible;
 	}
 }

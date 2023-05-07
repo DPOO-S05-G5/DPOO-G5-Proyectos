@@ -126,6 +126,7 @@ public class InterfazRecepcion extends Interfaz
 			int numeroHabSuiteDoble = Integer.parseInt(input("¿Cuantas habitaciones Suite Doble?"));
 			
 			boolean disponibles = controlador.revisarDisponibilidad(numeroHabEstandar, numeroHabSuite, numeroHabSuiteDoble, fechaInicial, fechaFinal);
+			System.out.println(disponibles);
 			
 			if (disponibles)
 			{		

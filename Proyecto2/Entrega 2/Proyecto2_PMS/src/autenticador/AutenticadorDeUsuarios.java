@@ -45,7 +45,7 @@ public class AutenticadorDeUsuarios
 			{
 				Usuario newUser = new Usuario(userLogin, password1, type);
 				usersMap.put(userLogin, newUser);
-				salvador.salvarUsuario(newUser);
+				salvador.salvarObjeto(newUser);
 				return type;
 			}
 			else

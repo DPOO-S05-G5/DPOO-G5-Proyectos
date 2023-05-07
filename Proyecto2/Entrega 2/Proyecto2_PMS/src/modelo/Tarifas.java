@@ -1,15 +1,10 @@
 package modelo;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.TreeMap;
-
-import salvador.SalvadorDeDatos;
 
 public class Tarifas
 {

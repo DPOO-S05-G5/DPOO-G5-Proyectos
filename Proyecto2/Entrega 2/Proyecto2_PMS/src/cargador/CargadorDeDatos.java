@@ -21,7 +21,7 @@ import modelo.Tarifas;
 
 public class CargadorDeDatos
 {
-	private static final String DATA_DIR = "data/";
+	private static final String DATA_DIR = "./data/";
 	
 	private Controlador controlador;
 	private CoordinadorPMS coordinadorPMS;
@@ -83,6 +83,7 @@ public class CargadorDeDatos
 		controlador.setUsuarios(mapaUsuarios);
 		controlador.setTarifas(tarifas);
 		controlador.setCalendario(calendario);
+		controlador.setReservas(mapaReservas);
 		controlador.setHabitaciones(mapaHabitaciones);
 	}
 	

@@ -20,11 +20,13 @@ public class CoordinadorPMS
 	private Calendario calendario;
 	private HashMap<String, Habitacion> mapaHabitaciones;
 	private HashMap<String, Integer> cantidadTiposHabitacion;
+	private HashMap<String, Reserva> mapaReservas;
 
 	public CoordinadorPMS(Controlador controlador)
 	{
 		this.controlador = controlador;
-		this.salvador = new SalvadorDeDatos(this);
+		this.salvador = new SalvadorDeDatos();
+		salvador.setCoordinadorPMS(this);
 		this.cantidadTiposHabitacion = new HashMap<String, Integer>();
 		cantidadTiposHabitacion.put(ESTANDAR, 0);
 		cantidadTiposHabitacion.put(SUITE, 0);
@@ -51,7 +53,7 @@ public class CoordinadorPMS
 		ArrayList<Tarifa> tarifasEditadas = tarifas.addTarifa(tipo, valor, fechaInicial, fechaFinal, diasTarifa);
 		System.out.println(tarifasEditadas);
 		for (Tarifa tarifa : tarifasEditadas)
-			salvador.salvarTarifa(tarifa);
+			salvador.salvarObjeto(tarifa);
 	}
 	
 	public void eliminarTarifas(String tipo, ArrayList<Integer> fechaInicial, ArrayList<Integer> fechaFinal, ArrayList<String> diasTarifa)
@@ -59,7 +61,7 @@ public class CoordinadorPMS
 		ArrayList<Tarifa> tarifasEditadas = tarifas.removeTarifa(tipo, fechaInicial, fechaFinal, diasTarifa);
 		System.out.println(tarifasEditadas);
 		for (Tarifa tarifa : tarifasEditadas)
-			salvador.salvarTarifa(tarifa);
+			salvador.salvarObjeto(tarifa);
 	}
 	
 	public ArrayList<String> getFechasSinTarifaStr()
@@ -117,7 +119,7 @@ public class CoordinadorPMS
 	public String infoHabitacion(String id)
 	{
 		Habitacion habitacion = mapaHabitaciones.get(id);
-		salvador.salvarHabitacion(habitacion);
+		salvador.salvarObjeto(habitacion);
 		return habitacion.toString();
 	}
 
@@ -227,4 +229,9 @@ public class CoordinadorPMS
 	{
 		this.calendario = calendario;
 	}
+
+    public void setMapaReservas(HashMap<String, Reserva> mapaReservas)
+	{
+		this.mapaReservas = mapaReservas;
+    }
 }

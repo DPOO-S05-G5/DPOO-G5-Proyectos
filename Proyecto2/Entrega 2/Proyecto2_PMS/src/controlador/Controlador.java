@@ -13,6 +13,7 @@ import consola.InterfazPrincipal;
 import modelo.Calendario;
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;
+import modelo.Reserva;
 import modelo.Tarifas;
 
 public class Controlador
@@ -291,5 +292,10 @@ public class Controlador
     public void setCalendario(Calendario calendario) 
 	{
 		coordinadorPMS.setCalendario(calendario);
+    }
+
+    public void setReservas(HashMap<String, Reserva> mapaReservas) 
+	{
+		coordinadorPMS.setMapaReservas(mapaReservas);
     }
 }

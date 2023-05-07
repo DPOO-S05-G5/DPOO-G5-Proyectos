@@ -16,35 +16,34 @@ public class DialogInicial extends JDialog implements ActionListener
 	
 	private VentanaPrincipal padre;
 	
-	public DialogInicial(VentanaPrincipal ventanaPrincipal, Color foregroundColor, Color backgroundColor, Color buttonColor)
+	public DialogInicial(VentanaPrincipal ventanaPrincipal, Color backColor, Color textColor, Color buttonColor)
 	{
 		padre = ventanaPrincipal;
 		
-		getContentPane().setBackground(backgroundColor);
-		getContentPane().setForeground(foregroundColor);
+		getContentPane().setBackground(backColor);
+		getContentPane().setForeground(textColor);
 		
 		setLayout(new FlowLayout());
 		
 		JButton registerButton = new JButton("Registrar nuevo usuario");
 		registerButton.addActionListener(this);
 		registerButton.setActionCommand(REGISTRAR);
-		registerButton.setForeground(foregroundColor);
+		registerButton.setForeground(textColor);
 		registerButton.setBackground(buttonColor);
 		
 		JButton loginButton = new JButton("Ingresar con usuario existente");
 		loginButton.addActionListener(this);
 		loginButton.setActionCommand(LOGIN);
-		loginButton.setForeground(foregroundColor);
+		loginButton.setForeground(textColor);
 		loginButton.setBackground(buttonColor);
 		
 		add(registerButton);
 		add(loginButton);
 		
 		setTitle("Inicio");
-		setSize(200, 200);
+		setSize(200, 120);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
 	}
 
 	@Override
@@ -55,7 +54,7 @@ public class DialogInicial extends JDialog implements ActionListener
 		if (command.equals(REGISTRAR))
 		{
 			dispose();
-			padre.dialogoRegistrar();
+			padre.dialogRegistrar();
 		}
 		else
 		{

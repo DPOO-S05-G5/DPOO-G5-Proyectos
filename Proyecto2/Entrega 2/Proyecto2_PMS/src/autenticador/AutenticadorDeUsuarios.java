@@ -30,29 +30,23 @@ public class AutenticadorDeUsuarios
 		this.register = new Register();
 	}
 	
-	public String registrarUsuario()
-	{
-		String type = register.selectType();
-		String userLogin = register.getLogin();
-		String password1 = register.getPassword1();
-		String password2 = register.getPassword2();
-		
-		boolean userExists = usersMap.containsKey(userLogin);
-		
+	public void registrarUsuario(String tipo, String login, String password, String confirmPassword) throws Exception
+	{		
+		boolean userExists = usersMap.containsKey(login);
+
 		if (!userExists)
 		{
-			if (password1.equals(password2))
+			if (confirmPassword.equals(password))
 			{
-				Usuario newUser = new Usuario(userLogin, password1, type);
-				usersMap.put(userLogin, newUser);
+				Usuario newUser = new Usuario(login, password, tipo);
+				usersMap.put(login, newUser);
 				salvador.salvarObjeto(newUser);
-				return type;
 			}
 			else
-				return register.passwordMistake();
+				throw new Exception("Las contraseñas no coinciden");
 		}
 		else
-			return register.userExists();
+			throw new Exception("El usuario ya existe");
 	}
 	
 	public String iniciarSesion()

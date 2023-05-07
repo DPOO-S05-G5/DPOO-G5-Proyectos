@@ -93,4 +93,19 @@ public class Calendario
 		
 		return disponible;
 	}
+
+    public void eliminarReserva(Reserva reserva)
+	{
+		LocalDate fechaInicial = reserva.getFechaInicial();
+		LocalDate fechaFinal = reserva.getFechaFinal();
+
+		NavigableMap<LocalDate, ArrayList<Reserva>> fechasEnRango = calendario.subMap(fechaInicial, true, fechaFinal, true);
+
+		for (Entry<LocalDate, ArrayList<Reserva>> entry : fechasEnRango.entrySet())
+		{
+			ArrayList<Reserva> reservas = entry.getValue();
+			reservas.remove(reserva);
+			
+		}
+    }
 }

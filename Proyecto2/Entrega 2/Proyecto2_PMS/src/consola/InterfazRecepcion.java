@@ -162,6 +162,10 @@ public class InterfazRecepcion extends Interfaz
 	private void ejecutarCancelarReserva()
 	{
 		// TODO Auto-generated method stub
+		String id = input("Documento del huesped responsable");
+		String fechaInicial = input("Fecha inicial (aaaa-mm-dd)");
+
+		controlador.cancelarReserva(id, fechaInicial);
 	}
 
 	@Override

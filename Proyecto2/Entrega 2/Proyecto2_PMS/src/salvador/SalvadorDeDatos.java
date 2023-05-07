@@ -8,6 +8,7 @@ import java.io.IOException;
 import autenticador.Usuario;
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;
+import modelo.Huesped;
 import modelo.Reserva;
 import modelo.Tarifa;
 
@@ -18,6 +19,7 @@ public class SalvadorDeDatos
 	private static final String TARIFAS_DIR = DATA_DIR + "tarifas/";
 	private static final String RESERVAS_DIR = DATA_DIR + "reservas/";
 	private static final String HABITACIONES_DIR = DATA_DIR + "habitaciones/";
+	private static final String HUESPEDES_DIR = DATA_DIR + "huespedes/";
 	private static final String SERVICIOS_DIR = DATA_DIR + "servicios/";
 	private static final String PRODUCTOS_DIR = DATA_DIR + "productos/";
 	private CoordinadorPMS coordinadorPMS;
@@ -47,6 +49,11 @@ public class SalvadorDeDatos
 				Tarifa tarifa = (Tarifa) obj;
 				fos = new FileOutputStream(TARIFAS_DIR + tarifa.toString() + ".xml");
 			}
+			else if (obj instanceof Huesped)
+			{
+				Huesped huesped = (Huesped) obj;
+				fos = new FileOutputStream(HUESPEDES_DIR + huesped.getId() + ".xml");
+			}
 			else if (obj instanceof Reserva)
 			{
 				Reserva reserva = (Reserva) obj;
@@ -69,54 +76,6 @@ public class SalvadorDeDatos
 			
 	}
 	
-	// public void salvarUsuario(Usuario usuario)
-	// {
-	// 	try
-	// 	{
-	// 		FileOutputStream fos = new FileOutputStream(USUARIOS_DIR + usuario.getLogin() + ".xml");
-	// 		XMLEncoder encoder = new XMLEncoder(fos);
-	// 		encoder.writeObject(usuario);
-	// 		encoder.close();
-	// 		fos.close();
-	// 	}
-	// 	catch (IOException e)
-	// 	{
-	// 		e.printStackTrace();
-	// 	}
-	// }
-
-	// public void salvarTarifa(Tarifa tarifa)
-	// {
-	// 	try
-	// 	{
-	// 		FileOutputStream fos = new FileOutputStream(TARIFAS_DIR + tarifa.toString() + ".xml");
-	// 		XMLEncoder encoder = new XMLEncoder(fos);
-	// 		encoder.writeObject(tarifa);
-	// 		encoder.close();
-	// 		fos.close();
-	// 	}
-	// 	catch (IOException e)
-	// 	{
-	// 		e.printStackTrace();
-	// 	}
-	// }
-	
-	// public void salvarHabitacion(Habitacion habitacion)
-	// {
-	// 	try
-	// 	{
-	// 		FileOutputStream fos = new FileOutputStream(HABITACIONES_DIR + habitacion.getId() + ".xml");
-	// 		XMLEncoder encoder = new XMLEncoder(fos);
-	// 		encoder.writeObject(habitacion);
-	// 		encoder.close();
-	// 		fos.close();
-	// 		coordinadorPMS.getCantidadTiposHabitacion().put(habitacion.getTipo(), coordinadorPMS.getCantidadTiposHabitacion().get(habitacion.getTipo()) + 1);
-	// 	}
-	// 	catch (IOException e)
-	// 	{
-	// 		e.printStackTrace();
-	// 	}
-	// }
 
 	public void borrarHabitacion(String id)
 	{
@@ -133,5 +92,22 @@ public class SalvadorDeDatos
 				}
 			}
 		}		
+	}
+
+	public void eliminarObjeto(Reserva reserva)
+	{
+		File directorio = new File(RESERVAS_DIR);
+		String[] hijos = directorio.list();
+		if (hijos != null)
+		{
+			for (String archivo : hijos)
+			{
+				if (archivo.equals(reserva.getId() + ".xml"))
+				{
+					File archivoAEliminar = new File(RESERVAS_DIR + archivo);
+					archivoAEliminar.delete();
+				}
+			}
+		}
 	}
 }

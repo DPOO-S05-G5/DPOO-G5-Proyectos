@@ -1,6 +1,9 @@
 package controlador;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -239,22 +242,6 @@ public class Controlador
 		return coordinadorPMS.catalogoHabitaciones();
 	}
 
-	public String getInfoHabitacionesDisponibles(LocalDate fecha, int numeroDeNoches)
-	{
-		String infoHabitacionesDisponibles = "";
-		ArrayList<Habitacion> habitaciones = coordinadorPMS.getHabitacionesDisponibles(fecha, numeroDeNoches);
-		int i = 1;
-		if (habitaciones != null)
-			for (Habitacion hab : habitaciones)
-			{
-				infoHabitacionesDisponibles += i + ". " + hab.toString() + "\n";
-				i++;
-			}
-		else
-			infoHabitacionesDisponibles = "No hay habitaciones para " + numeroDeNoches + " noches entre " + fecha.toString() + " y " + fecha.plusDays(numeroDeNoches).toString() + ".";
-		return infoHabitacionesDisponibles;
-	}
-
 	public boolean existeHabitacion(String idHabitacion)
 	{
 		return coordinadorPMS.existeHabitacion(idHabitacion);
@@ -300,4 +287,21 @@ public class Controlador
 		
 		coordinadorPMS.nuevaReserva(numeroHabsEstandar, numeroHabsSuite, numeroHabsSuiteDoble, idHuesped, nombre, apellidos, celular, correo, fechaI, fechaF);
 	}
+
+    public boolean cancelarReserva(String id, String fechaInicial)
+	{
+		String[] listaFechaI = fechaInicial.split("-");
+		LocalDate fechaI = LocalDate.of(Integer.parseInt(listaFechaI[0]), Integer.parseInt(listaFechaI[1]), Integer.parseInt(listaFechaI[2]));
+		LocalTime horaCheckIn = LocalTime.of(15, 0);
+		LocalDateTime fechaHoraI = LocalDateTime.of(fechaI, horaCheckIn);
+		
+		LocalDate hoy = LocalDate.now();
+		LocalTime horaActual = LocalTime.now();
+		LocalDateTime fechaHoraActual = LocalDateTime.of(hoy, horaActual);
+		
+		if (48 <= ChronoUnit.HOURS.between(fechaHoraActual, fechaHoraI))
+			return false;
+		else
+			return coordinadorPMS.cancelarReserva(id + "-" + fechaInicial);
+    }
 }

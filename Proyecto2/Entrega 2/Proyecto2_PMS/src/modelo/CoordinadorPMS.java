@@ -275,9 +275,14 @@ public class CoordinadorPMS
 
 		Huesped huesped = new Huesped(nombre, apellidos, id, correo, celular);
 		Reserva reserva = new Reserva(huesped, fechaI, fechaF, habitaciones, precioReserva);
+		for (Habitacion habitacion : habitaciones)
+		habitacion.setReservaActual(reserva);
+		
 		reserva.agregarHuesped(huesped);
 		mapaReservas.put(reserva.getId(), reserva);
+		calendario.addReserva(reserva);
 		reservaActual = reserva;
+		salvador.salvarObjeto(reserva);
     }
 
 	public void agregarHuesped(String nombres, String apellidos, String documento, String correo, String celular)
@@ -285,5 +290,23 @@ public class CoordinadorPMS
 		Huesped huesped = new Huesped(nombres, apellidos, documento, correo, celular);
 		mapaHuespedes.put(documento, huesped);
 		reservaActual.agregarHuesped(huesped);
+	}
+
+	public boolean cancelarReserva(String id)
+	{
+		Reserva reserva = mapaReservas.get(id);
+		if (reserva != null)
+		{
+			for (Habitacion habitacion : reserva.getHabitaciones())
+			{
+				habitacion.setReservaActual(null);
+				habitacion.setHuespedes(null);
+			}
+			mapaReservas.remove(id);
+			calendario.eliminarReserva(reserva);
+			salvador.eliminarObjeto(reserva);
+			return true;
+		}
+		return false;
 	}
 }

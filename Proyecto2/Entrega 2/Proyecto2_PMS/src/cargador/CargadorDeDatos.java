@@ -13,6 +13,7 @@ import modelo.Calendario;
 import modelo.CoordinadorPMS;
 import modelo.Fecha;
 import modelo.Habitacion;
+import modelo.Huesped;
 import modelo.Reserva;
 import modelo.Tarifa;
 import modelo.Tarifas;
@@ -28,6 +29,7 @@ public class CargadorDeDatos
 	private Calendario calendario;
 	private HashMap<String, Habitacion> mapaHabitaciones;
 	private HashMap<String, Reserva> mapaReservas;
+	private HashMap<String, Huesped> mapaHuespedes;
 	
 	public CargadorDeDatos(Controlador controlador, CoordinadorPMS coordinadorPMS)
 	{
@@ -125,6 +127,12 @@ public class CargadorDeDatos
 						String id = reserva.getId();
 						mapaReservas.put(id, reserva);
 						calendario.addReserva(reserva);
+					}
+					else if (obj instanceof Huesped)
+					{
+						Huesped huesped = (Huesped) obj;
+						String id = huesped.getId();
+						mapaHuespedes.put(id, huesped);
 					}
 					else 
 					{

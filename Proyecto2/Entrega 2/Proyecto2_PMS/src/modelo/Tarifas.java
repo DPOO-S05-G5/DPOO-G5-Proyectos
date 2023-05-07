@@ -117,4 +117,29 @@ public class Tarifas
 		
 		return tarifasEditadas;
 	}
+
+    public int calcularValorTarifa(String tipo, int mesInicial, int diaInicial, int diaSemanaInicial, int mesFinal, int diaFinal)
+	{
+		int valorTarifa = 0;
+
+		Fecha fechaI = new Fecha(mesInicial, diaInicial);
+		Fecha fechaF = new Fecha(mesFinal, diaFinal);
+
+		NavigableMap<Fecha, Tarifa> fechasEnRango = arbolTarifas.subMap(fechaI, true, fechaF, true);
+
+		int diaSemana = diaSemanaInicial;
+
+		for (Entry<Fecha, Tarifa> entry : fechasEnRango.entrySet())
+		{
+			Tarifa tarifa = entry.getValue();
+			valorTarifa += tarifa.getValorTarifa(tipo, diaSemana);
+			
+			diaSemana++;
+
+			if (diaSemana == 7)
+				diaSemana = 0;
+		}
+
+        return valorTarifa;
+    }
 }

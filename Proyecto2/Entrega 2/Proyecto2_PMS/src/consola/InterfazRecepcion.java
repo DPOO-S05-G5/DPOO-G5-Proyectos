@@ -131,15 +131,21 @@ public class InterfazRecepcion extends Interfaz
 			boolean disponibles = controlador.revisarDisponibilidad(numeroHabEstandar, numeroHabSuite, numeroHabSuiteDoble, fechaInicial, fechaFinal);
 			System.out.println(disponibles);
 			
+
 			if (disponibles)
-			{		
-				int numeroHuespedes = Integer.parseInt(input("¿Cuantos huépedes?"));
+			{					
+				int numeroHuespedes = Integer.parseInt(input("¿Cuantos huespedes?"));				
+				controlador.nuevaReserva(numeroHabEstandar, numeroHabSuite, numeroHabSuiteDoble, documentoHuespedResponsable, nombreHuespedResponsable, apellidosHuespedResponsable, correoHuespedResponsable, celularHuespedResponsable, fechaFinal, fechaFinal);
 				
-				for (int i=0; i<numeroHuespedes; i++)
+				for (int  i=1; i<numeroHuespedes; i++)
 				{
-					controlador.agregarHuesped();
+					String nombreHuesped = input("Nombre del huesped");
+					String apellidosHuesped = input("Apellidos del huesped");
+					String documentoHuesped = input("Documento de ID");
+					String correoHuesped = input("Correo electronico");
+					String celularHuesped = input("Número de celular");
+					controlador.agregarHuesped(nombreHuesped, apellidosHuesped, documentoHuesped, correoHuesped, celularHuesped);
 				}
-				
 				System.out.println("Reserva exitosa!");
 			}
 			else

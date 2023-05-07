@@ -21,6 +21,8 @@ public class CoordinadorPMS
 	private HashMap<String, Habitacion> mapaHabitaciones;
 	private HashMap<String, Integer> cantidadTiposHabitacion;
 	private HashMap<String, Reserva> mapaReservas;
+	private HashMap<String, Huesped> mapaHuespedes;
+	private Reserva reservaActual;
 
 	public CoordinadorPMS(Controlador controlador)
 	{
@@ -165,10 +167,9 @@ public class CoordinadorPMS
 		return catalogo;
 	}
 
-	public ArrayList<Habitacion> getHabitacionesDisponibles(LocalDate initialDate, int numeroDeNoches)
+	public ArrayList<Habitacion> getHabitacionesDisponibles(String tipo,LocalDate initialDate, LocalDate finalDate)
 	{
 		ArrayList<Habitacion> habitacionesDisponibles = new ArrayList<Habitacion>();
-		LocalDate finalDate = initialDate.plusDays(numeroDeNoches);
 		
 		if (mapaHabitaciones != null)
 		{
@@ -193,7 +194,7 @@ public class CoordinadorPMS
 							break;
 						}
 					}
-					if (disponible)
+					if (disponible && habitacion.getTipo().equals(tipo))
 					{
 						habitacionesDisponibles.add(habitacion);
 					}
@@ -243,5 +244,46 @@ public class CoordinadorPMS
 			habitacion.setReservaActual(null);
 			habitacion.setHuespedes(null);
 		}
+	}
+
+    public void nuevaReserva(int numeroHabsEstandar, int numeroHabSuite, int numeroHabsSuiteDoble, String id, String nombre, String apellidos, String celular, String correo, LocalDate fechaI,
+            LocalDate fechaF) 
+	{
+		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
+		
+		if (numeroHabsEstandar > 0)
+			for (int i=0; i<numeroHabsEstandar; i++)
+				habitaciones.add(getHabitacionesDisponibles(ESTANDAR, fechaI, fechaF).get(i));
+		
+		if (numeroHabSuite > 0)
+			for (int i=0; i<numeroHabSuite; i++)
+				habitaciones.add(getHabitacionesDisponibles(SUITE, fechaI, fechaF).get(i));
+			
+		if (numeroHabsSuiteDoble > 0)
+			for (int i=0; i<numeroHabsSuiteDoble; i++)
+				habitaciones.add(getHabitacionesDisponibles(SUITE_DOBLE, fechaI, fechaF).get(i));
+		
+		int precioReserva = 0;
+		int mesInicial = fechaI.getMonthValue();
+		int diaInicial = fechaI.getDayOfMonth();
+		int diaSemanaInicial = fechaI.getDayOfWeek().getValue()-1;
+		int mesFinal = fechaF.getMonthValue();
+		int diaFinal = fechaF.getDayOfMonth();
+
+		for (Habitacion habitacion : habitaciones)
+			precioReserva += tarifas.calcularValorTarifa(habitacion.getTipo(), mesInicial, diaInicial, diaSemanaInicial, mesFinal, diaFinal);
+
+		Huesped huesped = new Huesped(nombre, apellidos, id, correo, celular);
+		Reserva reserva = new Reserva(huesped, fechaI, fechaF, habitaciones, precioReserva);
+		reserva.agregarHuesped(huesped);
+		mapaReservas.put(reserva.getId(), reserva);
+		reservaActual = reserva;
+    }
+
+	public void agregarHuesped(String nombres, String apellidos, String documento, String correo, String celular)
+	{
+		Huesped huesped = new Huesped(nombres, apellidos, documento, correo, celular);
+		mapaHuespedes.put(documento, huesped);
+		reservaActual.agregarHuesped(huesped);
 	}
 }

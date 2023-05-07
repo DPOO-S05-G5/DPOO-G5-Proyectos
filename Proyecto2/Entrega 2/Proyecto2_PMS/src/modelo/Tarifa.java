@@ -84,9 +84,15 @@ public class Tarifa
 		
 		return info;
 	}
+
 	@Override
     public String toString() 
 	{
         return "tarifa-" + fecha.toString();
     }
+
+	public int getValorTarifa(String tipo, int diaSemana)
+	{
+		return mapaDiasSemana.get(DIAS[diaSemana]).get(tipo);
+	}
 }

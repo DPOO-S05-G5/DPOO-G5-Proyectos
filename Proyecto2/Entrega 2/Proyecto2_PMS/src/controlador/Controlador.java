@@ -270,9 +270,9 @@ public class Controlador
 		return coordinadorPMS.revisarDisponibilidad(numeroHabEstandar, numeroHabSuite, numeroHabSuiteDoble, fechaI, fechaF);
 	}
 
-    public void agregarHuesped() 
+    public void agregarHuesped(String nombres, String apellidos, String documento, String correo, String celular) 
 	{
-
+		coordinadorPMS.agregarHuesped(nombres, apellidos, documento, celular, correo);
     }
 
     public void setCalendario(Calendario calendario) 
@@ -290,4 +290,14 @@ public class Controlador
 		String idReserva = idHuesped + "-" + fechaInicial;
 		coordinadorPMS.checkOut(idReserva);
     }
+
+	public void nuevaReserva(int numeroHabsEstandar, int numeroHabsSuite, int numeroHabsSuiteDoble, String idHuesped, String nombre, String apellidos, String celular, String correo, String fechaInicial, String fechaFinal)
+	{
+		String[] listaFechaI = fechaInicial.split("-");
+		String[] listaFechaF = fechaFinal.split("-");
+		LocalDate fechaI = LocalDate.of(Integer.parseInt(listaFechaI[0]), Integer.parseInt(listaFechaI[1]), Integer.parseInt(listaFechaI[2]));
+		LocalDate fechaF = LocalDate.of(Integer.parseInt(listaFechaF[0]), Integer.parseInt(listaFechaF[1]), Integer.parseInt(listaFechaF[2]));
+		
+		coordinadorPMS.nuevaReserva(numeroHabsEstandar, numeroHabsSuite, numeroHabsSuiteDoble, idHuesped, nombre, apellidos, celular, correo, fechaI, fechaF);
+	}
 }

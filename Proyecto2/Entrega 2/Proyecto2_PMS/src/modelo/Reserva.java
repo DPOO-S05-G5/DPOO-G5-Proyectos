@@ -8,10 +8,8 @@ public class Reserva
 	private Huesped reservador;
 	private String cedulaReservador;
 	private String id;
-	private int cantidadHuespedes;
 	private LocalDate fechaInicial;
 	private LocalDate fechaFinal;
-	private int noches;
 	private int precioTotal;
 	private ArrayList<Habitacion> habitaciones;
 	
@@ -20,24 +18,15 @@ public class Reserva
 		
 	}
 
-	public Reserva(Huesped reservador, int cantidadHuespedes, LocalDate fechaInicial, LocalDate fechaFinal, int noches,
-			ArrayList<Habitacion> habitaciones)
+	public Reserva(Huesped reservador, LocalDate fechaInicial, LocalDate fechaFinal, ArrayList<Habitacion> habitaciones, int precioTotal)
 	{
 		this.reservador = reservador;
 		this.cedulaReservador = reservador.getId();
 		this.id = cedulaReservador + "-" + fechaInicial.toString();
-		this.cantidadHuespedes = cantidadHuespedes;
 		this.fechaInicial = fechaInicial;
 		this.fechaFinal = fechaFinal;
-		this.noches = noches;
 		this.habitaciones = habitaciones;
-		this.precioTotal = calcularPrecioTotal();
-	}
-
-	private int calcularPrecioTotal()
-	{
-		// TODO Auto-generated method stub
-		return 0;
+		this.precioTotal = precioTotal;
 	}
 
     public Huesped getReservador()
@@ -68,17 +57,7 @@ public class Reserva
 	public void setId(String id)
 	{
 		this.id = id;
-	}
-
-	public int getCantidadHuespedes()
-	{
-		return cantidadHuespedes;
-	}
-
-	public void setCantidadHuespedes(int cantidadHuespedes)
-	{
-		this.cantidadHuespedes = cantidadHuespedes;
-	}
+	}	
 
 	public LocalDate getFechaInicial()
 	{
@@ -98,16 +77,6 @@ public class Reserva
 	public void setFechaFinal(LocalDate fechaFinal)
 	{
 		this.fechaFinal = fechaFinal;
-	}
-
-	public int getNoches()
-	{
-		return noches;
-	}
-
-	public void setNoches(int noches)
-	{
-		this.noches = noches;
 	}
 
 	public int getPrecioTotal()
@@ -162,4 +131,16 @@ public class Reserva
 		}
 		return contador;
     }
+
+	public void agregarHuesped(Huesped huesped)
+	{
+		for (Habitacion hab : habitaciones)
+		{
+			if (hab.getHuespedes().size() < hab.getCapacidadAdultos() + hab.getCapacidadNinios())
+			{
+				hab.getHuespedes().put(huesped.getId(), huesped);
+				break;
+			}
+		}
+	}
 }

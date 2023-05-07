@@ -15,8 +15,8 @@ public abstract class Habitacion
 	private ArrayList<Cama> camas;
 	private int capacidadAdultos;
 	private int capacidadNinios;
-	// private HashMap<String, Huesped> huespedes;
-	// private Reserva reservaActual;
+	private HashMap<String, Huesped> huespedes;
+	private Reserva reservaActual;
 	private HashMap<String, Reserva> reservas;
 	
 	public Habitacion()
@@ -154,6 +154,31 @@ public abstract class Habitacion
 		this.reservas.put(reserva.getId(), reserva);
 	}
 	
+	public Reserva getReservaActual()
+	{
+		return reservaActual;
+	}
+
+	public void setReservaActual(Reserva reserva)
+	{
+		this.reservaActual = reserva;
+	}
+
+	public HashMap<String, Huesped> getHuespedes()
+	{
+		return huespedes;
+	}
+
+	public void setHuespedes(HashMap<String, Huesped> huespedes)
+	{
+		this.huespedes = huespedes;
+	}
+
+	public void addHuesped(Huesped huesped)
+	{
+		this.huespedes.put(huesped.getId(), huesped);
+	}
+
 	@Override
 	public String toString()
 	{

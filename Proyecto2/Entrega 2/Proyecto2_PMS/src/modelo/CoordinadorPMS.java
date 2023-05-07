@@ -234,4 +234,14 @@ public class CoordinadorPMS
 	{
 		this.mapaReservas = mapaReservas;
     }
+
+	public void checkOut(String idReserva) 
+	{
+		Reserva reserva = mapaReservas.get(idReserva);
+		for (Habitacion habitacion : reserva.getHabitaciones())
+		{
+			habitacion.setReservaActual(null);
+			habitacion.setHuespedes(null);
+		}
+	}
 }

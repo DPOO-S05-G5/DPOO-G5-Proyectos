@@ -88,8 +88,10 @@ public class InterfazRecepcion extends Interfaz
 	private void ejecutarCheckOut()
 	{
 		String idHuesped = input("ID del huesped responsable");
-		controlador.generarTextoFactura();
-		controlador.checkOut();
+		String fechaInicial = input("Fecha inicial (aaaa-mm-dd)");
+
+		// controlador.generarTextoFactura();
+		controlador.checkOut(idHuesped, fechaInicial);
 	}
 
 	private void ejecutarGetInfoHuesped()

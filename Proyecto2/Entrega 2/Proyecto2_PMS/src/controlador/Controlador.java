@@ -284,4 +284,10 @@ public class Controlador
 	{
 		coordinadorPMS.setMapaReservas(mapaReservas);
     }
+
+    public void checkOut(String idHuesped, String fechaInicial) 
+	{
+		String idReserva = idHuesped + "-" + fechaInicial;
+		coordinadorPMS.checkOut(idReserva);
+    }
 }

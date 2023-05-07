@@ -44,7 +44,7 @@ public class InterfazAdmin extends JFrame implements ActionListener
     public InterfazAdmin(ControladorVentanas ventanaPrincipal)
     {
         setTitle("Administrador");
-        
+        padre = ventanaPrincipal;   
         backColor = ControladorVentanas.BACK_COLOR;
         textColor = ControladorVentanas.TEXT_COLOR;
         buttonColor = ControladorVentanas.BUTTON_COLOR;
@@ -177,6 +177,36 @@ public class InterfazAdmin extends JFrame implements ActionListener
     {
         // TODO Auto-generated method stub
         String comando = e.getActionCommand();
-        
+
+        switch (comando)
+        {
+            case ADD_TARIFA:
+                DialogAddTarifa dialogAddATrifa = new DialogAddTarifa(padre, backColor, textColor, buttonColor);
+            case FECHAS_SIN_TARIFA:
+                mostrarFechasSinTarifa();
+            case ADD_HAB:
+                DialogAddHab dialogAddHab = new DialogAddHab(padre, backColor, textColor, buttonColor);
+            case REMOVE_HAB:
+                DialogRemoveHab dialogRemoveHab = new DialogRemoveHab(padre, backColor, textColor, buttonColor);
+            case SHOW_HABS:
+                mostrarCatalogoHabs();
+            case SHOW_MATRIX:
+                mostarMatrix();
+            case GO_TO_RECEPCION:
+                padre.iniciarInterfazRecepcionista();
+                dispose();
+            case GO_TO_SERVICIOS:
+                padre.iniciarInterfazServicios();
+                dispose();
+        }  
+    }
+
+    private void mostarMatrix() {
+    }
+
+    private void mostrarCatalogoHabs() {
+    }
+
+    private void mostrarFechasSinTarifa() {
     }    
 }

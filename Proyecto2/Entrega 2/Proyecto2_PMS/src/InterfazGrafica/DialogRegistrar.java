@@ -1,7 +1,6 @@
 package InterfazGrafica;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -17,12 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import autenticador.AutenticadorDeUsuarios;
-import controlador.Controlador;
 
 public class DialogRegistrar extends JDialog implements ActionListener
 {
 
-	private static final String TIPO = "tipo";
 	private static final String[] TIPOS_USUARIO = {"admin", "recepcionista", "empleado"};
 	
 	private AutenticadorDeUsuarios autenticador;
@@ -33,7 +30,7 @@ public class DialogRegistrar extends JDialog implements ActionListener
 
 	JPanel northPanel;
 	JLabel tiposLabel;
-	JComboBox tiposComboBox;
+	JComboBox<String> tiposComboBox;
 
 	JPanel centerPanel;
 	JLabel loginLabel;
@@ -65,7 +62,6 @@ public class DialogRegistrar extends JDialog implements ActionListener
 		add(northPanel, BorderLayout.NORTH);
 		add(centerPanel, BorderLayout.CENTER);
 		add(southPanel, BorderLayout.SOUTH);
-		add(southPanel, BorderLayout.SOUTH);
 
 		setTitle("Registrar nuevo empleado");
 		setSize(500, 200);
@@ -83,8 +79,6 @@ public class DialogRegistrar extends JDialog implements ActionListener
 		tiposLabel.setForeground(textColor);
 		tiposLabel.setBackground(backColor);
 		tiposComboBox = new JComboBox<String>(TIPOS_USUARIO);
-		tiposComboBox.addActionListener(this);
-		tiposComboBox.setActionCommand(TIPO);
 		tiposComboBox.setForeground(backColor);
 		tiposComboBox.setBackground(textColor);
 		

@@ -87,8 +87,9 @@ public class InterfazRecepcion extends Interfaz
 
 	private void ejecutarCheckOut()
 	{
-		// TODO Auto-generated method stub
-		
+		String idHuesped = input("ID del huesped responsable");
+		controlador.generarTextoFactura();
+		controlador.checkOut();
 	}
 
 	private void ejecutarGetInfoHuesped()
@@ -153,7 +154,6 @@ public class InterfazRecepcion extends Interfaz
 	private void ejecutarCancelarReserva()
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

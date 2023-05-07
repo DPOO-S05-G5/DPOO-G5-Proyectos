@@ -25,7 +25,7 @@ public class Reserva
 	{
 		this.reservador = reservador;
 		this.cedulaReservador = reservador.getId();
-		this.id = cedulaReservador + reservador.getReservas().size();
+		this.id = cedulaReservador + "-" + fechaInicial.toString();
 		this.cantidadHuespedes = cantidadHuespedes;
 		this.fechaInicial = fechaInicial;
 		this.fechaFinal = fechaFinal;

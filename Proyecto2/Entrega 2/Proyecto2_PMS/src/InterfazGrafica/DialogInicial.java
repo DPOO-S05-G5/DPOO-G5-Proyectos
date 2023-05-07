@@ -31,7 +31,7 @@ public class DialogInicial extends JDialog implements ActionListener
 		registerButton.setForeground(textColor);
 		registerButton.setBackground(buttonColor);
 		
-		JButton loginButton = new JButton("Ingresar con usuario existente");
+		JButton loginButton = new JButton("Iniciar sesión");
 		loginButton.addActionListener(this);
 		loginButton.setActionCommand(LOGIN);
 		loginButton.setForeground(textColor);

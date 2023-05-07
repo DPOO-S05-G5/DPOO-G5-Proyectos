@@ -49,10 +49,8 @@ public class AutenticadorDeUsuarios
 			throw new Exception("El usuario ya existe");
 	}
 	
-	public String iniciarSesion()
+	public String iniciarSesion(String userLogin, String password) throws Exception
 	{
-		String userLogin = login.getLogin();
-		String password = login.getPassword();
 		Usuario user = usersMap.get(userLogin);
 		
 		if (user != null)
@@ -61,10 +59,10 @@ public class AutenticadorDeUsuarios
 			if (userPassword.equals(password))
 				return user.getType();
 			else
-				return login.incorrectPassword();
+				throw new Exception("Contraseña incorrecta");
 		}
 		else
-			return login.userNotFound();
+			throw new Exception("El usuario no existe");
 	}
 	
 	public void setUsersMap(HashMap<String, Usuario> usersMap)

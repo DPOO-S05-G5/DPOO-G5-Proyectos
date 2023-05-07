@@ -11,9 +11,9 @@ import controlador.Controlador;
 
 public class VentanaPrincipal extends JFrame
 {
-	private static final String EMPLEADO = "empleado";
-	private static final String RECEPCIONISTA = "recepcionista";
-	private static final String ADMIN = "admin";
+	public static final String EMPLEADO = "empleado";
+	public static final String RECEPCIONISTA = "recepcionista";
+	public static final String ADMIN = "admin";
 	private static final Color BACK_COLOR = new Color(10, 28, 46);
 	private static final Color TEXT_COLOR = new Color(229, 229, 229);
 	private static final Color BUTTON_COLOR = new Color(0, 128, 128);
@@ -27,7 +27,7 @@ public class VentanaPrincipal extends JFrame
 	public VentanaPrincipal()
 	{
 		autenticador = new AutenticadorDeUsuarios();
-		controlador = new Controlador(this);
+		controlador = new Controlador(this, autenticador);
 		controlador.cargarDatos();
 
 		dialogInicial = new DialogInicial(this, BACK_COLOR, TEXT_COLOR, BUTTON_COLOR);
@@ -40,12 +40,43 @@ public class VentanaPrincipal extends JFrame
 
 	public void dialogLogin()
 	{
-		dialogLogin	= new DialogLogin(this, BACK_COLOR, TEXT_COLOR, BUTTON_COLOR);
+		dialogLogin	= new DialogLogin(this, autenticador, BACK_COLOR, TEXT_COLOR, BUTTON_COLOR);
 	}
 
 	public static void main(String[] args)
 	{
 		FlatLightLaf.install();
 		new VentanaPrincipal();
+	}
+
+	public void actualizar(String tipo) 
+	{
+		if (tipo.equals(EMPLEADO))
+		{
+			iniciarInterfazEmpleado();
+		}
+		else if (tipo.equals(RECEPCIONISTA))
+		{
+			iniciarInterfazRecepcionista();
+		}
+		else if (tipo.equals(ADMIN))
+		{
+			iniciarInterfazAdmin();
+		}
+	}
+
+	private void iniciarInterfazAdmin() 
+	{
+		
+	}
+
+	private void iniciarInterfazRecepcionista() 
+	{
+
+	}
+
+	private void iniciarInterfazEmpleado() 
+	{
+
 	}
 }

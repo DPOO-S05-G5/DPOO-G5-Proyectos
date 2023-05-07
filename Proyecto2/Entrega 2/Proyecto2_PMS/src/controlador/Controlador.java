@@ -33,10 +33,10 @@ public class Controlador
 	private CoordinadorPMS coordinadorPMS;
 	
 
-	public Controlador(VentanaPrincipal ventanaPrincipal)
+	public Controlador(VentanaPrincipal ventanaPrincipal, AutenticadorDeUsuarios autenticador)
 	{
 		this.ventanaPrincipal = ventanaPrincipal;
-		this.autenticador = new AutenticadorDeUsuarios();
+		this.autenticador = autenticador;
 		this.coordinadorPMS = new CoordinadorPMS(this);
 		this.cargador = new CargadorDeDatos(this, coordinadorPMS);
 	}
@@ -58,24 +58,9 @@ public class Controlador
 		return mapaDiasSemana;
 	}
 
-	public String cargarDatos()
+	public void cargarDatos()
 	{
 		cargador.cargarDatos();
-		
-		String infoCarga = "";
-		HashMap<String, Integer> dictInfoCarga = cargador.infoDeCarga();
-		
-		if (dictInfoCarga != null)
-		{
-			for (Entry<String, Integer> info : dictInfoCarga.entrySet())
-			{
-				infoCarga += info.getKey() + ": " + info.getValue() + "\n";
-			}
-		}
-		else
-			infoCarga = "No se encontraron datos del hotel.";
-		
-		return infoCarga;
 	}
 	
 	public void setUsuarios(HashMap<String, Usuario> mapaUsuarios)

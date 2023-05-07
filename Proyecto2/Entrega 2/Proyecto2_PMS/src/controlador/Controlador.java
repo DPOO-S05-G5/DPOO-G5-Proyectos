@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import InterfazGrafica.VentanaPrincipal;
+import InterfazGrafica.ControladorVentanas;
 import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
 import cargador.CargadorDeDatos;
@@ -27,13 +27,13 @@ public class Controlador
 	private static final String[] STRINGS_MESES = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 	private static final HashMap<String, Integer> MAPA_DIAS_SEMANA = crearMapaDiasSemana();
 	private static final int[] DIASXMES = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	private VentanaPrincipal ventanaPrincipal;
+	private ControladorVentanas ventanaPrincipal;
 	private AutenticadorDeUsuarios autenticador;
 	private CargadorDeDatos cargador;
 	private CoordinadorPMS coordinadorPMS;
 	
 
-	public Controlador(VentanaPrincipal ventanaPrincipal, AutenticadorDeUsuarios autenticador)
+	public Controlador(ControladorVentanas ventanaPrincipal, AutenticadorDeUsuarios autenticador)
 	{
 		this.ventanaPrincipal = ventanaPrincipal;
 		this.autenticador = autenticador;

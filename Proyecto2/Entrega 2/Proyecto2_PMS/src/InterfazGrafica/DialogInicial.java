@@ -14,9 +14,9 @@ public class DialogInicial extends JDialog implements ActionListener
 	private static final String REGISTRAR = "registrar";
 	private static final String LOGIN = "login";
 	
-	private VentanaPrincipal padre;
+	private ControladorVentanas padre;
 	
-	public DialogInicial(VentanaPrincipal ventanaPrincipal, Color backColor, Color textColor, Color buttonColor)
+	public DialogInicial(ControladorVentanas ventanaPrincipal, Color backColor, Color textColor, Color buttonColor)
 	{
 		padre = ventanaPrincipal;
 		

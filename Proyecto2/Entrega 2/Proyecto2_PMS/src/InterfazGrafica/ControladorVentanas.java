@@ -1,31 +1,37 @@
 package InterfazGrafica;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
 import autenticador.AutenticadorDeUsuarios;
 import controlador.Controlador;
 
-public class VentanaPrincipal extends JFrame
+public class ControladorVentanas
 {
 	public static final String EMPLEADO = "empleado";
 	public static final String RECEPCIONISTA = "recepcionista";
 	public static final String ADMIN = "admin";
-	private static final Color BACK_COLOR = new Color(10, 28, 46);
-	private static final Color TEXT_COLOR = new Color(229, 229, 229);
-	private static final Color BUTTON_COLOR = new Color(0, 128, 128);
+	public static final Color BACK_COLOR = new Color(10, 28, 46);
+	public static final Color TEXT_COLOR = new Color(229, 229, 229);
+	public static final Color BUTTON_COLOR = new Color(0, 128, 128);
 	
 	private AutenticadorDeUsuarios autenticador;
 	private Controlador controlador;
 	private DialogInicial dialogInicial;
 	private DialogRegistrar dialogRegistrar;
 	private DialogLogin dialogLogin;
+	private InterfazAdmin interfazAdmin;
 	
-	public VentanaPrincipal()
+	public ControladorVentanas()
 	{
+
 		autenticador = new AutenticadorDeUsuarios();
 		controlador = new Controlador(this, autenticador);
 		controlador.cargarDatos();
@@ -46,37 +52,30 @@ public class VentanaPrincipal extends JFrame
 	public static void main(String[] args)
 	{
 		FlatLightLaf.install();
-		new VentanaPrincipal();
+		new ControladorVentanas();
 	}
 
 	public void actualizar(String tipo) 
 	{
 		if (tipo.equals(EMPLEADO))
-		{
 			iniciarInterfazEmpleado();
-		}
 		else if (tipo.equals(RECEPCIONISTA))
-		{
 			iniciarInterfazRecepcionista();
-		}
 		else if (tipo.equals(ADMIN))
-		{
 			iniciarInterfazAdmin();
-		}
 	}
 
 	private void iniciarInterfazAdmin() 
 	{
-		
+		interfazAdmin = new InterfazAdmin(this); 
 	}
 
 	private void iniciarInterfazRecepcionista() 
 	{
-
+	
 	}
 
 	private void iniciarInterfazEmpleado() 
 	{
-
 	}
 }

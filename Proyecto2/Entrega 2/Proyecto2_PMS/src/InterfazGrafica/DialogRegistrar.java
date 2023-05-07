@@ -26,7 +26,7 @@ public class DialogRegistrar extends JDialog implements ActionListener
 	private static final String[] TIPOS_USUARIO = {"admin", "recepcionista", "empleado"};
 	
 	private AutenticadorDeUsuarios autenticador;
-	private VentanaPrincipal padre;
+	private ControladorVentanas controladorVentanas;
 	private Color backColor;
 	private Color textColor;
 	private Color buttonColor;
@@ -46,11 +46,11 @@ public class DialogRegistrar extends JDialog implements ActionListener
 	JPanel southPanel;
 	JButton registerButton;
 
-	public DialogRegistrar(VentanaPrincipal ventanaPrincipal, AutenticadorDeUsuarios autenticador, Color backColor, Color textColor,
+	public DialogRegistrar(ControladorVentanas ventanaPrincipal, AutenticadorDeUsuarios autenticador, Color backColor, Color textColor,
 			Color buttonColor)
 	{
 		this.autenticador = autenticador;
-		padre = ventanaPrincipal;
+		controladorVentanas = ventanaPrincipal;
 		this.backColor = backColor;
 		this.textColor = textColor;
 		this.buttonColor = buttonColor;
@@ -161,9 +161,8 @@ public class DialogRegistrar extends JDialog implements ActionListener
 		{
 			JOptionPane.showMessageDialog(this, e1.getMessage(), "Error de registración", JOptionPane.ERROR_MESSAGE);
 		}
-		
 		dispose();
-		padre.dialogLogin();
+		controladorVentanas.dialogLogin();
 	}
 
 }

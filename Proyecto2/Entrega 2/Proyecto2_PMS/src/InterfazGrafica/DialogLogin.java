@@ -19,7 +19,7 @@ import autenticador.AutenticadorDeUsuarios;
 public class DialogLogin extends JDialog implements ActionListener
 {
 	private AutenticadorDeUsuarios autenticador;
-	private VentanaPrincipal padre;
+	private ControladorVentanas padre;
 	private Color backColor;
 	private Color textColor;
 	private Color buttonColor;
@@ -35,7 +35,7 @@ public class DialogLogin extends JDialog implements ActionListener
 	JPanel southPanel;
 	JButton loginButton;
 
-	public DialogLogin(VentanaPrincipal ventanaPrincipal, AutenticadorDeUsuarios autenticador, Color backColor, Color textColor,
+	public DialogLogin(ControladorVentanas ventanaPrincipal, AutenticadorDeUsuarios autenticador, Color backColor, Color textColor,
 			Color buttonColor)
 	{
 		this.autenticador = autenticador;

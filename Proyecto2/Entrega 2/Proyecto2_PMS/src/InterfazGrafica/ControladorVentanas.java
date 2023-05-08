@@ -25,7 +25,9 @@ public class ControladorVentanas
 	private DialogRegistrar dialogRegistrar;
 	private DialogLogin dialogLogin;
 	private InterfazAdmin interfazAdmin;
-	
+	private InterfazRecepcionista interfazRecepcionista;
+	private InterfazServicios interfazServicios;
+
 	public ControladorVentanas()
 	{
 
@@ -69,11 +71,12 @@ public class ControladorVentanas
 
 	public void iniciarInterfazRecepcionista() 
 	{
-	
+		interfazRecepcionista = new InterfazRecepcionista(this);
 	}
 
 	public void iniciarInterfazServicios() 
 	{
+		interfazServicios = new InterfazServicios(this);
 	}
 
     public CoordinadorPMS getCoordinadorPMS()

@@ -105,7 +105,22 @@ public class Calendario
 		{
 			ArrayList<Reserva> reservas = entry.getValue();
 			reservas.remove(reserva);
-			
+
 		}
     }
+
+	public int darNumeroHabitacionesOcupadas(LocalDate fecha)
+	{
+		int habsOcupadas = 0;
+		if (calendario.containsKey(fecha))
+		{
+			
+			ArrayList<Reserva> reservas = calendario.get(fecha);
+			for (Reserva reserva : reservas)
+			{
+				habsOcupadas += reserva.getNumeroHabEstandar() + reserva.getNumeroHabSuite() + reserva.getNumeroHabSuiteDoble();
+			}
+		}
+		return habsOcupadas;
+	}
 }

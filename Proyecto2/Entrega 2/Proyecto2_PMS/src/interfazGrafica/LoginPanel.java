@@ -1,4 +1,4 @@
-package InterfazGrafica;
+package interfazGrafica;
 
 import java.awt.CardLayout;
 import java.awt.Color;

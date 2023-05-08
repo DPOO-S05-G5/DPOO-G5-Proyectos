@@ -1,6 +1,7 @@
-package InterfazGrafica;
+package interfazGrafica;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -60,7 +61,7 @@ public class InterfazAdmin extends JFrame implements ActionListener
         add(eastPanel, BorderLayout.EAST);
 		setSize(1200, 800);
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     private void setWestPanel()
@@ -167,7 +168,7 @@ public class InterfazAdmin extends JFrame implements ActionListener
 
     private void setEastPanel()
     {
-        eastPanel = new JPanel();
+        eastPanel = new JPanel(new CardLayout());
         eastPanel.setBackground(backColor);
         eastPanel.setForeground(textColor);
     }
@@ -175,13 +176,13 @@ public class InterfazAdmin extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        // TODO Auto-generated method stub
         String comando = e.getActionCommand();
 
         switch (comando)
         {
             case ADD_TARIFA:
                 new DialogAddTarifa(padre, backColor, textColor, buttonColor);
+                break;
             case FECHAS_SIN_TARIFA:
                 mostrarFechasSinTarifa();
             case ADD_HAB:
@@ -192,9 +193,11 @@ public class InterfazAdmin extends JFrame implements ActionListener
                 mostrarCatalogoHabs();
             case SHOW_MATRIX:
                 mostarMatrix();
+                break;
             case GO_TO_RECEPCION:
                 padre.iniciarInterfazRecepcionista();
                 dispose();
+                break;
             case GO_TO_SERVICIOS:
                 padre.iniciarInterfazServicios();
                 dispose();
@@ -203,10 +206,10 @@ public class InterfazAdmin extends JFrame implements ActionListener
 
     private void mostarMatrix()
     {
-        eastPanel.removeAll();;
-        eastPanel.add(new PanelMatriz(padre, backColor, textColor), BorderLayout.CENTER);
-        eastPanel.revalidate();
-        eastPanel.repaint();
+    	JFrame panelMatriz = new FrameMatriz(padre, backColor, textColor);
+        panelMatriz.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        panelMatriz.setVisible(true);
+        panelMatriz.pack();
     }
 
     private void mostrarCatalogoHabs() {

@@ -314,4 +314,9 @@ public class CoordinadorPMS
 	{
 		return mapaHabitaciones.size();
 	}
+
+	public int darNumeroHabitacionesOcupadas(LocalDate fecha)
+	{
+		return calendario.darNumeroHabitacionesOcupadas(fecha);
+	}
 }

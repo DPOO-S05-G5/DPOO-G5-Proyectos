@@ -37,13 +37,15 @@ public class InterfazRecepcionista extends JFrame implements ActionListener
 	JLabel nombreHuesped, apellidoHuesped, idHuesped, correoHuesped, fechaInicio, fechaFinal, numeroHuespedes, numEstandar, numSuite, numDoble;
 	JTextField nombreHuespedTF, apellidoHuespedTF, idHuespedTF, correoHuespedTF, fechaInicioTF, fechaFinalTF;
 	JComboBox<Integer> numeroHuespedesC, numEstandarC, numSuiteC, numDobleC;
-	
+	private JFrame infohuesped;
 	
 	private static final String ADD_RESERVA = "Realizar reserva";
 	private static final String CHECK_IN = "Check-In";
 	private static final String CHECK_OUT = "Check-Out";
 	
 	JButton reservaButton;
+	JButton check_outButton;
+	
 	
 	
 	
@@ -200,16 +202,88 @@ public class InterfazRecepcionista extends JFrame implements ActionListener
 		southPanel = new JPanel(new FlowLayout());
 		southPanel.setBackground(backColor);
 		southPanel.setForeground(textColor);
+		
 		reservaButton = new JButton("Hacer reserva");
         reservaButton.addActionListener(this);
         reservaButton.setActionCommand(ADD_RESERVA);
-        //reservaButton.setForeground(foregroundColor);
         reservaButton.setBackground(buttonColor);
-        southPanel.add(reservaButton);
+        
+        check_outButton = new JButton("Hacer Check_Out");
+        check_outButton.addActionListener(this);
+        check_outButton.setActionCommand(CHECK_OUT);
+        check_outButton.setBackground(buttonColor);
+        southPanel.add(check_outButton);
+	}
+	
+	private void infoHuespedes()
+	{
+		
+		infohuesped= new JFrame();
+		JLabel nombre, apellidos, documento, correo, celular; 
+		JTextField nombreTF, apellidosTF, documentoTF, correoTF, celularTF;
+		infohuesped.setLayout(new BoxLayout(centerPanel,BoxLayout.Y_AXIS));
+		nombre = new JLabel("Nombre del huesped");
+		nombre.setForeground(textColor);
+		nombre.setBackground(backColor);
+		nombreTF = new JTextField(20);
+		nombreTF.setForeground(backColor);
+		nombreTF.setBackground(textColor);
+		
+		apellidos = new JLabel("Apellidos del huesped");
+		apellidos.setForeground(textColor);
+		apellidos.setBackground(backColor);
+		apellidosTF = new JTextField(20);
+		apellidosTF.setForeground(backColor);
+		apellidosTF.setBackground(textColor);
+		
+		documento = new JLabel("Documento de ID");
+		documento.setForeground(textColor);
+		documento.setBackground(backColor);
+		documentoTF = new JTextField(20);
+		documentoTF.setForeground(backColor);
+		documentoTF.setBackground(textColor);
+		
+		correo = new JLabel("Correo electrónico");
+		correo.setForeground(textColor);
+		correo.setBackground(backColor);
+		correoTF = new JTextField(20);
+		correoTF.setForeground(backColor);
+		correoTF.setBackground(textColor);
+		
+		celular = new JLabel("Numero de celular");
+		celular.setForeground(textColor);
+		celular.setBackground(backColor);
+		celularTF = new JTextField(20);
+		celularTF.setForeground(backColor);
+		celularTF.setBackground(textColor);
+		
+		
+		infohuesped.add(nombre);
+		infohuesped.add(nombreTF);
+		infohuesped.add(apellidos);
+		infohuesped.add(apellidosTF);
+		infohuesped.add(documento);
+		infohuesped.add(documentoTF);
+		infohuesped.add(correo);
+		infohuesped.add(correoTF);
+		infohuesped.add(celular);
+		infohuesped.add(celularTF);
+		
+		String nombreH = nombreTF.getText();
+		String apellidosH = apellidosTF.getText();
+		String documentoH = documentoTF.getText();
+		String correoH = correoTF.getText();
+		String celularH = celularTF.getText();
+			
+		setSize(1000, 700);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+		controlador.agregarHuesped(nombreH, apellidosH, documentoH, correoH, celularH);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		String documento = idHuesped.getText();
 		Integer numeroEstandar = numEstandarC.getSelectedIndex();
 		Integer numeroSuite = numSuiteC.getSelectedIndex();
 		Integer numeroDoble = numDobleC.getSelectedIndex();
@@ -224,7 +298,7 @@ public class InterfazRecepcionista extends JFrame implements ActionListener
             {
                 for (int i=0; i<numHuespedes; i++) 
                 {
-                controlador.agregarHuesped();
+                infoHuespedes();
                 }
             
                 JOptionPane.showMessageDialog(southPanel, "Reserva Exitosa!");
@@ -233,7 +307,13 @@ public class InterfazRecepcionista extends JFrame implements ActionListener
             JOptionPane.showMessageDialog(southPanel,"No hay habitaciones disponbles para las fechas dadas");
 					 
 		}
+		else	
+		{
+			
+			controlador.checkOut(documento, fechaInicial);
+			JOptionPane.showMessageDialog(southPanel, "CheckOut exitoso!");
 		
-	}
+	    }
 
+}
 }

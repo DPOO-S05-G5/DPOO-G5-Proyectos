@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="19.0.2" class="java.beans.XMLDecoder">
+ <object class="modelo.Tarifa">
+  <void property="fecha">
+   <object class="modelo.Fecha">
+    <void property="dia">
+     <int>29</int>
+    </void>
+    <void property="mes">
+     <int>1</int>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

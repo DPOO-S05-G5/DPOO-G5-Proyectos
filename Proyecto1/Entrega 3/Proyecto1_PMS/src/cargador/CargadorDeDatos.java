@@ -1,283 +1,117 @@
 package cargador;
 
 import java.beans.XMLDecoder;
+import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
-import modelo.CoordinadorPMS;
-import modelo.HabitacionEstandar;
-import modelo.HabitacionSuite;
-import modelo.HabitacionSuiteDoble;
+import controlador.Controlador;
+import modelo.Fecha;
+import modelo.Habitacion;
+import modelo.Tarifa;
+import modelo.Tarifas;
 
 public class CargadorDeDatos
 {
-	String nombreArchivoUsuarios;
-	HashMap<String, Usuario> mapaUsuarios;
-	HashMap<String, HabitacionEstandar> mapaHabitacionesEstandar;
-	HashMap<String, HabitacionSuite> mapaHabitacionesSuite;
-	HashMap<String, HabitacionSuiteDoble> mapaHabitacionesSuiteDoble;
+	private static final String DATA_DIR = "data/";
 	
-	public CargadorDeDatos()
+	private Controlador controlador;
+	private HashMap<String, Usuario> mapaUsuarios;
+	private Tarifas tarifas;
+	private HashMap<String, Habitacion> mapaHabitaciones;
+	
+	public CargadorDeDatos(Controlador controlador)
 	{
-		this.nombreArchivoUsuarios = "data/usuarios.xml";
+		this.controlador = controlador;		
 		this.mapaUsuarios = new HashMap<String, Usuario>();
-		this.mapaHabitacionesEstandar = new HashMap<String, HabitacionEstandar>();
-		this.mapaHabitacionesSuite = new HashMap<String, HabitacionSuite>();
-		this.mapaHabitacionesSuiteDoble = new HashMap<String, HabitacionSuiteDoble>();
+		this.tarifas = new Tarifas();
+		this.mapaHabitaciones = new HashMap<String, Habitacion>();
 	}
 	
-	public void cargarDatosHotel(AutenticadorDeUsuarios autenticador, CoordinadorPMS coordinadorPMS)
+	public HashMap<String, Integer> infoDeCarga()
 	{
-		cargarUsuarios(autenticador);
-		cargarHabitaciones(coordinadorPMS);
+		HashMap<String, Integer> dictInfoCarga = new HashMap<String, Integer>();
+		
+		dictInfoCarga.put("Usuarios", mapaUsuarios.size());
+		dictInfoCarga.put("Habitaciones", mapaHabitaciones.size());
+		dictInfoCarga.put("Tarifas", tarifas.getArbolTarifas().size());
+		
+		return dictInfoCarga;
 	}
 
-	private void cargarHabitaciones(CoordinadorPMS coordinadorPMS) 
+	public void cargarDatos()
 	{
+		File directorioData = new File(DATA_DIR);
+		File[] subDirectoriosData = directorioData.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File dir) {
+                return dir.isDirectory();
+			}
+		});
 		
-		cargarHabitacionesEstandar(coordinadorPMS);
-		cargarHabitacionesSuite(coordinadorPMS);
-		cargarHabitacionesSuiteDoble(coordinadorPMS);
-		
-	}
-
-
-	private void cargarHabitacionesEstandar(CoordinadorPMS coordinadorPMS) 
-	{
-		try
+		if (subDirectoriosData != null)
 		{
-			Object obj;
-			FileInputStream fis = new FileInputStream("data/tarifasHabitacionesEstandar.xml");
-			XMLDecoder decoder = new XMLDecoder(fis);
-			
-			obj = decoder.readObject();
-			if (obj instanceof ArrayList)
+			for (File subDirectorio : subDirectoriosData)
 			{
-				HabitacionEstandar.setTarifas((ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>) obj);
-			}
-			else
-			{
-				System.err.println("No esta la lista en el archivo");
-			}
-			decoder.close();
-			fis.close();
-			
-			fis = new FileInputStream("data/habitacionesEstandar.xml");
-			decoder = new XMLDecoder(fis);
-			
-			while (true)
-			{
-				try
+				String[] archivos = subDirectorio.list();
+				
+				if (archivos != null)
 				{
-					obj = decoder.readObject();
-					
-					if (obj instanceof HabitacionEstandar)
+					for (String archivo : archivos)
 					{
-						HabitacionEstandar room = (HabitacionEstandar) obj;
-						String id = room.getID();
-						mapaHabitacionesEstandar.put(id, room);
-					}
-					else
-					{
-						System.err.println("objecto inesperado en el archivo");
+						cargarArchivo(subDirectorio.toString() + "/", archivo);
 					}
 				}
-				catch (ArrayIndexOutOfBoundsException e3)
-				{
-					break;
-				}
 			}
-			decoder.close();
-			fis.close();
-		}
-		catch (FileNotFoundException e2)
-		{
-			return;
-		}
-		catch (IOException e1)
-		{
-			e1.printStackTrace();
 		}
 		
-		for (HashMap.Entry<String, HabitacionEstandar> entrada : mapaHabitacionesEstandar.entrySet())
-		{
-			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getID());
-		}
-		
-		System.out.println(HabitacionEstandar.getTarifas());
-		
-		coordinadorPMS.setHabitacionesEstandar(mapaHabitacionesEstandar);
+		controlador.setUsuarios(mapaUsuarios);
+		controlador.setTarifas(tarifas);
+		controlador.setHabitaciones(mapaHabitaciones);
 	}
 	
-	private void cargarHabitacionesSuite(CoordinadorPMS coordinadorPMS) 
+	private void cargarArchivo(String directorio, String archivo) 
 	{
-		try
+		try 
 		{
-			Object obj;
-			FileInputStream fis = new FileInputStream("data/tarifasHabitacionesSuite.xml");
-			XMLDecoder decoder = new XMLDecoder(fis);
-			
-			obj = decoder.readObject();
-			if (obj instanceof ArrayList)
-			{
-				HabitacionSuite.setTarifas((ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>) obj);
-			}
-			else
-			{
-				System.err.println("No esta la lista en el archivo");
-			}
-			decoder.close();
-			fis.close();
-			
-			fis = new FileInputStream("data/habitacionesSuite.xml");
-			decoder = new XMLDecoder(fis);
-			
-			while (true)
-			{
-				try
-				{
-					obj = decoder.readObject();
-					
-					if (obj instanceof HabitacionSuite)
-					{
-						HabitacionSuite room = (HabitacionSuite) obj;
-						String id = room.getID();
-						mapaHabitacionesSuite.put(id, room);
-					}
-					else
-					{
-						System.err.println("objecto inesperado en el archivo");
-					}
-				}
-				catch (ArrayIndexOutOfBoundsException e3)
-				{
-					break;
-				}
-			}
-			decoder.close();
-			fis.close();
-		}
-		catch (FileNotFoundException e2)
-		{
-			return;
-		}
-		catch (IOException e1)
-		{
-			e1.printStackTrace();
-		}
-		
-		for (HashMap.Entry<String, HabitacionSuite> entrada : mapaHabitacionesSuite.entrySet())
-		{
-			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getID());
-		}
-		
-		System.out.println(HabitacionSuite.getTarifas());
-		
-		coordinadorPMS.setHabitacionesSuite(mapaHabitacionesSuite);
-		
-	}
-
-	private void cargarHabitacionesSuiteDoble(CoordinadorPMS coordinadorPMS) 
-	{
-		try
-		{
-			Object obj;
-			FileInputStream fis = new FileInputStream("data/tarifasHabitacionesSuiteDoble.xml");
-			XMLDecoder decoder = new XMLDecoder(fis);
-			
-			obj = decoder.readObject();
-			if (obj instanceof ArrayList)
-			{
-				HabitacionSuiteDoble.setTarifas((ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>>) obj);
-			}
-			else
-			{
-				System.err.println("No esta la lista en el archivo");
-			}
-			decoder.close();
-			fis.close();
-			
-			fis = new FileInputStream("data/habitacionesSuiteDoble.xml");
-			decoder = new XMLDecoder(fis);
-			
-			while (true)
-			{
-				try
-				{
-					obj = decoder.readObject();
-					
-					if (obj instanceof HabitacionSuiteDoble)
-					{
-						HabitacionSuiteDoble room = (HabitacionSuiteDoble) obj;
-						String id = room.getID();
-						mapaHabitacionesSuiteDoble.put(id, room);
-					}
-					else
-					{
-						System.err.println("objecto inesperado en el archivo");
-					}
-				}
-				catch (ArrayIndexOutOfBoundsException e3)
-				{
-					break;
-				}
-			}
-			decoder.close();
-			fis.close();
-		}
-		catch (FileNotFoundException e2)
-		{
-			return;
-		}
-		catch (IOException e1)
-		{
-			e1.printStackTrace();
-		}
-		
-		for (HashMap.Entry<String, HabitacionSuiteDoble> entrada : mapaHabitacionesSuiteDoble.entrySet())
-		{
-			System.out.println(entrada.getKey());
-			System.out.println(entrada.getValue().getID());
-		}
-		
-		System.out.println(HabitacionSuiteDoble.getTarifas());
-		
-		coordinadorPMS.setHabitacionesSuiteDoble(mapaHabitacionesSuiteDoble);
-
-	}
-
-	private void cargarUsuarios(AutenticadorDeUsuarios autenticador)
-	{	
-		try
-		{
-			FileInputStream fis = new FileInputStream(nombreArchivoUsuarios);
+			FileInputStream fis = new FileInputStream(directorio + archivo);
 			XMLDecoder decoder = new XMLDecoder(fis);
 			Object obj;
-			
-			while (true)
+
+			while (true) 	
 			{
-				try
+				try 
 				{
 					obj = decoder.readObject();
-					
-					if (obj instanceof Usuario)
+
+					if (obj instanceof Usuario) 
 					{
 						Usuario usuario = (Usuario) obj;
 						String login = usuario.getLogin();
 						mapaUsuarios.put(login, usuario);
 					}
-					else
+					else if (obj instanceof Tarifa)
 					{
-						System.err.println("objecto inesperado en el archivo");
+						Tarifa tarifa = (Tarifa) obj;
+						Fecha fecha = tarifa.getFecha();
+						tarifas.getArbolTarifas().put(fecha, tarifa);
 					}
-				}
+					else if (obj instanceof Habitacion)
+					{
+						Habitacion hab = (Habitacion) obj;
+						String id = hab.getId();
+						mapaHabitaciones.put(id, hab);
+					}
+					else 
+					{
+						System.err.println("objecto inesperado en el archivo" + directorio + archivo);
+					}
+				} 
 				catch (ArrayIndexOutOfBoundsException e3)
 				{
 					break;
@@ -285,17 +119,11 @@ public class CargadorDeDatos
 			}
 			decoder.close();
 			fis.close();
-		}
-		catch (FileNotFoundException e2)
-		{
-			return;
-		}
-		catch (IOException e1)
+		} 
+		catch (IOException e1) 
 		{
 			e1.printStackTrace();
 		}
-		
-		autenticador.setMapaUsuarios(mapaUsuarios);
 
 	}
 }

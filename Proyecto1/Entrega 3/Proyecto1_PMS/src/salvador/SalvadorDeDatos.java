@@ -1,44 +1,35 @@
 package salvador;
 
 import java.beans.XMLEncoder;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 
-import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
+import modelo.Habitacion;
+import modelo.Tarifa;
 
 public class SalvadorDeDatos
 {
-	String nombrerArchivoUsuarios;
-	HashMap<String, Usuario> mapaUsuarios;
+	private static final String DATA_DIR = "data/";
+	private static final String USUARIOS_DIR = DATA_DIR + "usuarios/";
+	private static final String TARIFAS_DIR = DATA_DIR + "tarifas/";
+	private static final String HABITACIONES_DIR = DATA_DIR + "habitaciones/";
+	private static final String SERVICIOS_DIR = DATA_DIR + "servicios/";
+	private static final String PRODUCTOS_DIR = DATA_DIR + "productos/";
 	
 	public SalvadorDeDatos()
 	{
-		this.nombrerArchivoUsuarios = "data/usuarios.xml";
-	}
-	
-	public void salvarDatosHotel(AutenticadorDeUsuarios autenticador)
-	{
-		salvarUsuarios(autenticador);
-		// salvarHabitaciones(coordinadorPMS);
-	}
-	
-	private void salvarUsuarios(AutenticadorDeUsuarios autenticador)
-	{
-		this.mapaUsuarios = autenticador.getMapaUsuarios();
 		
+	}
+	
+	public void salvarUsuario(Usuario usuario)
+	{
 		try
 		{
-			FileOutputStream fos = new FileOutputStream(nombrerArchivoUsuarios);
+			FileOutputStream fos = new FileOutputStream(USUARIOS_DIR + usuario.getLogin() + ".xml");
 			XMLEncoder encoder = new XMLEncoder(fos);
-			
-			for (HashMap.Entry<String, Usuario> entrada : mapaUsuarios.entrySet())
-			{
-				Usuario usuario = (Usuario) entrada.getValue();
-				System.out.println(usuario.toString());
-				encoder.writeObject(usuario);
-			}
+			encoder.writeObject(usuario);
 			encoder.close();
 			fos.close();
 		}
@@ -48,4 +39,52 @@ public class SalvadorDeDatos
 		}
 	}
 
+	public void salvarTarifa(Tarifa tarifa)
+	{
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(TARIFAS_DIR + tarifa.toString() + ".xml");
+			XMLEncoder encoder = new XMLEncoder(fos);
+			encoder.writeObject(tarifa);
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void salvarHabitacion(Habitacion habitacion)
+	{
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(HABITACIONES_DIR + habitacion.getId() + ".xml");
+			XMLEncoder encoder = new XMLEncoder(fos);
+			encoder.writeObject(habitacion);
+			encoder.close();
+			fos.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public void borrarHabitacion(String id)
+	{
+		File directorio = new File(HABITACIONES_DIR);
+		String[] hijos = directorio.list();
+		if (hijos != null)
+		{
+			for (String archivo : hijos)
+			{
+				if (archivo.equals(id + ".xml"))
+				{
+					File archivoAEliminar = new File(HABITACIONES_DIR + archivo);
+					archivoAEliminar.delete();
+				}
+			}
+		}		
+	}
 }

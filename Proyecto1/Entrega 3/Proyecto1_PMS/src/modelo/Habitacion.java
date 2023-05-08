@@ -1,44 +1,51 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Habitacion
 {
+	private String tipo;
 	private boolean tieneCocina;
 	private boolean tieneBalcon;
 	private boolean tieneVista;
 	private String torre;
 	private int piso;
-	private String ID;
+	private String id;
 	private ArrayList<Cama> camas;
 	private int capacidadAdultos;
-	private int capacidadNinos;
-	
+	private int capacidadNinios;
+	// private HashMap<String, Huesped> huespedes;
+	// private Reserva reservaActual;
+	private HashMap<String, Reserva> reservas;
 	
 	public Habitacion()
 	{
 		
 	}
 	
-	public Habitacion(boolean tieneCocina, boolean tieneBalcon, boolean tieneVista, String torre, int piso, String iD)
+	
+	public Habitacion(String tipo, boolean cocina, boolean balcon, boolean vista, String torre, int piso, String id)
 	{
-		super();
-		this.tieneCocina = tieneCocina;
-		this.tieneBalcon = tieneBalcon;
-		this.tieneVista = tieneVista;
+		this.tipo = tipo;
+		this.tieneCocina = cocina;
+		this.tieneBalcon = balcon;
+		this.tieneVista = vista;
 		this.torre = torre;
 		this.piso = piso;
-		ID = iD;
+		this.id = id;
+		this.reservas = new HashMap<String, Reserva>();
 	}
 
-	public ArrayList<Cama> getCamas()
+
+	public String getTipo()
 	{
-		return camas;
+		return tipo;
 	}
 
-	public void setCamas(ArrayList<Cama> camas)
+	public void setTipo(String tipo)
 	{
-		this.camas = camas;
+		this.tipo = tipo;
 	}
 
 	public boolean isTieneCocina()
@@ -91,14 +98,24 @@ public abstract class Habitacion
 		this.piso = piso;
 	}
 
-	public String getID()
+	public String getId()
 	{
-		return ID;
+		return id;
 	}
 
-	public void setID(String iD)
+	public void setId(String id)
 	{
-		ID = iD;
+		this.id = id;
+	}
+
+	public ArrayList<Cama> getCamas()
+	{
+		return camas;
+	}
+
+	public void setCamas(ArrayList<Cama> camas)
+	{
+		this.camas = camas;
 	}
 
 	public int getCapacidadAdultos()
@@ -111,14 +128,66 @@ public abstract class Habitacion
 		this.capacidadAdultos = capacidadAdultos;
 	}
 
-	public int getCapacidadNinos()
+	public int getCapacidadNinios()
 	{
-		return capacidadNinos;
+		return capacidadNinios;
 	}
 
-	public void setCapacidadNinos(int capacidadNinos)
+	public void setCapacidadNinios(int capacidadNinios)
 	{
-		this.capacidadNinos = capacidadNinos;
+		this.capacidadNinios = capacidadNinios;
 	}
+
+	public HashMap<String, Reserva> getReservas()
+	{
+		return reservas;
+	}
+
+
+	public void setReservas(HashMap<String, Reserva> reservas)
+	{
+		this.reservas = reservas;
+	}
+
+	public void addReserva(Reserva reserva)
+	{
+		this.reservas.put(reserva.getId(), reserva);
+	}
+	
+	@Override
+	public String toString()
+	{
+		String info = "Habitacion " + tipo + " " + id + ":";
+		
+		info += "\n\tTorre: " + torre;
+		info += "\n\tPiso: " + piso;
+		
+		info += "\n\tCamas:";
+		for (Cama cama : camas)
+			info += "\n\t\t" + cama.toString();
+		
+		info += "\n\tCapacidad adultos: " + capacidadAdultos;
+		info += "\n\tCapacidad Niños: " + capacidadNinios;
+		
+		info += "\n\tTiene cocina? ";
+		if (tieneCocina)
+			info += "Si";
+		else
+			info += "No"; 
+		
+		info += "\n\tTiene balcón? ";
+		if (tieneBalcon)
+			info += "Si";
+		else
+			info += "No"; 
+		
+		info += "\n\tTiene vista? ";
+		if (tieneVista)
+			info += "Si";
+		else
+			info += "No"; 
+		
+		return info;
+	}	
 	
 }

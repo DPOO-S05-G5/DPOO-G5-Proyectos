@@ -304,4 +304,9 @@ public class Controlador
 		else
 			return coordinadorPMS.cancelarReserva(id + "-" + fechaInicial);
     }
+
+	public CoordinadorPMS getCoordinadorPMS()
+	{
+		return coordinadorPMS;
+	}
 }

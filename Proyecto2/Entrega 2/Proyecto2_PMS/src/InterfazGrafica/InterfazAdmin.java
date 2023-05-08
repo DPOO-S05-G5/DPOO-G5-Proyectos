@@ -181,13 +181,13 @@ public class InterfazAdmin extends JFrame implements ActionListener
         switch (comando)
         {
             case ADD_TARIFA:
-                DialogAddTarifa dialogAddATrifa = new DialogAddTarifa(padre, backColor, textColor, buttonColor);
+                new DialogAddTarifa(padre, backColor, textColor, buttonColor);
             case FECHAS_SIN_TARIFA:
                 mostrarFechasSinTarifa();
             case ADD_HAB:
-                DialogAddHab dialogAddHab = new DialogAddHab(padre, backColor, textColor, buttonColor);
+                new DialogAddHab(padre, backColor, textColor, buttonColor);
             case REMOVE_HAB:
-                DialogRemoveHab dialogRemoveHab = new DialogRemoveHab(padre, backColor, textColor, buttonColor);
+                new DialogRemoveHab(padre, backColor, textColor, buttonColor);
             case SHOW_HABS:
                 mostrarCatalogoHabs();
             case SHOW_MATRIX:
@@ -201,7 +201,12 @@ public class InterfazAdmin extends JFrame implements ActionListener
         }  
     }
 
-    private void mostarMatrix() {
+    private void mostarMatrix()
+    {
+        eastPanel.removeAll();;
+        eastPanel.add(new PanelMatriz(padre, backColor, textColor), BorderLayout.CENTER);
+        eastPanel.revalidate();
+        eastPanel.repaint();
     }
 
     private void mostrarCatalogoHabs() {

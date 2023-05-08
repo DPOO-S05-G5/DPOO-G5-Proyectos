@@ -5,6 +5,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import autenticador.AutenticadorDeUsuarios;
 import controlador.Controlador;
+import modelo.CoordinadorPMS;
 
 public class ControladorVentanas
 {
@@ -74,4 +75,9 @@ public class ControladorVentanas
 	public void iniciarInterfazServicios() 
 	{
 	}
+
+    public CoordinadorPMS getCoordinadorPMS()
+	{
+        return controlador.getCoordinadorPMS();
+    }
 }

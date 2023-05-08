@@ -309,4 +309,9 @@ public class CoordinadorPMS
 		}
 		return false;
 	}
+
+	public int getNumeroHabitaciones()
+	{
+		return mapaHabitaciones.size();
+	}
 }

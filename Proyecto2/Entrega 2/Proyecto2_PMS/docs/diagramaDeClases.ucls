@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
+  <class id="1" language="java" name="interfazGrafica.LoginPanel" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/LoginPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="270" x="974" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="modelo.ServicioRestauranteHabitacion" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/ServicioRestauranteHabitacion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="200" x="504" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="autenticador.Usuario" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/autenticador/Usuario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="161" x="466" y="3273"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="modelo.Inventario" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Inventario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="783" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="modelo.Restaurante" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Restaurante.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="94" x="950" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="modelo.Huesped" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Huesped.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="459" width="248" x="4305" y="2774"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="modelo.Servicio" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Servicio.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="531" width="283" x="1125" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="modelo.Tarifa" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Tarifa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="367" x="2922" y="2221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="salvador.SalvadorDeDatos" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/salvador/SalvadorDeDatos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="232" x="4244" y="3273"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="interfazGrafica.ControladorVentanas" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/ControladorVentanas.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="387" width="212" x="1668" y="2221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="modelo.Habitacion" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Habitacion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="783" width="311" x="4691" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="interfazGrafica.DialogAddTarifa" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/DialogAddTarifa.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="549" width="294" x="1284" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="autenticador.Register" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/autenticador/Register.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="151" x="2348" y="3273"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="modelo.Producto" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Producto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="639" width="291" x="1489" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="modelo.Tarifas" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Tarifas.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="486" x="3350" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="modelo.HabitacionSuite" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/HabitacionSuite.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="304" x="4731" y="2221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="interfazGrafica.DialogRemoveHab" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/DialogRemoveHab.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="305" x="1862" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="interfazGrafica.InterfazAdmin" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/InterfazAdmin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="585" width="214" x="1618" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="autenticador.AutenticadorDeUsuarios" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/autenticador/AutenticadorDeUsuarios.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="277" x="2443" y="2774"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="interfazGrafica.DialogRegistrar" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/DialogRegistrar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="441" width="412" x="2443" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="modelo.HabitacionEstandar" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/HabitacionEstandar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="323" x="5075" y="2221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="interfazGrafica.DialogAddHab" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/DialogAddHab.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="286" x="2250" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="modelo.Fecha" project="Proyecto2_PMS" file="/Proyecto2_PMS/src/modelo/Fecha.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="103" x="2922" y="2774"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="modelo.Grupo" project="Proyecto2_PMS" file="/Proyecto2_PMS/src/modelo/Grupo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="87" x="2620" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="interfazGrafica.DialogLogin" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/DialogLogin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="394" x="2895" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="autenticador.Login" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/autenticador/Login.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="171" width="158" x="2539" y="3273"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="interfazGrafica.InterfazServicios" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/InterfazServicios.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="218" x="1872" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="modelo.CoordinadorPMS" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/CoordinadorPMS.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="585" width="438" x="4244" y="629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="modelo.ServicioRestauranteComedor" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/ServicioRestauranteComedor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="81" width="192" x="2792" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="controlador.Controlador" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/controlador/Controlador.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="639" width="426" x="508" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="interfazGrafica.DialogInicial" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/DialogInicial.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="273" x="2130" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="modelo.ComparadorHabitaciones" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/ComparadorHabitaciones.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="193" x="3070" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="modelo.Reserva" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Reserva.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="513" width="344" x="4305" y="2221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="modelo.Cama" project="Proyecto2_PMS" file="/Proyecto2_PMS/src/modelo/Cama.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="423" width="171" x="5438" y="2221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="cargador.CargadorDeDatos" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/cargador/CargadorDeDatos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="258" x="3350" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="interfazGrafica.InterfazRecepcionista" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/InterfazRecepcionista.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="729" width="300" x="487" y="629"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="modelo.HabitacionSuiteDoble" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/HabitacionSuiteDoble.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="331" x="5649" y="2221"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="interfazGrafica.TableroCalendario" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/interfazGrafica/TableroCalendario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="200" x="4244" y="-50"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="modelo.Calendario" project="Proyecto2_PMS" 
+    file="/Proyecto2_PMS/src/modelo/Calendario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="326" x="3897" y="1398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="40">    
+    <bendpoint x="3319" y="629"/>    
+    <bendpoint x="3319" y="1398"/>    
+    <bendpoint x="3319" y="2221"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="41" name="mapaHuespedes"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="44" name="padre"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="47" name="padre"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="50" name="mapaHabitaciones"/>      
+      <multiplicity id="51" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <bendpoint x="1928" y="629"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="53" name="controlador"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <bendpoint x="4700" y="2221"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="56" name="habitacionActual"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <bendpoint x="1485" y="2221"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="59" name="autenticador"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="62" name="dialogRegistrar"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="65" name="dialogLogin"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="68" name="coordinadorPMS"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="71" name="father"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <bendpoint x="4274" y="1398"/>    
+    <bendpoint x="4274" y="2221"/>    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="74" name="mapaHuespedes"/>      
+      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <bendpoint x="477" y="1398"/>    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="77" name="padre"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <bendpoint x="4295" y="1398"/>    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="80" name="mapaReservas"/>      
+      <multiplicity id="81" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="83" name="login"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="86" name="controlador"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="89" name="dialogInicial"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="92" name="reservaActual"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <bendpoint x="4712" y="629"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="95" name="mapaHabitaciones"/>      
+      <multiplicity id="96" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="98" name="reservas"/>      
+      <multiplicity id="99" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="101" name="fecha"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="104" name="camas"/>      
+      <multiplicity id="105" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="107" name="calendario"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <bendpoint x="2452" y="2221"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="110" name="autenticador"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <bendpoint x="6010" y="2774"/>    
+    <bendpoint x="6010" y="2221"/>    
+    <bendpoint x="6010" y="1398"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="113" name="coordinadorPMS"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <bendpoint x="3359" y="629"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="116" name="tarifas"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="119" name="usersMap"/>      
+      <multiplicity id="120" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <bendpoint x="4679" y="2221"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="122" name="huespedes"/>      
+      <multiplicity id="123" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <bendpoint x="456" y="629"/>    
+    <bendpoint x="456" y="1398"/>    
+    <bendpoint x="456" y="2221"/>    
+    <bendpoint x="456" y="2774"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="125" name="mapaUsuarios"/>      
+      <multiplicity id="126" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="128" name="controlador"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="130">    
+    <bendpoint x="1949" y="629"/>    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="131" name="cargador"/>      
+      <multiplicity id="132" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="133">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="134" name="reservador"/>      
+      <multiplicity id="135" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="137" name="salvador"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="140" name="register"/>      
+      <multiplicity id="141" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="142">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="143">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="144" name="padre"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="146">    
+    <bendpoint x="2678" y="2221"/>    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="147" name="autenticador"/>      
+      <multiplicity id="148" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="149">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="150" name="tarifas"/>      
+      <multiplicity id="151" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="152">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="153" name="controladorVentanas"/>      
+      <multiplicity id="154" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="155">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="156" name="interfazAdmin"/>      
+      <multiplicity id="157" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="158">    
+    <bendpoint x="3887" y="629"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="159" name="calendario"/>      
+      <multiplicity id="160" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="161">    
+    <bendpoint x="4316" y="1398"/>    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="162" name="reservaActual"/>      
+      <multiplicity id="163" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="164">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="165" name="ventanaPrincipal"/>      
+      <multiplicity id="166" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="167">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="168" name="controladorVentanas"/>      
+      <multiplicity id="169" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="170">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="171" name="coordinadorPMS"/>      
+      <multiplicity id="172" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="173">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="174">    
+    <bendpoint x="3866" y="629"/>    
+    <bendpoint x="3866" y="1398"/>    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="175" name="mapaReservas"/>      
+      <multiplicity id="176" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="177">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="178" name="habitaciones"/>      
+      <multiplicity id="179" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="180">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="181">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="182" name="padre"/>      
+      <multiplicity id="183" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="184">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="185" name="controlador"/>      
+      <multiplicity id="186" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="187">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="188" name="autenticador"/>      
+      <multiplicity id="189" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="190">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="191" name="coordinadorPMS"/>      
+      <multiplicity id="192" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="194" name="reservas"/>      
+      <multiplicity id="195" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="196">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="197" name="arbolTarifas"/>      
+      <multiplicity id="198" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="199">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="200" name="coordinadorPMS"/>      
+      <multiplicity id="201" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="202">    
+    <bendpoint x="4253" y="1398"/>    
+    <bendpoint x="4253" y="2221"/>    
+    <bendpoint x="4253" y="2774"/>    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="203" name="salvador"/>      
+      <multiplicity id="204" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

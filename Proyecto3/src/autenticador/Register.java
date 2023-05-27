@@ -9,6 +9,7 @@ public class Register
 	private static final String EMPLEADO = "empleado";
 	private static final String RECEPCIONISTA = "recepcionista";
 	private static final String ADMIN = "admin";
+	public static final String HUESPED = "huesped";
 
 	public String selectType()
 	{

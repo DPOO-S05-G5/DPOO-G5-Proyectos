@@ -12,9 +12,9 @@ public class HabitacionSuiteDoble extends Habitacion
 		
 	}
 	
-	public HabitacionSuiteDoble(boolean cocina, boolean balcon, boolean vista, String torre, int piso, String id)
+	public HabitacionSuiteDoble(boolean cocina, boolean balcon, boolean vista, String torre, int piso, String id, int tamanoHab, boolean aire_acondicionado, boolean calefaccion, int tamanoCama, boolean tv, boolean cafetera, boolean ropCama_TapHipoaler, boolean plancha, boolean secadorPelo, int voltajeAC, boolean tomaUSBA, boolean tomaUSBC, boolean incluyeDesayuno)
 	{
-		super(TIPO, cocina, balcon, vista, torre, piso, id);
+		super(TIPO, cocina, balcon, vista, torre, piso, id, tamanoHab, calefaccion, tamanoCama, tv, cafetera, ropCama_TapHipoaler, plancha, secadorPelo, voltajeAC, tomaUSBA, tomaUSBC, incluyeDesayuno);
 
 		ArrayList<Cama> camas = new ArrayList<Cama>();
 		for (String tipoCama : TIPOS_CAMA)

@@ -44,7 +44,10 @@ public class Controlador
 		this.cargador = new CargadorDeDatos(this, coordinadorPMS);
 	}
 	
-	public static ArrayList<String> getTiposHabitacion()
+	public Controlador(interfaz.ControladorVentanas controladorVentanas, AutenticadorDeUsuarios autenticador2) {
+    }
+
+    public static ArrayList<String> getTiposHabitacion()
 	{
 		return TIPOS_HABITACION;
 	}

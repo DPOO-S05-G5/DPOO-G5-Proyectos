@@ -18,29 +18,14 @@ public abstract class Habitacion
 	private HashMap<String, Huesped> huespedes;
 	private Reserva reservaActual;
 	private HashMap<String, Reserva> reservas;
-	private int tamanoHab; 
-	private boolean tieneAC;
-	private boolean tieneCalefaccion; 
-	private int tamanoCama;
-	private boolean tieneTV;
-	private boolean tieneCafetera;
-	private boolean tieneRopCama_TapHipoaler;
-	private boolean tienePlancha;
-	private boolean tieneSecadorPelo;
-	private int voltajeAC;
-	private boolean tieneTomaUSBA;
-	private boolean tieneTomaUSBC;
-	private boolean incluyeDesayuno;
-
 	
-
 	public Habitacion()
 	{
 		
 	}
 	
 	
-	public Habitacion(String tipo, boolean cocina, boolean balcon, boolean vista, String torre, int piso, String id, int tamanoHab, boolean aire_acondicionado, boolean calefaccion, int tamanoCama, boolean tv, boolean cafetera, boolean ropCama_TapHipoaler, boolean plancha, boolean secadorPelo, int voltajeAC, boolean tomaUSBA, boolean tomaUSBC, boolean incluyeDesayuno)
+	public Habitacion(String tipo, boolean cocina, boolean balcon, boolean vista, String torre, int piso, String id)
 	{
 		this.tipo = tipo;
 		this.tieneCocina = cocina;
@@ -50,21 +35,6 @@ public abstract class Habitacion
 		this.piso = piso;
 		this.id = id;
 		this.reservas = new HashMap<String, Reserva>();
-		this.tamanoHab = tamanoHab;
-		this.tieneAC = aire_acondicionado;
-		this.tieneCalefaccion = calefaccion;
-		this.tamanoCama = tamanoCama;
-		this.tieneTV = tv;
-		this.tieneCafetera = cafetera;
-		this.tieneRopCama_TapHipoaler = ropCama_TapHipoaler;
-		this.tienePlancha = plancha;
-		this.tieneSecadorPelo = secadorPelo;
-		this.voltajeAC = voltajeAC;
-		this.tieneTomaUSBA = tomaUSBA;
-		this.tieneTomaUSBC = tomaUSBC;
-		this.incluyeDesayuno = incluyeDesayuno;
-		
-
 	}
 
 
@@ -208,136 +178,6 @@ public abstract class Habitacion
 	{
 		this.huespedes.put(huesped.getId(), huesped);
 	}
-
-	public int getTamanoHab() {
-		return tamanoHab;
-	}
-
-
-	public void setTamanoHab(int tamanoHab) {
-		this.tamanoHab = tamanoHab;
-	}
-
-
-	public boolean isTieneAC() {
-		return tieneAC;
-	}
-
-
-	public void setTieneAC(boolean tieneAC) {
-		this.tieneAC = tieneAC;
-	}
-
-
-	public boolean isTieneCalefaccion() {
-		return tieneCalefaccion;
-	}
-
-
-	public void setTieneCalefaccion(boolean tieneCalefaccion) {
-		this.tieneCalefaccion = tieneCalefaccion;
-	}
-
-
-	public int getTamanoCama() {
-		return tamanoCama;
-	}
-
-
-	public void setTamanoCama(int tamanoCama) {
-		this.tamanoCama = tamanoCama;
-	}
-
-
-	public boolean isTieneTV() {
-		return tieneTV;
-	}
-
-
-	public void setTieneTV(boolean tieneTV) {
-		this.tieneTV = tieneTV;
-	}
-
-
-	public boolean isTieneCafetera() {
-		return tieneCafetera;
-	}
-
-
-	public void setTieneCafetera(boolean tieneCafetera) {
-		this.tieneCafetera = tieneCafetera;
-	}
-
-
-	public boolean isTieneRopCama_TapHipoaler() {
-		return tieneRopCama_TapHipoaler;
-	}
-
-
-	public void setTieneRopCama_TapHipoaler(boolean tieneRopCama_TapHipoaler) {
-		this.tieneRopCama_TapHipoaler = tieneRopCama_TapHipoaler;
-	}
-
-
-	public boolean isTienePlancha() {
-		return tienePlancha;
-	}
-
-
-	public void setTienePlancha(boolean tienePlancha) {
-		this.tienePlancha = tienePlancha;
-	}
-
-
-	public boolean isTieneSecadorPelo() {
-		return tieneSecadorPelo;
-	}
-
-
-	public void setTieneSecadorPelo(boolean tieneSecadorPelo) {
-		this.tieneSecadorPelo = tieneSecadorPelo;
-	}
-
-
-	public int getVoltajeAC() {
-		return voltajeAC;
-	}
-
-
-	public void setVoltajeAC(int voltajeAC) {
-		this.voltajeAC = voltajeAC;
-	}
-
-
-	public boolean isTieneTomaUSBA() {
-		return tieneTomaUSBA;
-	}
-
-
-	public void setTieneTomaUSBA(boolean tieneTomaUSBA) {
-		this.tieneTomaUSBA = tieneTomaUSBA;
-	}
-
-
-	public boolean isTieneTomaUSBC() {
-		return tieneTomaUSBC;
-	}
-
-
-	public void setTieneTomaUSBC(boolean tieneTomaUSBC) {
-		this.tieneTomaUSBC = tieneTomaUSBC;
-	}
-
-
-	public boolean isIncluyeDesayuno() {
-		return incluyeDesayuno;
-	}
-
-
-	public void setIncluyeDesayuno(boolean incluyeDesayuno) {
-		this.incluyeDesayuno = incluyeDesayuno;
-	}
-
 
 	@Override
 	public String toString()

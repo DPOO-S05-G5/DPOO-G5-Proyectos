@@ -19,14 +19,14 @@ public class LoginPanel extends JPanel implements ActionListener
 	private static final String TIPO = "tipo";
 	private static final String[] TIPOS_USUARIO = {"admin", "recepcionista", "empleado"}; 
 	
-	private ControladorVentanas father;
+	private ControladorVentanasPMS father;
 	private JButton registerButton;
 	private JButton loginButton;
 	private Color backColor;
 	private Color foreColor;
 	private Color buttonColor;
 	
-	public LoginPanel(ControladorVentanas ventanaPrincipal, Color foregroundColor, Color backgroundColor,
+	public LoginPanel(ControladorVentanasPMS ventanaPrincipal, Color foregroundColor, Color backgroundColor,
 			Color buttonColor)
 	{
 		father = ventanaPrincipal;

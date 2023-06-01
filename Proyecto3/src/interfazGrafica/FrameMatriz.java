@@ -15,12 +15,12 @@ import javax.swing.border.Border;
 public class FrameMatriz extends JFrame
 {
 
-	private static final Color MAX_COLOR = ControladorVentanas.TEXT_COLOR;
+	private static final Color MAX_COLOR = ControladorVentanasPMS.TEXT_COLOR;
     private static final int MAX_R = MAX_COLOR.getRed();
     private static final int MAX_G = MAX_COLOR.getGreen();
     private static final int MAX_B = MAX_COLOR.getBlue();
 
-    private ControladorVentanas controladorVentanas;
+    private ControladorVentanasPMS controladorVentanas;
     private TableroCalendario board;
     private int rows;
     private int columns;
@@ -28,7 +28,7 @@ public class FrameMatriz extends JFrame
     private Color textColor;
     private int[] minColorList;
 
-    public FrameMatriz(ControladorVentanas controladorVentanas, Color backColor, Color textColor)
+    public FrameMatriz(ControladorVentanasPMS controladorVentanas, Color backColor, Color textColor)
     {
         this.controladorVentanas = controladorVentanas;
         this.board = new TableroCalendario(controladorVentanas.getCoordinadorPMS());

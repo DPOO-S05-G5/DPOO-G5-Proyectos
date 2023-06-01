@@ -150,13 +150,14 @@ public class DialogRegistrar extends JDialog implements ActionListener
 		try 
 		{
 			autenticador.registrarUsuario(tipo, login, password, confirmPassword);
+			dispose();
+			controladorVentanas.dialogLogin();
 		} 
-		catch (Exception e1) 
+		catch (Exception e1)
 		{
 			JOptionPane.showMessageDialog(this, e1.getMessage(), "Error de registración", JOptionPane.ERROR_MESSAGE);
 		}
-		dispose();
-		controladorVentanas.dialogLogin();
+		
 	}
 
 }

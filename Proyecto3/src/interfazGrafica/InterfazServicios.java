@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 
 public class InterfazServicios extends JFrame implements ActionListener {
 
-	private ControladorVentanas padre;
+	private ControladorVentanasPMS padre;
 	private Color backColor;
 	private Color textColor;
 	private Color buttonColor;
@@ -26,7 +26,7 @@ public class InterfazServicios extends JFrame implements ActionListener {
 	JLabel opciones;
 	JComboBox<String> opcionesC;
 	
-	public InterfazServicios (ControladorVentanas ventanaPrincipal)
+	public InterfazServicios (ControladorVentanasPMS ventanaPrincipal)
 	{
 		centerPanel = new JPanel();
 		centerPanel.setBackground(backColor);

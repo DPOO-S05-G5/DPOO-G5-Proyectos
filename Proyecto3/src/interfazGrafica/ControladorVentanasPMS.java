@@ -5,13 +5,15 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import autenticador.AutenticadorDeUsuarios;
 import controlador.Controlador;
+import interfazAppHuesped.InterfazHuesped;
 import modelo.CoordinadorPMS;
 
-public class ControladorVentanas
+public class ControladorVentanasPMS implements ControladorVentanas
 {
 	public static final String EMPLEADO = "empleado";
 	public static final String RECEPCIONISTA = "recepcionista";
 	public static final String ADMIN = "admin";
+	public static final String HUESPED = "huesped";
 	public static final String ESTANDAR = "estandar";
 	public static final String SUITE = "suite";
 	public static final String SUITEDOBLE = "suitedoble";
@@ -25,8 +27,9 @@ public class ControladorVentanas
 	private DialogRegistrar dialogRegistrar;
 	private DialogLogin dialogLogin;
 	private InterfazAdmin interfazAdmin;
+	private InterfazHuesped interfazHuesped;
 	
-	public ControladorVentanas()
+	public ControladorVentanasPMS()
 	{
 
 		autenticador = new AutenticadorDeUsuarios();
@@ -35,23 +38,29 @@ public class ControladorVentanas
 
 		dialogInicial = new DialogInicial(this, BACK_COLOR, TEXT_COLOR, BUTTON_COLOR);
 	}
-
+	
+	@Override
 	public void dialogRegistrar()
 	{
 		dialogRegistrar	= new DialogRegistrar(this, autenticador, BACK_COLOR, TEXT_COLOR, BUTTON_COLOR);
 	}
 
+	@Override
 	public void dialogLogin()
 	{
 		dialogLogin	= new DialogLogin(this, autenticador, BACK_COLOR, TEXT_COLOR, BUTTON_COLOR);
 	}
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args)
 	{
 		FlatLightLaf.install();
-		new ControladorVentanas();
+		new ControladorVentanasPMS();
 	}
 
+	@Override
 	public void actualizar(String tipo) 
 	{
 		if (tipo.equals(EMPLEADO))
@@ -74,10 +83,17 @@ public class ControladorVentanas
 
 	public void iniciarInterfazServicios() 
 	{
+		
 	}
 
+	@Override
     public CoordinadorPMS getCoordinadorPMS()
 	{
         return controlador.getCoordinadorPMS();
     }
+
+	@Override
+	public void logout() {
+		// TODO Auto-generated method stub
+	}
 }

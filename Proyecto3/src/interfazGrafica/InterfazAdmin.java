@@ -24,13 +24,12 @@ public class InterfazAdmin extends JFrame implements ActionListener
     private static final String GO_TO_RECEPCION = "Ir a recepción";
     private static final String GO_TO_SERVICIOS = "Ir a servicios";
 
-    private ControladorVentanas padre;
+    private ControladorVentanasPMS padre;
 	private Color backColor;
 	private Color textColor;
 	private Color buttonColor;
 
     private JPanel westPanel;
-    private JPanel westPanelButtons;
     private JButton crearTarifaButton;
     private JButton mostrarFechasSinTarifaButton;
     private JButton crearHabButton;
@@ -42,13 +41,13 @@ public class InterfazAdmin extends JFrame implements ActionListener
 
     private JPanel eastPanel;
 
-    public InterfazAdmin(ControladorVentanas ventanaPrincipal)
+    public InterfazAdmin(ControladorVentanasPMS ventanaPrincipal)
     {
         setTitle("Administrador");
         padre = ventanaPrincipal;   
-        backColor = ControladorVentanas.BACK_COLOR;
-        textColor = ControladorVentanas.TEXT_COLOR;
-        buttonColor = ControladorVentanas.BUTTON_COLOR;
+        backColor = ControladorVentanasPMS.BACK_COLOR;
+        textColor = ControladorVentanasPMS.TEXT_COLOR;
+        buttonColor = ControladorVentanasPMS.BUTTON_COLOR;
         
         setLayout(new BorderLayout());
         setBackground(backColor);

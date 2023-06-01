@@ -19,10 +19,10 @@ import javax.swing.JTextField;
 
 public class DialogAddTarifa extends JDialog implements ActionListener
 {
-    private static final String[] TIPOS_HABITACION = {ControladorVentanas.ESTANDAR, ControladorVentanas.SUITE, ControladorVentanas.SUITEDOBLE};
+    private static final String[] TIPOS_HABITACION = {ControladorVentanasPMS.ESTANDAR, ControladorVentanasPMS.SUITE, ControladorVentanasPMS.SUITEDOBLE};
     private static final String ADD = "Agregar tarifa";
     
-    private ControladorVentanas controladorVentanas;
+    private ControladorVentanasPMS controladorVentanas;
     private Color backColor;
     private Color textColor;
     private Color buttonColor;
@@ -49,7 +49,7 @@ public class DialogAddTarifa extends JDialog implements ActionListener
     private JButton addButton;
 
 
-    public DialogAddTarifa(ControladorVentanas ventanaPrincipal, Color backColor, Color textColor,
+    public DialogAddTarifa(ControladorVentanasPMS ventanaPrincipal, Color backColor, Color textColor,
     Color buttonColor) 
     {
         this.controladorVentanas = ventanaPrincipal;

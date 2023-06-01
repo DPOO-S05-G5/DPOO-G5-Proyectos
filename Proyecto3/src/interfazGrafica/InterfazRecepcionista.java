@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
 
 public class InterfazRecepcionista extends JFrame implements ActionListener
 {
-	private ControladorVentanas padre;
+	private ControladorVentanasPMS padre;
 	private Controlador controlador;
 	private Color backColor;
 	private Color textColor;
@@ -49,15 +49,15 @@ public class InterfazRecepcionista extends JFrame implements ActionListener
 	
 	
 	
-	public InterfazRecepcionista(ControladorVentanas ventanaPrincipal, Controlador controlador)
+	public InterfazRecepcionista(ControladorVentanasPMS ventanaPrincipal, Controlador controlador)
     {
         setTitle("Recepcionista");
         this.controlador = controlador;
         padre = ventanaPrincipal;
         
-        backColor = ControladorVentanas.BACK_COLOR;
-        textColor = ControladorVentanas.TEXT_COLOR;
-        buttonColor = ControladorVentanas.BUTTON_COLOR;
+        backColor = ControladorVentanasPMS.BACK_COLOR;
+        textColor = ControladorVentanasPMS.TEXT_COLOR;
+        buttonColor = ControladorVentanasPMS.BUTTON_COLOR;
         
         setLayout(new BorderLayout());
         setBackground(backColor);

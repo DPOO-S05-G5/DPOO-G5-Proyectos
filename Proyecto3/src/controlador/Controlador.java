@@ -14,6 +14,7 @@ import autenticador.Usuario;
 import cargador.CargadorDeDatos;
 import consola.InterfazPrincipal;
 import interfazGrafica.ControladorVentanas;
+import interfazGrafica.ControladorVentanasPMS;
 import modelo.Calendario;
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;

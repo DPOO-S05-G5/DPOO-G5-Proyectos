@@ -46,10 +46,6 @@ public class DialogInicial extends JDialog implements ActionListener
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
-	public DialogInicial(interfaz.ControladorVentanas controladorVentanas, Color backColor, Color textColor,
-            Color buttonColor) {
-    }
-
     @Override
 	public void actionPerformed(ActionEvent e)
 	{

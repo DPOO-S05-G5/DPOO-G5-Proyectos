@@ -1,7 +1,6 @@
 package interfazAppHuesped;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -23,9 +22,6 @@ public class DialogFiltrarFechas extends JDialog implements ActionListener{
     private static final String SELECCIONAR = "Seleccionar fechas";
 
     private ControladorVentanas controladorVentanas;
-    private Color backColor;
-    private Color textColor;
-    private Color buttonColor;
     private JLabel fechaIncialLabel;
     private JLabel fechaFinalLabel;
     private JTextField fechaInicialTextField;
@@ -43,9 +39,6 @@ public class DialogFiltrarFechas extends JDialog implements ActionListener{
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         this.controladorVentanas = controladorVentanas;
-        this.backColor = backColor;
-        this.textColor = textColor;
-        this.buttonColor = buttonColor;
 
         setBackground(backColor);
         setForeground(textColor);
@@ -122,21 +115,21 @@ public class DialogFiltrarFechas extends JDialog implements ActionListener{
             LocalDatePickerDialog datePicker = new LocalDatePickerDialog(DialogFiltrarFechas.this);
             datePicker.setVisible(true);
 
-            // Get the selected dates from the date picker dialog
             LocalDate initialDate = datePicker.getInitialDate();
             LocalDate endDate = datePicker.getEndDate();
 
-            // Display the selected dates in the text fields
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             fechaInicialTextField.setText(initialDate.format(formatter));
             fechaFinalTextField.setText(endDate.format(formatter));
         }
-        else if (comando.equals(InterfazHuesped.FILTRAR)) {
+        else if (comando.equals(InterfazHuesped.FILTRAR)) 
+        {
+            // TODO filtrar fechas
             String fechaInicial = fechaInicialTextField.getText();
             String fechaFinal = fechaFinalTextField.getText();
             controladorVentanas.filtrarFechas();
-            System.out.println("Initial Date: " + fechaInicial);
-            System.out.println("End Date: " + fechaFinal);
+            System.out.println("Fecha inicial: " + fechaInicial);
+            System.out.println("Fecha final: " + fechaFinal);
         }
         else if (comando.equals(InterfazHuesped.CANCELAR)) {
             dispose();

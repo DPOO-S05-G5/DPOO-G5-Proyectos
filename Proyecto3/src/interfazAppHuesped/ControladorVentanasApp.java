@@ -82,4 +82,10 @@ public class ControladorVentanasApp implements ControladorVentanas
 		dialogInicial = new DialogInicial(this, BACK_COLOR, TEXT_COLOR, BUTTON_COLOR);
 	}
 
+	@Override
+	public void filtrarFechas() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

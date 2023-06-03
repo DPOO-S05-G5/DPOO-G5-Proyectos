@@ -9,4 +9,5 @@ public interface ControladorVentanas {
 	public void actualizar(String tipo);
 	public CoordinadorPMS getCoordinadorPMS();
 	public void logout();
+    public void filtrarFechas();
 }

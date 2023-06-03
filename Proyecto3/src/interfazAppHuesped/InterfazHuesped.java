@@ -18,12 +18,12 @@ import interfazGrafica.ControladorVentanasPMS;
 
 public class InterfazHuesped extends JFrame implements ActionListener {
 	
-	private static final String FILTRAR = "Filtrar fechas";
-	private static final String RESERVAR = "Reservar";
-	private static final String PAGAR = "Pagar";
-	private static final String CANCELAR = "Cancelar";
-	private static final String MIS_RESERVAS = "Mis reservas";
-	private static final String LOGOUT = "Cerrar sesión";
+	public static final String FILTRAR = "Filtrar fechas";
+	public static final String RESERVAR = "Reservar";
+	public static final String PAGAR = "Pagar";
+	public static final String CANCELAR = "Cancelar";
+	public static final String MIS_RESERVAS = "Mis reservas";
+	public static final String LOGOUT = "Cerrar sesión";
 	
 	private ControladorVentanas controladorVentanas;
 	private Color backColor;

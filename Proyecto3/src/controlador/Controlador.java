@@ -12,7 +12,6 @@ import java.util.Map.Entry;
 import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
 import cargador.CargadorDeDatos;
-import consola.InterfazPrincipal;
 import interfazGrafica.ControladorVentanas;
 import interfazGrafica.ControladorVentanasPMS;
 import modelo.Calendario;

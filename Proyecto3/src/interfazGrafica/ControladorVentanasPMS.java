@@ -96,4 +96,10 @@ public class ControladorVentanasPMS implements ControladorVentanas
 	public void logout() {
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	public void filtrarFechas() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'filtrarFechas'");
+	}
 }

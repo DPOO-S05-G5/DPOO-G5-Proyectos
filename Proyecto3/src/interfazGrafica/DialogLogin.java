@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import autenticador.AutenticadorDeUsuarios;
@@ -30,7 +31,7 @@ public class DialogLogin extends JDialog implements ActionListener
 
 	JPanel centerPanel;
 	JLabel passwordLabel;
-	JTextField passwordTextField;
+	JPasswordField passwordTextField;
 
 	JPanel southPanel;
 	JButton loginButton;
@@ -90,7 +91,7 @@ public class DialogLogin extends JDialog implements ActionListener
 		
 		passwordLabel = new JLabel("Contraseña: ");
 		passwordLabel.setForeground(textColor);
-		passwordTextField = new JTextField(20);
+		passwordTextField = new JPasswordField(20);
 		passwordTextField.setForeground(backColor);
 		passwordTextField.setBackground(textColor);
 
@@ -117,7 +118,7 @@ public class DialogLogin extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		String login = usuarioTextField.getText();
-		String password = passwordTextField.getText();
+		String password = passwordTextField.getPassword().toString();
 		String tipo = null;
 		try
 		{

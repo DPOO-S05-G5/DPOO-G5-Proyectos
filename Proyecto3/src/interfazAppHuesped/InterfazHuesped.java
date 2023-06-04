@@ -44,7 +44,6 @@ public class InterfazHuesped extends JFrame implements ActionListener {
         backColor = ControladorVentanasApp.BACK_COLOR;
         textColor = ControladorVentanasApp.TEXT_COLOR;
         buttonColor = ControladorVentanasApp.BUTTON_COLOR;
-		
         setLayout(new BorderLayout());
         setBackground(backColor);
         setForeground(textColor);

@@ -15,8 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import interfazGrafica.ControladorVentanas;
-
 public class DialogFiltrarFechas extends JDialog implements ActionListener{
 
     private static final String SELECCIONAR = "Seleccionar fechas";
@@ -124,7 +122,6 @@ public class DialogFiltrarFechas extends JDialog implements ActionListener{
         }
         else if (comando.equals(InterfazHuesped.FILTRAR)) 
         {
-            // TODO filtrar fechas
             String fechaInicial = fechaInicialTextField.getText();
             String fechaFinal = fechaFinalTextField.getText();
             padre.filtrarFechas(fechaInicial, fechaFinal);

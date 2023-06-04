@@ -3,16 +3,18 @@ package interfazGrafica;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class dialogHabitacion extends JDialog implements ActionListener {
+public class DialogHabitacion extends JDialog implements ActionListener {
 
     private static final String RESERVAR = "Reservar";
     private static final String PAGAR = "Reservar y pagar (10% de descuento)";
@@ -26,6 +28,7 @@ public class dialogHabitacion extends JDialog implements ActionListener {
     private Color buttonColor;
     private JTextField infoHabTextField;
     private JLabel titleLabel;
+    private JLabel imageLabel;
     private JButton cancelarButton;
     private JButton reservarButton;
     private JButton pagarButton;
@@ -36,7 +39,7 @@ public class dialogHabitacion extends JDialog implements ActionListener {
     private String infoHabitacion;
     private String tipoHabitacion;
 
-    public dialogHabitacion(ControladorVentanas controladorVentanas, Color backColor, Color textColor, Color buttonColor, String idHabitacion, String infoHabitacion, String tipoHabitacion)
+    public DialogHabitacion(ControladorVentanas controladorVentanas, Color backColor, Color textColor, Color buttonColor, String idHabitacion, String infoHabitacion, String tipoHabitacion)
     {
         this.controladorVentanas = controladorVentanas;
         this.backColor = backColor;
@@ -108,21 +111,34 @@ public class dialogHabitacion extends JDialog implements ActionListener {
 
     private void setNorthPanel() {
 
-        northPanel = new JPanel();
+        northPanel = new JPanel(new GridLayout(2, 1));
 
         titleLabel = new JLabel(tipoHabitacion + " " + idHabitacion);
         titleLabel.setBackground(backColor);
         titleLabel.setForeground(textColor);
-        
         northPanel.add(titleLabel);
+
+        String imgSource = "data/images/" + tipoHabitacion + ".jpg";
+        imageLabel = new JLabel(new ImageIcon(imgSource));
+        northPanel.add(imageLabel);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        
+        String command = e.getActionCommand();
+
+        if (command.equals(PAGAR))
+        {
+            controladorVentanas.pagarHab(idHabitacion);
+        }
+        else if (command.equals(RESERVAR))
+        {
+            controladorVentanas.reservarHab(idHabitacion);
+        }
+        else if (command.equals(CANCELAR))
+        {
+            dispose();
+        }  
     }
-
-
-    
 }

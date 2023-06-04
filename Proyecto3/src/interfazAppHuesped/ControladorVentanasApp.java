@@ -3,11 +3,9 @@ package interfazAppHuesped;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.formdev.flatlaf.FlatLightLaf;
@@ -87,7 +85,6 @@ public class ControladorVentanasApp implements ControladorVentanas
 
 	@Override
 	public void logout() {
-		// TODO Auto-generated method stub
 		interfazHuesped.dispose();
 		dialogInicial = new DialogInicial(this, BACK_COLOR, TEXT_COLOR, BUTTON_COLOR);
 	}
@@ -115,6 +112,28 @@ public class ControladorVentanasApp implements ControladorVentanas
 
 		return panelDisponibles;
 		
+	}
+
+	@Override
+	public void pagarHab(String id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'pagarHab'");
+	}
+
+	@Override
+	public void reservarHab(String id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'reservarHab'");
+	}
+
+	@Override
+	public String getInfoHabitacion(String id) {
+		return controlador.getInfoHabitacion(id);
+	}
+
+	@Override
+	public String getTipoHabitacion(String id) {
+		return controlador.getTipoHabitacion(id);
 	}
 
 }

@@ -319,4 +319,14 @@ public class CoordinadorPMS
 	{
 		return calendario.darNumeroHabitacionesOcupadas(fecha);
 	}
+
+	public String extendedInfoHabitacion(String id) {
+		Habitacion habitacion = mapaHabitaciones.get(id);
+		return habitacion.getInfo();
+	}
+
+    public String tipoHabitacion(String id) {
+		Habitacion habitacion = mapaHabitaciones.get(id);
+        return habitacion.getTipo();
+    }
 }

@@ -7,13 +7,11 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import autenticador.AutenticadorDeUsuarios;
 import autenticador.Usuario;
 import cargador.CargadorDeDatos;
 import interfazGrafica.ControladorVentanas;
-import interfazGrafica.ControladorVentanasPMS;
 import modelo.Calendario;
 import modelo.CoordinadorPMS;
 import modelo.Habitacion;
@@ -328,5 +326,13 @@ public class Controlador
 
 		return habitaciones;
 
+	}
+
+	public String getInfoHabitacion(String id) {
+		return coordinadorPMS.extendedInfoHabitacion(id);
+	}
+
+	public String getTipoHabitacion(String id) {
+		return coordinadorPMS.tipoHabitacion(id);
 	}
 }

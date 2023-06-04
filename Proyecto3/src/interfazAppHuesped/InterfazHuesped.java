@@ -2,7 +2,6 @@ package interfazAppHuesped;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,12 +9,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import interfazGrafica.ControladorVentanas;
-import interfazGrafica.ControladorVentanasPMS;
-
+import interfazGrafica.DialogHabitacion;
 public class InterfazHuesped extends JFrame implements ActionListener {
 	
 	public static final String FILTRAR = "Filtrar fechas";
@@ -119,24 +118,23 @@ public class InterfazHuesped extends JFrame implements ActionListener {
 
 		String comando = e.getActionCommand();
 		
-		switch (comando) {
-
-			case FILTRAR:
-				new DialogFiltrarFechas(this, backColor, textColor, buttonColor);
-				break;
-
-			case MIS_RESERVAS:
-				misReservas();
-				break;
-
-			case LOGOUT:
-				controladorVentanas.logout();
-				dispose();
-				break;
-				
-			default:
-				break;
+		if (comando.equals(FILTRAR)) {
+			JDialog dialogFiltrarFechas = new DialogFiltrarFechas(this, backColor, textColor, buttonColor);
+		} 
+		else if (comando.equals(MIS_RESERVAS)) {
+			misReservas();
 		}
+		else if (comando.equals(LOGOUT)) {
+			controladorVentanas.logout();
+			dispose();
+		}
+		else if (comando.startsWith("Hab-")) {
+			String[] parts = comando.split("-");
+			String id = parts[1];
+			String info = controladorVentanas.getInfoHabitacion(id);
+			String tipo = controladorVentanas.getTipoHabitacion(id);
+			JDialog dialogHabitacion = new DialogHabitacion(controladorVentanas, backColor, textColor, buttonColor, id, info, tipo); 
+		}		
 	}
 
 	private void misReservas() {
@@ -149,7 +147,7 @@ public class InterfazHuesped extends JFrame implements ActionListener {
 	public void filtrarFechas(String fechaInicial, String fechaFinal) {
 
 		eastPanel.removeAll();
-		controladorVentanas.filtrarFechas(this, fechaInicial, fechaFinal);
+		eastPanel.add(controladorVentanas.filtrarFechas(this, fechaInicial, fechaFinal));
 	}
 
 	

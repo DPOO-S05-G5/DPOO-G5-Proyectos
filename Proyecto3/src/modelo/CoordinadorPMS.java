@@ -329,4 +329,20 @@ public class CoordinadorPMS
 		Habitacion habitacion = mapaHabitaciones.get(id);
         return habitacion.getTipo();
     }
+
+	public int calcularPrecioReserva(String id, LocalDate fechaI, LocalDate fechaF) {
+		
+		Habitacion habitacion = mapaHabitaciones.get(id);
+		int precio = 0;
+
+		int mesInicial = fechaI.getMonthValue();
+		int diaInicial = fechaI.getDayOfMonth();
+		int diaSemanaInicial = fechaI.getDayOfWeek().getValue()-1;
+		int mesFinal = fechaF.getMonthValue();
+		int diaFinal = fechaF.getDayOfMonth();
+
+		precio += tarifas.calcularValorTarifa(habitacion.getTipo(), mesInicial, diaInicial, diaSemanaInicial, mesFinal, diaFinal);
+
+		return precio;
+	}
 }

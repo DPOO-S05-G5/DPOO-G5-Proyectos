@@ -114,17 +114,7 @@ public class ControladorVentanasApp implements ControladorVentanas
 		
 	}
 
-	@Override
-	public void pagarHab(String id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'pagarHab'");
-	}
 
-	@Override
-	public void reservarHab(String id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'reservarHab'");
-	}
 
 	@Override
 	public String getInfoHabitacion(String id) {
@@ -134,6 +124,18 @@ public class ControladorVentanasApp implements ControladorVentanas
 	@Override
 	public String getTipoHabitacion(String id) {
 		return controlador.getTipoHabitacion(id);
+	}
+
+	@Override
+	public void pagarHab(String id, String fechaInicial, String fechaFinal) {
+
+		controlador.pagarHabitacion(id, fechaInicial, fechaFinal);
+	}
+
+	@Override
+	public void reservarHab(String id, String fechaInicial, String fechaFinal) {
+
+		controlador.reservarHabitacion(id, fechaInicial, fechaFinal);
 	}
 
 }

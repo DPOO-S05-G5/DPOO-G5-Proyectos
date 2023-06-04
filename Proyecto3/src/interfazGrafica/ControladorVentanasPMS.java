@@ -108,18 +108,6 @@ public class ControladorVentanasPMS implements ControladorVentanas
 	}
 
 	@Override
-	public void pagarHab(String id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'pagarHab'");
-	}
-
-	@Override
-	public void reservarHab(String id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'reservarHab'");
-	}
-
-	@Override
 	public String getInfoHabitacion(String id) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'getInfoHabitacion'");
@@ -129,6 +117,18 @@ public class ControladorVentanasPMS implements ControladorVentanas
 	public String getTipoHabitacion(String id) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'getTipoHabitacion'");
+	}
+
+	@Override
+	public void pagarHab(String id, String fechaInicial, String fechaFinal) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'pagarHab'");
+	}
+
+	@Override
+	public void reservarHab(String id, String fechaInicial, String fechaFinal) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'reservarHab'");
 	}
 	
 }

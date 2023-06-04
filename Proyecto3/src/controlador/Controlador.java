@@ -17,6 +17,7 @@ import modelo.CoordinadorPMS;
 import modelo.Habitacion;
 import modelo.Reserva;
 import modelo.Tarifas;
+import pagos.InterfazPagos;
 
 public class Controlador
 {
@@ -32,7 +33,7 @@ public class Controlador
 	private AutenticadorDeUsuarios autenticador;
 	private CargadorDeDatos cargador;
 	private CoordinadorPMS coordinadorPMS;
-	
+	private InterfazPagos interfazPagos;
 
 	public Controlador(ControladorVentanas ventanaPrincipal, AutenticadorDeUsuarios autenticador)
 	{
@@ -335,4 +336,24 @@ public class Controlador
 	public String getTipoHabitacion(String id) {
 		return coordinadorPMS.tipoHabitacion(id);
 	}
+
+    public void pagarHabitacion(String id, String fechaInicial, String fechaFinal) {
+
+		String[] listaFechaI = fechaInicial.split("-");
+		String[] listaFechaF = fechaFinal.split("-");
+		LocalDate fechaI = LocalDate.of(Integer.parseInt(listaFechaI[0]), Integer.parseInt(listaFechaI[1]), Integer.parseInt(listaFechaI[2]));
+		LocalDate fechaF = LocalDate.of(Integer.parseInt(listaFechaF[0]), Integer.parseInt(listaFechaF[1]), Integer.parseInt(listaFechaF[2]));
+
+		int precioReserva = coordinadorPMS.calcularPrecioReserva(id, fechaI, fechaF);
+
+		// TODO interfaz pagos
+		interfazPagos = new InterfazPagos(precioReserva);
+		
+    }
+
+    public void reservarHabitacion(String id, String fechaInicial, String fechaFinal) {
+		// TODO reservar con datos del cliente
+
+
+    }
 }

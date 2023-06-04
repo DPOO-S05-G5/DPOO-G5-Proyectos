@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import interfazAppHuesped.InterfazHuesped;
+
 public class DialogHabitacion extends JDialog implements ActionListener {
 
     private static final String RESERVAR = "Reservar";
@@ -22,7 +24,7 @@ public class DialogHabitacion extends JDialog implements ActionListener {
     private static final Color COLOR_PAGAR = new Color(147,196,125);
     private static final Color COLOR_TEXTO_PAGAR = Color.BLACK;
 
-    private ControladorVentanas controladorVentanas;
+    private InterfazHuesped padre;
     private Color backColor;
     private Color textColor;
     private Color buttonColor;
@@ -39,9 +41,9 @@ public class DialogHabitacion extends JDialog implements ActionListener {
     private String infoHabitacion;
     private String tipoHabitacion;
 
-    public DialogHabitacion(ControladorVentanas controladorVentanas, Color backColor, Color textColor, Color buttonColor, String idHabitacion, String infoHabitacion, String tipoHabitacion)
+    public DialogHabitacion(InterfazHuesped padre, Color backColor, Color textColor, Color buttonColor, String idHabitacion, String infoHabitacion, String tipoHabitacion)
     {
-        this.controladorVentanas = controladorVentanas;
+        this.padre = padre;
         this.backColor = backColor;
         this.textColor = textColor;
         this.buttonColor = buttonColor;
@@ -130,11 +132,11 @@ public class DialogHabitacion extends JDialog implements ActionListener {
 
         if (command.equals(PAGAR))
         {
-            controladorVentanas.pagarHab(idHabitacion);
+            padre.pagarHab(idHabitacion);
         }
         else if (command.equals(RESERVAR))
         {
-            controladorVentanas.reservarHab(idHabitacion);
+            padre.reservarHab(idHabitacion);
         }
         else if (command.equals(CANCELAR))
         {

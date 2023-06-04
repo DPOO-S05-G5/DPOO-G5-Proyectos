@@ -36,6 +36,9 @@ public class InterfazHuesped extends JFrame implements ActionListener {
     private JButton misReservasButton;
     private JButton logoutButton;
 
+	private String fechaInicial;
+	private String fechaFinal;
+
 	public InterfazHuesped(ControladorVentanasApp controladorVentanas) {
 		
 		setTitle("Bienvenido al hotel Villa Uniandes");
@@ -132,7 +135,7 @@ public class InterfazHuesped extends JFrame implements ActionListener {
 			String id = parts[1];
 			String info = controladorVentanas.getInfoHabitacion(id);
 			String tipo = controladorVentanas.getTipoHabitacion(id);
-			JDialog dialogHabitacion = new DialogHabitacion(controladorVentanas, backColor, textColor, buttonColor, id, info, tipo); 
+			JDialog dialogHabitacion = new DialogHabitacion(this, backColor, textColor, buttonColor, id, info, tipo); 
 		}		
 	}
 
@@ -146,9 +149,19 @@ public class InterfazHuesped extends JFrame implements ActionListener {
 	public void filtrarFechas(String fechaInicial, String fechaFinal) {
 
 		eastPanel.removeAll();
+		this.fechaInicial = fechaInicial;
+		this.fechaFinal = fechaFinal;
 		eastPanel.add(controladorVentanas.filtrarFechas(this, fechaInicial, fechaFinal));
 	}
 
-	
+	public void pagarHab(String idHabitacion) {
+
+		controladorVentanas.pagarHab(idHabitacion, fechaInicial, fechaFinal);
+	}
+
+    public void reservarHab(String idHabitacion) {
+
+		controladorVentanas.reservarHab(idHabitacion, fechaInicial, fechaFinal);
+    }
 
 }

@@ -8,11 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import autenticador.AutenticadorDeUsuarios;
@@ -27,16 +27,16 @@ public class DialogRegistrarHuesped extends JDialog implements ActionListener {
 	private Color textColor;
 	private Color buttonColor;
 
-	JPanel centerPanel;
-	JLabel loginLabel;
-	JLabel passwordLabel;
-	JLabel confirmPasswordLabel;
-	JTextField loginTextField;
-	JTextField passwordTextField;
-	JTextField confirmPasswordTextField;
+	private JPanel centerPanel;
+	private JLabel loginLabel;
+	private JLabel passwordLabel;
+	private JLabel confirmPasswordLabel;
+	private JTextField loginTextField;
+	private JPasswordField passwordTextField;
+	private JPasswordField confirmPasswordTextField;
 
-	JPanel southPanel;
-	JButton registerButton;
+	private JPanel southPanel;
+	private JButton registerButton;
 	
 	public DialogRegistrarHuesped(ControladorVentanas ventanaPrincipal, AutenticadorDeUsuarios autenticador, Color backColor, Color textColor,
 			Color buttonColor)
@@ -86,11 +86,11 @@ public class DialogRegistrarHuesped extends JDialog implements ActionListener {
 		loginTextField.setForeground(backColor);
 		loginTextField.setBackground(textColor);
 		
-		passwordTextField = new JTextField();
+		passwordTextField = new JPasswordField();
 		passwordTextField.setForeground(backColor);
 		passwordTextField.setBackground(textColor);
 
-		confirmPasswordTextField = new JTextField();
+		confirmPasswordTextField = new JPasswordField();
 		confirmPasswordTextField.setForeground(backColor);
 		confirmPasswordTextField.setBackground(textColor);
 
@@ -121,8 +121,8 @@ public class DialogRegistrarHuesped extends JDialog implements ActionListener {
 	{
 		String tipo = ControladorVentanasPMS.HUESPED;
 		String login = loginTextField.getText();
-		String password = passwordTextField.getText();
-		String confirmPassword = confirmPasswordTextField.getText();
+		String password = passwordTextField.getPassword().toString();
+		String confirmPassword = confirmPasswordTextField.getPassword().toString();
 		try 
 		{
 			autenticador.registrarUsuario(tipo, login, password, confirmPassword);

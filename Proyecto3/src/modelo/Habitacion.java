@@ -346,6 +346,17 @@ public abstract class Habitacion
 		
 		info += "\n\tTorre: " + torre;
 		info += "\n\tPiso: " + piso;
+
+		return info;
+	}
+
+
+    public String getInfo() {
+
+		String info = "Habitacion " + tipo + " " + id + ":";
+		
+		info += "\n\tTorre: " + torre;
+		info += "\n\tPiso: " + piso;
 		
 		info += "\n\tCamas:";
 		for (Cama cama : camas)
@@ -373,6 +384,6 @@ public abstract class Habitacion
 			info += "No"; 
 		
 		return info;
-	}	
+    }	
 	
 }

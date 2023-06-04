@@ -6,9 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import controlador.Controlador;
 import modelo.Habitacion;
-import modelo.Tarifas;
 
 public class BotonHabitacion extends JButton {
 

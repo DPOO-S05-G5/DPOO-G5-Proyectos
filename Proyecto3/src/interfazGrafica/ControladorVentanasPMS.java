@@ -1,6 +1,10 @@
 package interfazGrafica;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
+
 import com.formdev.flatlaf.FlatLightLaf;
 
 import autenticador.AutenticadorDeUsuarios;
@@ -96,4 +100,35 @@ public class ControladorVentanasPMS implements ControladorVentanas
 	public void logout() {
 		// TODO Auto-generated method stub
 	}
+
+	@Override
+	public JPanel filtrarFechas(ActionListener padre, String fechaIncial, String fechaFinal) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'filtrarFechas'");
+	}
+
+	@Override
+	public void pagarHab(String id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'pagarHab'");
+	}
+
+	@Override
+	public void reservarHab(String id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'reservarHab'");
+	}
+
+	@Override
+	public String getInfoHabitacion(String id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getInfoHabitacion'");
+	}
+
+	@Override
+	public String getTipoHabitacion(String id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getTipoHabitacion'");
+	}
+	
 }

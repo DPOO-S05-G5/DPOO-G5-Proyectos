@@ -2,7 +2,6 @@ package interfazAppHuesped;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,20 +9,20 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import interfazGrafica.ControladorVentanas;
-import interfazGrafica.ControladorVentanasPMS;
-
+import interfazGrafica.DialogHabitacion;
 public class InterfazHuesped extends JFrame implements ActionListener {
 	
-	private static final String FILTRAR = "Filtrar fechas";
-	private static final String RESERVAR = "Reservar";
-	private static final String PAGAR = "Pagar";
-	private static final String CANCELAR = "Cancelar";
-	private static final String MIS_RESERVAS = "Mis reservas";
-	private static final String LOGOUT = "Cerrar sesión";
+	public static final String FILTRAR = "Filtrar fechas";
+	public static final String RESERVAR = "Reservar";
+	public static final String PAGAR = "Pagar";
+	public static final String CANCELAR = "Cancelar";
+	public static final String MIS_RESERVAS = "Mis reservas";
+	public static final String LOGOUT = "Cerrar sesión";
 	
 	private ControladorVentanas controladorVentanas;
 	private Color backColor;
@@ -118,24 +117,23 @@ public class InterfazHuesped extends JFrame implements ActionListener {
 
 		String comando = e.getActionCommand();
 		
-		switch (comando) {
-
-			case FILTRAR:
-				new DialogFiltrarFechas(controladorVentanas, backColor, textColor, buttonColor);
-				break;
-
-			case MIS_RESERVAS:
-				misReservas();
-				break;
-
-			case LOGOUT:
-				controladorVentanas.logout();
-				dispose();
-				break;
-				
-			default:
-				break;
+		if (comando.equals(FILTRAR)) {
+			JDialog dialogFiltrarFechas = new DialogFiltrarFechas(this, backColor, textColor, buttonColor);
+		} 
+		else if (comando.equals(MIS_RESERVAS)) {
+			misReservas();
 		}
+		else if (comando.equals(LOGOUT)) {
+			controladorVentanas.logout();
+			dispose();
+		}
+		else if (comando.startsWith("Hab-")) {
+			String[] parts = comando.split("-");
+			String id = parts[1];
+			String info = controladorVentanas.getInfoHabitacion(id);
+			String tipo = controladorVentanas.getTipoHabitacion(id);
+			JDialog dialogHabitacion = new DialogHabitacion(controladorVentanas, backColor, textColor, buttonColor, id, info, tipo); 
+		}		
 	}
 
 	private void misReservas() {
@@ -143,6 +141,12 @@ public class InterfazHuesped extends JFrame implements ActionListener {
 		eastPanel.removeAll();
 		// TODO Mostrar reservas del usuario
 
+	}
+
+	public void filtrarFechas(String fechaInicial, String fechaFinal) {
+
+		eastPanel.removeAll();
+		eastPanel.add(controladorVentanas.filtrarFechas(this, fechaInicial, fechaFinal));
 	}
 
 	

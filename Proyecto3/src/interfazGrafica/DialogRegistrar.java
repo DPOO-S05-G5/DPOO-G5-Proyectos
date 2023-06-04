@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import autenticador.AutenticadorDeUsuarios;
@@ -37,8 +38,8 @@ public class DialogRegistrar extends JDialog implements ActionListener
 	JLabel passwordLabel;
 	JLabel confirmPasswordLabel;
 	JTextField loginTextField;
-	JTextField passwordTextField;
-	JTextField confirmPasswordTextField;
+	JPasswordField passwordTextField;
+	JPasswordField confirmPasswordTextField;
 
 	JPanel southPanel;
 	JButton registerButton;
@@ -110,11 +111,11 @@ public class DialogRegistrar extends JDialog implements ActionListener
 		loginTextField.setForeground(backColor);
 		loginTextField.setBackground(textColor);
 		
-		passwordTextField = new JTextField();
+		passwordTextField = new JPasswordField();
 		passwordTextField.setForeground(backColor);
 		passwordTextField.setBackground(textColor);
 
-		confirmPasswordTextField = new JTextField();
+		confirmPasswordTextField = new JPasswordField();
 		confirmPasswordTextField.setForeground(backColor);
 		confirmPasswordTextField.setBackground(textColor);
 
@@ -145,8 +146,8 @@ public class DialogRegistrar extends JDialog implements ActionListener
 	{
 		String tipo = TIPOS_USUARIO[tiposComboBox.getSelectedIndex()];
 		String login = loginTextField.getText();
-		String password = passwordTextField.getText();
-		String confirmPassword = confirmPasswordTextField.getText();
+		String password = passwordTextField.getPassword().toString();
+		String confirmPassword = confirmPasswordTextField.getPassword().toString();
 		try 
 		{
 			autenticador.registrarUsuario(tipo, login, password, confirmPassword);

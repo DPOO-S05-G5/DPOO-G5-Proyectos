@@ -1,6 +1,13 @@
 package interfazAppHuesped;
 
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 import com.formdev.flatlaf.FlatLightLaf;
 
 import autenticador.AutenticadorDeUsuarios;
@@ -9,6 +16,7 @@ import interfazGrafica.ControladorVentanas;
 import interfazGrafica.DialogInicial;
 import interfazGrafica.DialogLogin;
 import modelo.CoordinadorPMS;
+import modelo.Habitacion;
 
 public class ControladorVentanasApp implements ControladorVentanas
 {
@@ -77,9 +85,55 @@ public class ControladorVentanasApp implements ControladorVentanas
 
 	@Override
 	public void logout() {
-		// TODO Auto-generated method stub
 		interfazHuesped.dispose();
 		dialogInicial = new DialogInicial(this, BACK_COLOR, TEXT_COLOR, BUTTON_COLOR);
+	}
+
+	@Override
+	public JPanel filtrarFechas(ActionListener padre, String fechaInicial, String fechaFinal) {
+		
+		ArrayList<Habitacion> habs = controlador.getHabitacionesDisponibles(fechaInicial, fechaFinal);
+		int rows = (int) Math.ceil(habs.size() / 6.0);
+		int cols = rows * 6;
+		JPanel panelDisponibles = new JPanel(new GridLayout(rows, cols));
+		JButton botonHab;
+
+		for (Habitacion hab : habs)
+		{
+			botonHab = new JButton(hab.toString());
+			botonHab.setBackground(BUTTON_COLOR);
+			botonHab.setForeground(TEXT_COLOR);
+			botonHab.addActionListener(padre);
+			String actionCommand = "Hab-" + hab.getId();
+			botonHab.setActionCommand(actionCommand);
+
+			panelDisponibles.add(botonHab);
+		}
+
+		return panelDisponibles;
+		
+	}
+
+	@Override
+	public void pagarHab(String id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'pagarHab'");
+	}
+
+	@Override
+	public void reservarHab(String id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'reservarHab'");
+	}
+
+	@Override
+	public String getInfoHabitacion(String id) {
+		return controlador.getInfoHabitacion(id);
+	}
+
+	@Override
+	public String getTipoHabitacion(String id) {
+		return controlador.getTipoHabitacion(id);
 	}
 
 }

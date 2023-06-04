@@ -1,6 +1,15 @@
 package interfazAppHuesped;
 
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import com.formdev.flatlaf.FlatLightLaf;
 
 import autenticador.AutenticadorDeUsuarios;
@@ -9,6 +18,7 @@ import interfazGrafica.ControladorVentanas;
 import interfazGrafica.DialogInicial;
 import interfazGrafica.DialogLogin;
 import modelo.CoordinadorPMS;
+import modelo.Habitacion;
 
 public class ControladorVentanasApp implements ControladorVentanas
 {
@@ -83,8 +93,27 @@ public class ControladorVentanasApp implements ControladorVentanas
 	}
 
 	@Override
-	public void filtrarFechas() {
-		// TODO Auto-generated method stub
+	public JPanel filtrarFechas(ActionListener padre, String fechaInicial, String fechaFinal) {
+		
+		ArrayList<Habitacion> habs = controlador.getHabitacionesDisponibles(fechaInicial, fechaFinal);
+		int rows = (int) Math.ceil(habs.size() / 6.0);
+		int cols = rows * 6;
+		JPanel panelDisponibles = new JPanel(new GridLayout(rows, cols));
+		JButton botonHab;
+
+		for (Habitacion hab : habs)
+		{
+			botonHab = new JButton(hab.toString());
+			botonHab.setBackground(BUTTON_COLOR);
+			botonHab.setForeground(TEXT_COLOR);
+			botonHab.addActionListener(padre);
+			String actionCommand = "Hab-" + hab.getId();
+			botonHab.setActionCommand(actionCommand);
+
+			panelDisponibles.add(botonHab);
+		}
+
+		return panelDisponibles;
 		
 	}
 

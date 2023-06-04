@@ -1,6 +1,11 @@
 package interfazGrafica;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import com.formdev.flatlaf.FlatLightLaf;
 
 import autenticador.AutenticadorDeUsuarios;
@@ -98,8 +103,9 @@ public class ControladorVentanasPMS implements ControladorVentanas
 	}
 
 	@Override
-	public void filtrarFechas() {
+	public JPanel filtrarFechas(ActionListener padre, String fechaIncial, String fechaFinal) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'filtrarFechas'");
 	}
+	
 }

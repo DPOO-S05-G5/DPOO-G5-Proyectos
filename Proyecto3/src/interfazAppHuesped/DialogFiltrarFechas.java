@@ -21,7 +21,7 @@ public class DialogFiltrarFechas extends JDialog implements ActionListener{
 
     private static final String SELECCIONAR = "Seleccionar fechas";
 
-    private ControladorVentanas controladorVentanas;
+    private InterfazHuesped padre;
     private JLabel fechaIncialLabel;
     private JLabel fechaFinalLabel;
     private JTextField fechaInicialTextField;
@@ -30,7 +30,7 @@ public class DialogFiltrarFechas extends JDialog implements ActionListener{
     private JButton filtrarButton;
     private JButton cancelarButton;
 
-    public DialogFiltrarFechas(ControladorVentanas controladorVentanas, Color backColor, Color textColor,
+    public DialogFiltrarFechas(InterfazHuesped padre, Color backColor, Color textColor,
             Color buttonColor) {
 
         setTitle("Filtrar fechas");
@@ -38,7 +38,7 @@ public class DialogFiltrarFechas extends JDialog implements ActionListener{
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
-        this.controladorVentanas = controladorVentanas;
+        this.padre = padre;
 
         setBackground(backColor);
         setForeground(textColor);
@@ -127,9 +127,8 @@ public class DialogFiltrarFechas extends JDialog implements ActionListener{
             // TODO filtrar fechas
             String fechaInicial = fechaInicialTextField.getText();
             String fechaFinal = fechaFinalTextField.getText();
-            controladorVentanas.filtrarFechas();
-            System.out.println("Fecha inicial: " + fechaInicial);
-            System.out.println("Fecha final: " + fechaFinal);
+            padre.filtrarFechas(fechaInicial, fechaFinal);
+            dispose();
         }
         else if (comando.equals(InterfazHuesped.CANCELAR)) {
             dispose();

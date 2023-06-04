@@ -346,32 +346,7 @@ public abstract class Habitacion
 		
 		info += "\n\tTorre: " + torre;
 		info += "\n\tPiso: " + piso;
-		
-		info += "\n\tCamas:";
-		for (Cama cama : camas)
-			info += "\n\t\t" + cama.toString();
-		
-		info += "\n\tCapacidad adultos: " + capacidadAdultos;
-		info += "\n\tCapacidad Niños: " + capacidadNinios;
-		
-		info += "\n\tTiene cocina? ";
-		if (tieneCocina)
-			info += "Si";
-		else
-			info += "No"; 
-		
-		info += "\n\tTiene balcón? ";
-		if (tieneBalcon)
-			info += "Si";
-		else
-			info += "No"; 
-		
-		info += "\n\tTiene vista? ";
-		if (tieneVista)
-			info += "Si";
-		else
-			info += "No"; 
-		
+
 		return info;
 	}	
 	

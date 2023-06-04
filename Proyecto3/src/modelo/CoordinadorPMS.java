@@ -167,7 +167,7 @@ public class CoordinadorPMS
 		return catalogo;
 	}
 
-	public ArrayList<Habitacion> getHabitacionesDisponibles(String tipo,LocalDate initialDate, LocalDate finalDate)
+	public ArrayList<Habitacion> getHabitacionesDisponibles(String tipo, LocalDate initialDate, LocalDate finalDate)
 	{
 		ArrayList<Habitacion> habitacionesDisponibles = new ArrayList<Habitacion>();
 		

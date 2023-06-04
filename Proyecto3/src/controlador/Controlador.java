@@ -309,4 +309,24 @@ public class Controlador
 	{
 		return coordinadorPMS;
 	}
+
+	public ArrayList<Habitacion> getHabitacionesDisponibles(String fechaInicial, String fechaFinal) {
+		
+		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
+
+		String[] listaFechaI = fechaInicial.split("-");
+		String[] listaFechaF = fechaFinal.split("-");
+		LocalDate fechaI = LocalDate.of(Integer.parseInt(listaFechaI[0]), Integer.parseInt(listaFechaI[1]), Integer.parseInt(listaFechaI[2]));
+		LocalDate fechaF = LocalDate.of(Integer.parseInt(listaFechaF[0]), Integer.parseInt(listaFechaF[1]), Integer.parseInt(listaFechaF[2]));
+		
+		ArrayList<String> tipos = getTiposHabitacion();
+
+		for (String tipo : tipos)
+		{
+			habitaciones.addAll(coordinadorPMS.getHabitacionesDisponibles(tipo, fechaI, fechaF));
+		}
+
+		return habitaciones;
+
+	}
 }

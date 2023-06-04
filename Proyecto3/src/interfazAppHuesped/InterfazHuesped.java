@@ -122,7 +122,7 @@ public class InterfazHuesped extends JFrame implements ActionListener {
 		switch (comando) {
 
 			case FILTRAR:
-				new DialogFiltrarFechas(controladorVentanas, backColor, textColor, buttonColor);
+				new DialogFiltrarFechas(this, backColor, textColor, buttonColor);
 				break;
 
 			case MIS_RESERVAS:
@@ -144,6 +144,12 @@ public class InterfazHuesped extends JFrame implements ActionListener {
 		eastPanel.removeAll();
 		// TODO Mostrar reservas del usuario
 
+	}
+
+	public void filtrarFechas(String fechaInicial, String fechaFinal) {
+
+		eastPanel.removeAll();
+		controladorVentanas.filtrarFechas(this, fechaInicial, fechaFinal);
 	}
 
 	

@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,16 +27,16 @@ public class DialogRegistrarHuesped extends JDialog implements ActionListener {
 	private Color textColor;
 	private Color buttonColor;
 
-	JPanel centerPanel;
-	JLabel loginLabel;
-	JLabel passwordLabel;
-	JLabel confirmPasswordLabel;
-	JTextField loginTextField;
-	JPasswordField passwordTextField;
-	JPasswordField confirmPasswordTextField;
+	private JPanel centerPanel;
+	private JLabel loginLabel;
+	private JLabel passwordLabel;
+	private JLabel confirmPasswordLabel;
+	private JTextField loginTextField;
+	private JPasswordField passwordTextField;
+	private JPasswordField confirmPasswordTextField;
 
-	JPanel southPanel;
-	JButton registerButton;
+	private JPanel southPanel;
+	private JButton registerButton;
 	
 	public DialogRegistrarHuesped(ControladorVentanas ventanaPrincipal, AutenticadorDeUsuarios autenticador, Color backColor, Color textColor,
 			Color buttonColor)
